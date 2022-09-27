@@ -1,0 +1,12 @@
+{
+	"content": [
+		{
+			"text": "Sample to show",
+			"content_type": 1
+		},
+		{
+			"text": "Another Sample to show",
+			"content_type": 2
+		}		
+	]
+}

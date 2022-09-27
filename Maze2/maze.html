@@ -1,0 +1,70 @@
+<link rel="stylesheet" type="text/css" href="mazing.css">
+
+<div id="maze_container"><!-- --></div>
+
+<script src="maze-builder.js"></script>
+<script src="fancy-maze-builder.js"></script>
+<script src="mazing.js"></script>
+<script>
+
+  var Maze, MazeGame;
+
+  const makeMaze = (id, width, height, speech = false) => {
+    Maze = new FancyMazeBuilder(width, height);
+    Maze.display(id);
+    MazeGame = new Mazing("maze");
+    if(speech) {
+      MazeGame.enableSpeech();
+    }
+  }
+
+  makeMaze("maze_container", 12, 12);
+  	setTimeout(function() {
+		var showSettings = localStorage.getItem('displayMazeSettings');
+		if(showSettings === 'true'){
+			document.getElementById('settings').style.display = 'block';
+		}
+		let color = document.getElementById('maze_color');
+		color.addEventListener('input', function(e) {
+ 			document.getElementById("maze").style.backgroundColor = this.value;
+		});
+		
+		let wallColor = document.getElementById('wall_color');
+		wallColor.addEventListener('input', function(e) {
+		document.getElementById("wall_color").style.backgroundColor = this.value;
+			for(var i = 0; i < document.getElementsByClassName('wall').length; i++)
+			{
+				document.getElementsByClassName('wall')[i].style.backgroundColor = this.value;
+			}
+		});
+		
+		
+	},1000);
+	function myFunction() {
+		  // Get the checkbox
+	  var checkBox = document.getElementById("myCheck");
+	  if (checkBox.checked == true){
+			for(var x = 0; x < document.getElementsByClassName('wall').length; x++)
+			{
+				document.getElementsByClassName('wall')[x].style.backgroundImage = "none";
+			}
+			document.getElementById('maze').style.backgroundImage = "none";
+	  } else {
+		for(var y = 0; y < document.getElementsByClassName('wall').length; y++)
+		{
+			document.getElementsByClassName('wall')[y].style.backgroundImage = 'linear-gradient(45deg, rgba(0,0,0,0.2) 45%, transparent 55%), linear-gradient(to bottom, rgba(0,0,0,0.2) 45%, transparent 55%)';
+		}
+		document.getElementById('maze').style.backgroundImage = "radial-gradient(circle at 0% 0%, transparent 50%, rgba(0,0,0,0.1) 50%), radial-gradient(circle at center, rgba(0,0,0,0.1) 50%, transparent 50%), radial-gradient(circle at 100% 100%, transparent 50%, rgba(0,0,0,0.1) 50%), radial-gradient(circle at 0% 100%, transparent 50%, rgba(0,0,0,0.1) 50%), radial-gradient(circle at 100% 0%, transparent 50%, rgba(0,0,0,0.1) 50%)";
+	  }
+	}
+</script>
+<div id="settings" style="display: none">
+	<label for="favcolor">Select Background color:</label>
+	<input type="color" id="maze_color" name="maze_color" value="#ff0000"><br><br>
+	
+	<label for="favcolor">Select Wall color:</label>
+	<input type="color" id="wall_color" name="wall_color" value="#ff0000"><br><br>
+	
+	Hide Background image <input type="checkbox" id="myCheck" onclick="myFunction()">
+
+</div>

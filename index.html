@@ -1,0 +1,48 @@
+<script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
+<iframe id="myiframe" src="javascript:;" width="100%" height="100%" frameborder="0">
+</iframe>
+<script>
+	$(document).ready(function() {
+		var total = 11;
+		var number = 1 + Math.floor(Math.random() * total);
+		var src = '2048/index.html';
+		switch(number) {
+			case 1:
+				src = '2048/index.html';
+				break;
+			case 2:
+				src = 'AI-Tic-Tac-Toe-Website/index.html';
+				break;
+			case 3:
+				src = 'align-four/index.html';
+				break;
+			case 4:
+				src = 'clumsy-bird/index.html';
+				break;
+			case 5:
+				src = 'color-match-game-broken/dist/index.html';
+				break;
+			case 6:
+				src = 'JoyRunner/runner.html';
+				break;
+			case 7:
+				src = 'snake/index.html';
+				break;
+			case 8:
+				src = 'sweet-memory-game/dist/index.html';
+				break;
+			case 9:
+				src = 'tower-blocks/dist/index.html';
+				break;
+			case 10:
+				src = 'Elimination-games-XiaoXiaoLe/index.html';
+				break;
+			case 11:
+				src = 'Maze2/maze.html';
+				break;
+			default:
+				src = 'tower-blocks/dist/index.html';
+		}
+    	$('#myiframe').attr('src', src);
+	});
+</script>
