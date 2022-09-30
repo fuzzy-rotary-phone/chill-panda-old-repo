@@ -104,6 +104,10 @@ html, body {
 #container.ended .game-over p {
   transition-delay: 0.3s;
 }
+#container.ended .game-over #trigger-text {
+  transition-delay: 0s;
+  font-size: 24px;
+}
 #container #trigger-content {
   position: absolute;
   width: 100%;

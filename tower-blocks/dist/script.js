@@ -179,11 +179,12 @@ class Game {
         this.startButton = document.getElementById('start-button');
         this.instructions = document.getElementById('instructions');
         this.scoreContainer.innerHTML = '0';
-        this.triggerFreq = 5;
+        // this.triggerFreq = 5;
         this.allContent = $.getJSON('content.json');
-        this.triggerContent = document.getElementById('trigger-content');
-        this.triggerContent.innerHTML = '';
+        // this.triggerContent = document.getElementById('trigger-content');
+        // this.triggerContent.innerHTML = '';
         this.newBlocks = new THREE.Group();
+        this.triggerText = document.getElementById('trigger-text');
         this.placedBlocks = new THREE.Group();
         this.choppedBlocks = new THREE.Group();
         this.stage.add(this.newBlocks);
@@ -249,7 +250,7 @@ class Game {
         setTimeout(() => {
             this.startGame();
         }, cameraMoveSpeed * 1000);
-        this.triggerContent.innerHTML = '';
+        // this.triggerContent.innerHTML = '';
     }
     placeBlock() {
         let currentBlock = this.blocks[this.blocks.length - 1];
@@ -290,16 +291,22 @@ class Game {
         this.stage.setCamera(this.blocks.length * 2);
         if (this.blocks.length >= 5)
             this.instructions.classList.add('hide');
-        if(this.blocks.length % this.triggerFreq == 0) {
-            let total = this.allContent.responseJSON["content"].length;
-            let number = Math.floor(Math.random() * total);
-            this.triggerContent.innerHTML = this.allContent.responseJSON["content"][number]["text"];
-            this.triggerContent.classList.remove("run-animation");
-            this.triggerContent.offsetWidth;
-            this.triggerContent.classList.add("run-animation");
-        }
+        // if(this.blocks.length % this.triggerFreq == 0) {
+        //     let total = this.allContent.responseJSON["content"].length;
+        //     let number = Math.floor(Math.random() * total);
+        //     this.triggerContent.innerHTML = this.allContent.responseJSON["content"][number]["text"];
+        //     this.triggerContent.classList.remove("run-animation");
+        //     this.triggerContent.offsetWidth;
+        //     this.triggerContent.classList.add("run-animation");
+        // }
+    }
+    setTrigger() {
+        let total = this.allContent.responseJSON["content"].length;
+        let number = Math.floor(Math.random() * total);
+        this.triggerText.innerHTML = this.allContent.responseJSON["content"][number]["text"];
     }
     endGame() {
+        this.setTrigger();
         this.updateState(this.STATES.ENDED);
     }
     tick() {
