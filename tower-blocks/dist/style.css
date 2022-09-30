@@ -107,6 +107,12 @@ html, body {
 #container.ended .game-over #trigger-text {
   transition-delay: 0s;
   font-size: 24px;
+  border-color: black;
+  border-style: solid;
+  padding: 20px;
+  border-radius: 20px;
+  font-weight: bold;
+  color: indigo;
 }
 #container #trigger-content {
   position: absolute;
