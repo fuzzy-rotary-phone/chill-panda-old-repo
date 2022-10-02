@@ -9,15 +9,20 @@
 <body>
 <!-- partial:index.partial.html -->
 <main>
+  <div class="title">Start from star. Make it all one color in minimum moves.</div>
   <div class="controls">
     <div class="new-game">New Game</div>
     <div>Moves <span class="moves">0</span> / <span>35</span></div>
   </div>
   <div id="board"></div>
   <div id="colors"></div>
-  <div id="game-over"></div>
+  <div id="end-div">
+    <div id="game-over"></div>
+    <div id="trigger-text"></div>
+  </div>
 </main>
 <!-- partial -->
+  <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
   <script  src="./script.js"></script>
 
 </body>
