@@ -27,6 +27,8 @@
 
     var canxiao = null;
 
+    var allcontent = $.getJSON('content.json');
+
     function preparebackground() {  //绘制背景
         //var bgcanvas = document.getElementById(bgcanvasId)
         //bgcanvas.height = h;
@@ -702,6 +704,21 @@
 
     init.bind(this)();
 
+    var triggerText = document.getElementById('trigger-text');
+    var triggerDiv = document.getElementById('trigger-div');
+
+    function resetTrigger() {
+        triggerText.innerHTML = '';
+        triggerDiv.classList.add('d-none');
+    }
+
+    function setTrigger() {
+        var total = allcontent.responseJSON["content"].length;
+        var number = Math.floor(Math.random() * total);
+        triggerText.innerHTML = allcontent.responseJSON["content"][number]["text"];
+        triggerDiv.classList.remove('d-none');
+    }
+
     function gameendfun() {
         gameend = true;
         gaming = false;
@@ -712,6 +729,7 @@
         if (gameendcalback) {
             gameendcalback(score);
         }
+        setTrigger();
     }
     var interv = 0;
     var gaming = false;
@@ -734,6 +752,8 @@
             createjs.Tween.get(mask).to({ alpha: 0 }, 100).call(function () {
                 mask.visible = false;
             });
+
+            resetTrigger();
 
             panduan();
 
