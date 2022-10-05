@@ -110,7 +110,7 @@ function setup() {
     button.template.cornerRadius = 0;
     button.template.color = "#fff";
     button.template.textColor = "#333";
-    button.template.textFont = "silkscreen";
+    button.template.textFont = "Comic Sans";
     button.template.textSize = vw * 0.07;
     var btnspacing = vh * 0.03;
     button.template.onPress = function () {
@@ -249,7 +249,7 @@ function draw() {
 
     // die screen
     if (game.ended) {
-        button.score.text = "Score: " + snake.score_final + "\nOn " + saved.difficulty;
+        button.score.text = "Score: " + snake.score_final;
         button.again.stroke = saved.stroke;
 
         button.score.draw();
