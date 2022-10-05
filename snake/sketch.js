@@ -160,9 +160,20 @@ function setup() {
     button.insane.stroke = "#333";
     button.insane.difficulty = difficulties.insane;
 
+    // trigger button (not interactive)
+    button.trigger = { ...button.template };
+    button.trigger.resize(vw * 0.8, vh * 0.3);
+    button.trigger.y = centerbtns(3);
+    button.trigger.x = vw * 0.5 - button.trigger.width * 0.5;
+    button.trigger.stroke = "#f00";
+    button.trigger.onPress = function () { };
+    button.trigger.onRelease = function () { };
+    button.trigger.text = get_content();
+    button.trigger.textSize = button.template.textSize * 0.6;
+
     // again button
     button.again = { ...button.template };
-    button.again.y = centerbtns(2);
+    button.again.y = button.trigger.y + button.trigger.height + btnspacing;
     button.again.text = "again";
     button.again.onRelease = function () {
         if (game.ended) {
@@ -196,7 +207,7 @@ function setup() {
     // score button (not interactive)
     button.score = { ...button.template };
     button.score.resize(button.template.width * 1.3, button.template.height * 1.3);
-    button.score.y = button.again.y - button.score.height - btnspacing;
+    button.score.y = button.trigger.y - button.score.height - btnspacing;
     button.score.x = vw * 0.5 - button.score.width * 0.5;
     button.score.stroke = "#00f";
     button.score.onPress = function () { };
@@ -244,6 +255,7 @@ function draw() {
         button.score.draw();
         button.again.draw();
         button.back.draw();
+        button.trigger.draw();
     }
 
     // see line 165
