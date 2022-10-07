@@ -4,7 +4,8 @@ html {
 body {
     margin: 0;
     padding: 0;
-    background-color: #6dbe7c;
+    background: #000 radial-gradient(1000px 500px, #3f546b, #000);
+    font-family: Comic Sans MS;
 }
 
 div.main {
@@ -27,15 +28,20 @@ div.score {
 }
 
     div.score > button {
-        margin: 30px 0 0 0;
-        padding: 6px 27px;
+        font-size: 30px;
+        margin: 20px 0 0 0;
+        padding: 6px 40px;
         color: #fff;
-        background-color: #D44A7B;
+        background-color: #593f6b;
         border: none;
         border-radius: 3px;
         cursor: pointer;
         outline: none;
         transition: all 0.3s;
+        border: solid 2px #ccc;
+        border-radius: 8px;
+        color: #fff;
+        cursor: pointer;
     }
 
         div.score > button:active {
@@ -44,6 +50,8 @@ div.score {
 
 .game-container {
     position: relative;
+    margin-top: 30px;
+    height: 500px;
 }
 
 canvas.gamecanvas {
@@ -61,19 +69,45 @@ canvas.gamecanvas {
 }
 
 .score-time {
-    font-size: 12px;color: #fff;
+    font-size: 20px;
+    color: #fff;
+    margin-top: 5px;
 }
 
 .score-num {
-    font-size: 12px;
+    font-size: 30px;
     color: #fff;
     line-height: 0;
     padding: 20px 0 20px 0;
+    margin-top: 10px;
 }
 
     .score-num > span {
-        font-size: 29px;
+        font-size: 50px;
         vertical-align: bottom;
         padding: 0 10px;
     }
 
+#trigger-div {
+    position: absolute;
+    z-index: 3;
+    text-align: center;
+    top: 20%;
+    padding: 20px;
+    margin: 30px 60px 30px 60px;
+    border-color: black;
+    border-style: solid;
+    border-radius: 20px;
+    border-width: 5px;
+    border-color: magenta;
+}
+
+#trigger-text {
+    color: chartreuse;
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.d-none {
+    display: none;
+}
