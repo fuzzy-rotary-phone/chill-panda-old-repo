@@ -55,8 +55,10 @@ body {
 
 .title {
   text-align: center;
-  font-size: 30px;
+  font-size: calc(1em + 2vmin);
   color: aqua;
+  width: 60vmin;
+  margin: auto;
 }
 
 .controls {
@@ -116,7 +118,7 @@ body {
 
 #end-div {
   position: absolute;
-  top: 50%;
+  top: 57%;
   left: 50%;
   transform: translate(-50%, -50%);
   justify-content: center;
@@ -134,20 +136,20 @@ body {
 #trigger-text {
   pointer-events: none;
   position: relative;
-  font-size: 2.5em;
-  margin: 0.3em;
-  padding: 0.2em;
+  font-size: calc(1em + 2vmin);
+  margin: 2vmin;
+  padding: 1.5vmin;  
   border-color: magenta;
   border-style: solid;
-  border-radius: 0.5em;
+  border-radius: 1vmin;
   color: black;
-  border-width: 0.1em;
+  border-width: 0.6vmin;
 }
 
 #game-over {
   pointer-events: none;
   position: relative;
-  font-size: 2em;
+  font-size: calc(1em + 3vmin);;
 }
 
 #game-over span {
