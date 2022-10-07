@@ -56,6 +56,22 @@ h2 {
   border-radius: 8px;
 }
 
+#trigger-div {
+  padding: 12px;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  border-color: magenta;
+  border-width: 5px;
+  border-style: solid;
+  font-size: 20px;
+  color: azure;
+  margin-bottom: 20px;
+}
+
+.d-none {
+  display: none;
+}
+
 .dif-options {
   clear: both;
   overflow: hidden;

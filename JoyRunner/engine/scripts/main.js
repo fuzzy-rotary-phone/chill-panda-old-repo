@@ -13,6 +13,7 @@ const statusText = {
     gameOver: document.querySelector("#game-over-text"),
     bestScore: document.querySelector("#best-score"),
     container: document.querySelector(".status-container"),
+    trigger: document.querySelector("#trigger-text")
 }
 
 // event
@@ -81,7 +82,7 @@ const lostListener = {
 let barrierAnimTimer = setInterval(() => {}, 0);
 let barrierLeftOffset = 90;
 let barrierRounds = 0;
-let barrierDurationValue = 20;
+let barrierDurationValue = 15;
 const barrierAnim = {
     start: () => {
         barrierLeftOffset = 90;
@@ -125,6 +126,7 @@ const gameStatus = {
         sounds.playground.currentTime = 0;
         sounds.playground.play();
         statusText.container.classList.add("d-none");
+        statusText.trigger.classList.add("d-none");
     },
     stop: () => {
         gameStarted = false;
@@ -135,6 +137,7 @@ const gameStatus = {
         game.clouds.style.animationPlayState = "paused";
         sounds.playground.pause();
         statusText.container.classList.remove("d-none");
+        statusText.trigger.classList.remove("d-none");
     }
 }
 
@@ -206,9 +209,18 @@ function userLost() {
         lostStatus = true;
     }, 1000);
     changeBestScore();
-    statusText.gameOver.classList.remove("d-none")
+    statusText.gameOver.classList.remove("d-none");
+    setTrigger();
+    statusText.trigger.classList.remove("d-none");
 }
 
+let allContent = $.getJSON('content/content.json');
+
+function setTrigger() {
+    let total = allContent.responseJSON["content"].length;
+    let number = Math.floor(Math.random() * total);
+    statusText.trigger.innerHTML = allContent.responseJSON["content"][number]["text"];
+}
 
 let barrierIndex;
 
@@ -218,25 +230,25 @@ function setBarrierIndexRandom() {
 
 
 function checkBarrierRounds(rounds) {
-    if (rounds == 10) {
+    if (rounds == 5) {
         barrierAnim.stop();
-        barrierDurationValue = 13;
+        barrierDurationValue = 10;
+        barrierAnim.start();
+    } else if (rounds == 10) {
+        barrierAnim.stop();
+        barrierDurationValue = 5;
+        barrierAnim.start();
+    } else if (rounds == 15) {
+        barrierAnim.stop();
+        barrierDurationValue = 1;
         barrierAnim.start();
     } else if (rounds == 20) {
         barrierAnim.stop();
-        barrierDurationValue = 11;
+        barrierDurationValue = 0.3;
         barrierAnim.start();
-    } else if (rounds == 30) {
+    } else if (rounds == 25) {
         barrierAnim.stop();
-        barrierDurationValue = 7;
-        barrierAnim.start();
-    } else if (rounds == 40) {
-        barrierAnim.stop();
-        barrierDurationValue = 3;
-        barrierAnim.start();
-    } else if (rounds == 50) {
-        barrierAnim.stop();
-        barrierDurationValue = 1;
+        barrierDurationValue = 0.01;
         barrierAnim.start();
     }
 }
