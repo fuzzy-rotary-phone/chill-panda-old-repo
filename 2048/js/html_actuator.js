@@ -3,8 +3,11 @@ function HTMLActuator() {
   this.scoreContainer   = document.querySelector(".score-container");
   this.bestContainer    = document.querySelector(".best-container");
   this.messageContainer = document.querySelector(".game-message");
+  this.triggerDiv = document.querySelector("#trigger-div");
+  this.triggerText = document.querySelector("#trigger-text");
 
   this.score = 0;
+  this.allContent = $.getJSON('content.json');
 }
 
 HTMLActuator.prototype.actuate = function (grid, metadata) {
@@ -30,6 +33,7 @@ HTMLActuator.prototype.actuate = function (grid, metadata) {
       } else if (metadata.won) {
         self.message(true); // You win!
       }
+      self.setTrigger();
     }
 
   });
@@ -136,4 +140,15 @@ HTMLActuator.prototype.clearMessage = function () {
   // IE only takes one value to remove at a time.
   this.messageContainer.classList.remove("game-won");
   this.messageContainer.classList.remove("game-over");
+  this.resetTrigger();
+};
+
+HTMLActuator.prototype.setTrigger = function () {
+  var total = this.allContent.responseJSON["content"].length;
+  var number = Math.floor(Math.random() * total);
+  this.triggerText.innerHTML = this.allContent.responseJSON["content"][number]["text"];
+};
+
+HTMLActuator.prototype.resetTrigger = function() {
+  this.triggerText.innerHTML = '';
 };
