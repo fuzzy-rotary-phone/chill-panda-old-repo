@@ -1,5 +1,6 @@
 // constants
 const WEB_WORKER_URL = 'scripts/worker.js';
+const CONTENT_URL = 'scripts/content.json';
 const BLURBS = {
   'start': {
     header: 'Get Ready',
@@ -30,6 +31,7 @@ const OUTLOOKS = {
   'win-imminent': 'Uh oh, computer is feeling saucy!',
   'loss-imminent': 'Computer is unsure. Now\'s your chance!'
 };
+const allContent = $.getJSON(CONTENT_URL);
 
 // global variables
 var worker;
@@ -78,10 +80,16 @@ function setOutlook(key) {
   }
 }
 
+function resetTrigger() {
+  $('#trigger-text').empty();
+  $('#trigger-div').addClass("d-none");
+}
+
 function startGame() {
   $('.dif').addClass('freeze');
   $('.dif input').prop('disabled', true);
   $('.lit-cells, .chips').empty();
+  resetTrigger();
 
   worker.postMessage({
     messageType: 'reset',
@@ -182,11 +190,19 @@ function endComputerTurn(coords, isWin, winningChips, isBoardFull, isWinImminent
   });
 }
 
+function setTrigger() {
+  var total = allContent.responseJSON["content"].length;
+  var number = Math.floor(Math.random() * total);
+  $('#trigger-text').text(allContent.responseJSON["content"][number]["text"]);
+  $('#trigger-div').removeClass("d-none");
+}
+
 function endGame(blurbKey, winningChips) {
   $('.dif').removeClass('freeze');
   $('.dif input').prop('disabled', false);
   setBlurb(blurbKey);
   setOutlook();
+  setTrigger();
   
   if(winningChips) {
     // not a tie, highlight the chips in the winning run

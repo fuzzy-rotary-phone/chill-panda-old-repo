@@ -53,6 +53,12 @@ body {
   color: #fffced;
 }
 
+.title {
+  text-align: center;
+  font-size: 30px;
+  color: aqua;
+}
+
 .controls {
   display: flex;
   justify-content: space-between;
@@ -108,11 +114,42 @@ body {
   color: #00bcd4;
 }
 
-#game-over {
-  pointer-events: none;
+#end-div {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  font-size: 3em;
+  justify-content: center;
+  text-align: center;
+  width: 65vmin;
+  height: 65vmin;
+  overflow: scroll;
+  align-content: center;
+  vertical-align: middle;
+  display: grid;
+  justify-content: center;
+  align-items: center;
+}
+
+#trigger-text {
+  pointer-events: none;
+  position: relative;
+  font-size: 2.5em;
+  margin: 0.3em;
+  padding: 0.2em;
+  border-color: magenta;
+  border-style: solid;
+  border-radius: 0.5em;
+  color: black;
+  border-width: 0.1em;
+}
+
+#game-over {
+  pointer-events: none;
+  position: relative;
+  font-size: 2em;
+}
+
+#game-over span {
+  color: black;
 }

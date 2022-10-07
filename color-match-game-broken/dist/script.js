@@ -5,9 +5,11 @@
   let board = document.querySelector('#board')
   let colors = document.querySelector('#colors')
   let gameover = document.querySelector('#game-over')
+  let triggertext = document.querySelector('#trigger-text')
 
   // control variables 
   let colorArray = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j']
+  let allContent = $.getJSON('content.json')
 
   let running = false
 
@@ -31,6 +33,14 @@
     return n < 10 ? shuffle(collection).slice(0, n) : collection
   }
 
+  let setTrigger = () => {
+    let total = allContent.responseJSON["content"].length;
+    let number = Math.floor(Math.random() * total);
+    triggertext.innerHTML = allContent.responseJSON["content"][number]["text"];
+    triggertext.classList.remove("d-none");
+    triggertext.style.removeProperty("border");
+  }
+
   let checkWin = (moves) => {
     let n = 0
     let msg = ''
@@ -52,6 +62,7 @@
       }
     }
     if(!running) {
+      setTrigger()
       gameover.innerHTML = msg
     }
   }
@@ -88,6 +99,12 @@
     }
   }
 
+  let resetTrigger = () => {
+    triggertext.classList.add("d-none");
+    triggertext.innerHTML = '';
+    triggertext.style.setProperty('border','none');    
+  }
+
   let newGame = () => {
     let options = setColors(colorArray.slice(), skill)
     tally = 0
@@ -101,6 +118,7 @@
     board.className = ''
     board.childNodes[0].className = color + cell
     checkColor(color)
+    resetTrigger()
   }
 
   let play = (chip) => {
@@ -110,6 +128,7 @@
         board.className = 'started'
       }
       tally++
+      moves.innerText = tally;
       //?
       checkColor(chip)
       checkWin(tally)
