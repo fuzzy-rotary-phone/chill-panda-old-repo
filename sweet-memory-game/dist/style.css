@@ -100,3 +100,14 @@ body {
 .swal2-overlay {
   background-color: white;
 }
+
+.swal2-content div {
+  font-size: 40px;
+  border-color: black;
+  border-style: solid;
+  padding: 20px;
+  border-radius: 20px;
+  font-weight: bold;
+  color: indigo;
+  margin-top: 30px;
+}
