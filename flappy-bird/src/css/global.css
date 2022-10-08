@@ -46,16 +46,16 @@ div.swal-alert {
 }
 
 #trigger-div {
-  margin-top: 20px;
+  margin-top: 2vh;
 }
 
 #trigger-text {
-  padding: 20px;
+  padding: 2vh;
   border-color: black;
   border-style: solid;
-  border-radius: 20px;
-  font-size: 30px;
+  border-radius: 2vh;
+  font-size: 3.5vh;
   font-weight: bold;
   color: indigo;
-  border-width: 5px;
+  border-width: 0.5vh;
 }
