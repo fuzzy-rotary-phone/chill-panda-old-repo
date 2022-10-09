@@ -98,13 +98,13 @@ function new_game(difficulty) {
 function setup() {
     var disclaimer_element = document.getElementById("disclaimer");
     disclaimer_element.parentNode.removeChild(disclaimer_element);
-    var canvas = createCanvas(w * pixel_size, h * pixel_size);
+    var canvas = createCanvas(w * pixel_size * 0.985, h * pixel_size);
     canvas.parent("canvas-container");
     colorMode(HSB);
     textAlign(CENTER, CENTER);
 
     // button template
-    button.template.resize(vw * 0.55, vh * 0.10);
+    button.template.resize(vw * 0.55, vh * 0.12);
     button.template.x = vw * 0.5 - button.template.width * 0.5;
     button.template.strokeWeight = vw * 0.015;
     button.template.cornerRadius = 0;
@@ -162,7 +162,7 @@ function setup() {
 
     // trigger button (not interactive)
     button.trigger = { ...button.template };
-    button.trigger.resize(vw * 0.8, vh * 0.3);
+    button.trigger.resize(vw * 0.8, max(vw, vh) * 0.2);
     button.trigger.y = centerbtns(3);
     button.trigger.x = vw * 0.5 - button.trigger.width * 0.5;
     button.trigger.stroke = "#f00";
@@ -227,8 +227,8 @@ function draw() {
     // menu
     if (!game.started) {
         drawbg();
-        textSize(vw * 0.22);
-        text('snake', vw * 0.5, vh * 0.175)
+        textSize(vw * 0.17);
+        text('snake', vw * 0.5, vh * 0.12)
         button.easy.draw();
         button.normal.draw();
         button.hard.draw();
@@ -310,7 +310,7 @@ function draw() {
         if (snake.did_eat(food)) {
             if(if_show_content(snake.body)) {
                 curr_content = get_content();
-                game.trigger = true;
+                // game.trigger = true;
             }
             snake.body.push(snake.body[snake.body.length - 1]);
             new_food(snake.body);

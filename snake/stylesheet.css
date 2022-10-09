@@ -15,7 +15,19 @@ body {
 	overflow: hidden;
 }
 
+canvas {
+	width: 98%;
+	height: 98%;
+	border-color: red;
+	border-width: 0.5vh;
+	border-style: solid;
+}
+
 p {
     text-align: center;
     padding-top: 60%;
+}
+
+button {
+	padding: 1px;
 }
