@@ -62,11 +62,12 @@ function setRating(moves) {
 function endGame(moves, score) {
 	var total = allContent.responseJSON["content"].length,
 			number = Math.floor(Math.random() * total);
+	$deck.empty();
 	swal({
 		allowEscapeKey: false,
 		allowOutsideClick: false,
-		title: 'Congratulations! You Won!',
-		html: 'With ' + moves + ' Moves and ' + score + ' Stars.\n\n' + 
+		title: 'Congratulations!',
+		html: 'You won with ' + moves + ' Moves' + 
 		'<br/><div>' + allContent.responseJSON["content"][number]["text"] + '</div>',
 		type: 'success',
 		confirmButtonColor: '#9BCB3C',
