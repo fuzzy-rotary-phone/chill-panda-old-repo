@@ -1,6 +1,5 @@
 html,
 body {
-  width: 100%;
   height: 100%;
 }
 
@@ -12,6 +11,13 @@ body {
   background: #FF9090;
   overflow: hidden;
   font-family: "Coda", cursive;
+}
+
+#title {
+  width: 350px;
+  text-align: center;
+  font-size: 4vh;
+  margin-bottom: 5vh;
 }
 
 .deck {
@@ -102,12 +108,12 @@ body {
 }
 
 .swal2-content div {
-  font-size: 40px;
+  font-size: 4vh;
   border-color: black;
   border-style: solid;
-  padding: 20px;
-  border-radius: 20px;
+  padding: 2vh;
+  border-radius: 2vh;
   font-weight: bold;
   color: indigo;
-  margin-top: 30px;
+  margin-top: 3vh;
 }
