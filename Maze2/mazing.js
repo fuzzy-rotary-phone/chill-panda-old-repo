@@ -99,7 +99,7 @@ Mazing.prototype.heroTakeKey = function() {
   this.heroHasKey = true;
   this.heroScore += 20;
   this.mazeScore.classList.add("has-key");
-  this.setMessage("you now have the key!");
+  this.setMessage("you have the key!");
 };
 
 Mazing.prototype.gameOver = function(text) {
