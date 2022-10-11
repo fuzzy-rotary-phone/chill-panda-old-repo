@@ -39,6 +39,13 @@ function Mazing(id) {
     }
   }
 
+  var triggerDiv = document.createElement("div");
+  triggerDiv.id = "trigger-div";
+  var triggerText = document.createElement("div");
+  triggerText.id = "trigger-text";
+  triggerDiv.appendChild(triggerText);
+  this.mazeContainer.insertAdjacentElement("afterend", triggerDiv);
+
   var mazeOutputDiv = document.createElement("div");
   mazeOutputDiv.id = "maze_output";
 
@@ -53,6 +60,17 @@ function Mazing(id) {
   // activate control keys
   this.keyPressHandler = this.mazeKeyPressHandler.bind(this);
   document.addEventListener("keydown", this.keyPressHandler, false);
+
+  //active touch controls
+  this.hammer = new Hammer(this.mazeContainer); // create hammer object to handle swipes
+  this.hammer.get("swipe").set({ direction: Hammer.DIRECTION_ALL }); // enable vertical swipes
+  this.swipeHandler();
+
+  //trigger control added
+  this.allContent = $.getJSON('content.json');
+  this.triggerDiv = document.getElementById("trigger-div");
+  this.triggerText = document.getElementById("trigger-text");
+  this.triggerDiv.classList.add("d-none");
 };
 
 Mazing.prototype.enableSpeech = function() {
@@ -81,7 +99,7 @@ Mazing.prototype.heroTakeKey = function() {
   this.heroHasKey = true;
   this.heroScore += 20;
   this.mazeScore.classList.add("has-key");
-  this.setMessage("you now have the key!");
+  this.setMessage("you have the key!");
 };
 
 Mazing.prototype.gameOver = function(text) {
@@ -89,6 +107,7 @@ Mazing.prototype.gameOver = function(text) {
   document.removeEventListener("keydown", this.keyPressHandler, false);
   this.setMessage(text);
   this.mazeContainer.classList.add("finished");
+  this.setTrigger();
 };
 
 Mazing.prototype.heroWins = function() {
@@ -187,8 +206,51 @@ Mazing.prototype.mazeKeyPressHandler = function(e) {
   e.preventDefault();
 };
 
+Mazing.prototype.moveHeroHelper = function (dir) {
+  var tryPos = new Position(this.heroPos.x, this.heroPos.y);
+  switch(dir) {
+    case "up":
+      tryPos.x--;
+      break;
+    case "down":
+      tryPos.x++;
+      break;
+    case "left":
+      this.mazeContainer.classList.remove("face-right");
+      tryPos.y--;
+      break;
+    case "right":
+      this.mazeContainer.classList.add("face-right");
+      tryPos.y++;
+      break;
+  }
+  this.tryMoveHero(tryPos);
+};
+
+Mazing.prototype.swipeHandler = function() {
+  this.hammer.on("swipeup", function () {
+    MazeGame.moveHeroHelper("up");
+  });
+  this.hammer.on("swipedown", function () {
+    MazeGame.moveHeroHelper("down");
+  });
+  this.hammer.on("swipeleft", function () {
+    MazeGame.moveHeroHelper("left");
+  });
+  this.hammer.on("swiperight", function () {
+    MazeGame.moveHeroHelper("right");
+  });
+};
+
 Mazing.prototype.setChildMode = function() {
   this.childMode = true;
   this.heroScore = 0;
   this.setMessage("collect all the treasure");
+};
+
+Mazing.prototype.setTrigger = function () {
+  var total = this.allContent.responseJSON["content"].length;
+  var number = Math.floor(Math.random() * total);
+  this.triggerText.innerHTML = this.allContent.responseJSON["content"][number]["text"];
+  this.triggerDiv.classList.remove("d-none");
 };

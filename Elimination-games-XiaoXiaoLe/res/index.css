@@ -4,7 +4,8 @@ html {
 body {
     margin: 0;
     padding: 0;
-    background-color: #6dbe7c;
+    background: #000 radial-gradient(1000px 500px, #3f546b, #000);
+    font-family: Comic Sans MS;
 }
 
 div.main {
@@ -23,19 +24,24 @@ div.score {
     text-align: center;
     -webkit-user-select: none;
     user-select: none;
-    height: 130px;
+    height: 20vh;
 }
 
     div.score > button {
-        margin: 30px 0 0 0;
-        padding: 6px 27px;
+        font-size: calc(1em + 1vmin);
+        margin: 3vh 0 0 0;
+        padding: 0.5vh 3vh;
         color: #fff;
-        background-color: #D44A7B;
+        background-color: #593f6b;
         border: none;
         border-radius: 3px;
         cursor: pointer;
         outline: none;
         transition: all 0.3s;
+        border: solid 2px #ccc;
+        border-radius: 8px;
+        color: #fff;
+        cursor: pointer;
     }
 
         div.score > button:active {
@@ -44,6 +50,8 @@ div.score {
 
 .game-container {
     position: relative;
+    margin-top: 30px;
+    height: 500px;
 }
 
 canvas.gamecanvas {
@@ -58,22 +66,57 @@ canvas.gamecanvas {
     z-index: 2;
     border-radius: 5px;
     box-shadow: 0 0 10px #00130B inset;
+    border-color: whitesmoke;
+    border-width: 0.5vh;
+    border-style: ridge;
 }
 
 .score-time {
-    font-size: 12px;color: #fff;
+    font-size: calc(1em + 1vmin);
+    color: #fff;
+    margin-top: 1vh;
+}
+
+.score-time > span {
+    font-size: calc(1em + 2vmin);
+    color: crimson;
 }
 
 .score-num {
-    font-size: 12px;
+    font-size: calc(1em + 2vmin);
     color: #fff;
     line-height: 0;
-    padding: 20px 0 20px 0;
+    padding: 3vh 0 3vh 0;
+    margin-top: 2vh;
 }
 
-    .score-num > span {
-        font-size: 29px;
-        vertical-align: bottom;
-        padding: 0 10px;
-    }
+.score-num > span {
+    font-size: calc(1em + 5vmin);
+    vertical-align: bottom;
+    padding: 0 1vh;
+    color: chartreuse;
+}
 
+#trigger-div {
+    position: absolute;
+    z-index: 3;
+    text-align: center;
+    top: 10vh;
+    padding: 2vh;
+    margin: 1vh 5vh 1vh 5vh;
+    border-color: black;
+    border-style: solid;
+    border-radius: 1vh;
+    border-width: 0.5vh;
+    border-color: magenta;
+}
+
+#trigger-text {
+    color: chartreuse;
+    font-size: 3vh;
+    font-weight: bold;
+}
+
+.d-none {
+    display: none;
+}

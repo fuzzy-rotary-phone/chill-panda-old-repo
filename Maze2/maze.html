@@ -1,5 +1,3 @@
-<<<<<<< Updated upstream
-=======
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -13,23 +11,17 @@
 
 	  gtag('config', 'G-L26FXBG7SW');
 	</script>
+	<script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
+	<script src="https://hammerjs.github.io/dist/hammer.min.js"></script>
+	<script src="maze-builder.js"></script>
+	<script src="fancy-maze-builder.js"></script>
+	<script src="mazing.js"></script>
 	<link rel="stylesheet" type="text/css" href="index.css">
+	<link rel="stylesheet" type="text/css" href="mazing.css">
 </head>
-<body>
-	<iframe id="myiframe" src="javascript:;" width="100%" height="100%" frameborder="0">
-	</iframe>
-</body>
 
-<meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1">
+<div id="maze_container"></div>
 
->>>>>>> Stashed changes
-<link rel="stylesheet" type="text/css" href="mazing.css">
-
-<div id="maze_container"><!-- --></div>
-
-<script src="maze-builder.js"></script>
-<script src="fancy-maze-builder.js"></script>
-<script src="mazing.js"></script>
 <script>
 
   var Maze, MazeGame;
@@ -38,6 +30,7 @@
     Maze = new FancyMazeBuilder(width, height);
     Maze.display(id);
     MazeGame = new Mazing("maze");
+    // MazeGame.swipeHandler();
     if(speech) {
       MazeGame.enableSpeech();
     }
@@ -82,7 +75,8 @@
 		document.getElementById('maze').style.backgroundImage = "radial-gradient(circle at 0% 0%, transparent 50%, rgba(0,0,0,0.1) 50%), radial-gradient(circle at center, rgba(0,0,0,0.1) 50%, transparent 50%), radial-gradient(circle at 100% 100%, transparent 50%, rgba(0,0,0,0.1) 50%), radial-gradient(circle at 0% 100%, transparent 50%, rgba(0,0,0,0.1) 50%), radial-gradient(circle at 100% 0%, transparent 50%, rgba(0,0,0,0.1) 50%)";
 	  }
 	}
-</script>
+</script>	
+	
 <div id="settings" style="display: none">
 	<label for="favcolor">Select Background color:</label>
 	<input type="color" id="maze_color" name="maze_color" value="#ff0000"><br><br>

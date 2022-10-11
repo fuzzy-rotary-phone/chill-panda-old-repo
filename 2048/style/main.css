@@ -177,7 +177,7 @@ hr {
       font-weight: bold;
       height: 60px;
       line-height: 60px;
-      margin-top: 222px; }
+      margin-top: 22px; }
     .game-container .game-message .lower {
       display: block;
       margin-top: 59px; }
@@ -756,3 +756,17 @@ hr {
     margin-top: 90px !important; }
   .game-message .lower {
     margin-top: 30px !important; } }
+  
+  #trigger-div {
+    margin: 30px;
+  }
+
+  #trigger-text {
+    font-size: 30px;
+    border-color: black;
+    border-style: solid;
+    padding: 20px;
+    border-radius: 20px;
+    font-weight: bold;
+    color: indigo;
+  }

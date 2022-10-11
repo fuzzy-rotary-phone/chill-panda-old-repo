@@ -53,6 +53,14 @@ body {
   color: #fffced;
 }
 
+.title {
+  text-align: center;
+  font-size: calc(1em + 2vmin);
+  color: aqua;
+  width: 60vmin;
+  margin: auto;
+}
+
 .controls {
   display: flex;
   justify-content: space-between;
@@ -108,11 +116,42 @@ body {
   color: #00bcd4;
 }
 
-#game-over {
-  pointer-events: none;
+#end-div {
   position: absolute;
-  top: 50%;
+  top: 57%;
   left: 50%;
   transform: translate(-50%, -50%);
-  font-size: 3em;
+  justify-content: center;
+  text-align: center;
+  width: 65vmin;
+  height: 65vmin;
+  overflow: scroll;
+  align-content: center;
+  vertical-align: middle;
+  display: grid;
+  justify-content: center;
+  align-items: center;
+}
+
+#trigger-text {
+  pointer-events: none;
+  position: relative;
+  font-size: calc(1em + 2vmin);
+  margin: 2vmin;
+  padding: 1.5vmin;  
+  border-color: magenta;
+  border-style: solid;
+  border-radius: 1vmin;
+  color: black;
+  border-width: 0.6vmin;
+}
+
+#game-over {
+  pointer-events: none;
+  position: relative;
+  font-size: calc(1em + 3vmin);;
+}
+
+#game-over span {
+  color: black;
 }

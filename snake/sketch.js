@@ -98,19 +98,19 @@ function new_game(difficulty) {
 function setup() {
     var disclaimer_element = document.getElementById("disclaimer");
     disclaimer_element.parentNode.removeChild(disclaimer_element);
-    var canvas = createCanvas(w * pixel_size, h * pixel_size);
+    var canvas = createCanvas(w * pixel_size * 0.985, h * pixel_size);
     canvas.parent("canvas-container");
     colorMode(HSB);
     textAlign(CENTER, CENTER);
 
     // button template
-    button.template.resize(vw * 0.55, vh * 0.10);
+    button.template.resize(vw * 0.55, vh * 0.12);
     button.template.x = vw * 0.5 - button.template.width * 0.5;
     button.template.strokeWeight = vw * 0.015;
     button.template.cornerRadius = 0;
     button.template.color = "#fff";
     button.template.textColor = "#333";
-    button.template.textFont = "silkscreen";
+    button.template.textFont = "Comic Sans";
     button.template.textSize = vw * 0.07;
     var btnspacing = vh * 0.03;
     button.template.onPress = function () {
@@ -160,9 +160,20 @@ function setup() {
     button.insane.stroke = "#333";
     button.insane.difficulty = difficulties.insane;
 
+    // trigger button (not interactive)
+    button.trigger = { ...button.template };
+    button.trigger.resize(vw * 0.8, max(vw, vh) * 0.2);
+    button.trigger.y = centerbtns(3);
+    button.trigger.x = vw * 0.5 - button.trigger.width * 0.5;
+    button.trigger.stroke = "#f00";
+    button.trigger.onPress = function () { };
+    button.trigger.onRelease = function () { };
+    button.trigger.text = get_content();
+    button.trigger.textSize = button.template.textSize * 0.6;
+
     // again button
     button.again = { ...button.template };
-    button.again.y = centerbtns(2);
+    button.again.y = button.trigger.y + button.trigger.height + btnspacing;
     button.again.text = "again";
     button.again.onRelease = function () {
         if (game.ended) {
@@ -196,7 +207,7 @@ function setup() {
     // score button (not interactive)
     button.score = { ...button.template };
     button.score.resize(button.template.width * 1.3, button.template.height * 1.3);
-    button.score.y = button.again.y - button.score.height - btnspacing;
+    button.score.y = button.trigger.y - button.score.height - btnspacing;
     button.score.x = vw * 0.5 - button.score.width * 0.5;
     button.score.stroke = "#00f";
     button.score.onPress = function () { };
@@ -216,8 +227,8 @@ function draw() {
     // menu
     if (!game.started) {
         drawbg();
-        textSize(vw * 0.22);
-        text('snake', vw * 0.5, vh * 0.175)
+        textSize(vw * 0.17);
+        text('snake', vw * 0.5, vh * 0.12)
         button.easy.draw();
         button.normal.draw();
         button.hard.draw();
@@ -238,12 +249,13 @@ function draw() {
 
     // die screen
     if (game.ended) {
-        button.score.text = "Score: " + snake.score_final + "\nOn " + saved.difficulty;
+        button.score.text = "Score: " + snake.score_final;
         button.again.stroke = saved.stroke;
 
         button.score.draw();
         button.again.draw();
         button.back.draw();
+        button.trigger.draw();
     }
 
     // see line 165
@@ -298,7 +310,7 @@ function draw() {
         if (snake.did_eat(food)) {
             if(if_show_content(snake.body)) {
                 curr_content = get_content();
-                game.trigger = true;
+                // game.trigger = true;
             }
             snake.body.push(snake.body[snake.body.length - 1]);
             new_food(snake.body);

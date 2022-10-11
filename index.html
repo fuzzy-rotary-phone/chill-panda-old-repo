@@ -1,23 +1,25 @@
-<!-- Google tag (gtag.js) -->
-<script>
-    var host = window.location.hostname;
-    if(host != "localhost") {
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title></title>
+	<!-- Google tag (gtag.js) -->
 	<script async src="https://www.googletagmanager.com/gtag/js?id=G-L26FXBG7SW"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+	<script>
+	  window.dataLayer = window.dataLayer || [];
+	  function gtag(){dataLayer.push(arguments);}
+	  gtag('js', new Date());
 
-  gtag('config', 'G-L26FXBG7SW');
-</script>
-    }
-</script>
-
-
-
+	  gtag('config', 'G-L26FXBG7SW');
+	</script>
+	<link rel="stylesheet" type="text/css" href="index.css">
+</head>
+<body>
+	<iframe id="myiframe" src="javascript:;" width="100%" height="100%" frameborder="0">
+	</iframe>
+</body>
 <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
-<iframe id="myiframe" src="javascript:;" width="100%" height="100%" frameborder="0">
-</iframe>
 <script>
 	$(document).ready(function() {
 		var total = 10;
@@ -31,7 +33,7 @@
 				src = 'align-four/index.html';
 				break;
 			case 3:
-				src = 'clumsy-bird/index.html';
+				src = 'flappy-bird/index.html';
 				break;
 			case 4:
 				src = 'color-match-game-broken/dist/index.html';
@@ -60,3 +62,4 @@
     	$('#myiframe').attr('src', src);
 	});
 </script>
+</html>
