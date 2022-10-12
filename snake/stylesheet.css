@@ -7,18 +7,20 @@ html,
 body {
 	margin: 0;
 	padding: 0;
-	justify-content: center;
-	align-items: center;
-	background: #e0e0e0;
-
-	/* hide scrollbars */
-	overflow: hidden;
+	background: black;
+	display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  overflow: hidden;
+  height: 100%;
+  width: 100%;
 }
 
 canvas {
 	width: 98%;
 	height: 98%;
-	border-color: red;
+	border-color: black;
 	border-width: 0.5vh;
 	border-style: solid;
 }
@@ -30,4 +32,31 @@ p {
 
 button {
 	padding: 1px;
+}
+
+.swal2-content div {
+  font-size: 4vh;
+  border-color: black;
+  border-style: solid;
+  padding: 2vh;
+  border-radius: 2vh;
+  font-weight: bold;
+  color: indigo;
+  margin-top: 3vh;
+}
+
+.swal2-overlay {
+  background-color: white !important;
+}
+
+*::-moz-selection {
+  background: transparent;
+}
+
+*::selection {
+  background: transparent;
+}
+
+.d-none {
+	display: none;
 }

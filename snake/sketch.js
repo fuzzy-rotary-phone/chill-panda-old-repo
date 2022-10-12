@@ -95,13 +95,15 @@ function new_game(difficulty) {
     new_food(snake.body);
 }
 
-function setup() {
-    var disclaimer_element = document.getElementById("disclaimer");
-    disclaimer_element.parentNode.removeChild(disclaimer_element);
+function addCanvas() {
     var canvas = createCanvas(w * pixel_size * 0.985, h * pixel_size);
     canvas.parent("canvas-container");
     colorMode(HSB);
-    textAlign(CENTER, CENTER);
+    textAlign(CENTER, CENTER);    
+}
+
+function setup() {
+    addCanvas();
 
     // button template
     button.template.resize(vw * 0.55, vh * 0.12);
@@ -249,13 +251,32 @@ function draw() {
 
     // die screen
     if (game.ended) {
-        button.score.text = "Score: " + snake.score_final;
-        button.again.stroke = saved.stroke;
+        // button.score.text = "Score: " + snake.score_final;
+        // button.again.stroke = saved.stroke;
 
-        button.score.draw();
-        button.again.draw();
-        button.back.draw();
-        button.trigger.draw();
+        // button.score.draw();
+        // button.again.draw();
+        // button.back.draw();
+        // button.trigger.draw();
+        noLoop();
+        $('.p5Canvas').addClass('d-none');
+        swal({
+            allowEscapeKey: false,
+            allowOutsideClick: false,
+            title: 'Game over!',
+            html: 'Your snake length is <strong>' + snake.score_final + 
+            '</strong><br/><div>' + button.trigger.text + '</div>',
+            type: 'error',
+            backdrop: 'white',
+            confirmButtonColor: '#9BCB3C',
+            confirmButtonText: 'Play again!'
+        }).then(function(isConfirm) {
+            if (isConfirm) {
+                $('.p5Canvas').removeClass('d-none');
+                button.again.onRelease();
+                loop();
+            }
+        })
     }
 
     // see line 165
