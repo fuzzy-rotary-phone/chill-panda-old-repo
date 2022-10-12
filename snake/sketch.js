@@ -1,4 +1,5 @@
 // global vars (sorry, very messy)
+// const Swal = require('sweetalert2');
 const vw = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
 const vh = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
 const w = 15; // snake pixel size
@@ -260,23 +261,95 @@ function draw() {
         // button.trigger.draw();
         noLoop();
         $('.p5Canvas').addClass('d-none');
-        swal({
+        // swal({
+        //     allowEscapeKey: false,
+        //     allowOutsideClick: false,
+        //     showDenyButton: true,
+        //     showCancelButton: true,
+        //     title: 'Game over!',
+        //     html: 'Your snake length is <strong>' + snake.score_final + 
+        //     '</strong><br/><div>' + button.trigger.text + '</div>',
+        //     type: 'error',
+        //     backdrop: 'white',
+        //     confirmButtonColor: '#9BCB3C',
+        //     confirmButtonText: 'Play same level!',
+        //     denyButtonText: 'Play different level',
+        //     cancelButtonText: 'Play another game',
+        // }).then((result) => {
+        //     if (result.isConfirmed) {
+        //         $('.p5Canvas').removeClass('d-none');
+        //         button.again.onRelease();
+        //         loop();
+        //     } else if (result.isDenied) {
+        //         $('.p5Canvas').removeClass('d-none');
+        //         button.back.onRelease();
+        //         loop();
+        //     } else {
+        //         window.location.reload();
+        //     }
+        // });
+        // swal({
+        //     allowEscapeKey: false,
+        //     allowOutsideClick: false,
+        //     title: 'Game over!',
+        //     html: 'Your snake length is <strong>' + snake.score_final + 
+        //     '</strong><br/><div>' + button.trigger.text + '</div>',
+        //     type: 'error',
+        //     backdrop: 'white',
+        //     buttons: {
+        //         same: 'Play same level',
+        //         different: 'Play different level',
+        //         game: 'Play another game'
+        //     },
+        // }).then((value) => {
+        //   switch (value) {
+         
+        //     case "same":
+        //       $('.p5Canvas').removeClass('d-none');
+        //       button.again.onRelease();
+        //       loop();
+        //       break;
+         
+        //     case "different":
+        //       $('.p5Canvas').removeClass('d-none');
+        //       button.back.onRelease();
+        //       break;
+
+        //     case "game":
+        //       window.location.reload();
+        //       break;
+         
+        //     default:
+        //       window.location.reload();
+        //   }
+        // });
+        Swal.fire({
             allowEscapeKey: false,
             allowOutsideClick: false,
             title: 'Game over!',
-            html: 'Your snake length is <strong>' + snake.score_final + 
+            html: '<span>Your snake length is </span><strong>' + snake.score_final + 
             '</strong><br/><div>' + button.trigger.text + '</div>',
-            type: 'error',
+            icon: 'error',
             backdrop: 'white',
-            confirmButtonColor: '#9BCB3C',
-            confirmButtonText: 'Play again!'
-        }).then(function(isConfirm) {
-            if (isConfirm) {
+            showDenyButton: true,
+            showCancelButton: true,
+            confirmButtonText: 'Play same level',
+            denyButtonText: 'Play different level',
+            cancelButtonText: 'Play another game',
+        }).then((result) => {
+            /* Read more about isConfirmed, isDenied below */
+            if (result.isConfirmed) {
                 $('.p5Canvas').removeClass('d-none');
                 button.again.onRelease();
                 loop();
+            } else if (result.isDenied) {
+                $('.p5Canvas').removeClass('d-none');
+                button.back.onRelease();
+                loop();
+            } else if (result.dismiss === Swal.DismissReason.cancel) {
+                window.location.reload();
             }
-        })
+        });
     }
 
     // see line 165

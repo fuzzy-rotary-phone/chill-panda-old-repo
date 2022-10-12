@@ -34,8 +34,13 @@ button {
 	padding: 1px;
 }
 
-.swal2-content div {
-  font-size: 4vh;
+.swal2-popup {
+	font-family: "Helvetica Neue",Helvetica,Arial,sans-serif !important;
+	overflow: hidden;
+}
+
+.swal2-html-container div {
+  font-size: calc(1em + 1vh);
   border-color: black;
   border-style: solid;
   padding: 2vh;
@@ -45,8 +50,36 @@ button {
   margin-top: 3vh;
 }
 
+.swal2-html-container span {
+	font-size: 1.3em;
+}
+
+.swal2-html-container strong {
+	font-size: 1.5em;
+}
+
 .swal2-overlay {
   background-color: white !important;
+}
+
+.swal2-actions {
+	flex-direction: column;
+}
+
+.swal2-actions button {
+	width: 15em;
+}
+
+.swal2-confirm {
+
+}
+
+.swal2-deny {
+	background-color: #6e7881 !important;
+}
+
+.swal2-cancel {
+	background-color: #dc3741 !important;
 }
 
 *::-moz-selection {
