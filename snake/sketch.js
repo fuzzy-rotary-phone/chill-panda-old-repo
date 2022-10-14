@@ -262,47 +262,7 @@ function draw() {
         // button.trigger.draw();
         noLoop();
         $('.p5Canvas').addClass('d-none');
-        Swal.fire({
-            allowEscapeKey: false,
-            allowOutsideClick: false,
-            title: 'Game over!',
-            html: '<span>Your snake length is </span><strong>' + snake.score_final + 
-            '</strong><br/>',
-            icon: 'error',
-            backdrop: 'white',
-            showDenyButton: true,
-            showCancelButton: true,
-            confirmButtonText: '<i class="fa-regular fa-rotate-right"></i>',
-            denyButtonText: '<i class="fa-regular fa-shuffle"></i>',
-            cancelButtonText: '<i class="fa-regular fa-xmark"></i>',
-        }).then((result) => {
-            /* Read more about isConfirmed, isDenied below */
-            if (result.isConfirmed) {
-                $('.p5Canvas').removeClass('d-none');
-                button.back.onRelease();
-                loop();
-            } else if (result.isDenied) {
-                window.location.reload();
-            } else if (result.dismiss === Swal.DismissReason.cancel) {
-                window.location.reload();
-            }
-        });
-        var triggerDiv = '<div class="trigger-div">' + button.trigger.text + '</div>';
-        $('.swal2-container').append(triggerDiv);
-        var shareDiv = document.createElement('div');
-        shareDiv.className = 'share-div';
-        shareDiv.innerHTML = '<i class="fa-solid fa-share"></i>';
-        shareDiv.addEventListener('click', share);
-        $('.swal2-container').append(shareDiv);
-        var buttonTextDiv = document.createElement('div');
-        buttonTextDiv.className = 'button-div';
-        buttonTextDiv.innerHTML = '<span>Repeat</span><span>Shuffle</span><span>Exit</span>';
-        $('.swal2-container').append(buttonTextDiv);
-        var logoDiv = document.createElement('div');
-        logoDiv.className = 'logo-div';
-        logoDiv.innerHTML = '<a href='+ all_content['website'] +' target="_blank">' 
-        + '<img src=' + all_content['logo'] + '>' + '</a>';
-        $('.swal2-container').append(logoDiv);
+        addEndScreen();
     }
 
     // see line 165
@@ -420,4 +380,48 @@ function share() {
     } else {
         swal("Browser doesn't support this API !");
     }
+}
+
+function addEndScreen() {
+    Swal.fire({
+        allowEscapeKey: false,
+        allowOutsideClick: false,
+        title: 'Game over!',
+        html: '<span>Your snake length is </span><strong>' + snake.score_final + 
+        '</strong><br/>',
+        icon: 'error',
+        backdrop: 'white',
+        showDenyButton: true,
+        showCancelButton: true,
+        confirmButtonText: '<i class="fa-regular fa-rotate-right"></i>',
+        denyButtonText: '<i class="fa-regular fa-shuffle"></i>',
+        cancelButtonText: '<i class="fa-regular fa-xmark"></i>',
+    }).then((result) => {
+        /* Read more about isConfirmed, isDenied below */
+        if (result.isConfirmed) {
+            $('.p5Canvas').removeClass('d-none');
+            button.back.onRelease();
+            loop();
+        } else if (result.isDenied) {
+            window.location.reload();
+        } else if (result.dismiss === Swal.DismissReason.cancel) {
+            window.location.reload();
+        }
+    });
+    var triggerDiv = '<div class="trigger-div">' + button.trigger.text + '</div>';
+    $('.swal2-container').append(triggerDiv);
+    var shareDiv = document.createElement('div');
+    shareDiv.className = 'share-div';
+    shareDiv.innerHTML = '<i class="fa-solid fa-share"></i>';
+    shareDiv.addEventListener('click', share);
+    $('.swal2-container').append(shareDiv);
+    var buttonTextDiv = document.createElement('div');
+    buttonTextDiv.className = 'button-div';
+    buttonTextDiv.innerHTML = '<span>Repeat</span><span>Shuffle</span><span>Exit</span>';
+    $('.swal2-container').append(buttonTextDiv);
+    var logoDiv = document.createElement('div');
+    logoDiv.className = 'logo-div';
+    logoDiv.innerHTML = '<a href='+ all_content['website'] +' target="_blank">' 
+    + '<img src=' + all_content['logo'] + '>' + '</a>';
+    $('.swal2-container').append(logoDiv);
 }
