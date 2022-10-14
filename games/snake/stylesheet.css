@@ -129,6 +129,7 @@ button {
 	box-shadow: 3px 3px 18px -8px #263238;
 	overflow: hidden;
 	opacity: 0.9;
+	font-family: "Helvetica Neue",Helvetica,Arial,sans-serif !important;
 }
 
 .share-div {
