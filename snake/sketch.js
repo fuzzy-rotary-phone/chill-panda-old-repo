@@ -1,4 +1,5 @@
 // global vars (sorry, very messy)
+// const Swal = require('sweetalert2');
 const vw = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
 const vh = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
 const w = 15; // snake pixel size
@@ -18,7 +19,7 @@ console.log("setting canvas height (in pixels) to " + h);
 const trigger_freq = 5;
 var all_content;
 var curr_content;
-$.getJSON('content.json', function (data) {
+$.getJSON('../content.json', function (data) {
     all_content = data;
 });
 
@@ -95,22 +96,24 @@ function new_game(difficulty) {
     new_food(snake.body);
 }
 
-function setup() {
-    var disclaimer_element = document.getElementById("disclaimer");
-    disclaimer_element.parentNode.removeChild(disclaimer_element);
+function addCanvas() {
     var canvas = createCanvas(w * pixel_size * 0.985, h * pixel_size);
     canvas.parent("canvas-container");
     colorMode(HSB);
-    textAlign(CENTER, CENTER);
+    textAlign(CENTER, CENTER);    
+}
+
+function setup() {
+    addCanvas();
 
     // button template
     button.template.resize(vw * 0.55, vh * 0.12);
     button.template.x = vw * 0.5 - button.template.width * 0.5;
     button.template.strokeWeight = vw * 0.015;
-    button.template.cornerRadius = 0;
+    button.template.cornerRadius = 30;
     button.template.color = "#fff";
     button.template.textColor = "#333";
-    button.template.textFont = "Comic Sans";
+    button.template.textFont = "Helvetica Neue";
     button.template.textSize = vw * 0.07;
     var btnspacing = vh * 0.03;
     button.template.onPress = function () {
@@ -156,7 +159,7 @@ function setup() {
     // insane button
     button.insane = { ...button.template };
     button.insane.y = button.hard.y + button.template.height + btnspacing;
-    button.insane.text = "insane!!!";
+    button.insane.text = "insane";
     button.insane.stroke = "#333";
     button.insane.difficulty = difficulties.insane;
 
@@ -227,8 +230,9 @@ function draw() {
     // menu
     if (!game.started) {
         drawbg();
-        textSize(vw * 0.17);
-        text('snake', vw * 0.5, vh * 0.12)
+        textSize(vh * 0.17);
+        textFont('Lucida Grande');
+        text('snake', vw * 0.5, vh * 0.12);
         button.easy.draw();
         button.normal.draw();
         button.hard.draw();
@@ -249,13 +253,16 @@ function draw() {
 
     // die screen
     if (game.ended) {
-        button.score.text = "Score: " + snake.score_final;
-        button.again.stroke = saved.stroke;
+        // button.score.text = "Score: " + snake.score_final;
+        // button.again.stroke = saved.stroke;
 
-        button.score.draw();
-        button.again.draw();
-        button.back.draw();
-        button.trigger.draw();
+        // button.score.draw();
+        // button.again.draw();
+        // button.back.draw();
+        // button.trigger.draw();
+        noLoop();
+        $('.p5Canvas').addClass('d-none');
+        addEndScreen();
     }
 
     // see line 165
@@ -357,4 +364,64 @@ function sleep(miliseconds) {
    while (currentTime + miliseconds >= new Date().getTime()) {
       
    }
+}
+
+function share() {
+    if (navigator.share) {
+        navigator.share({
+            title: 'Chill Panda',
+            url: window.location.href
+        }).then(() => {
+            console.log('Thanks for sharing!');
+        }).catch(err => {
+            console.log('Error while using Web share API:');
+            console.log(err);
+        });
+    } else {
+        swal("Browser doesn't support this API !");
+    }
+}
+
+function addEndScreen() {
+    Swal.fire({
+        allowEscapeKey: false,
+        allowOutsideClick: false,
+        title: 'Game over!',
+        html: '<span>Your snake length is </span><strong>' + snake.score_final + 
+        '</strong><br/>',
+        icon: 'error',
+        backdrop: 'white',
+        showDenyButton: true,
+        showCancelButton: true,
+        confirmButtonText: '<i class="fa-regular fa-rotate-right"></i>',
+        denyButtonText: '<i class="fa-regular fa-shuffle"></i>',
+        cancelButtonText: '<i class="fa-regular fa-xmark"></i>',
+    }).then((result) => {
+        /* Read more about isConfirmed, isDenied below */
+        if (result.isConfirmed) {
+            $('.p5Canvas').removeClass('d-none');
+            button.back.onRelease();
+            loop();
+        } else if (result.isDenied) {
+            window.location.reload();
+        } else if (result.dismiss === Swal.DismissReason.cancel) {
+            window.location.reload();
+        }
+    });
+    var triggerDiv = '<div class="trigger-div">' + button.trigger.text + '</div>';
+    $('.swal2-container').append(triggerDiv);
+    var shareDiv = document.createElement('div');
+    shareDiv.className = 'share-div';
+    shareDiv.innerHTML = '<i class="fa-solid fa-share"></i>';
+    shareDiv.addEventListener('click', share);
+    $('.swal2-container').append(shareDiv);
+    var buttonTextDiv = document.createElement('div');
+    buttonTextDiv.className = 'button-div';
+    buttonTextDiv.innerHTML = '<span>Repeat</span><span>Shuffle</span><span>Exit</span>';
+    $('.swal2-container').append(buttonTextDiv);
+    var logoDiv = document.createElement('div');
+    logoDiv.className = 'logo-div';
+    logoDiv.innerHTML = '<a href='+ all_content['website'] +' target="_blank">' 
+    + '<img src=' + all_content['logo'] + '>' + '</a>';
+    $('.swal2-container').append(logoDiv);
 }
