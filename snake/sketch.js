@@ -19,7 +19,7 @@ console.log("setting canvas height (in pixels) to " + h);
 const trigger_freq = 5;
 var all_content;
 var curr_content;
-$.getJSON('content.json', function (data) {
+$.getJSON('../content.json', function (data) {
     all_content = data;
 });
 
