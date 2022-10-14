@@ -1,6 +1,5 @@
 @font-face {
-	font-family: Silkscreen;
-	src: url("resources/fonts/silkscreen/slkscr.ttf");
+	font-family: "Helvetica Neue",Helvetica,Arial,sans-serif !important;
 }
 
 html,
@@ -37,6 +36,9 @@ button {
 .swal2-popup {
 	font-family: "Helvetica Neue",Helvetica,Arial,sans-serif !important;
 	overflow: hidden;
+	padding: 2em 0 0 0 !important;
+	height: 100% !important;
+	grid-row: 2 !important;
 }
 
 .swal2-html-container div {
@@ -63,23 +65,112 @@ button {
 }
 
 .swal2-actions {
-	flex-direction: column;
+	flex-direction: row;
 }
 
 .swal2-actions button {
-	width: 15em;
+	width: 4em;
+	height: 4em;
+	border-radius: 2em !important;
+	margin-right: 1em;
+	margin-left: 1em;
+	box-shadow: 3px 3px 18px -8px #263238;
+}
+
+.swal2-actions button i {
+	font-size: 1.5rem;
 }
 
 .swal2-confirm {
-
+	background-color: #fcbf49 !important;
 }
 
 .swal2-deny {
-	background-color: #6e7881 !important;
+	background-color: #f77f00 !important;
 }
 
 .swal2-cancel {
-	background-color: #dc3741 !important;
+	background-color: #d62828 !important;
+}
+
+.swal2-title {
+	font-family: Lucida Grande !important;
+	font-size: 2.5em !important;
+}
+
+.logo-div {
+	display: grid;
+	grid-column: 2;
+	grid-row: 1;
+	align-self: start;
+	justify-self: safe start;
+}
+
+.logo-div img {
+	height: 10vh;
+}
+
+.trigger-div {
+  font-size: 4vh;
+  border-color: black;
+  border-style: solid;
+  padding: 2vh;
+  border-radius: 2vh;
+  font-weight: bold;
+  color: #003049;
+	display: grid;
+	grid-column: 2;
+	grid-row: 1;
+	align-self: end;
+	justify-self: center;
+	width: 10em;
+	max-width: 100%;
+	text-align: center;
+	box-shadow: 3px 3px 18px -8px #263238;
+	overflow: hidden;
+	opacity: 0.9;
+}
+
+.share-div {
+	display: grid;
+	grid-column: 2;
+	grid-row: 4;
+	align-self: start;
+	justify-self: safe end;
+	margin: auto;
+	margin-right: 0.3em;
+	font-size: 1.2em;
+}
+
+.button-div {
+	grid-column: 2;
+	grid-row: 3;
+	align-self: start;
+	justify-self: safe end;
+	margin: auto;
+	text-align: center;
+	overflow: hidden;
+	margin-top: 0em;
+
+}
+
+.button-div span {
+	display: inline-block;
+	width: 5em;
+	font-size: 1.2em;
+	font-family: "Helvetica Neue",Helvetica,Arial,sans-serif !important;
+	font-weight: bold;
+	color: black;
+	opacity: 0.7;
+}
+
+.share-div i {
+	font-size: 2em;
+	color: #003049;
+}
+
+.share-div i:hover {
+	cursor: pointer;
 }
 
 *::-moz-selection {
