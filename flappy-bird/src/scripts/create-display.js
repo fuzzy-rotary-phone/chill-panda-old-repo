@@ -12,7 +12,7 @@ export default function (main) {
         global.flappyBird = main.makeFlappyBird()
         global.floor = main.createFloor()
         global.pipes = main.makePipes()
-        global.allContent = $.getJSON('./public/content.json')
+        global.allContent = $.getJSON('../content.json')
       },
 
       draw() {

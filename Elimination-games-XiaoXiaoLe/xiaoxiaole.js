@@ -27,7 +27,7 @@
 
     var canxiao = null;
 
-    var allcontent = $.getJSON('content.json');
+    var allcontent = $.getJSON('../content.json');
 
     function preparebackground() {  //绘制背景
         //var bgcanvas = document.getElementById(bgcanvasId)

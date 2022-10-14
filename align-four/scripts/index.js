@@ -1,6 +1,6 @@
 // constants
 const WEB_WORKER_URL = 'scripts/worker.js';
-const CONTENT_URL = 'scripts/content.json';
+const CONTENT_URL = '../content.json';
 const BLURBS = {
   'start': {
     header: 'Get Ready',

@@ -67,7 +67,7 @@ function Mazing(id) {
   this.swipeHandler();
 
   //trigger control added
-  this.allContent = $.getJSON('content.json');
+  this.allContent = $.getJSON('../content.json');
   this.triggerDiv = document.getElementById("trigger-div");
   this.triggerText = document.getElementById("trigger-text");
   this.triggerDiv.classList.add("d-none");
