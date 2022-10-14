@@ -20,10 +20,10 @@ const trigger_freq = 5;
 var all_content;
 var curr_content;
 var config;
-$.getJSON('../content.json', function (data) {
+$.getJSON('../../resources/content.json', function (data) {
     all_content = data;
 });
-$.getJSON('../config.json', function (data) {
+$.getJSON('../../resources/config.json', function (data) {
     config = data;
 })
 
@@ -234,7 +234,7 @@ function draw() {
     // menu
     if (!game.started) {
         drawbg();
-        textSize(vh * 0.17);
+        textSize(vh * 0.15);
         textFont('Lucida Grande');
         text('snake', vw * 0.5, vh * 0.12);
         button.easy.draw();

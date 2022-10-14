@@ -12,7 +12,7 @@ var symbols = ['bicycle', 'bicycle', 'leaf', 'leaf', 'cube', 'cube', 'anchor', '
 		rank3stars = gameCardsQTY + 2,
 		rank2stars = gameCardsQTY + 6,
 		rank1stars = gameCardsQTY + 10,
-		allContent = $.getJSON('../content.json');
+		allContent = $.getJSON('../../resources/content.json');
 
 // Shuffle function From http://stackoverflow.com/a/2450976
 function shuffle(array) {

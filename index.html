@@ -24,40 +24,40 @@
 	$(document).ready(function() {
 		var total = 10;
 		var number = 1 + Math.floor(Math.random() * total);
-		var src = '2048/index.html';
+		var src = 'games/2048/index.html';
 		switch(number) {
 			case 1:
-				src = '2048/index.html';
+				src = 'games/2048/index.html';
 				break;
 			case 2:
-				src = 'align-four/index.html';
+				src = 'games/align-four/index.html';
 				break;
 			case 3:
-				src = 'flappy-bird/index.html';
+				src = 'games/flappy-bird/index.html';
 				break;
 			case 4:
-				src = 'color-match-game-broken/index.html';
+				src = 'games/color-match-game-broken/index.html';
 				break;
 			case 5:
-				src = 'JoyRunner/runner.html';
+				src = 'games/JoyRunner/runner.html';
 				break;
 			case 6:
-				src = 'snake/index.html';
+				src = 'games/snake/index.html';
 				break;
 			case 7:
-				src = 'sweet-memory-game/index.html';
+				src = 'games/sweet-memory-game/index.html';
 				break;
 			case 8:
-				src = 'tower-blocks/index.html';
+				src = 'games/tower-blocks/index.html';
 				break;
 			case 9:
-				src = 'Elimination-games-XiaoXiaoLe/index.html';
+				src = 'games/Elimination-games-XiaoXiaoLe/index.html';
 				break;
 			case 10:
-				src = 'Maze2/maze.html';
+				src = 'games/Maze2/maze.html';
 				break;
 			default:
-				src = 'tower-blocks/dist/index.html';
+				src = 'games/tower-blocks/dist/index.html';
 		}
     	$('#myiframe').attr('src', src);
 	});

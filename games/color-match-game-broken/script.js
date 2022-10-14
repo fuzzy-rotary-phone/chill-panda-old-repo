@@ -9,7 +9,7 @@
 
   // control variables 
   let colorArray = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j']
-  let allContent = $.getJSON('../content.json')
+  let allContent = $.getJSON('../../resources/content.json')
 
   let running = false
 

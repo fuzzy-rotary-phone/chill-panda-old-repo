@@ -214,7 +214,7 @@ function userLost() {
     statusText.trigger.classList.remove("d-none");
 }
 
-let allContent = $.getJSON('../content.json');
+let allContent = $.getJSON('../../resources/content.json');
 
 function setTrigger() {
     let total = allContent.responseJSON["content"].length;

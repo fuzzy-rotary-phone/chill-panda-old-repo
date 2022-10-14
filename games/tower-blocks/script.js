@@ -180,7 +180,7 @@ class Game {
         this.instructions = document.getElementById('instructions');
         this.scoreContainer.innerHTML = '0';
         // this.triggerFreq = 5;
-        this.allContent = $.getJSON('../content.json');
+        this.allContent = $.getJSON('../../resources/content.json');
         // this.triggerContent = document.getElementById('trigger-content');
         // this.triggerContent.innerHTML = '';
         this.newBlocks = new THREE.Group();
