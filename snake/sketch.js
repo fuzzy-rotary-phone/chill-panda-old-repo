@@ -18,9 +18,13 @@ console.log("setting canvas height (in pixels) to " + h);
 const trigger_freq = 5;
 var all_content;
 var curr_content;
-$.getJSON('content.json', function (data) {
+var config;
+$.getJSON('../content.json', function (data) {
     all_content = data;
 });
+$.getJSON('../config.json', function (data) {
+    config = data;
+})
 
 var snake, food;
 var boundaries = { xmin: 0, xmax: w, ymin: 0, ymax: h };
@@ -357,4 +361,64 @@ function sleep(miliseconds) {
    while (currentTime + miliseconds >= new Date().getTime()) {
       
    }
+}
+
+function share() {
+    if (navigator.share) {
+        navigator.share({
+            title: 'Chill Panda',
+            url: window.location.href
+        }).then(() => {
+            console.log('Thanks for sharing!');
+        }).catch(err => {
+            console.log('Error while using Web share API:');
+            console.log(err);
+        });
+    } else {
+        swal("Browser doesn't support this API !");
+    }
+}
+
+function addEndScreen() {
+    Swal.fire({
+        allowEscapeKey: false,
+        allowOutsideClick: false,
+        title: 'Game over!',
+        html: '<span>Your snake length is </span><strong>' + snake.score_final + 
+        '</strong><br/>',
+        icon: 'error',
+        backdrop: 'white',
+        showDenyButton: true,
+        showCancelButton: true,
+        confirmButtonText: '<i class="fa-regular fa-rotate-right"></i>',
+        denyButtonText: '<i class="fa-regular fa-shuffle"></i>',
+        cancelButtonText: '<i class="fa-regular fa-xmark"></i>',
+    }).then((result) => {
+        /* Read more about isConfirmed, isDenied below */
+        if (result.isConfirmed) {
+            $('.p5Canvas').removeClass('d-none');
+            button.back.onRelease();
+            loop();
+        } else if (result.isDenied) {
+            $('#myiframe').attr('src', '')
+        } else if (result.dismiss === Swal.DismissReason.cancel) {
+            window.location.href = config['prod_url'];
+        }
+    });
+    var triggerDiv = '<div class="trigger-div">' + button.trigger.text + '</div>';
+    $('.swal2-container').append(triggerDiv);
+    var shareDiv = document.createElement('div');
+    shareDiv.className = 'share-div';
+    shareDiv.innerHTML = '<i class="fa-solid fa-share"></i>';
+    shareDiv.addEventListener('click', share);
+    $('.swal2-container').append(shareDiv);
+    var buttonTextDiv = document.createElement('div');
+    buttonTextDiv.className = 'button-div';
+    buttonTextDiv.innerHTML = '<span>Repeat</span><span>Shuffle</span><span>Exit</span>';
+    $('.swal2-container').append(buttonTextDiv);
+    var logoDiv = document.createElement('div');
+    logoDiv.className = 'logo-div';
+    logoDiv.innerHTML = '<a href='+ all_content['website'] +' target="_blank">' 
+    + '<img src=' + all_content['logo'] + '>' + '</a>';
+    $('.swal2-container').append(logoDiv);
 }

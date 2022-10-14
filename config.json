@@ -1,0 +1,4 @@
+{
+	"test_url": "http://localhost:8000",
+	"prod_url": "https://chill-panda.github.io"
+}
