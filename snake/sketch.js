@@ -407,7 +407,7 @@ function addEndScreen() {
             button.back.onRelease();
             loop();
         } else if (result.isDenied) {
-            $('#myiframe').attr('src', 'index.html');
+            window.location.href = config['prod_url'];
         } else if (result.dismiss === Swal.DismissReason.cancel) {
             window.location.href = config['prod_url'];
         }
