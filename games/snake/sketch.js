@@ -382,7 +382,7 @@ function share() {
             console.log(err);
         });
     } else {
-        swal("Browser doesn't support this API !");
+        Swal.fire("Browser doesn't support this API !");
     }
 }
 
