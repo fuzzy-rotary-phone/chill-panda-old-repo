@@ -98,6 +98,12 @@ function startGame() {
   });
 }
 
+function resetGame() {
+  $('.lit-cells, .chips').empty();
+  setBlurb('start');
+  setOutlook();
+}
+
 function startHumanTurn() {
   setBlurb('p1-turn');
   $('.click-columns div').addClass('hover');
@@ -212,7 +218,7 @@ function endGame(blurbKey, winningChips) {
       createLitCell(winningChips[i].col, winningChips[i].row);
     }
   }
-  showEndScreen(blurbKey);
+  setTimeout(function() { showEndScreen(blurbKey) }, 2000);
 }
 
 function createLitCell(col, row) {
@@ -268,7 +274,7 @@ function dropCursorChip(row, callback) {
 }
 
 function indexToPixels(index) {
-  return (index * 61 + 1) + 'px';
+  return (index * 52 + 1) + 'px';
 }
 
 function getContent() {
@@ -297,8 +303,8 @@ function showEndScreen(key) {
   Swal.fire({
       allowEscapeKey: false,
       allowOutsideClick: false,
-      title: BLURBS[key].header,
-      html: '<span>' + BLURBS[key].blurb + '! </span>',
+      title: BLURBS[key].header + '!',
+      html: '<span>' + BLURBS[key].blurb + '</span>',
       icon: BLURBS[key].type,
       backdrop: 'white',
       showDenyButton: true,
@@ -309,9 +315,7 @@ function showEndScreen(key) {
   }).then((result) => {
       /* Read more about isConfirmed, isDenied below */
       if (result.isConfirmed) {
-          $('.p5Canvas').removeClass('d-none');
-          button.back.onRelease();
-          loop();
+          resetGame();
       } else if (result.isDenied) {
           window.location.href = config['prod_url'];
       } else if (result.dismiss === Swal.DismissReason.cancel) {
