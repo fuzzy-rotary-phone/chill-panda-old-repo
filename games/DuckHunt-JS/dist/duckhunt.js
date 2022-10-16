@@ -32882,7 +32882,7 @@ var defaultStyle = {
     fill: 'black',
     fillGradientType: _const.TEXT_GRADIENT.LINEAR_VERTICAL,
     fillGradientStops: [],
-    fontFamily: 'Arial',
+    fontFamily: 'Helvetica Neue',
     fontSize: 26,
     fontStyle: 'normal',
     fontVariant: 'normal',
@@ -37218,8 +37218,8 @@ var BLUE_SKY_COLOR = 0x64b0ff;
 var PINK_SKY_COLOR = 0xfbb4d4;
 var SUCCESS_RATIO = 0.6;
 var BOTTOM_LINK_STYLE = {
-  fontFamily: 'Arial',
-  fontSize: '15px',
+  fontFamily: 'Helvetica Neue',
+  fontSize: '20px',
   align: 'left',
   fill: 'white'
 };
@@ -37267,10 +37267,10 @@ var Game = function () {
       });
 
       this.scaleToWindow();
-      this.addLinkToLevelCreator();
+      // this.addLinkToLevelCreator();
       this.addPauseLink();
       this.addMuteLink();
-      this.addFullscreenLink();
+      // this.addFullscreenLink();
       this.bindEvents();
       this.startLevel();
       this.animate();
@@ -37293,7 +37293,7 @@ var Game = function () {
     value: function addMuteLink() {
       this.stage.hud.createTextBox('muteLink', {
         style: BOTTOM_LINK_STYLE,
-        location: _Stage2.default.muteLinkBoxLocation(),
+        location: _Stage2.default.levelCreatorLinkBoxLocation(),
         anchor: {
           x: 1,
           y: 1
@@ -37306,7 +37306,7 @@ var Game = function () {
     value: function addPauseLink() {
       this.stage.hud.createTextBox('pauseLink', {
         style: BOTTOM_LINK_STYLE,
-        location: _Stage2.default.pauseLinkBoxLocation(),
+        location: _Stage2.default.fullscreenLinkBoxLocation(),
         anchor: {
           x: 1,
           y: 1
@@ -37765,8 +37765,8 @@ var Game = function () {
         if (!Object.prototype.hasOwnProperty.call(this.stage.hud, 'score')) {
           this.stage.hud.createTextBox('score', {
             style: {
-              fontFamily: 'Arial',
-              fontSize: '18px',
+              fontFamily: 'Helvetica Neue',
+              fontSize: '20px',
               align: 'left',
               fill: 'white'
             },
@@ -37809,8 +37809,8 @@ var Game = function () {
         if (!Object.prototype.hasOwnProperty.call(this.stage.hud, 'waveStatus')) {
           this.stage.hud.createTextBox('waveStatus', {
             style: {
-              fontFamily: 'Arial',
-              fontSize: '14px',
+              fontFamily: 'Helvetica Neue',
+              fontSize: '16px',
               align: 'center',
               fill: 'white'
             },
@@ -37854,7 +37854,7 @@ var Game = function () {
         if (!Object.prototype.hasOwnProperty.call(this.stage.hud, 'gameStatus')) {
           this.stage.hud.createTextBox('gameStatus', {
             style: {
-              fontFamily: 'Arial',
+              fontFamily: 'Helvetica Neue',
               fontSize: '40px',
               align: 'left',
               fill: 'white'
@@ -38592,8 +38592,8 @@ var Hud = function (_Container) {
       // set defaults, and allow them to be overwritten
       var options = (0, _object.assign)({
         style: {
-          fontFamily: 'Arial',
-          fontSize: '18px',
+          fontFamily: 'Helvetica Neue',
+          fontSize: '20px',
           align: 'left',
           fill: 'white'
         },
