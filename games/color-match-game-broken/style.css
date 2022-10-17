@@ -49,8 +49,13 @@ body {
   justify-content: center;
   font-size: calc(1em + 1vmin);
   font-family: "Bubblegum Sans", Helvetica, FontAwesome, sans-serif;
-  background: #212429;
+  background: #2b2d42;
   color: #fffced;
+  overflow-y: hidden;
+}
+
+main {
+  margin: 1em;
 }
 
 .title {
@@ -107,6 +112,9 @@ body {
   justify-content: center;
   cursor: pointer;
   border-radius: 0.3em;
+  border-color: white;
+  border-width: 0.2em;
+  border-style: solid;
 }
 
 .new-game {

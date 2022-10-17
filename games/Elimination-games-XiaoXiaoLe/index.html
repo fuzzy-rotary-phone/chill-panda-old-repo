@@ -21,11 +21,7 @@
 <body>
 
     <div class="main">
-
-        <div class="score">
-            <button id="js-start">Start</button>
-            <button id="js-hint">Hint</button>
-            <button id="js-chint">Close hint</button>
+        <div class="score top">
             <div class="score-num">Score:<span id="js-score-num">0</span></div>
             <div class="score-time">Time left: <span id="js-time-down">60</span><span style="font-size: calc(1em + 1vmin);">s</span></div>
         </div>
@@ -35,7 +31,11 @@
             </div>
             <canvas id="js-game" width="300" height="250" class="gamecanvas"></canvas>
         </div>
-        
+        <div class="score buttons">
+            <button id="js-start">Start</button>
+            <!-- <button id="js-hint">Hint</button>
+            <button id="js-chint">Close hint</button> -->
+        </div>        
     </div>
 
     <script src="res/zepto.min.1.1.6.js"></script>

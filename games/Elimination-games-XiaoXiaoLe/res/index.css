@@ -6,6 +6,7 @@ body {
     padding: 0;
     background: #000 radial-gradient(1000px 500px, #3f546b, #000);
     font-family: Comic Sans MS;
+    overflow-y: hidden;
 }
 
 div.main {
@@ -38,20 +39,27 @@ div.score {
         cursor: pointer;
         outline: none;
         transition: all 0.3s;
-        border: solid 2px #ccc;
+        border: solid 3px #ccc;
         border-radius: 8px;
         color: #fff;
         cursor: pointer;
+        width: 10em;
+        height: 2em;
     }
 
         div.score > button:active {
             background-color: #A92453;
         }
 
+.score.top {
+    margin-top: 4em;
+    height: auto;
+}
+
 .game-container {
     position: relative;
     margin-top: 30px;
-    height: 500px;
+    height: 350px;
 }
 
 canvas.gamecanvas {
@@ -67,7 +75,7 @@ canvas.gamecanvas {
     border-radius: 5px;
     box-shadow: 0 0 10px #00130B inset;
     border-color: whitesmoke;
-    border-width: 0.5vh;
+    border-width: 0.1em;
     border-style: ridge;
 }
 
