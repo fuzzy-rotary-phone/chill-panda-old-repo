@@ -17,8 +17,10 @@ const statusText = {
 }
 
 // event
-window.addEventListener("keyup", (e) => { listenUserKey(e) });
-window.addEventListener("click", (e) => { listenUserKey("click") });
+const keyup = (e) => { listenUserKey(e) };
+const click = (e) => { listenUserKey("click") };
+window.addEventListener("keyup", keyup);
+window.addEventListener("click", click);
 
 /***** obj *****/
 // jump
@@ -137,7 +139,7 @@ const gameStatus = {
         game.clouds.style.animationPlayState = "paused";
         sounds.playground.pause();
         statusText.container.classList.remove("d-none");
-        statusText.trigger.classList.remove("d-none");
+        // statusText.trigger.classList.remove("d-none");
     }
 }
 
@@ -160,9 +162,14 @@ const lastScore = {
     },
 }
 
+let exitClick = false;
 /***** function*****/
 // event listener (key)
 function listenUserKey(data) {
+    if (exitClick) {
+        exitClick = false;
+        return;
+    }
     if (gameStarted) {
         if (isJumped == false) {
             if (data == "click") {
@@ -210,8 +217,9 @@ function userLost() {
     }, 1000);
     changeBestScore();
     statusText.gameOver.classList.remove("d-none");
-    setTrigger();
-    statusText.trigger.classList.remove("d-none");
+    // setTrigger();
+    showEndScreen();
+    // statusText.trigger.classList.remove("d-none");
 }
 
 let allContent = $.getJSON('../../resources/content.json');
@@ -267,3 +275,94 @@ function changeBestScore() {
 }
 
 changeBestScore();
+
+function get_content() {
+    var total = allContent.responseJSON["content"].length;
+    var number = Math.floor(Math.random() * total);
+    return allContent.responseJSON["content"][number]["text"];
+}
+
+function share() {
+    if (navigator.share) {
+        navigator.share({
+            title: 'Chill Panda',
+            url: window.location.href
+        }).then(() => {
+            console.log('Thanks for sharing!');
+        }).catch(err => {
+            console.log('Error while using Web share API:');
+            console.log(err);
+        });
+    } else {
+        Swal.fire("Browser doesn't support this API !");
+    }
+}
+
+function resetGame() {
+    isJumped = false;
+    score = 0;
+    isLosted = false;
+    characterJumpTimer = setTimeout(() => {}, 0);
+    scoreCounterTimer = setInterval(() => {}, 0);
+    lostListenerTimer = setInterval(() => {}, 0);    
+    barrierAnimTimer = setInterval(() => {}, 0);
+    barrierLeftOffset = 90;
+    barrierRounds = 0;
+    barrierDurationValue = 15;
+    gameStarted = false;
+    lostStatus = true;
+    lostTimer = setTimeout(() => {}, 0);
+    window.addEventListener("keyup", keyup);
+    window.addEventListener("click", click);
+    exitClick = true;
+    statusText.trigger.classList.add("d-none");
+    statusText.gameOver.classList.add("d-none");
+    game.character.src = "content/gifs/character.png";
+    game.character.style.bottom = '0px';
+    game.barrier.src = "content/images/barrier-1.png";
+    game.barrier.style.left = '60%';
+    game.score.innerHTML = "0";
+}
+
+function showEndScreen() {
+    window.removeEventListener("keyup", keyup);
+    window.removeEventListener("click", click);
+    Swal.fire({
+        allowEscapeKey: false,
+        allowOutsideClick: false,
+        title: 'Game over!',
+        html: '<span>Your score is </span><strong>' + score + '</strong><br/>',
+        icon: 'error',
+        backdrop: 'white',
+        showDenyButton: true,
+        showCancelButton: true,
+        confirmButtonText: '<i class="fa fa-repeat fa-2x" aria-hidden="true"></i>',
+        denyButtonText: '<i class="fa fa-random fa-2x" aria-hidden="true"></i>',
+        cancelButtonText: '<i class="fa fa-times fa-2x" aria-hidden="true"></i>',
+    }).then((result) => {
+        /* Read more about isConfirmed, isDenied below */
+        if (result.isConfirmed) {
+            resetGame();
+        } else if (result.isDenied) {
+            window.location.href = config['prod_url'];
+        } else if (result.dismiss === Swal.DismissReason.cancel) {
+            window.location.href = config['prod_url'];
+        }
+    });
+    var triggerDiv = '<div class="trigger-div">' + get_content() + '</div>';
+    $('.swal2-container').append(triggerDiv);
+    var shareDiv = document.createElement('div');
+    shareDiv.className = 'share-div';
+    shareDiv.innerHTML = '<i class="fa fa-share fa-2x" aria-hidden="true"></i>';
+    shareDiv.addEventListener('click', share);
+    $('.swal2-container').append(shareDiv);
+    var buttonTextDiv = document.createElement('div');
+    buttonTextDiv.className = 'button-div';
+    buttonTextDiv.innerHTML = '<span>Repeat</span><span>Shuffle</span><span>Exit</span>';
+    $('.swal2-container').append(buttonTextDiv);
+    var logoDiv = document.createElement('div');
+    logoDiv.className = 'logo-div';
+    logoDiv.innerHTML = '<a href='+ allContent.responseJSON['website'] +' target="_blank">' 
+    + '<img src=' + allContent.responseJSON['logo'] + '>' + '</a>';
+    $('.swal2-container').append(logoDiv);
+}
