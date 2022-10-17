@@ -37301,7 +37301,7 @@ var Game = function () {
           y: 1
         }
       });
-      this.stage.hud.muteLink = 'mute (m)';
+      this.stage.hud.muteLink = 'mute';
     }
   }, {
     key: 'addPauseLink',
@@ -37314,7 +37314,7 @@ var Game = function () {
           y: 1
         }
       });
-      this.stage.hud.pauseLink = 'pause (p)';
+      this.stage.hud.pauseLink = 'pause';
     }
   }, {
     key: 'addLinkToLevelCreator',

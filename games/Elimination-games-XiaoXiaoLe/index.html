@@ -9,6 +9,13 @@
     <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
 
     <link rel="stylesheet" href="res/index.css" />
+
+    <!--  Script  -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sweetalert2@11.5.1/dist/sweetalert2.min.js"></script>
+
+    <!--  Styles  -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.5.1/dist/sweetalert2.min.css">
+    <link rel="stylesheet" href="../../assets/font-awesome-4.7.0/css/font-awesome.min.css">    
     
 </head>
 <body>
@@ -36,7 +43,7 @@
     <script src="res/tweenjs-0.6.2.min.js"></script>
     <script src="res/hammer.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <!-- <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script> -->
     <script src="xiaoxiaole.js"></script>
     <script type="text/javascript">
 
@@ -47,7 +54,7 @@
             $("#js-score-num").text(score)
         }, function (score) {   //game end calback
             // alert("gameover!!,You get " + score + " points");
-            swal("Game Over!", "You get " + score + " points");
+            // swal("Game Over!", "You get " + score + " points");
         }, function (time) {
             $("#js-time-down").text(time)
         });
