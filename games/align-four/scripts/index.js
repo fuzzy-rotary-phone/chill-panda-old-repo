@@ -218,7 +218,7 @@ function endGame(blurbKey, winningChips) {
       createLitCell(winningChips[i].col, winningChips[i].row);
     }
   }
-  setTimeout(function() { showEndScreen(blurbKey) }, 2000);
+  setTimeout(function() { showEndScreen(blurbKey) }, 1000);
 }
 
 function createLitCell(col, row) {
@@ -284,43 +284,43 @@ function getContent() {
 }
 
 function share() {
-    if (navigator.share) {
-        navigator.share({
-            title: 'Chill Panda',
-            url: window.location.href
-        }).then(() => {
-            console.log('Thanks for sharing!');
-        }).catch(err => {
-            console.log('Error while using Web share API:');
-            console.log(err);
-        });
-    } else {
-        Swal.fire("Browser doesn't support this API !");
-    }
+  if (navigator.share) {
+    navigator.share({
+      title: 'Chill Panda',
+      url: window.location.href
+    }).then(() => {
+      console.log('Thanks for sharing!');
+    }).catch(err => {
+      console.log('Error while using Web share API:');
+      console.log(err);
+    });
+  } else {
+    Swal.fire("Browser doesn't support this API !");
+  }
 }
 
 function showEndScreen(key) {
   Swal.fire({
-      allowEscapeKey: false,
-      allowOutsideClick: false,
-      title: BLURBS[key].header + '!',
-      html: '<span>' + BLURBS[key].blurb + '</span>',
-      icon: BLURBS[key].type,
-      backdrop: 'white',
-      showDenyButton: true,
-      showCancelButton: true,
-      confirmButtonText: '<i class="fa fa-repeat fa-2x" aria-hidden="true"></i>',
-      denyButtonText: '<i class="fa fa-random fa-2x" aria-hidden="true"></i>',
-      cancelButtonText: '<i class="fa fa-times fa-2x" aria-hidden="true"></i>',
+    allowEscapeKey: false,
+    allowOutsideClick: false,
+    title: BLURBS[key].header + '!',
+    html: '<span>' + BLURBS[key].blurb + '</span>',
+    icon: BLURBS[key].type,
+    backdrop: 'white',
+    showDenyButton: true,
+    showCancelButton: true,
+    confirmButtonText: '<i class="fa fa-repeat fa-2x" aria-hidden="true"></i>',
+    denyButtonText: '<i class="fa fa-random fa-2x" aria-hidden="true"></i>',
+    cancelButtonText: '<i class="fa fa-times fa-2x" aria-hidden="true"></i>',
   }).then((result) => {
-      /* Read more about isConfirmed, isDenied below */
-      if (result.isConfirmed) {
-          resetGame();
-      } else if (result.isDenied) {
-          window.location.href = config['prod_url'];
-      } else if (result.dismiss === Swal.DismissReason.cancel) {
-          window.location.href = config['prod_url'];
-      }
+    /* Read more about isConfirmed, isDenied below */
+    if (result.isConfirmed) {
+        resetGame();
+    } else if (result.isDenied) {
+        window.location.href = config['prod_url'];
+    } else if (result.dismiss === Swal.DismissReason.cancel) {
+        window.location.href = config['prod_url'];
+    }
   });
   var triggerDiv = '<div class="trigger-div">' + getContent() + '</div>';
   $('.swal2-container').append(triggerDiv);
