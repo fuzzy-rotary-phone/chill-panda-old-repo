@@ -193,13 +193,17 @@ class Game {
         this.addBlock();
         this.tick();
         this.updateState(this.STATES.READY);
+        this.clickListener = (e) => {
+            this.onAction();
+        };
         document.addEventListener('keydown', e => {
             if (e.keyCode == 32)
                 this.onAction();
         });
-        document.addEventListener('click', e => {
-            this.onAction();
-        });
+        // document.addEventListener('click', e => {
+        //     this.onAction();
+        // });
+        document.addEventListener('click', this.clickListener);
         document.addEventListener('touchstart', e => {
             e.preventDefault();
             // this.onAction();
@@ -336,7 +340,7 @@ class Game {
         }
     }
     showEndScreen() {
-        
+        document.removeEventListener('click', this.clickListener);
         Swal.fire({
             allowEscapeKey: false,
             allowOutsideClick: false,
@@ -352,6 +356,7 @@ class Game {
         }).then((result) => {
             /* Read more about isConfirmed, isDenied below */
             if (result.isConfirmed) {
+                document.addEventListener('click', this.clickListener);
                 this.updateState(this.STATES.ENDED);
             } else if (result.isDenied) {
                 window.location.href = config['prod_url'];
