@@ -25,7 +25,7 @@ $.getJSON('../../resources/content.json', function (data) {
 });
 $.getJSON('../../resources/config.json', function (data) {
     config = data;
-})
+});
 
 var snake, food;
 var boundaries = { xmin: 0, xmax: w, ymin: 0, ymax: h };
