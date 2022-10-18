@@ -306,13 +306,75 @@ class Game {
         this.triggerText.innerHTML = this.allContent.responseJSON["content"][number]["text"];
     }
     endGame() {
-        this.setTrigger();
-        this.updateState(this.STATES.ENDED);
+        // this.setTrigger();
+        // this.updateState(this.STATES.ENDED);
+        this.showEndScreen();
     }
     tick() {
         this.blocks[this.blocks.length - 1].tick();
         this.stage.render();
         requestAnimationFrame(() => { this.tick(); });
+    }
+    getContent() {
+        let total = this.allContent.responseJSON["content"].length;
+        let number = Math.floor(Math.random() * total);
+        return this.allContent.responseJSON["content"][number]["text"];
+    }
+    share() {
+        if (navigator.share) {
+            navigator.share({
+                title: 'Chill Panda',
+                url: window.location.href
+            }).then(() => {
+                console.log('Thanks for sharing!');
+            }).catch(err => {
+                console.log('Error while using Web share API:');
+                console.log(err);
+            });
+        } else {
+            Swal.fire("Browser doesn't support this API !");
+        }
+    }
+    showEndScreen() {
+        
+        Swal.fire({
+            allowEscapeKey: false,
+            allowOutsideClick: false,
+            title: 'Game over!',
+            html: '<span>Your score is </span><strong>' + this.scoreContainer.innerHTML + '</strong><br/>',
+            icon: 'error',
+            backdrop: 'white',
+            showDenyButton: true,
+            showCancelButton: true,
+            confirmButtonText: '<i class="fa fa-repeat fa-2x" aria-hidden="true"></i>',
+            denyButtonText: '<i class="fa fa-random fa-2x" aria-hidden="true"></i>',
+            cancelButtonText: '<i class="fa fa-times fa-2x" aria-hidden="true"></i>',
+        }).then((result) => {
+            /* Read more about isConfirmed, isDenied below */
+            if (result.isConfirmed) {
+                this.updateState(this.STATES.ENDED);
+            } else if (result.isDenied) {
+                window.location.href = config['prod_url'];
+            } else if (result.dismiss === Swal.DismissReason.cancel) {
+                window.location.href = config['prod_url'];
+            }
+        });
+        var triggerDiv = '<div class="trigger-div">' + this.getContent() + '</div>';
+        $('.swal2-container').append(triggerDiv);
+        var shareDiv = document.createElement('div');
+        shareDiv.className = 'share-div';
+        shareDiv.innerHTML = '<i class="fa fa-share fa-2x" aria-hidden="true"></i>';
+        shareDiv.addEventListener('click', this.share);
+        $('.swal2-container').append(shareDiv);
+        var buttonTextDiv = document.createElement('div');
+        buttonTextDiv.className = 'button-div';
+        buttonTextDiv.innerHTML = '<span>Repeat</span><span>Shuffle</span><span>Exit</span>';
+        $('.swal2-container').append(buttonTextDiv);
+        var logoDiv = document.createElement('div');
+        logoDiv.className = 'logo-div';
+        logoDiv.innerHTML = '<a href='+ this.allContent.responseJSON['website'] +' target="_blank">' 
+        + '<img src=' + this.allContent.responseJSON['logo'] + '>' + '</a>';
+        $('.swal2-container').append(logoDiv);
     }
 }
 let game = new Game();
