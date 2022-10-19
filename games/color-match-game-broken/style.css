@@ -2,6 +2,46 @@
 @import url("https://fonts.googleapis.com/css?family=Bubblegum+Sans");
 /* colors */
 .a, .a-x {
+  background: #283618;
+}
+
+.b, .b-x {
+  background: #fefae0;
+}
+
+.c, .c-x {
+  background: #bc6c25;
+}
+
+.d, .d-x {
+  background: #2a9d8f;
+}
+
+.e, .e-x {
+  background: #e76f51;
+}
+
+.f, .f-x {
+  background: #e63946;
+}
+
+.g, .g-x {
+  background: #457b9d;
+}
+
+.h, .h-x {
+  background: #1d3557;
+}
+
+.i, .i-x {
+  background: #ffafcc;
+}
+
+.j, .j-x {
+  background: #cdb4db;
+}
+
+/*.a, .a-x {
   background: #573659;
 }
 
@@ -39,7 +79,7 @@
 
 .j, .j-x {
   background: #2f506c;
-}
+}*/
 
 body {
   margin: 0;
