@@ -7,6 +7,7 @@ html {
 body {
   display: table-row;
   background: #000 radial-gradient(1000px 500px, #3f546b, #000);
+  overflow: hidden;
 }
 
 .wrapper {
@@ -210,8 +211,8 @@ h2 {
 
 .chips div {
   position: absolute;
-  width: 1.4em;
-  height: 1.4em;
+  width: 51px;
+  height: 51px;
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
 }
@@ -280,7 +281,7 @@ h2 {
 }
 
 .swal2-icon {
-  margin-top: 2em;
+  margin-top: 2em !important;
 }
 
 .swal2-popup {

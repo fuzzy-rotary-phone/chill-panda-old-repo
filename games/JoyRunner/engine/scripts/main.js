@@ -218,7 +218,7 @@ function userLost() {
     changeBestScore();
     statusText.gameOver.classList.remove("d-none");
     // setTrigger();
-    showEndScreen();
+    setTimeout(() => { showEndScreen() }, 1000);
     // statusText.trigger.classList.remove("d-none");
 }
 

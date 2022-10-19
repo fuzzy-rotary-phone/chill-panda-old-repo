@@ -284,7 +284,7 @@ Mazing.prototype.share = function () {
 };
 
 Mazing.prototype.resetGame = function () {
-  
+  window.location = window.location.pathname;
 };
 
 Mazing.prototype.showEndScreen = function () {

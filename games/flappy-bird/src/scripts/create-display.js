@@ -88,7 +88,7 @@ export default function (main) {
           allowEscapeKey: false,
           allowOutsideClick: false,
           title: 'Game over!',
-          html: `<p>You've earned ${score} points</p>`,
+          html: `<p>You've earned <strong>${score}</strong> points</p>`,
           icon: 'error',
           backdrop: 'white',
           showDenyButton: true,

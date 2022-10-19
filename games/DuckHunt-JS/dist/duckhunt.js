@@ -37385,7 +37385,7 @@ var Game = function () {
     value: function pause() {
       var _this2 = this;
 
-      this.stage.hud.pauseLink = this.paused ? 'pause (p)' : 'unpause (p)';
+      this.stage.hud.pauseLink = this.paused ? 'pause' : 'unpause';
       // SetTimeout, woof. Thing is here we need to leave enough animation frames for the HUD status to be updated
       // before pausing all rendering, otherwise the text update we need above won't be shown to the user.
       setTimeout(function () {
@@ -37415,7 +37415,7 @@ var Game = function () {
   }, {
     key: 'mute',
     value: function mute() {
-      this.stage.hud.muteLink = this.muted ? 'mute (m)' : 'unmute (m)';
+      this.stage.hud.muteLink = this.muted ? 'mute' : 'unmute';
       this.muted = !this.muted;
       _Sound2.default.mute(this.muted);
     }
@@ -37632,7 +37632,7 @@ var Game = function () {
       }).then((result) => {
         /* Read more about isConfirmed, isDenied below */
         if (result.isConfirmed) {
-          newGame();
+          window.location = window.location.pathname;
         } else if (result.isDenied) {
           window.location.href = config['prod_url'];
         } else if (result.dismiss === Swal.DismissReason.cancel) {
@@ -37683,15 +37683,15 @@ var Game = function () {
         return;
       }
 
-      if (this.stage.clickedFullscreenLink(clickPoint)) {
-        this.fullscreen();
-        return;
-      }
+      // if (this.stage.clickedFullscreenLink(clickPoint)) {
+      //   this.fullscreen();
+      //   return;
+      // }
 
-      if (this.stage.clickedLevelCreatorLink(clickPoint)) {
-        this.openLevelCreator();
-        return;
-      }
+      // if (this.stage.clickedLevelCreatorLink(clickPoint)) {
+      //   this.openLevelCreator();
+      //   return;
+      // }
 
       if (!this.stage.hud.replayButton && !this.outOfAmmo() && !this.shouldWaveEnd() && !this.paused) {
         _Sound2.default.play('gunSound');
@@ -38802,8 +38802,10 @@ var HUD_LOCATIONS = {
   WAVE_STATUS: new _pixi.Point(MAX_X - 11, MAX_Y - 30),
   LEVEL_CREATOR_LINK: new _pixi.Point(MAX_X - 11, MAX_Y - 10),
   FULL_SCREEN_LINK: new _pixi.Point(MAX_X - 130, MAX_Y - 10),
-  PAUSE_LINK: new _pixi.Point(MAX_X - 318, MAX_Y - 10),
-  MUTE_LINK: new _pixi.Point(MAX_X - 236, MAX_Y - 10),
+  // PAUSE_LINK: new _pixi.Point(MAX_X - 318, MAX_Y - 10),
+  // MUTE_LINK: new _pixi.Point(MAX_X - 236, MAX_Y - 10),
+  PAUSE_LINK: new _pixi.Point(MAX_X - 100, MAX_Y - 10),
+  MUTE_LINK: new _pixi.Point(MAX_X - 5, MAX_Y - 10),
   GAME_STATUS: new _pixi.Point(MAX_X / 2, MAX_Y * 0.45),
   REPLAY_BUTTON: new _pixi.Point(MAX_X / 2, MAX_Y * 0.56),
   BULLET_STATUS: new _pixi.Point(10, 10),

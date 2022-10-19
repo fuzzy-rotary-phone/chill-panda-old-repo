@@ -6,7 +6,7 @@ body {
     padding: 0;
     background: #000 radial-gradient(1000px 500px, #3f546b, #000);
     font-family: Comic Sans MS;
-    overflow-y: hidden;
+    overflow: hidden;
 }
 
 div.main {

@@ -1,3 +1,7 @@
+body {
+	overflow: hidden;
+}
+
 .swal2-container {
   overflow-y: hidden;
 }

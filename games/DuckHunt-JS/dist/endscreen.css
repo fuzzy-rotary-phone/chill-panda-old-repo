@@ -1,3 +1,7 @@
+body {
+  overflow: hidden;
+}
+
 .swal2-container {
   overflow-y: hidden;
 }
@@ -30,7 +34,7 @@
 }
 
 .swal2-html-container span {
-  font-size: 0.8em;
+  font-size: 1em;
 }
 
 .swal2-html-container strong {

@@ -8,6 +8,7 @@ body,
      -moz-user-select: none;
       -ms-user-select: none;
           user-select: none;
+  overflow: hidden;
 }
 
 html {
@@ -457,7 +458,7 @@ a {
 .button-div span {
   display: inline-block;
   width: 6em;
-  font-size: 1.5em;
+  font-size: 14px;
   font-family: "Helvetica Neue",Helvetica,Arial,sans-serif !important;
   color: black;
   opacity: 0.7;

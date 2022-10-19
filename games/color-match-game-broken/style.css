@@ -51,7 +51,7 @@ body {
   font-family: "Bubblegum Sans", Helvetica, FontAwesome, sans-serif;
   background: #2b2d42;
   color: #fffced;
-  overflow-y: hidden;
+  overflow: hidden;
 }
 
 main {
@@ -309,7 +309,7 @@ main {
 }
 
 .share-div i {
-  font-size: 2em;
+  font-size: 1.5em;
   color: #003049;
 }
 

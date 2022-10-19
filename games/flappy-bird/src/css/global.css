@@ -10,7 +10,7 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  overflow-y: hidden;
+  overflow: hidden;
 
   background: #fafafa;
   font: 700 1.5rem VT323, sans-serif;
