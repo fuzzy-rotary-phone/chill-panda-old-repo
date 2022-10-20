@@ -38,7 +38,7 @@ a {
 .game-container {
   margin: 20px auto 0;
   width: var(--main-width);
-  height: 350px;
+  height: 30em;
   border-bottom: 1px solid rgba(255, 255, 255, 0.5);
   border-radius: 2px;
   color: rgba(255, 255, 255, 0.85);
@@ -80,8 +80,8 @@ a {
 }
 
 .game-container .game-area #game-character {
-  width: 100px;
-  left: 13px;
+  width: 8em;
+  left: 0.1em;
   position: relative;
   -webkit-transition: bottom .3s;
   transition: bottom .3s;
@@ -89,7 +89,7 @@ a {
 }
 
 .game-container .game-area #game-barrier {
-  width: 70px;
+  width: 6em;
   position: relative;
   z-index: 1;
 }
@@ -115,7 +115,7 @@ a {
   width: var(--main-width);
   font-family: "Press Start 2P", cursive;
   padding: 2vh;
-  font-size: 3vh;
+  font-size: 2em;
   border-color: white;
   border-style: solid;
   border-radius: 2vh;

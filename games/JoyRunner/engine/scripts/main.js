@@ -36,8 +36,8 @@ const character = {
             characterJumpTimer = setTimeout(() => {
                 game.character.src = "content/gifs/character-run.gif";
                 isJumped = false;
-            }, 230)
-        }, 300);
+            }, 130)
+        }, 400);
     },
 }
 
@@ -83,6 +83,7 @@ let barrierAnimTimer = setInterval(() => {}, 0);
 let barrierLeftOffset = 90;
 let barrierRounds = 0;
 let barrierDurationValue = 15;
+let barrierLeftLimit = -35;
 const barrierAnim = {
     start: () => {
         barrierLeftOffset = 90;
@@ -91,7 +92,7 @@ const barrierAnim = {
         barrierAnimTimer = setInterval(() => {
             game.barrier.style.left = `${barrierLeftOffset}%`;
             barrierLeftOffset--;
-            if (barrierLeftOffset == -24) {
+            if (barrierLeftOffset == barrierLeftLimit) {
                 barrierLeftOffset = 90;
                 barrierRounds++;
                 checkBarrierRounds(barrierRounds);
