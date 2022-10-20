@@ -2,7 +2,7 @@
 // const Swal = require('sweetalert2');
 const vw = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
 const vh = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
-const w = 15; // snake pixel size
+const w = 12; // snake pixel size
 var h = w * 4;
 const pixel_size = vw / w;
 console.log("setting pixel size to " + pixel_size);
@@ -61,11 +61,14 @@ const difficulties = {
     insane: 'insane' // 17
 }
 
+var total_images = 30;
+
 function new_food(body) {
+    var number = 1 + floor(random(total_images));
     var placing_food = true;
     var food_on_body = false;
     while (placing_food) {
-        food = new Food(w, h, snake.rainbow.colors[snake.body.length]);
+        food = new Food(w, h, snake.rainbow.colors[snake.body.length], number);
         for (var b of body) {
             if (food.x === b.x && food.y === b.y) {
                 food_on_body = true;
@@ -115,8 +118,8 @@ function setup() {
     button.template.x = vw * 0.5 - button.template.width * 0.5;
     button.template.strokeWeight = vw * 0.015;
     button.template.cornerRadius = 30;
-    button.template.color = "#fff";
-    button.template.textColor = "#333";
+    button.template.color = "#000";
+    button.template.textColor = "#FFF";
     button.template.textFont = "Helvetica Neue";
     button.template.textSize = vw * 0.07;
     var btnspacing = vh * 0.03;
@@ -143,28 +146,28 @@ function setup() {
     button.easy = { ...button.template };
     button.easy.y = centerbtns(4);
     button.easy.text = "easy";
-    button.easy.stroke = "#0f0";
+    button.easy.stroke = "#ee9191";
     button.easy.difficulty = difficulties.easy;
 
     // normal button
     button.normal = { ...button.template };
     button.normal.y = button.easy.y + button.template.height + btnspacing;
     button.normal.text = "normal";
-    button.normal.stroke = "#ff0";
+    button.normal.stroke = "#e75f5f";
     button.normal.difficulty = difficulties.normal;
 
     // hard button
     button.hard = { ...button.template };
     button.hard.y = button.normal.y + button.template.height + btnspacing;
     button.hard.text = "hard";
-    button.hard.stroke = "#f00";
+    button.hard.stroke = "#D70F0E";
     button.hard.difficulty = difficulties.hard;
 
     // insane button
     button.insane = { ...button.template };
     button.insane.y = button.hard.y + button.template.height + btnspacing;
     button.insane.text = "insane";
-    button.insane.stroke = "#333";
+    button.insane.stroke = "#6a040f";
     button.insane.difficulty = difficulties.insane;
 
     // trigger button (not interactive)
@@ -225,7 +228,7 @@ function setup() {
 function draw() {
     noStroke();
     drawbg = function () {
-        background(color(0, 0, 92));
+        background(color(0, 0, 1));
     }
     drawdimbg = function () {
         background(color(0, 0, 50));
@@ -234,6 +237,7 @@ function draw() {
     // menu
     if (!game.started) {
         drawbg();
+        fill('#FFFFFF');
         textSize(vh * 0.15);
         textFont('Lucida Grande');
         text('snake', vw * 0.5, vh * 0.12);
@@ -289,7 +293,7 @@ function draw() {
         if (game.guide && !game.ended) {
             textSize(w * 0.07);
             strokeWeight(0);
-            fill(80);
+            fill('#dee2e6');
 
             var guidetxt = {
                 x: w * 0.5,
@@ -314,7 +318,7 @@ function draw() {
         // display score
         textSize(w * 0.4);
         strokeWeight(0);
-        fill(80);
+        fill('#dee2e6');
         text(snake.body.length - 1, w * 0.5, h * 0.5);
 
 
@@ -403,9 +407,10 @@ function addEndScreen() {
     }).then((result) => {
         /* Read more about isConfirmed, isDenied below */
         if (result.isConfirmed) {
-            $('.p5Canvas').removeClass('d-none');
-            button.back.onRelease();
-            loop();
+            // $('.p5Canvas').removeClass('d-none');
+            // button.back.onRelease();
+            // loop();
+            window.location = window.location.pathname;
         } else if (result.isDenied) {
             window.location.href = config['prod_url'];
         } else if (result.dismiss === Swal.DismissReason.cancel) {
