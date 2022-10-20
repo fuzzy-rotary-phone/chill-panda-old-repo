@@ -28,6 +28,7 @@
     />
     <meta name="twitter:image" content="/images/logo@512x.png" />
 
+    <!--  Styles  -->
     <link rel="preconnect" href="https://fonts.gstatic.com" />
     <link rel="dns-prefetch" href="https:/fonts.gstatic.com" />
     <link
@@ -44,6 +45,17 @@
       sizes="512x512"
       href="/images/logo@512x.png"
     />
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-L26FXBG7SW"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-L26FXBG7SW');
+    </script>
+
     <!-- Scripts -->
     <script>
       if ('serviceWorker' in navigator) {
@@ -60,31 +72,21 @@
 
     <script
       crossorigin="anonymous"
-      src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.7/dist/sweetalert2.all.min.js"
+      src="../../lib/sweetalert2.all.min.js" defer
     ></script>
 
     <script
       crossorigin="anonymous"
-      src="https://polyfill.io/v3/polyfill.min.js"
+      src="../../lib/polyfill.min.js" defer
     ></script>
 
-    <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
+    <script src="../../lib/jquery-3.6.1.min.js" defer></script>
 
-    <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-L26FXBG7SW"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-
-    gtag('config', 'G-L26FXBG7SW');
-  </script>
-
+    <script src="./src/game.js" type="module" defer></script>
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
 
     <canvas width="320" height="600"></canvas>
-    <script src="./src/game.js" type="module"></script>
   </body>
 </html>
