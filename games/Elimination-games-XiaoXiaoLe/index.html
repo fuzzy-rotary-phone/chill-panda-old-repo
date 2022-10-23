@@ -8,7 +8,6 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
 
-    <!--  Styles  -->
     <link rel="stylesheet" href="res/index.css" />
 
     <!-- Google tag (gtag.js) -->
@@ -21,24 +20,23 @@
       gtag('config', 'G-L26FXBG7SW');
     </script>
 
-    <!-- Scripts -->
+    <!--  Styles  -->
+    <link rel="stylesheet" href="../../lib/sweetalert2.min.css">
+    <link rel="stylesheet" href="../../assets/font-awesome-4.7.0/css/font-awesome.min.css">
+
+    <!--  Script  -->
+    <script type="text/javascript" src="../../lib/sweetalert2.min.js"></script>
     <script src="../../lib/zepto.min.1.1.6.js" defer></script>
     <script src="../../lib/easeljs-0.8.2.min.js" defer></script>
     <script src="../../lib/tweenjs-0.6.2.min.js" defer></script>
     <script src="../../lib/hammer.min.js" defer></script>
-    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script> -->
     <script src="../../lib/jquery.min.js" defer></script>
-    <script src="../../lib/sweetalert.min.js" defer></script>
-    <script src="xiaoxiaole.js" defer></script>
+
 </head>
 <body>
 
     <div class="main">
-
-        <div class="score">
-            <button id="js-start">Start</button>
-            <button id="js-hint">Hint</button>
-            <button id="js-chint">Close hint</button>
+        <div class="score top">
             <div class="score-num">Score:<span id="js-score-num">0</span></div>
             <div class="score-time">Time left: <span id="js-time-down">60</span><span style="font-size: calc(1em + 1vmin);">s</span></div>
         </div>
@@ -48,19 +46,26 @@
             </div>
             <canvas id="js-game" width="300" height="250" class="gamecanvas"></canvas>
         </div>
-        
+        <div class="score buttons">
+            <button id="js-start">Start</button>
+            <!-- <button id="js-hint">Hint</button>
+            <button id="js-chint">Close hint</button> -->
+        </div>        
     </div>
 
+    <!-- <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script> -->
+    <script src="xiaoxiaole.js"></script>
     <script type="text/javascript">
 
-        var xxl = new XiaoXiaoLe("js-game", "img",{
-            col:6,  //6 columns
-            row:5,  //5 rows
+        // var xxl = new XiaoXiaoLe("js-game", "img", {
+        var xxl = new XiaoXiaoLe("js-game", "../../assets/ingame", {
+            col:8,  //6 columns
+            row:7,  //5 rows
         },function (score) {  //score changed calback
             $("#js-score-num").text(score)
         }, function (score) {   //game end calback
             // alert("gameover!!,You get " + score + " points");
-            swal("Game Over!", "You get " + score + " points");
+            // swal("Game Over!", "You get " + score + " points");
         }, function (time) {
             $("#js-time-down").text(time)
         });

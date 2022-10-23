@@ -71,6 +71,8 @@ function Mazing(id) {
   this.triggerDiv = document.getElementById("trigger-div");
   this.triggerText = document.getElementById("trigger-text");
   this.triggerDiv.classList.add("d-none");
+
+  this.winFlag = false;
 };
 
 Mazing.prototype.enableSpeech = function() {
@@ -107,14 +109,16 @@ Mazing.prototype.gameOver = function(text) {
   document.removeEventListener("keydown", this.keyPressHandler, false);
   this.setMessage(text);
   this.mazeContainer.classList.add("finished");
-  this.setTrigger();
+  // this.setTrigger();
+  this.showEndScreen();
 };
 
 Mazing.prototype.heroWins = function() {
   this.mazeScore.classList.remove("has-key");
   this.maze[this.heroPos].classList.remove("door");
   this.heroScore += 50;
-  this.gameOver("you finished !!!");
+  this.winFlag = true;
+  this.gameOver("You escaped the Maze!");
 };
 
 Mazing.prototype.tryMoveHero = function(pos) {
@@ -129,7 +133,8 @@ Mazing.prototype.tryMoveHero = function(pos) {
   if(nextStep.match(/sentinel/)) {
     this.heroScore = Math.max(this.heroScore - 5, 0);
     if(!this.childMode && this.heroScore <= 0) {
-      this.gameOver("sorry, you didn't make it");
+      this.winFlag = false;
+      this.gameOver("Sorry, you didn't make it");
     } else {
       this.setMessage("ow, that hurt!");
     }
@@ -169,7 +174,8 @@ Mazing.prototype.tryMoveHero = function(pos) {
       this.heroScore--;
     }
     if(!this.childMode && (this.heroScore <= 0)) {
-      this.gameOver("sorry, you didn't make it");
+      this.winFlag = false;
+      this.gameOver("Sorry, you didn't make it");
     } else {
       this.setMessage("...");
     }
@@ -253,4 +259,71 @@ Mazing.prototype.setTrigger = function () {
   var number = Math.floor(Math.random() * total);
   this.triggerText.innerHTML = this.allContent.responseJSON["content"][number]["text"];
   this.triggerDiv.classList.remove("d-none");
+};
+
+Mazing.prototype.getContent = function () {
+  var total = this.allContent.responseJSON["content"].length;
+  var number = Math.floor(Math.random() * total);
+  return this.allContent.responseJSON["content"][number]["text"];
+};
+
+Mazing.prototype.share = function () {
+  if (navigator.share) {
+    navigator.share({
+      title: 'Chill Panda',
+      url: window.location.href
+    }).then(() => {
+      console.log('Thanks for sharing!');
+    }).catch(err => {
+      console.log('Error while using Web share API:');
+      console.log(err);
+    });
+  } else {
+    Swal.fire("Browser doesn't support this API !");
+  }
+};
+
+Mazing.prototype.resetGame = function () {
+  window.location = window.location.pathname;
+};
+
+Mazing.prototype.showEndScreen = function () {
+  Swal.fire({
+    allowEscapeKey: false,
+    allowOutsideClick: false,
+    title: this.winFlag ? 'Congratulations!' : 'Game over!',
+    html: '<span>' + this.mazeMessage.innerHTML + '</span>',
+    icon: this.winFlag ? 'success' : 'error',
+    backdrop: 'white',
+    showDenyButton: true,
+    showCancelButton: true,
+    confirmButtonText: '<i class="fa fa-repeat fa-2x" aria-hidden="true"></i>',
+    denyButtonText: '<i class="fa fa-random fa-2x" aria-hidden="true"></i>',
+    cancelButtonText: '<i class="fa fa-times fa-2x" aria-hidden="true"></i>',
+  }).then((result) => {
+    /* Read more about isConfirmed, isDenied below */
+    if (result.isConfirmed) {
+        this.resetGame();
+    } else if (result.isDenied) {
+        window.location.href = config['prod_url'];
+    } else if (result.dismiss === Swal.DismissReason.cancel) {
+        window.location.href = config['prod_url'];
+    }
+  });
+  var triggerDiv = '<div class="trigger-div">' + this.getContent() + '</div>';
+  $('.swal2-container').append(triggerDiv);
+  var shareDiv = document.createElement('div');
+  shareDiv.className = 'share-div';
+  shareDiv.innerHTML = '<i class="fa fa-share fa-2x" aria-hidden="true"></i>';
+  shareDiv.addEventListener('click', this.share);
+  $('.swal2-container').append(shareDiv);
+  var buttonTextDiv = document.createElement('div');
+  buttonTextDiv.className = 'button-div';
+  buttonTextDiv.innerHTML = '<span>Repeat</span><span>Shuffle</span><span>Exit</span>';
+  $('.swal2-container').append(buttonTextDiv);
+  var logoDiv = document.createElement('div');
+  logoDiv.className = 'logo-div';
+  logoDiv.innerHTML = '<a href='+ this.allContent.responseJSON['website'] +' target="_blank">' 
+  + '<img src=' + this.allContent.responseJSON['logo'] + '>' + '</a>';
+  $('.swal2-container').append(logoDiv);
 };
