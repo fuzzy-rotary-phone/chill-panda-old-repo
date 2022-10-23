@@ -25,7 +25,7 @@ $.getJSON('../../resources/content.json', function (data) {
 });
 $.getJSON('../../resources/config.json', function (data) {
     config = data;
-})
+});
 
 var snake, food;
 var boundaries = { xmin: 0, xmax: w, ymin: 0, ymax: h };
@@ -386,7 +386,7 @@ function share() {
             console.log(err);
         });
     } else {
-        swal("Browser doesn't support this API !");
+        Swal.fire("Browser doesn't support this API !");
     }
 }
 
@@ -401,9 +401,9 @@ function addEndScreen() {
         backdrop: 'white',
         showDenyButton: true,
         showCancelButton: true,
-        confirmButtonText: '<i class="fa-regular fa-rotate-right"></i>',
-        denyButtonText: '<i class="fa-regular fa-shuffle"></i>',
-        cancelButtonText: '<i class="fa-regular fa-xmark"></i>',
+        confirmButtonText: '<i class="fa fa-repeat fa-2x" aria-hidden="true"></i>',
+        denyButtonText: '<i class="fa fa-random fa-2x" aria-hidden="true"></i>',
+        cancelButtonText: '<i class="fa fa-times fa-2x" aria-hidden="true"></i>',
     }).then((result) => {
         /* Read more about isConfirmed, isDenied below */
         if (result.isConfirmed) {
@@ -421,7 +421,7 @@ function addEndScreen() {
     $('.swal2-container').append(triggerDiv);
     var shareDiv = document.createElement('div');
     shareDiv.className = 'share-div';
-    shareDiv.innerHTML = '<i class="fa-solid fa-share"></i>';
+    shareDiv.innerHTML = '<i class="fa fa-share fa-2x" aria-hidden="true"></i>';
     shareDiv.addEventListener('click', share);
     $('.swal2-container').append(shareDiv);
     var buttonTextDiv = document.createElement('div');

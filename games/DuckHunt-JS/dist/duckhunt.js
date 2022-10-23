@@ -37249,6 +37249,8 @@ var Game = function () {
     this.waveEnding = false;
     this.quackingSoundId = null;
     this.levels = _levels2.default.normal;
+
+    this.allContent = $.getJSON('../../../resources/content.json')
     return this;
   }
 
@@ -37299,7 +37301,7 @@ var Game = function () {
           y: 1
         }
       });
-      this.stage.hud.muteLink = 'mute (m)';
+      this.stage.hud.muteLink = 'mute';
     }
   }, {
     key: 'addPauseLink',
@@ -37312,7 +37314,7 @@ var Game = function () {
           y: 1
         }
       });
-      this.stage.hud.pauseLink = 'pause (p)';
+      this.stage.hud.pauseLink = 'pause';
     }
   }, {
     key: 'addLinkToLevelCreator',
@@ -37383,7 +37385,7 @@ var Game = function () {
     value: function pause() {
       var _this2 = this;
 
-      this.stage.hud.pauseLink = this.paused ? 'pause (p)' : 'unpause (p)';
+      this.stage.hud.pauseLink = this.paused ? 'pause' : 'unpause';
       // SetTimeout, woof. Thing is here we need to leave enough animation frames for the HUD status to be updated
       // before pausing all rendering, otherwise the text update we need above won't be shown to the user.
       setTimeout(function () {
@@ -37413,7 +37415,7 @@ var Game = function () {
   }, {
     key: 'mute',
     value: function mute() {
-      this.stage.hud.muteLink = this.muted ? 'mute (m)' : 'unmute (m)';
+      this.stage.hud.muteLink = this.muted ? 'mute' : 'unmute';
       this.muted = !this.muted;
       _Sound2.default.mute(this.muted);
     }
@@ -37537,6 +37539,7 @@ var Game = function () {
       _Sound2.default.play('champ');
       this.gameStatus = 'You Win!';
       this.showReplay(this.getScoreMessage());
+      this.showEndScreen(this.gameStatus);
     }
   }, {
     key: 'loss',
@@ -37544,6 +37547,7 @@ var Game = function () {
       _Sound2.default.play('loserSound');
       this.gameStatus = 'You Lose!';
       this.showReplay(this.getScoreMessage());
+      this.showEndScreen(this.gameStatus);
     }
   }, {
     key: 'getScoreMessage',
@@ -37587,6 +37591,72 @@ var Game = function () {
       this.stage.hud.replayButton = replayText + ' Play Again?';
     }
   }, {
+    key: 'getContent',
+    value: function getContent() {
+      let total = this.allContent.responseJSON["content"].length;
+      let number = Math.floor(Math.random() * total);
+      return this.allContent.responseJSON["content"][number]["text"];
+    }
+  }, {
+    key: 'share',
+    value: function share() {
+      if (navigator.share) {
+        navigator.share({
+          title: 'Chill Panda',
+          url: window.location.href
+        }).then(() => {
+          console.log('Thanks for sharing!');
+        }).catch(err => {
+          console.log('Error while using Web share API:');
+          console.log(err);
+        });
+      } else {
+        Swal.fire("Browser doesn't support this API !");
+      }      
+    }
+  }, {
+    key: 'showEndScreen',
+    value: function showEndScreen(gameStatus) {
+      Swal.fire({
+        allowEscapeKey: false,
+        allowOutsideClick: false,
+        title: gameStatus,
+        html: '<span>' + this.getScoreMessage() + '</span>',
+        icon: this.gameStatus == 'You Win!' ? 'success' : 'error',
+        backdrop: 'white',
+        showDenyButton: true,
+        showCancelButton: true,
+        confirmButtonText: '<i class="fa fa-repeat fa-2x" aria-hidden="true"></i>',
+        denyButtonText: '<i class="fa fa-random fa-2x" aria-hidden="true"></i>',
+        cancelButtonText: '<i class="fa fa-times fa-2x" aria-hidden="true"></i>',
+      }).then((result) => {
+        /* Read more about isConfirmed, isDenied below */
+        if (result.isConfirmed) {
+          window.location = window.location.pathname;
+        } else if (result.isDenied) {
+          window.location.href = config['prod_url'];
+        } else if (result.dismiss === Swal.DismissReason.cancel) {
+          window.location.href = config['prod_url'];
+        }
+      });
+      var triggerDiv = '<div class="trigger-div">' + this.getContent() + '</div>';
+      $('.swal2-container').append(triggerDiv);
+      var shareDiv = document.createElement('div');
+      shareDiv.className = 'share-div';
+      shareDiv.innerHTML = '<i class="fa fa-share fa-2x" aria-hidden="true"></i>';
+      shareDiv.addEventListener('click', this.share);
+      $('.swal2-container').append(shareDiv);
+      var buttonTextDiv = document.createElement('div');
+      buttonTextDiv.className = 'button-div';
+      buttonTextDiv.innerHTML = '<span>Repeat</span><span>Shuffle</span><span>Exit</span>';
+      $('.swal2-container').append(buttonTextDiv);
+      var logoDiv = document.createElement('div');
+      logoDiv.className = 'logo-div';
+      logoDiv.innerHTML = '<a href='+ this.allContent.responseJSON['website'] +' target="_blank">' 
+      + '<img src=../' + this.allContent.responseJSON['logo'] + '>' + '</a>';
+      $('.swal2-container').append(logoDiv);
+    }
+  }, {
     key: 'openLevelCreator',
     value: function openLevelCreator() {
       // If they didn't pause the game, pause it for them
@@ -37613,15 +37683,15 @@ var Game = function () {
         return;
       }
 
-      if (this.stage.clickedFullscreenLink(clickPoint)) {
-        this.fullscreen();
-        return;
-      }
+      // if (this.stage.clickedFullscreenLink(clickPoint)) {
+      //   this.fullscreen();
+      //   return;
+      // }
 
-      if (this.stage.clickedLevelCreatorLink(clickPoint)) {
-        this.openLevelCreator();
-        return;
-      }
+      // if (this.stage.clickedLevelCreatorLink(clickPoint)) {
+      //   this.openLevelCreator();
+      //   return;
+      // }
 
       if (!this.stage.hud.replayButton && !this.outOfAmmo() && !this.shouldWaveEnd() && !this.paused) {
         _Sound2.default.play('gunSound');
@@ -38732,8 +38802,10 @@ var HUD_LOCATIONS = {
   WAVE_STATUS: new _pixi.Point(MAX_X - 11, MAX_Y - 30),
   LEVEL_CREATOR_LINK: new _pixi.Point(MAX_X - 11, MAX_Y - 10),
   FULL_SCREEN_LINK: new _pixi.Point(MAX_X - 130, MAX_Y - 10),
-  PAUSE_LINK: new _pixi.Point(MAX_X - 318, MAX_Y - 10),
-  MUTE_LINK: new _pixi.Point(MAX_X - 236, MAX_Y - 10),
+  // PAUSE_LINK: new _pixi.Point(MAX_X - 318, MAX_Y - 10),
+  // MUTE_LINK: new _pixi.Point(MAX_X - 236, MAX_Y - 10),
+  PAUSE_LINK: new _pixi.Point(MAX_X - 100, MAX_Y - 10),
+  MUTE_LINK: new _pixi.Point(MAX_X - 5, MAX_Y - 10),
   GAME_STATUS: new _pixi.Point(MAX_X / 2, MAX_Y * 0.45),
   REPLAY_BUTTON: new _pixi.Point(MAX_X / 2, MAX_Y * 0.56),
   BULLET_STATUS: new _pixi.Point(10, 10),
