@@ -6,8 +6,9 @@ html {
 
 body {
   display: table-row;
-  background: #000 radial-gradient(1000px 500px, #3f546b, #000);
   overflow: hidden;
+  /*background: #000 radial-gradient(1000px 500px, #3f546b, #000);*/
+  background-color: #023047;
 }
 
 .wrapper {

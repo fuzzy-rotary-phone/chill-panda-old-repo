@@ -11,8 +11,10 @@ export default function (main) {
       canvasY: 50,
 
       // Flappy bird physics
-      jumping: 4.6,
-      gravity: 0.25,
+      // jumping: 4.6,
+      // gravity: 0.25,
+      jumping: 3.5,
+      gravity: 0.17,
       speed: 0,
 
       jump() {
@@ -22,13 +24,16 @@ export default function (main) {
 
       update() {
         if (makeFloorCollision(flappyBird)) {
-          main.hitAudio.play()
-          main.changeScreen(main.display.over)
+          setTimeout(() => {
+            main.hitAudio.play()
+
+            main.changeScreen(main.display.over)
+          }, 100)
+        } else {
+          flappyBird.speed += flappyBird.gravity // It will increase speed by gravity
+
+          flappyBird.canvasY += flappyBird.speed
         }
-
-        flappyBird.speed += flappyBird.gravity // It will increase speed by gravity
-
-        flappyBird.canvasY += flappyBird.speed
       },
 
       movements: [

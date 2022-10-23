@@ -1,4 +1,5 @@
 import flappyBirdCollision from './makeFlappyPipeCollision.js'
+import { global } from './create-display.js'
 
 /**
  * Function to, randomly, create pipes.
@@ -24,7 +25,8 @@ export default function (main) {
       draw() {
         pipes.pipeList.forEach(pipe => {
           const pipeRandomY = pipe.y
-          const spacePipes = 92
+          // const spacePipes = 92
+          const spacePipes = 138
 
           const pipeSkyX = pipe.x
           const pipeSkyY = pipeRandomY
@@ -72,6 +74,7 @@ export default function (main) {
 
       update() {
         const passedFrames = main.frames % 100 === 0
+        const flappyBird = global.flappyBird
 
         if (passedFrames) {
           pipes.pipeList.push({
@@ -85,8 +88,12 @@ export default function (main) {
           pipe.x -= 2
 
           if (flappyBirdCollision(pipe)) {
-            main.hitAudio.play()
-            main.changeScreen(main.display.over)
+            setTimeout(() => {
+              main.hitAudio.play()
+              main.changeScreen(main.display.over)
+            }, 100)
+            flappyBird.speed -= flappyBird.gravity
+            flappyBird.canvasY -= flappyBird.speed
           }
 
           // Remove pipes that are out of the screen
