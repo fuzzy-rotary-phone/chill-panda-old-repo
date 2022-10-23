@@ -254,10 +254,10 @@ class Game {
     });
 
     this.scaleToWindow();
-    this.addLinkToLevelCreator();
+    // this.addLinkToLevelCreator();
     this.addPauseLink();
     this.addMuteLink();
-    this.addFullscreenLink();
+    // this.addFullscreenLink();
     this.bindEvents();
     this.startLevel();
     this.animate();
@@ -284,7 +284,7 @@ class Game {
         y: 1
       }
     });
-    this.stage.hud.muteLink = 'mute (m)';
+    this.stage.hud.muteLink = 'mute';
   }
 
   addPauseLink() {
@@ -296,7 +296,7 @@ class Game {
         y: 1
       }
     });
-    this.stage.hud.pauseLink = 'pause (p)';
+    this.stage.hud.pauseLink = 'pause';
   }
 
   addLinkToLevelCreator() {

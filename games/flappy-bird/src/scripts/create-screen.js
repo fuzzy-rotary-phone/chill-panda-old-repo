@@ -12,7 +12,7 @@ export default function (main) {
     }
 
     if (main.screenActive.over) {
-      main.screenActive.over()
+      setTimeout(main.screenActive.over(), 1000);
     }
   }
 }

@@ -16,11 +16,13 @@ const BLURBS = {
   },
   'p1-win': {
     header: 'You Win',
-    blurb: 'You are a winner. Remember this moment. Carry it with you, forever.'
+    blurb: 'You are a winner. Remember this moment. Carry it with you, forever.',
+    type: 'success'
   },
   'p2-win': {
     header: 'Computer Wins',
-    blurb: 'Try again when you\'re done wiping your tears of shame.'
+    blurb: 'Try again when you\'re done wiping your tears of shame.',
+    type: 'error'
   },
   'tie': {
     header: 'Tie',
@@ -94,6 +96,12 @@ function startGame() {
   worker.postMessage({
     messageType: 'reset',
   });
+}
+
+function resetGame() {
+  $('.lit-cells, .chips').empty();
+  setBlurb('start');
+  setOutlook();
 }
 
 function startHumanTurn() {
@@ -202,7 +210,7 @@ function endGame(blurbKey, winningChips) {
   $('.dif input').prop('disabled', false);
   setBlurb(blurbKey);
   setOutlook();
-  setTrigger();
+  // setTrigger();
   
   if(winningChips) {
     // not a tie, highlight the chips in the winning run
@@ -210,6 +218,7 @@ function endGame(blurbKey, winningChips) {
       createLitCell(winningChips[i].col, winningChips[i].row);
     }
   }
+  setTimeout(function() { showEndScreen(blurbKey) }, 1000);
 }
 
 function createLitCell(col, row) {
@@ -265,5 +274,68 @@ function dropCursorChip(row, callback) {
 }
 
 function indexToPixels(index) {
-  return (index * 61 + 1) + 'px';
+  return (index * 52 + 1) + 'px';
+}
+
+function getContent() {
+  var total = allContent.responseJSON["content"].length;
+  var number = Math.floor(Math.random() * total);
+  return allContent.responseJSON["content"][number]["text"];
+}
+
+function share() {
+  if (navigator.share) {
+    navigator.share({
+      title: 'Chill Panda',
+      url: window.location.href
+    }).then(() => {
+      console.log('Thanks for sharing!');
+    }).catch(err => {
+      console.log('Error while using Web share API:');
+      console.log(err);
+    });
+  } else {
+    Swal.fire("Browser doesn't support this API !");
+  }
+}
+
+function showEndScreen(key) {
+  Swal.fire({
+    allowEscapeKey: false,
+    allowOutsideClick: false,
+    title: BLURBS[key].header + '!',
+    html: '<span>' + BLURBS[key].blurb + '</span>',
+    icon: BLURBS[key].type,
+    backdrop: 'white',
+    showDenyButton: true,
+    showCancelButton: true,
+    confirmButtonText: '<i class="fa fa-repeat fa-2x" aria-hidden="true"></i>',
+    denyButtonText: '<i class="fa fa-random fa-2x" aria-hidden="true"></i>',
+    cancelButtonText: '<i class="fa fa-times fa-2x" aria-hidden="true"></i>',
+  }).then((result) => {
+    /* Read more about isConfirmed, isDenied below */
+    if (result.isConfirmed) {
+        resetGame();
+    } else if (result.isDenied) {
+        window.location.href = config['prod_url'];
+    } else if (result.dismiss === Swal.DismissReason.cancel) {
+        window.location.href = config['prod_url'];
+    }
+  });
+  var triggerDiv = '<div class="trigger-div">' + getContent() + '</div>';
+  $('.swal2-container').append(triggerDiv);
+  var shareDiv = document.createElement('div');
+  shareDiv.className = 'share-div';
+  shareDiv.innerHTML = '<i class="fa fa-share fa-2x" aria-hidden="true"></i>';
+  shareDiv.addEventListener('click', share);
+  $('.swal2-container').append(shareDiv);
+  var buttonTextDiv = document.createElement('div');
+  buttonTextDiv.className = 'button-div';
+  buttonTextDiv.innerHTML = '<span>Repeat</span><span>Shuffle</span><span>Exit</span>';
+  $('.swal2-container').append(buttonTextDiv);
+  var logoDiv = document.createElement('div');
+  logoDiv.className = 'logo-div';
+  logoDiv.innerHTML = '<a href='+ allContent.responseJSON['website'] +' target="_blank">' 
+  + '<img src=' + allContent.responseJSON['logo'] + '>' + '</a>';
+  $('.swal2-container').append(logoDiv);
 }
