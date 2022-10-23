@@ -317,9 +317,9 @@ function showEndScreen(key) {
     if (result.isConfirmed) {
         resetGame();
     } else if (result.isDenied) {
-        window.location.href = config['prod_url'];
+        window.location.href = '';
     } else if (result.dismiss === Swal.DismissReason.cancel) {
-        window.location.href = config['prod_url'];
+        window.location.href = '';
     }
   });
   var triggerDiv = '<div class="trigger-div">' + getContent() + '</div>';

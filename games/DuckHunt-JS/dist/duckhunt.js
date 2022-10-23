@@ -37634,9 +37634,9 @@ var Game = function () {
         if (result.isConfirmed) {
           window.location = window.location.pathname;
         } else if (result.isDenied) {
-          window.location.href = config['prod_url'];
+          window.location.href = '';
         } else if (result.dismiss === Swal.DismissReason.cancel) {
-          window.location.href = config['prod_url'];
+          window.location.href = '';
         }
       });
       var triggerDiv = '<div class="trigger-div">' + this.getContent() + '</div>';
