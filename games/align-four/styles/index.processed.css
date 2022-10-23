@@ -6,25 +6,27 @@ html {
 
 body {
   display: table-row;
+  overflow: hidden;
   /*background: #000 radial-gradient(1000px 500px, #3f546b, #000);*/
   background-color: #023047;
 }
 
 .wrapper {
   display: table-cell;
-  vertical-align: middle;
+  vertical-align: top;
   text-align: center;
+  overflow: hidden;
 }
 
 .content {
   display: inline-block;
-  width: 428px;
+  width: 364px;
   margin: 0 auto;
-  padding: 10px 20px;
+  margin-top: 1em;
 }
 
 .sidebar {
-  margin-top: 20px;
+  margin-top: 1em;
   text-align: left;
   font-family: 'Doppio One', sans-serif;
   color: #ccc;
@@ -51,18 +53,27 @@ h1 {
 }
 
 h2 {
-  font-size: 18px;
+  font-size: 1.2em;
 }
 
 .panel {
-  padding: 12px;
-  margin-bottom: 20px;
+  padding: 1em;
+  margin-bottom: 1em;
   background-color: rgba(255, 255, 255, 0.1);
-  border-radius: 8px;
+  border-radius: 1em;
 }
 
 .panel.info {
-  height: 75px;
+  height: 65px;
+  margin-bottom: 0px;
+}
+
+.panel.info h2 {
+  font-size: 14px !important;
+}
+
+.panel.info div {
+  font-size: 12px !important;
 }
 
 #trigger-div {
@@ -106,16 +117,16 @@ h2 {
 .dif-options label {
   display: block;
   margin: 0 auto;
-  width: 25px;
-  height: 25px;
+  width: 20px;
+  height: 20px;
   background-color: #666;
   border: solid 2px #ccc;
   border-radius: 8px;
   color: #999;
   text-align: center;
-  line-height: 25px;
+  line-height: 20px;
   cursor: pointer;
-  font-size: 18px;
+  font-size: 16px;
 }
 
 .freeze .dif-options input:not(:checked)+label {
@@ -139,7 +150,7 @@ h2 {
   width: 100%;
   padding: 2px 12px 4px;
   font-family: inherit;
-  font-size: 24px;
+  font-size: 18px;
   border: solid 2px #ccc;
   border-radius: 8px;
   background-color: #593f6b;
@@ -161,11 +172,13 @@ h2 {
 
 .board {
   position: relative;
-  width: 428px;
-  height: 428px;
-  margin-top: 40px;
+  width: 364px;
+  height: 364px;
+  margin-top: 2em;
   background-image: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/77020/board.png");
   box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.4);
+  background-size: contain;
+  object-fit: contain;
 }
 
 .lit-columns,
@@ -173,14 +186,14 @@ h2 {
 .chips,
 .click-columns {
   position: absolute;
-  width: 428px;
-  height: 428px;
+  width: 364px;
+  height: 364px;
 }
 
 .lit-columns div {
   float: left;
-  width: 60px;
-  height: 426px;
+  width: 51px;
+  height: 363px;
   margin: 1px 0 1px 1px;
   transition: background-color 0.1s;
 }
@@ -192,29 +205,33 @@ h2 {
 
 .lit-cells div {
   position: absolute;
-  width: 60px;
-  height: 60px;
+  width: 51px;
+  height: 51px;
   background-color: rgba(255, 255, 255, 0.3);
 }
 
 .chips div {
   position: absolute;
-  width: 60px;
-  height: 60px;
+  width: 51px;
+  height: 51px;
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
 }
 
 .chips .p1 {
   background-image: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/77020/p1-chip.png");
+  background-size: contain;
+  object-fit: contain;
 }
 
 .chips .p2 {
   background-image: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/77020/p2-chip.png");
+  background-size: contain;
+  object-fit: contain;
 }
 
 .chips .cursor {
-  bottom: 428px;
+  bottom: 364px;
   transition: left 0.1s ease-out;
 }
 
@@ -225,8 +242,8 @@ h2 {
 
 .click-columns div {
   float: left;
-  width: 61px;
-  height: 428px;
+  width: 51px;
+  height: 364px;
 }
 
 .click-columns div:first-child {
@@ -258,4 +275,170 @@ h2 {
     animation-timing-function: ease-out;
     transform: translateY(0);
   }
+}
+
+.swal2-container {
+  overflow-y: hidden;
+}
+
+.swal2-icon {
+  margin-top: 2em !important;
+}
+
+.swal2-popup {
+  font-family: "Helvetica Neue",Helvetica,Arial,sans-serif !important;
+  overflow: hidden;
+  padding: 0 !important;
+  height: 100% !important;
+  grid-row: 2 !important;
+}
+
+.swal2-html-container div {
+  font-size: calc(1em + 1vh);
+  border-color: black;
+  border-style: solid;
+  padding: 2vh;
+  border-radius: 2vh;
+  font-weight: bold;
+  color: indigo;
+  margin-top: 3vh;
+}
+
+.swal2-html-container {
+  margin-top: 0.2em;
+}
+
+.swal2-html-container span {
+  font-size: 1em;
+}
+
+.swal2-html-container strong {
+  font-size: 1.2em;
+}
+
+.swal2-overlay {
+  background-color: white !important;
+}
+
+.swal2-actions {
+  flex-direction: row;
+}
+
+.swal2-actions button {
+  width: 4em;
+  height: 4em;
+  border-radius: 2em !important;
+  margin-right: 1em;
+  margin-left: 1em;
+  box-shadow: 3px 3px 18px -8px #263238;
+}
+
+.swal2-actions button i {
+  /*font-size: 1.5rem;*/
+}
+
+.swal2-confirm {
+  background-color: #fcbf49 !important;
+}
+
+.swal2-deny {
+  background-color: #f77f00 !important;
+}
+
+.swal2-cancel {
+  background-color: #d62828 !important;
+}
+
+.swal2-title {
+  font-family: Lucida Grande !important;
+  font-size: 2em !important;
+  padding-top: 0.1em !important;
+}
+
+.logo-div {
+  display: grid;
+  grid-column: 2;
+  grid-row: 1;
+  align-self: start;
+  justify-self: safe start;
+}
+
+.logo-div img {
+  height: 10vh;
+}
+
+.trigger-div {
+  font-size: 1.3em;
+  border-color: black;
+  border-style: solid;
+  padding: 0.5em;
+  border-radius: 1em;
+  border-width: 0.15em;
+  font-weight: bold;
+  color: #003049;
+  display: grid;
+  grid-column: 2;
+  grid-row: 1;
+  align-self: end;
+  justify-self: center;
+  width: 10em;
+  max-width: 60%;
+  text-align: center;
+  box-shadow: 3px 3px 18px -8px #263238;
+  overflow: hidden;
+  opacity: 0.9;
+  font-family: "Helvetica Neue",Helvetica,Arial,sans-serif !important;
+}
+
+.share-div {
+  display: grid;
+  grid-column: 2;
+  grid-row: 4;
+  align-self: start;
+  justify-self: safe end;
+  margin: auto;
+  margin-right: 0.3em;
+  font-size: 1.2em;
+}
+
+.button-div {
+  grid-column: 2;
+  grid-row: 3;
+  align-self: start;
+  justify-self: safe end;
+  margin: auto;
+  text-align: center;
+  overflow: hidden;
+  margin-top: 0em;
+
+}
+
+.button-div span {
+  display: inline-block;
+  width: 7.5em;
+  font-size: 0.8em;
+  font-family: "Helvetica Neue",Helvetica,Arial,sans-serif !important;
+  color: black;
+  opacity: 0.7;
+}
+
+.share-div i {
+  font-size: 2em;
+  color: #003049;
+}
+
+.share-div i:hover {
+  cursor: pointer;
+}
+
+*::-moz-selection {
+  background: transparent;
+}
+
+*::selection {
+  background: transparent;
+}
+
+.d-none {
+  display: none;
 }

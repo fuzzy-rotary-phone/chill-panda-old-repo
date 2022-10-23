@@ -33,10 +33,18 @@ button {
 	padding: 1px;
 }
 
+.swal2-container {
+  overflow-y: hidden;
+}
+
+.swal2-icon {
+  margin-top: 2em;
+}
+
 .swal2-popup {
 	font-family: "Helvetica Neue",Helvetica,Arial,sans-serif !important;
 	overflow: hidden;
-	padding: 2em 0 0 0 !important;
+	padding: 0 !important;
 	height: 100% !important;
 	grid-row: 2 !important;
 }
@@ -52,12 +60,16 @@ button {
   margin-top: 3vh;
 }
 
+.swal2-html-container {
+	margin-top: 0.2em;
+}
+
 .swal2-html-container span {
-	font-size: 1.3em;
+	font-size: 1em;
 }
 
 .swal2-html-container strong {
-	font-size: 1.5em;
+	font-size: 1.2em;
 }
 
 .swal2-overlay {
@@ -78,7 +90,7 @@ button {
 }
 
 .swal2-actions button i {
-	font-size: 1.5rem;
+	/*font-size: 1.5rem;*/
 }
 
 .swal2-confirm {
@@ -95,7 +107,8 @@ button {
 
 .swal2-title {
 	font-family: Lucida Grande !important;
-	font-size: 2.5em !important;
+	font-size: 2em !important;
+	padding-top: 0.1em !important;
 }
 
 .logo-div {
@@ -111,11 +124,12 @@ button {
 }
 
 .trigger-div {
-  font-size: 4vh;
+  font-size: 1.3em;
   border-color: black;
   border-style: solid;
-  padding: 2vh;
-  border-radius: 2vh;
+  padding: 0.5em;
+  border-radius: 1em;
+  border-width: 0.15em;
   font-weight: bold;
   color: #003049;
 	display: grid;
@@ -124,7 +138,7 @@ button {
 	align-self: end;
 	justify-self: center;
 	width: 10em;
-	max-width: 100%;
+	max-width: 60%;
 	text-align: center;
 	box-shadow: 3px 3px 18px -8px #263238;
 	overflow: hidden;
@@ -157,10 +171,9 @@ button {
 
 .button-div span {
 	display: inline-block;
-	width: 5em;
-	font-size: 1.2em;
-	font-family: "Helvetica Neue",Helvetica,Arial,sans-serif !important;
-	font-weight: bold;
+	width: 7.5em;
+  font-size: 0.8em;
+  font-family: "Helvetica Neue",Helvetica,Arial,sans-serif !important;
 	color: black;
 	opacity: 0.7;
 }

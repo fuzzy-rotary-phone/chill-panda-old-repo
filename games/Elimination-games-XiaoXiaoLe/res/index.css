@@ -6,6 +6,7 @@ body {
     padding: 0;
     background: #000 radial-gradient(1000px 500px, #3f546b, #000);
     font-family: Comic Sans MS;
+    overflow: hidden;
 }
 
 div.main {
@@ -15,6 +16,7 @@ div.main {
     /* background-color: #61C793; */
     /* line-height: 0; */
     position: relative;
+    display: grid;
 }
 
 div.score {
@@ -24,12 +26,12 @@ div.score {
     text-align: center;
     -webkit-user-select: none;
     user-select: none;
-    height: 20vh;
+    grid-row: 3;
+    grid-column: 1;
 }
 
     div.score > button {
         font-size: calc(1em + 1vmin);
-        margin: 3vh 0 0 0;
         padding: 0.5vh 3vh;
         color: #fff;
         background-color: #593f6b;
@@ -38,20 +40,31 @@ div.score {
         cursor: pointer;
         outline: none;
         transition: all 0.3s;
-        border: solid 2px #ccc;
+        border: solid 3px #ccc;
         border-radius: 8px;
         color: #fff;
         cursor: pointer;
+        width: 10em;
+        height: 2em;
     }
 
         div.score > button:active {
             background-color: #A92453;
         }
 
+.score.top {
+    margin-top: 4em;
+    height: auto;
+    grid-row: 1;
+    grid-column: 1;
+}
+
 .game-container {
     position: relative;
-    margin-top: 30px;
-    height: 500px;
+    margin-top: 3em;
+    height: 55vmax;
+    grid-row: 2;
+    grid-column: 1;
 }
 
 canvas.gamecanvas {
@@ -67,7 +80,7 @@ canvas.gamecanvas {
     border-radius: 5px;
     box-shadow: 0 0 10px #00130B inset;
     border-color: whitesmoke;
-    border-width: 0.5vh;
+    border-width: 0.1em;
     border-style: ridge;
 }
 
@@ -119,4 +132,165 @@ canvas.gamecanvas {
 
 .d-none {
     display: none;
+}
+
+.swal2-container {
+  overflow-y: hidden;
+}
+
+.swal2-icon {
+  margin-top: 2em;
+}
+
+.swal2-popup {
+  font-family: "Helvetica Neue",Helvetica,Arial,sans-serif !important;
+  overflow: hidden;
+  padding: 0 !important;
+  height: 100% !important;
+  grid-row: 2 !important;
+}
+
+.swal2-html-container div {
+  font-size: calc(1em + 1vh);
+  border-color: black;
+  border-style: solid;
+  padding: 2vh;
+  border-radius: 2vh;
+  font-weight: bold;
+  color: indigo;
+  margin-top: 3vh;
+}
+
+.swal2-html-container {
+  margin-top: 0.2em;
+}
+
+.swal2-html-container span {
+  font-size: 0.8em;
+}
+
+.swal2-html-container strong {
+  font-size: 1.2em;
+}
+
+.swal2-overlay {
+  background-color: white !important;
+}
+
+.swal2-actions {
+  flex-direction: row;
+}
+
+.swal2-actions button {
+  width: 4em;
+  height: 4em;
+  border-radius: 2em !important;
+  margin-right: 1em;
+  margin-left: 1em;
+  box-shadow: 3px 3px 18px -8px #263238;
+}
+
+.swal2-actions button i {
+  /*font-size: 1.5rem;*/
+}
+
+.swal2-confirm {
+  background-color: #fcbf49 !important;
+}
+
+.swal2-deny {
+  background-color: #f77f00 !important;
+}
+
+.swal2-cancel {
+  background-color: #d62828 !important;
+}
+
+.swal2-title {
+  font-family: Lucida Grande !important;
+  font-size: 2em !important;
+  padding-top: 0.1em !important;
+}
+
+.logo-div {
+  display: grid;
+  grid-column: 2;
+  grid-row: 1;
+  align-self: start;
+  justify-self: safe start;
+}
+
+.logo-div img {
+  height: 10vh;
+}
+
+.trigger-div {
+  font-size: 1.3em;
+  border-color: black;
+  border-style: solid;
+  padding: 0.5em;
+  border-radius: 1em;
+  border-width: 0.15em;
+  font-weight: bold;
+  color: #003049;
+  display: grid;
+  grid-column: 2;
+  grid-row: 1;
+  align-self: end;
+  justify-self: center;
+  width: 10em;
+  max-width: 60%;
+  text-align: center;
+  box-shadow: 3px 3px 18px -8px #263238;
+  overflow: hidden;
+  opacity: 0.9;
+  font-family: "Helvetica Neue",Helvetica,Arial,sans-serif !important;
+}
+
+.share-div {
+  display: grid;
+  grid-column: 2;
+  grid-row: 4;
+  align-self: start;
+  justify-self: safe end;
+  margin: auto;
+  margin-right: 0.3em;
+  font-size: 1.2em;
+}
+
+.button-div {
+  grid-column: 2;
+  grid-row: 3;
+  align-self: start;
+  justify-self: safe end;
+  margin: auto;
+  text-align: center;
+  overflow: hidden;
+  margin-top: 0em;
+}
+
+.button-div span {
+  display: inline-block;
+  width: 7.5em;
+  font-size: 0.8em;
+  font-family: "Helvetica Neue",Helvetica,Arial,sans-serif !important;
+  color: black;
+  opacity: 0.7;
+}
+
+.share-div i {
+  font-size: 2em;
+  color: #003049;
+}
+
+.share-div i:hover {
+  cursor: pointer;
+}
+
+*::-moz-selection {
+  background: transparent;
+}
+
+*::selection {
+  background: transparent;
 }

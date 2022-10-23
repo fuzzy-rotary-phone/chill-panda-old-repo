@@ -12,7 +12,8 @@ var symbols = ['bicycle', 'bicycle', 'leaf', 'leaf', 'cube', 'cube', 'anchor', '
 		rank3stars = gameCardsQTY + 2,
 		rank2stars = gameCardsQTY + 6,
 		rank1stars = gameCardsQTY + 10,
-		allContent = $.getJSON('../../resources/content.json');
+		allContent = $.getJSON('../../resources/content.json'),
+		config = $.getJSON('../../resources/config.json');
 
 // Shuffle function From http://stackoverflow.com/a/2450976
 function shuffle(array) {
@@ -60,23 +61,9 @@ function setRating(moves) {
 
 // End Game
 function endGame(moves, score) {
-	var total = allContent.responseJSON["content"].length,
-			number = Math.floor(Math.random() * total);
 	$deck.empty();
-	swal({
-		allowEscapeKey: false,
-		allowOutsideClick: false,
-		title: 'Congratulations!',
-		html: 'You won with ' + moves + ' Moves' + 
-		'<br/><div>' + allContent.responseJSON["content"][number]["text"] + '</div>',
-		type: 'success',
-		confirmButtonColor: '#9BCB3C',
-		confirmButtonText: 'Play again!'
-	}).then(function(isConfirm) {
-		if (isConfirm) {
-			initGame();
-		}
-	})
+	window.localStorage.setItem('memoryGameMoves', moves);
+	location.href = 'end_screen.html';
 }
 
 // Restart Game
