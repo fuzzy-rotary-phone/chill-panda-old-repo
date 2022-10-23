@@ -51,9 +51,9 @@
     }
     function loadimg() {    //加载图片
         for (var i = 0; i < classnum; i++) {
-            bitimages[i] = new createjs.Bitmap(imgspath + "/" + i + ".png");
-            //bitimages[i].scaleX = bitimages[i].scaleY = 1;
-            bitimages[i].regX = bitimages[i].regY = -8;
+            bitimages[i] = new createjs.Bitmap(imgspath + "/" + (i + 1) + ".png");
+            bitimages[i].scaleX = bitimages[i].scaleY = 3;
+            bitimages[i].regX = bitimages[i].regY = 0;
         }
     }
     function randomrect() {     //初始化数据

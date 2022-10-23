@@ -4,7 +4,8 @@ html {
 body {
     margin: 0;
     padding: 0;
-    background: #000 radial-gradient(1000px 500px, #3f546b, #000);
+    /*background: #000 radial-gradient(1000px 500px, #3f546b, #000);*/
+    background-color: #03071e;
     font-family: Comic Sans MS;
     overflow: hidden;
 }
@@ -74,13 +75,15 @@ canvas.gamecanvas {
     width: 100%;
     z-index: 10;
     border-radius: 0px;
-    background-color: #00311c;
+    /*background-color: #00311c;*/
+    background-color: #d00000;
     cursor: default;
     z-index: 2;
-    border-radius: 5px;
-    box-shadow: 0 0 10px #00130B inset;
-    border-color: whitesmoke;
-    border-width: 0.1em;
+    border-radius: 2em;
+    box-shadow: 0 0 10px #03071e inset;
+    /*border-color: whitesmoke;*/
+    border-color: #d00000;
+    border-width: 0.5vh;
     border-style: ridge;
 }
 
