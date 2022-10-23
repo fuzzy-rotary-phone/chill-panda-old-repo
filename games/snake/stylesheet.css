@@ -34,7 +34,7 @@ button {
 }
 
 .swal2-container {
-  overflow-y: hidden;
+	overflow: hidden;
 }
 
 .swal2-icon {

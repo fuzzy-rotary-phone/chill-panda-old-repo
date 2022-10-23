@@ -61,11 +61,14 @@ const difficulties = {
     insane: 'insane' // 17
 }
 
+var total_images = 30;
+
 function new_food(body) {
+    var number = 1 + floor(random(total_images));
     var placing_food = true;
     var food_on_body = false;
     while (placing_food) {
-        food = new Food(w, h, snake.rainbow.colors[snake.body.length]);
+        food = new Food(w, h, snake.rainbow.colors[snake.body.length], number);
         for (var b of body) {
             if (food.x === b.x && food.y === b.y) {
                 food_on_body = true;
@@ -403,9 +406,10 @@ function addEndScreen() {
     }).then((result) => {
         /* Read more about isConfirmed, isDenied below */
         if (result.isConfirmed) {
-            $('.p5Canvas').removeClass('d-none');
-            button.back.onRelease();
-            loop();
+            // $('.p5Canvas').removeClass('d-none');
+            // button.back.onRelease();
+            // loop();
+            window.location = window.location.pathname;
         } else if (result.isDenied) {
             window.location.href = config['prod_url'];
         } else if (result.dismiss === Swal.DismissReason.cancel) {
