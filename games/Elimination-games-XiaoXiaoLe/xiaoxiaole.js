@@ -51,9 +51,9 @@
     }
     function loadimg() {    //加载图片
         for (var i = 0; i < classnum; i++) {
-            bitimages[i] = new createjs.Bitmap(imgspath + "/" + i + ".png");
-            //bitimages[i].scaleX = bitimages[i].scaleY = 1;
-            bitimages[i].regX = bitimages[i].regY = -8;
+            bitimages[i] = new createjs.Bitmap(imgspath + "/" + (i + 1) + ".png");
+            bitimages[i].scaleX = bitimages[i].scaleY = 3;
+            bitimages[i].regX = bitimages[i].regY = 0;
         }
     }
     function randomrect() {     //初始化数据
@@ -726,10 +726,11 @@
         canmove = false;
         mask.visible = true;
         createjs.Tween.get(mask).to({ alpha: 1 }, 300);
-        if (gameendcalback) {
-            gameendcalback(score);
-        }
-        setTrigger();
+        // if (gameendcalback) {
+        //     gameendcalback(score);
+        // }
+        // setTrigger();
+        showEndScreen();
     }
     var interv = 0;
     var gaming = false;
@@ -753,7 +754,7 @@
                 mask.visible = false;
             });
 
-            resetTrigger();
+            // resetTrigger();
 
             panduan();
 
@@ -766,7 +767,7 @@
             timecount = gametimeout;
             interv = setInterval(function () {
                 timecount--;
-                if (timedowncalback) {
+                if (timedowncalback && timecount >= 0) {
                     timedowncalback(timecount);
                 }
                 if (timecount <= 0) {
@@ -793,5 +794,101 @@
 
     function tick(event) {
         _this.stage.update();
+    }
+
+    function resetGame() {
+        score = 0;
+        addScore(0);
+        interv = 0;
+        gaming = false;
+        gametimeout = 2;
+        gametimeout *= 30;
+        timecount = 0;
+        clearInterval(interv);
+        $("#js-time-down").text(gametimeout);
+        var xxl = new XiaoXiaoLe("js-game", "img",{
+            col:6,  //6 columns
+            row:5,  //5 rows
+        },function (score) {  //score changed calback
+            $("#js-score-num").text(score)
+        }, function (score) {   //game end calback
+            // alert("gameover!!,You get " + score + " points");
+            // swal("Game Over!", "You get " + score + " points");
+        }, function (time) {
+            $("#js-time-down").text(time)
+        });
+
+        $("#js-start").click(function () {
+            xxl.start();
+        })
+        $("#js-hint").click(function () {
+            xxl.hint();
+        })
+        $("#js-chint").click(function () {
+            xxl.closeHint();
+        })        
+    }
+
+    function getContent() {
+        let total = allcontent.responseJSON["content"].length;
+        let number = Math.floor(Math.random() * total);
+        return allcontent.responseJSON["content"][number]["text"];
+    }
+
+    function share() {
+        if (navigator.share) {
+            navigator.share({
+                title: 'Chill Panda',
+                url: window.location.href
+            }).then(() => {
+                console.log('Thanks for sharing!');
+            }).catch(err => {
+                console.log('Error while using Web share API:');
+                console.log(err);
+            });
+        } else {
+            Swal.fire("Browser doesn't support this API !");
+        }
+    }
+
+    function showEndScreen() {
+        Swal.fire({
+            allowEscapeKey: false,
+            allowOutsideClick: false,
+            title: 'Game Over!',
+            html: '<span>Your score is <strong>' + score + '</strong></span>',
+            icon: 'error',
+            backdrop: 'white',
+            showDenyButton: true,
+            showCancelButton: true,
+            confirmButtonText: '<i class="fa fa-repeat fa-2x" aria-hidden="true"></i>',
+            denyButtonText: '<i class="fa fa-random fa-2x" aria-hidden="true"></i>',
+            cancelButtonText: '<i class="fa fa-times fa-2x" aria-hidden="true"></i>',
+        }).then((result) => {
+            /* Read more about isConfirmed, isDenied below */
+            if (result.isConfirmed) {
+                resetGame();
+            } else if (result.isDenied) {
+                window.location.href = config['prod_url'];
+            } else if (result.dismiss === Swal.DismissReason.cancel) {
+                window.location.href = config['prod_url'];
+            }
+        });
+        var triggerDiv = '<div class="trigger-div">' + getContent() + '</div>';
+        $('.swal2-container').append(triggerDiv);
+        var shareDiv = document.createElement('div');
+        shareDiv.className = 'share-div';
+        shareDiv.innerHTML = '<i class="fa fa-share fa-2x" aria-hidden="true"></i>';
+        shareDiv.addEventListener('click', share);
+        $('.swal2-container').append(shareDiv);
+        var buttonTextDiv = document.createElement('div');
+        buttonTextDiv.className = 'button-div';
+        buttonTextDiv.innerHTML = '<span>Repeat</span><span>Shuffle</span><span>Exit</span>';
+        $('.swal2-container').append(buttonTextDiv);
+        var logoDiv = document.createElement('div');
+        logoDiv.className = 'logo-div';
+        logoDiv.innerHTML = '<a href='+ allcontent.responseJSON['website'] +' target="_blank">' 
+        + '<img src=' + allcontent.responseJSON['logo'] + '>' + '</a>';
+        $('.swal2-container').append(logoDiv);
     }
 }

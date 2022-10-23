@@ -35,6 +35,18 @@
 		{
 			"text": "Sample to show 7 Sample to show 2 Sample to show 2 Sample to show 2 Sample to show 2 Sample to show 2 Sample to show 2 Sample to show 2 ",
 			"content_type": 1
+		},
+		{
+			"text": "COFFEE CRUSH sources and buys green coffees directly from the farmers. If you support the farmers, raise your cup and tag us on social media with #supportfarmers",
+			"content_type": 1
+		},
+		{
+			"text": "Today's chef special, XXX, is made with (ingredient); our chef brings this recipe from (place) \nGrab a taste of (place) at your table",
+			"content_type": 1
+		},
+		{
+			"text": "The ambiance of COFFEE CRUSH was inspired by XXX, it is designed to give you an experience of XXX. Do not hesitate to give us your take about the ambiance :)",
+			"content_type": 1
 		}
 	]
 }
