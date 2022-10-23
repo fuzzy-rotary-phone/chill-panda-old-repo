@@ -85,7 +85,6 @@ let barrierAnimTimer = setInterval(() => {}, 0);
 let barrierLeftOffset = 90;
 let barrierRounds = 0;
 let barrierDurationValue = 15;
-let barrierLeftLimit = -35;
 const barrierAnim = {
     start: () => {
         barrierLeftOffset = 90;
@@ -94,7 +93,7 @@ const barrierAnim = {
         barrierAnimTimer = setInterval(() => {
             game.barrier.style.left = `${barrierLeftOffset}%`;
             barrierLeftOffset--;
-            if (barrierLeftOffset == barrierLeftLimit) {
+            if (barrierLeftOffset == -35) {
                 barrierLeftOffset = 90;
                 barrierRounds++;
                 checkBarrierRounds(barrierRounds);
@@ -170,7 +169,7 @@ function listenUserKey(data) {
     if (exitClick) {
         exitClick = false;
         return;
-    }
+    }    
     if (gameStarted) {
         if (isJumped == false) {
             if (data == "click") {
@@ -219,8 +218,8 @@ function userLost() {
     changeBestScore();
     statusText.gameOver.classList.remove("d-none");
     // setTrigger();
-    setTimeout(() => { showEndScreen() }, 1000);
     // statusText.trigger.classList.remove("d-none");
+    setTimeout(() => { showEndScreen() }, 1000);
 }
 
 let allContent = $.getJSON('../../resources/content.json');

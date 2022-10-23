@@ -8,7 +8,6 @@ body,
      -moz-user-select: none;
       -ms-user-select: none;
           user-select: none;
-  overflow: hidden;
 }
 
 html {
@@ -39,7 +38,7 @@ a {
 .game-container {
   margin: 20px auto 0;
   width: var(--main-width);
-  height: 30em;
+  height: 350px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.5);
   border-radius: 2px;
   color: rgba(255, 255, 255, 0.85);
@@ -81,8 +80,8 @@ a {
 }
 
 .game-container .game-area #game-character {
-  width: 8em;
-  left: 0.1em;
+  width: 100px;
+  left: 0;
   position: relative;
   -webkit-transition: bottom .3s;
   transition: bottom .3s;
@@ -90,7 +89,7 @@ a {
 }
 
 .game-container .game-area #game-barrier {
-  width: 6em;
+  width: 70px;
   position: relative;
   z-index: 1;
 }
@@ -116,7 +115,7 @@ a {
   width: var(--main-width);
   font-family: "Press Start 2P", cursive;
   padding: 2vh;
-  font-size: 2em;
+  font-size: 3vh;
   border-color: white;
   border-style: solid;
   border-radius: 2vh;
@@ -319,164 +318,156 @@ a {
 /*# sourceMappingURL=main.css.map */
 
 .swal2-container {
-  overflow-y: hidden;
-}
+   overflow-y: hidden;
+ }
 
-.swal2-icon {
-  margin-top: 2em;
-  font-size: 1.5em !important;
-}
+ .swal2-icon {
+   margin-top: 2em;
+   font-size: 1.5em !important;
+ }
 
-.swal2-popup {
-  font-family: "Helvetica Neue",Helvetica,Arial,sans-serif !important;
-  overflow: hidden;
-  padding: 0 !important;
-  height: 100% !important;
-  grid-row: 2 !important;
-}
+ .swal2-popup {
+   font-family: "Helvetica Neue",Helvetica,Arial,sans-serif !important;
+   overflow: hidden;
+   padding: 0 !important;
+   height: 100% !important;
+   grid-row: 2 !important;
+ }
 
-.swal2-html-container div {
-  font-size: calc(1em + 1vh);
-  border-color: black;
-  border-style: solid;
-  padding: 2vh;
-  border-radius: 2vh;
-  font-weight: bold;
-  color: indigo;
-  margin-top: 3vh;
-}
+ .swal2-html-container div {
+   font-size: calc(1em + 1vh);
+   border-color: black;
+   border-style: solid;
+   padding: 2vh;
+   border-radius: 2vh;
+   font-weight: bold;
+   color: indigo;
+   margin-top: 3vh;
+ }
 
-.swal2-html-container {
-  margin-top: 0.2em;
-}
+ .swal2-html-container {
+   margin-top: 0.2em;
+ }
 
-.swal2-html-container span {
-  font-size: 1.5em;
-}
+ .swal2-html-container span {
+   font-size: 1.5em;
+ }
 
-.swal2-html-container strong {
-  font-size: 1.8em;
-}
+ .swal2-html-container strong {
+   font-size: 1.8em;
+ }
 
-.swal2-overlay {
-  background-color: white !important;
-}
+ .swal2-overlay {
+   background-color: white !important;
+ }
 
-.swal2-actions {
-  flex-direction: row;
-}
+ .swal2-actions {
+   flex-direction: row;
+ }
 
-.swal2-actions button {
-  width: 6em;
-  height: 6em;
-  border-radius: 3em !important;
-  margin-right: 1em;
-  margin-left: 1em;
-  box-shadow: 3px 3px 18px -8px #263238;
-}
+ .swal2-actions button {
+   width: 6em;
+   height: 6em;
+   border-radius: 3em !important;
+   margin-right: 1em;
+   margin-left: 1em;
+   box-shadow: 3px 3px 18px -8px #263238;
+ }
 
-.swal2-actions button i {
-  font-size: 2.5rem;
-}
+ .swal2-actions button i {
+   font-size: 2.5rem;
+ }
 
-.swal2-confirm {
-  background-color: #fcbf49 !important;
-}
+ .swal2-confirm {
+   background-color: #fcbf49 !important;
+ }
 
-.swal2-deny {
-  background-color: #f77f00 !important;
-}
+ .swal2-deny {
+   background-color: #f77f00 !important;
+ }
 
-.swal2-cancel {
-  background-color: #d62828 !important;
-}
+ .swal2-cancel {
+   background-color: #d62828 !important;
+ }
 
-.swal2-title {
-  font-family: Lucida Grande !important;
-  font-size: 3em !important;
-  padding-top: 0.1em !important;
-}
+ .swal2-title {
+   font-family: Lucida Grande !important;
+   font-size: 3em !important;
+   padding-top: 0.1em !important;
+ }
 
-.logo-div {
-  display: grid;
-  grid-column: 2;
-  grid-row: 1;
-  align-self: start;
-  justify-self: safe start;
-}
+ .logo-div {
+   display: grid;
+   grid-column: 2;
+   grid-row: 1;
+   align-self: start;
+   justify-self: safe start;
+ }
 
-.logo-div img {
-  height: 10vh;
-}
+ .logo-div img {
+   height: 10vh;
+ }
 
-.trigger-div {
-  font-size: 2em;
-  border-color: black;
-  border-style: solid;
-  padding: 0.5em;
-  border-radius: 1em;
-  border-width: 0.15em;
-  font-weight: bold;
-  color: #003049;
-  display: grid;
-  grid-column: 2;
-  grid-row: 1;
-  align-self: end;
-  justify-self: center;
-  width: 15em;
-  max-width: 60%;
-  text-align: center;
-  box-shadow: 3px 3px 18px -8px #263238;
-  overflow: hidden;
-  opacity: 0.9;
-  font-family: "Helvetica Neue",Helvetica,Arial,sans-serif !important;
-}
+ .trigger-div {
+   font-size: 2em;
+   border-color: black;
+   border-style: solid;
+   padding: 0.5em;
+   border-radius: 1em;
+   border-width: 0.15em;
+   font-weight: bold;
+   color: #003049;
+   display: grid;
+   grid-column: 2;
+   grid-row: 1;
+   align-self: end;
+   justify-self: center;
+   width: 15em;
+   max-width: 60%;
+   text-align: center;
+   box-shadow: 3px 3px 18px -8px #263238;
+   overflow: hidden;
+   opacity: 0.9;
+   font-family: "Helvetica Neue",Helvetica,Arial,sans-serif !important;
+ }
 
-.share-div {
-  display: grid;
-  grid-column: 2;
-  grid-row: 4;
-  align-self: start;
-  justify-self: safe end;
-  margin: auto;
-  margin-right: 0.3em;
-  font-size: 1.8em;
-}
+ .share-div {
+   display: grid;
+   grid-column: 2;
+   grid-row: 4;
+   align-self: start;
+   justify-self: safe end;
+   margin: auto;
+   margin-right: 0.3em;
+   font-size: 1.8em;
+ }
 
-.button-div {
-  grid-column: 2;
-  grid-row: 3;
-  align-self: start;
-  justify-self: safe end;
-  margin: auto;
-  text-align: center;
-  overflow: hidden;
-  margin-top: 0em;
+ .button-div {
+   grid-column: 2;
+   grid-row: 3;
+   align-self: start;
+   justify-self: safe end;
+   margin: auto;
+   text-align: center;
+   overflow: hidden;
+   margin-top: 0em;
 
-}
+ }
 
-.button-div span {
-  display: inline-block;
-  width: 6em;
-  font-size: 14px;
-  font-family: "Helvetica Neue",Helvetica,Arial,sans-serif !important;
-  color: black;
-  opacity: 0.7;
-}
+ .button-div span {
+   display: inline-block;
+   width: 6em;
+   font-size: 14px;
+   font-family: "Helvetica Neue",Helvetica,Arial,sans-serif !important;
+   color: black;
+   opacity: 0.7;
+ }
 
-.share-div i {
-  font-size: 2em;
-  color: #003049;
-}
+ .share-div i {
+   font-size: 2em;
+   color: #003049;
+ }
 
-.share-div i:hover {
-  cursor: pointer;
-}
-
-*::-moz-selection {
-  background: transparent;
-}
-
-*::selection {
-  background: transparent;
-}
+ .share-div i:hover {
+   cursor: pointer;
+ }
