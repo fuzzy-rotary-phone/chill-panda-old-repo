@@ -46,9 +46,9 @@ function showEndScreen(allcontent, config) {
         if (result.isConfirmed) {
             resetGame();
         } else if (result.isDenied) {
-            window.location.reload();
+            window.location.href = 'https://chillpanda.in';
         } else if (result.dismiss === Swal.DismissReason.cancel) {
-            window.location.reload();
+            window.location.href = 'https://chillpanda.in';
         }
     });
     var triggerDiv = '<div class="trigger-div">' + allcontent["content"][number]["text"] + '</div>';

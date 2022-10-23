@@ -101,9 +101,9 @@ export default function (main) {
           if (result.isConfirmed) {
             main.changeScreen(main.display.start)
           } else if (result.isDenied) {
-            window.location.reload();
+            window.location.href = 'https://chillpanda.in';
           } else if (result.dismiss === Swal.DismissReason.cancel) {
-            window.location.reload();
+            window.location.href = 'https://chillpanda.in';
           }
         });
         var triggerDiv = '<div class="trigger-div">' + global.allContent.responseJSON["content"][number]["text"] + '</div>';

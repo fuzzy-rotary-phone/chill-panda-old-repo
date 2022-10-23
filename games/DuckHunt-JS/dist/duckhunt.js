@@ -37634,9 +37634,9 @@ var Game = function () {
         if (result.isConfirmed) {
           window.location = window.location.pathname;
         } else if (result.isDenied) {
-          window.location.reload();
+          window.location.href = 'https://chillpanda.in';
         } else if (result.dismiss === Swal.DismissReason.cancel) {
-          window.location.reload();
+          window.location.href = 'https://chillpanda.in';
         }
       });
       var triggerDiv = '<div class="trigger-div">' + this.getContent() + '</div>';
