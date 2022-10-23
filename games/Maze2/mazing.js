@@ -305,9 +305,9 @@ Mazing.prototype.showEndScreen = function () {
     if (result.isConfirmed) {
         this.resetGame();
     } else if (result.isDenied) {
-        window.location.href = '';
+        window.location.reload();
     } else if (result.dismiss === Swal.DismissReason.cancel) {
-        window.location.href = '';
+        window.location.reload();
     }
   });
   var triggerDiv = '<div class="trigger-div">' + this.getContent() + '</div>';

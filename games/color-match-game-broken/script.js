@@ -206,9 +206,9 @@
       if (result.isConfirmed) {
         newGame();
       } else if (result.isDenied) {
-        window.location.href = '';
+        window.location.reload();
       } else if (result.dismiss === Swal.DismissReason.cancel) {
-        window.location.href = '';
+        window.location.reload();
       }
     });
     var triggerDiv = '<div class="trigger-div">' + getContent() + '</div>';

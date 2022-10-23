@@ -46,9 +46,9 @@ function showEndScreen(allcontent, config) {
         if (result.isConfirmed) {
             resetGame();
         } else if (result.isDenied) {
-            window.location.href = '';
+            window.location.reload();
         } else if (result.dismiss === Swal.DismissReason.cancel) {
-            window.location.href = '';
+            window.location.reload();
         }
     });
     var triggerDiv = '<div class="trigger-div">' + allcontent["content"][number]["text"] + '</div>';
