@@ -5,13 +5,16 @@ class Food {
 		this.size = 1;
 		this.c = color;
 		this.img = loadImage('../../assets/ingame/' + number + '.png');
+		// this.img = loadImage('\u1F354');
 	}
 
 	show() {
 		var edge_indent = -0.01; //same as snake.js
 		// fill(this.c);
-		fill('#ffffff');
-		rect(this.x + edge_indent / 2, this.y + edge_indent / 2, this.size - edge_indent, this.size - edge_indent);
+		// fill('#ffffff');
+		// clear();
+		// rect(this.x + edge_indent / 2, this.y + edge_indent / 2, this.size - edge_indent, this.size - edge_indent);
 		image(this.img, this.x + edge_indent / 2, this.y + edge_indent / 2, this.size - edge_indent, this.size - edge_indent);
+		// this.style('content', "\u1F354");
 	}
 }
