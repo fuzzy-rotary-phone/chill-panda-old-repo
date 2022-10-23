@@ -206,6 +206,7 @@ div.swal-alert {
   font-family: "Helvetica Neue",Helvetica,Arial,sans-serif !important;
   color: black;
   opacity: 0.7;
+  font-weight: normal;
 }
 
 .share-div i {
