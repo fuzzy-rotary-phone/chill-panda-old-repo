@@ -100,7 +100,7 @@ main {
 
 .title {
   text-align: center;
-  font-size: calc(1em + 2vmin);
+  font-size: 1em;
   color: aqua;
   width: 60vmin;
   margin: auto;
