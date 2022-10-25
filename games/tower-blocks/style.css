@@ -165,6 +165,9 @@ html, body {
     top: 15vh;
   }
 }
+#start-instructions {
+  text-align: center;
+}
 
 .swal2-container {
   overflow-y: hidden;

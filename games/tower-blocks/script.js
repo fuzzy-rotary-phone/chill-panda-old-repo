@@ -178,6 +178,7 @@ class Game {
         this.scoreContainer = document.getElementById('score');
         this.startButton = document.getElementById('start-button');
         this.instructions = document.getElementById('instructions');
+        this.startInstructions = document.getElementById('start-instructions');
         this.scoreContainer.innerHTML = '0';
         // this.triggerFreq = 5;
         this.allContent = $.getJSON('../../resources/content.json');
@@ -235,6 +236,7 @@ class Game {
             this.scoreContainer.innerHTML = '0';
             this.updateState(this.STATES.PLAYING);
             this.addBlock();
+            this.startInstructions.classList.add('d-none');
         }
     }
     restartGame() {

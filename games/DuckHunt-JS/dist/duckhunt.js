@@ -37443,6 +37443,9 @@ var Game = function () {
       this.wave = 0;
 
       this.gameStatus = this.level.title;
+      if (this.level.id == 1) {
+        this.showInstruction();
+      }
       this.stage.preLevelAnimation().then(function () {
         _this3.gameStatus = '';
         _this3.startWave();
@@ -37457,6 +37460,7 @@ var Game = function () {
       this.bullets = this.level.bullets;
       this.ducksShotThisWave = 0;
       this.waveEnding = false;
+      this.hideInstruction();
 
       this.stage.addDucks(this.level.ducks, this.level.speed);
     }
@@ -37557,27 +37561,27 @@ var Game = function () {
       var percentage = this.score / this.maxScore * 100;
 
       if (percentage === 100) {
-        scoreMessage = 'Flawless victory.';
+        scoreMessage = 'Flawless victory';
       }
 
       if (percentage < 100) {
-        scoreMessage = 'Close to perfection.';
+        scoreMessage = 'Close to perfection';
       }
 
       if (percentage <= 95) {
-        scoreMessage = 'Truly impressive score.';
+        scoreMessage = 'Truly impressive score';
       }
 
       if (percentage <= 85) {
-        scoreMessage = 'Solid score.';
+        scoreMessage = 'Solid score';
       }
 
       if (percentage <= 75) {
-        scoreMessage = 'Participation award.';
+        scoreMessage = 'Participation award';
       }
 
       if (percentage <= 63) {
-        scoreMessage = 'Yikes.';
+        scoreMessage = 'Yikes';
       }
 
       return scoreMessage;
@@ -37589,6 +37593,19 @@ var Game = function () {
         location: _Stage2.default.replayButtonLocation()
       });
       this.stage.hud.replayButton = replayText + ' Play Again?';
+    }
+  }, {
+    key: 'showInstruction',
+    value: function showInstruction() {
+      this.stage.hud.createTextBox('instructionBox', {
+        location: _Stage2.default.replayButtonLocation()
+      });
+      this.stage.hud.instructionBox = 'Hunt the ducks by tapping on them';
+    }
+  }, {
+    key: 'hideInstruction',
+    value: function hideInstruction() {
+      this.stage.hud.instructionBox = '';
     }
   }, {
     key: 'getContent',
