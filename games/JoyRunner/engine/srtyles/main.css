@@ -173,10 +173,13 @@ a {
 }
 
 .status-container #header-text {
-  font-size: 1.6rem;
+  font-size: 1rem;
   opacity: .8;
   text-align: center;
   line-height: 35px;
+}
+.status-container #game-over-text {
+  font-size: 1.6rem;
 }
 
 .status-container .best-score {
@@ -302,10 +305,13 @@ a {
     --main-width: 450px;
   }
   #header-text {
+    font-size: 0.8em !important;
+  }
+  #game-over-text {
     font-size: 1.4rem !important;
   }
   .best-score {
-    margin-top: 7px !important;
+    /*margin-top: 7px !important;*/
     font-size: 1.1rem !important;
   }
 }

@@ -60,6 +60,12 @@ div.swal-alert {
   border-width: 0.5vh;
 }
 
+#instructions {
+  margin-top: -2em;
+  padding: 1em;
+  max-width: 20em;  
+}
+
 .swal2-container {
   overflow-y: hidden;
 }

@@ -332,3 +332,11 @@ body {
 .d-none {
   display: none;
 }
+
+#instructions {
+  text-align: center;
+  font-family: fantasy;
+  margin-top: 1em;
+  padding: 0.5em;
+  max-width: 30em;
+}

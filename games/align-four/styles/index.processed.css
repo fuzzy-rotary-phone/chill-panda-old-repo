@@ -9,6 +9,7 @@ body {
   overflow: hidden;
   /*background: #000 radial-gradient(1000px 500px, #3f546b, #000);*/
   background-color: #023047;
+  transform: scale(0.8);
 }
 
 .wrapper {
@@ -33,9 +34,13 @@ body {
 }
 
 .heading {
-  text-align: left;
+  text-align: center;
   font-family: 'Doppio One', sans-serif;
   color: #ccc;  
+}
+
+.heading span {
+  font-size: 0.9em;
 }
 
 h1,
@@ -46,9 +51,9 @@ h2 {
 }
 
 h1 {
-  height: 68px;
-  line-height: 68px;
-  font-size: 40px;
+  height: 1.5em;
+  line-height: 1.5em;
+  font-size: 2em;
   text-align: center;
 }
 
@@ -174,7 +179,7 @@ h2 {
   position: relative;
   width: 364px;
   height: 364px;
-  margin-top: 2em;
+  margin-top: 3em;
   background-image: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/77020/board.png");
   box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.4);
   background-size: contain;

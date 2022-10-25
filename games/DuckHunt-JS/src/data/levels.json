@@ -2,7 +2,7 @@
   "normal": [
     {
       "id": 1,
-      "title": "Level 1",
+      "title": "Level 1\nHunt the ducks by tapping on them",
       "waves": 3,
       "ducks": 2,
       "pointsPerDuck": 100,

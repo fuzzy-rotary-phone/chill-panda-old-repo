@@ -241,6 +241,10 @@ function draw() {
         textSize(vh * 0.15);
         textFont('Lucida Grande');
         text('snake', vw * 0.5, vh * 0.12);
+        // fill('#FFFFFF');
+        textSize(vh * 0.015);
+        textFont('Lucida Grande');
+        text('swipe to change the direction of snake and don\'t hit the edges', vw * 0.5, vh * 0.2);
         button.easy.draw();
         button.normal.draw();
         button.hard.draw();
