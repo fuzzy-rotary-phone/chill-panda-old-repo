@@ -218,7 +218,7 @@ function endGame(blurbKey, winningChips) {
       createLitCell(winningChips[i].col, winningChips[i].row);
     }
   }
-  setTimeout(function() { showEndScreen(blurbKey) }, 1000);
+  setTimeout(function() { showAd(blurbKey) }, 1000);
 }
 
 function createLitCell(col, row) {
@@ -299,7 +299,37 @@ function share() {
   }
 }
 
+function showAd(key) {
+  var adPath = allContent.responseJSON["adPath"];
+  var total = allContent.responseJSON["totalAds"];
+  var number = 1 + Math.floor(Math.random() * total);
+  // var adDiv = document.createElement('div');
+  // adDiv.className = 'ad-div';
+  // adDiv.innerHTML = '<img class="ad-img" src=' + adPath + '' + number + '.png>';
+  // adDiv.addEventListener('click', (e) => { showEndScreen(key); });
+  $('.wrapper').addClass('d-none');
+  // $('body').append(adDiv);
+  $('body').addClass('ad-img');
+  $('body').css('background-image', 'url("' + adPath + '' + number + '.png")');
+  var closeDiv = document.createElement('div');
+  closeDiv.className = 'close-div';
+  closeDiv.innerHTML = '<i class="fa fa-times fa-2x" aria-hidden="true"></i>';
+  closeDiv.addEventListener('click', (e) => { showEndScreen(key); });
+  $('body').append(closeDiv);
+  setTimeout(function() {
+    closeDiv.classList.add('is-shown');
+  }, 3000);
+}
+
+function removeAd() {
+  $('body').removeClass('ad-img');
+  $('body').css('background-image', '');
+  $('.close-div').remove();
+  $('.wrapper').removeClass('d-none');
+}
+
 function showEndScreen(key) {
+  removeAd();
   Swal.fire({
     allowEscapeKey: false,
     allowOutsideClick: false,
@@ -322,8 +352,8 @@ function showEndScreen(key) {
         window.location.href = 'https://chillpanda.in';
     }
   });
-  var triggerDiv = '<div class="trigger-div">' + getContent() + '</div>';
-  $('.swal2-container').append(triggerDiv);
+  // var triggerDiv = '<div class="trigger-div">' + getContent() + '</div>';
+  // $('.swal2-container').append(triggerDiv);
   var shareDiv = document.createElement('div');
   shareDiv.className = 'share-div';
   shareDiv.innerHTML = '<i class="fa fa-share fa-2x" aria-hidden="true"></i>';
