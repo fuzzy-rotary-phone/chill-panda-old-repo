@@ -9,7 +9,6 @@ body {
   overflow: hidden;
   /*background: #000 radial-gradient(1000px 500px, #3f546b, #000);*/
   background-color: #023047;
-  transform: scale(0.8);
 }
 
 .wrapper {
@@ -17,6 +16,7 @@ body {
   vertical-align: top;
   text-align: center;
   overflow: hidden;
+  transform: scale(0.8);
 }
 
 .content {
