@@ -19,7 +19,7 @@ body {
 canvas {
 	width: 98%;
 	height: 98%;
-	border-color: black;
+	border-color: #D00000;
 	border-width: 0.5vh;
 	border-style: solid;
 }

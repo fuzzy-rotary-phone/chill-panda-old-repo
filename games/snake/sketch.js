@@ -86,16 +86,20 @@ function new_food(body) {
 function new_game(difficulty) {
     var fps;
     if (difficulty == 'easy') {
-        fps = 5;
+        // fps = 5;
+        fps = 3;
     }
     if (difficulty == 'normal') {
-        fps = 9;
+        // fps = 9;
+        fps = 5;
     }
     if (difficulty == 'hard') {
-        fps = 13;
+        // fps = 13;
+        fps = 7;
     }
     if (difficulty == 'insane') {
-        fps = 17;
+        // fps = 17;
+        fps = 15;
     }
     game.started = true;
     frameRate(fps);
@@ -301,7 +305,7 @@ function draw() {
 
             var guidetxt = {
                 x: w * 0.5,
-                y: h * 0.3
+                y: h * 0.5
             }
 
             if (snake.dir.x == 0 && snake.dir.y == 0) {
@@ -320,10 +324,10 @@ function draw() {
         }
 
         // display score
-        textSize(w * 0.4);
+        textSize(w * 0.1);
         strokeWeight(0);
         fill('#dee2e6');
-        text(snake.body.length - 1, w * 0.5, h * 0.5);
+        text(snake.body.length - 1, w * 0.93, h * 0.05);
 
 
         if (snake.did_eat(food)) {
