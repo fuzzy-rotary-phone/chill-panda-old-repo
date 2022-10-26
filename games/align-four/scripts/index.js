@@ -205,8 +205,6 @@ function setTrigger() {
   $('#trigger-div').removeClass("d-none");
 }
 
-var key;
-
 function endGame(blurbKey, winningChips) {
   $('.dif').removeClass('freeze');
   $('.dif input').prop('disabled', false);
@@ -220,8 +218,7 @@ function endGame(blurbKey, winningChips) {
       createLitCell(winningChips[i].col, winningChips[i].row);
     }
   }
-  key = blurbKey;
-  setTimeout(function() { showAd() }, 1000);
+  setTimeout(function() { showAd(blurbKey) }, 1000);
 }
 
 function createLitCell(col, row) {
@@ -302,7 +299,7 @@ function share() {
   }
 }
 
-function showAd() {
+function showAd(key) {
   var adPath = allContent.responseJSON["adPath"];
   var total = allContent.responseJSON["totalAds"];
   var number = 1 + Math.floor(Math.random() * total);
@@ -317,7 +314,7 @@ function showAd() {
   var closeDiv = document.createElement('div');
   closeDiv.className = 'close-div';
   closeDiv.innerHTML = '<i class="fa fa-times fa-2x" aria-hidden="true"></i>';
-  closeDiv.addEventListener('click', showEndScreen);
+  closeDiv.addEventListener('click', (e) => { showEndScreen(key); });
   $('body').append(closeDiv);
   setTimeout(function() {
     closeDiv.classList.add('is-shown');
@@ -331,7 +328,7 @@ function removeAd() {
   $('.wrapper').removeClass('d-none');
 }
 
-function showEndScreen() {
+function showEndScreen(key) {
   removeAd();
   Swal.fire({
     allowEscapeKey: false,

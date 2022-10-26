@@ -299,7 +299,7 @@ h2 {
   vertical-align: middle;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 5px 10px dimgray;
+  box-shadow: 0 5px 10px black;
   transform: translateY(150%);
   transition-timing-function: ease-in;
   transition: 0.2s;
