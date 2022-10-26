@@ -37561,27 +37561,27 @@ var Game = function () {
       var percentage = this.score / this.maxScore * 100;
 
       if (percentage === 100) {
-        scoreMessage = 'Flawless victory';
+        scoreMessage = 'Flawless victory.';
       }
 
       if (percentage < 100) {
-        scoreMessage = 'Close to perfection';
+        scoreMessage = 'Close to perfection.';
       }
 
       if (percentage <= 95) {
-        scoreMessage = 'Truly impressive score';
+        scoreMessage = 'Truly impressive score.';
       }
 
       if (percentage <= 85) {
-        scoreMessage = 'Solid score';
+        scoreMessage = 'Solid score.';
       }
 
       if (percentage <= 75) {
-        scoreMessage = 'Participation award';
+        scoreMessage = 'Participation award.';
       }
 
       if (percentage <= 63) {
-        scoreMessage = 'Yikes';
+        scoreMessage = 'Yikes.';
       }
 
       return scoreMessage;
@@ -37638,7 +37638,7 @@ var Game = function () {
         allowEscapeKey: false,
         allowOutsideClick: false,
         title: gameStatus,
-        html: '<span>' + this.getScoreMessage() + '</span>',
+        html: '<span>' + this.getScoreMessage() + ' Your score is <strong>' + this.score + '</strong></span>',
         icon: this.gameStatus == 'You Win!' ? 'success' : 'error',
         backdrop: 'white',
         showDenyButton: true,
