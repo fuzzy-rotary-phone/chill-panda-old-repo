@@ -304,6 +304,7 @@ h2 {
   transition-timing-function: ease-in;
   transition: 0.2s;
   cursor: pointer;
+  background-color: #D00000;
 }
 
 .close-div.is-shown {
