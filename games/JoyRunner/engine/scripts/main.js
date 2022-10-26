@@ -20,7 +20,7 @@ const statusText = {
 const keyup = (e) => { listenUserKey(e) };
 const click = (e) => { listenUserKey("click") };
 window.addEventListener("keyup", keyup);
-window.addEventListener("click", click);
+window.addEventListener("touchstart", click);
 
 /***** obj *****/
 // jump
