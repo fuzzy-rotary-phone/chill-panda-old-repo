@@ -318,8 +318,9 @@ h2 {
 }
 
 .ad-img {
-  background-size:cover;
+  background-size: contain;
   background-repeat: no-repeat;
+  background-position: center center;
 }
 
 .swal2-container {
