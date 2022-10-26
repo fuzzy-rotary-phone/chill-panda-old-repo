@@ -3,7 +3,7 @@
 	"industry": "F&B",
 	"website": "http://coffeecrush.net/site/",
 	"logo": "../../assets/CoffeeCrush.jpg",
-	"adPath": "../../assets/CoffeeCrush/",
+	"adPath": "../../../assets/CoffeeCrush/",
 	"totalAds": 10,
 	"content": [
 		{

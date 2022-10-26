@@ -205,6 +205,8 @@ function setTrigger() {
   $('#trigger-div').removeClass("d-none");
 }
 
+var key;
+
 function endGame(blurbKey, winningChips) {
   $('.dif').removeClass('freeze');
   $('.dif input').prop('disabled', false);
@@ -218,7 +220,8 @@ function endGame(blurbKey, winningChips) {
       createLitCell(winningChips[i].col, winningChips[i].row);
     }
   }
-  setTimeout(function() { showEndScreen(blurbKey) }, 1000);
+  key = blurbKey;
+  setTimeout(function() { showAd() }, 1000);
 }
 
 function createLitCell(col, row) {
@@ -299,20 +302,37 @@ function share() {
   }
 }
 
-function showAd(key) {
+function showAd() {
   var adPath = allContent.responseJSON["adPath"];
   var total = allContent.responseJSON["totalAds"];
   var number = 1 + Math.floor(Math.random() * total);
-  var adDiv = document.createElement('div');
-  adDiv.className = 'ad-div';
-  adDiv.innerHTML = '<img class="ad-img" src="' + adPath + '' + number + '.png" alt="Ad">';
-  adDiv.addEventListener('click', (e) => { showEndScreen(key); });
+  // var adDiv = document.createElement('div');
+  // adDiv.className = 'ad-div';
+  // adDiv.innerHTML = '<img class="ad-img" src=' + adPath + '' + number + '.png>';
+  // adDiv.addEventListener('click', (e) => { showEndScreen(key); });
   $('.wrapper').addClass('d-none');
-  $('body').append(adDiv);
+  // $('body').append(adDiv);
+  $('body').addClass('ad-img');
+  $('body').css('background-image', 'url("' + adPath + '' + number + '.png")');
+  var closeDiv = document.createElement('div');
+  closeDiv.className = 'close-div';
+  closeDiv.innerHTML = '<i class="fa fa-times fa-2x" aria-hidden="true"></i>';
+  closeDiv.addEventListener('click', showEndScreen);
+  $('body').append(closeDiv);
+  setTimeout(function() {
+    closeDiv.classList.add('is-shown');
+  }, 3000);
 }
 
-function showEndScreen(key) {
+function removeAd() {
+  $('body').removeClass('ad-img');
+  $('body').css('background-image', '');
+  $('.close-div').remove();
   $('.wrapper').removeClass('d-none');
+}
+
+function showEndScreen() {
+  removeAd();
   Swal.fire({
     allowEscapeKey: false,
     allowOutsideClick: false,
