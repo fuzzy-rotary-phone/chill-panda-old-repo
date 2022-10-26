@@ -299,7 +299,20 @@ function share() {
   }
 }
 
+function showAd(key) {
+  var adPath = allContent.responseJSON["adPath"];
+  var total = allContent.responseJSON["totalAds"];
+  var number = 1 + Math.floor(Math.random() * total);
+  var adDiv = document.createElement('div');
+  adDiv.className = 'ad-div';
+  adDiv.innerHTML = '<img class="ad-img" src="' + adPath + '' + number + '.png" alt="Ad">';
+  adDiv.addEventListener('click', (e) => { showEndScreen(key); });
+  $('.wrapper').addClass('d-none');
+  $('body').append(adDiv);
+}
+
 function showEndScreen(key) {
+  $('.wrapper').removeClass('d-none');
   Swal.fire({
     allowEscapeKey: false,
     allowOutsideClick: false,
@@ -322,8 +335,8 @@ function showEndScreen(key) {
         window.location.href = 'https://chillpanda.in';
     }
   });
-  var triggerDiv = '<div class="trigger-div">' + getContent() + '</div>';
-  $('.swal2-container').append(triggerDiv);
+  // var triggerDiv = '<div class="trigger-div">' + getContent() + '</div>';
+  // $('.swal2-container').append(triggerDiv);
   var shareDiv = document.createElement('div');
   shareDiv.className = 'share-div';
   shareDiv.innerHTML = '<i class="fa fa-share fa-2x" aria-hidden="true"></i>';
