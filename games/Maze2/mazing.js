@@ -110,7 +110,7 @@ Mazing.prototype.gameOver = function(text) {
   this.setMessage(text);
   this.mazeContainer.classList.add("finished");
   // this.setTrigger();
-  this.showEndScreen();
+  this.showAd();
 };
 
 Mazing.prototype.heroWins = function() {
@@ -287,7 +287,34 @@ Mazing.prototype.resetGame = function () {
   window.location = window.location.pathname;
 };
 
+Mazing.prototype.showAd = function () {
+  var adPath = this.allContent.responseJSON["adPath"];
+  var total = this.allContent.responseJSON["totalAds"];
+  var number = 1 + Math.floor(Math.random() * total);
+  $('#maze_container').addClass('d-none');
+  $('#instructions').addClass('d-none');
+  $('body').addClass('ad-img');
+  $('body').css('background-image', 'url("' + adPath + '' + number + '.png")');
+  var closeDiv = document.createElement('div');
+  closeDiv.className = 'close-div';
+  closeDiv.innerHTML = '<i class="fa fa-times fa-2x" aria-hidden="true"></i>';
+  closeDiv.addEventListener('click', (e) => { this.showEndScreen(); });
+  $('body').append(closeDiv);
+  setTimeout(function() {
+    closeDiv.classList.add('is-shown');
+  }, 3000);  
+};
+
+Mazing.prototype.removeAd = function () {
+  $('body').removeClass('ad-img');
+  $('body').css('background-image', '');
+  $('.close-div').remove();
+  $('#instructions').removeClass('d-none');
+  $('#maze_container').removeClass('d-none');
+};
+
 Mazing.prototype.showEndScreen = function () {
+  this.removeAd();
   Swal.fire({
     allowEscapeKey: false,
     allowOutsideClick: false,
@@ -310,8 +337,8 @@ Mazing.prototype.showEndScreen = function () {
         window.location.href = 'https://chillpanda.in';
     }
   });
-  var triggerDiv = '<div class="trigger-div">' + this.getContent() + '</div>';
-  $('.swal2-container').append(triggerDiv);
+  // var triggerDiv = '<div class="trigger-div">' + this.getContent() + '</div>';
+  // $('.swal2-container').append(triggerDiv);
   var shareDiv = document.createElement('div');
   shareDiv.className = 'share-div';
   shareDiv.innerHTML = '<i class="fa fa-share fa-2x" aria-hidden="true"></i>';
