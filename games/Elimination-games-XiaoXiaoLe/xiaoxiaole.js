@@ -797,20 +797,11 @@
         _this.stage.update();
     }
 
-    function resetGame() {
-        score = 0;
-        addScore(0);
-        interv = 0;
-        gaming = false;
-        gametimeout = 2;
-        gametimeout *= 30;
-        timecount = 0;
-        clearInterval(interv);
-        $("#js-time-down").text(gametimeout);
-        $('canvas').empty();
-        var xxl = new XiaoXiaoLe("js-game", "img",{
-            col:6,  //6 columns
-            row:5,  //5 rows
+    function newGame() {
+        // var xxl = new XiaoXiaoLe("js-game", "img", {
+        var xxl = new XiaoXiaoLe("js-game", "../../assets/ingame", {
+            col:8,  //6 columns
+            row:7,  //5 rows
         },function (score) {  //score changed calback
             $("#js-score-num").text(score)
         }, function (score) {   //game end calback
@@ -829,6 +820,19 @@
         $("#js-chint").click(function () {
             xxl.closeHint();
         })        
+    }
+
+    function resetGame() {
+        score = 0;
+        addScore(0);
+        interv = 0;
+        gaming = false;
+        gametimeout = 2;
+        gametimeout *= 30;
+        timecount = 0;
+        clearInterval(interv);
+        $("#js-time-down").text(gametimeout);
+        newGame();
     }
 
     function getContent() {
@@ -919,3 +923,5 @@
         $('.swal2-container').append(logoDiv);
     }
 }
+
+newGame();
