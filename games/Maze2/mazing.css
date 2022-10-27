@@ -1,4 +1,5 @@
 body {
+  font-family: Helvetica Neue;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -116,7 +117,7 @@ body {
   margin: 0.5em auto;
 }
 #maze_score, #maze_message {
-  font-family: fantasy;
+  font-family: Helvetica Neue;
   font-weight: bold;
   font-size: 1em;
 }
@@ -153,7 +154,7 @@ body {
 
 #trigger-text {
   font-size: calc(1em + 1vh);
-  font-family: monospace;
+  font-family: Helvetica Neue;
   color: blanchedalmond;
   text-align: center;
   align-content: space-between;
@@ -335,7 +336,7 @@ body {
 
 #instructions {
   text-align: center;
-  font-family: fantasy;
+  font-family: Helvetica Neue;
   margin-top: 1em;
   padding: 0.5em;
   max-width: 30em;
