@@ -314,7 +314,7 @@ class Game {
     endGame() {
         // this.setTrigger();
         // this.updateState(this.STATES.ENDED);
-        this.showEndScreen();
+        this.showAd();
     }
     tick() {
         this.blocks[this.blocks.length - 1].tick();
@@ -341,8 +341,31 @@ class Game {
             Swal.fire("Browser doesn't support this API !");
         }
     }
-    showEndScreen() {
+    showAd() {
         document.removeEventListener('click', this.clickListener);
+        var adPath = this.allContent.responseJSON["adPath"];
+        var total = this.allContent.responseJSON["totalAds"];
+        var number = 1 + Math.floor(Math.random() * total);
+        $('#container').addClass('d-none');
+        $('body').addClass('ad-img');
+        $('body').css('background-image', 'url("' + adPath + '' + number + '.png")');
+        var closeDiv = document.createElement('div');
+        closeDiv.className = 'close-div';
+        closeDiv.innerHTML = '<i class="fa fa-times fa-2x" aria-hidden="true"></i>';
+        closeDiv.addEventListener('click', (e) => { this.showEndScreen(); });
+        $('body').append(closeDiv);
+        setTimeout(function() {
+            closeDiv.classList.add('is-shown');
+        }, 3000);
+    }
+    removeAd() {
+        $('body').removeClass('ad-img');
+        $('body').css('background-image', '');
+        $('.close-div').remove();
+        $('#container').removeClass('d-none');
+    }
+    showEndScreen() {
+        this.removeAd();
         Swal.fire({
             allowEscapeKey: false,
             allowOutsideClick: false,
@@ -366,8 +389,8 @@ class Game {
                 window.location.href = 'https://chillpanda.in';
             }
         });
-        var triggerDiv = '<div class="trigger-div">' + this.getContent() + '</div>';
-        $('.swal2-container').append(triggerDiv);
+        // var triggerDiv = '<div class="trigger-div">' + this.getContent() + '</div>';
+        // $('.swal2-container').append(triggerDiv);
         var shareDiv = document.createElement('div');
         shareDiv.className = 'share-div';
         shareDiv.innerHTML = '<i class="fa fa-share fa-2x" aria-hidden="true"></i>';

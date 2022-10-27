@@ -300,7 +300,7 @@ h2 {
   align-items: center;
   justify-content: center;
   box-shadow: 0 5px 10px black;
-  transform: translateY(150%);
+  transform: translateY(200%);
   transition-timing-function: ease-in;
   transition: 0.2s;
   cursor: pointer;
