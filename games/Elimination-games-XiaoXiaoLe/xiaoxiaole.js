@@ -797,31 +797,6 @@
         _this.stage.update();
     }
 
-    function newGame() {
-        // var xxl = new XiaoXiaoLe("js-game", "img", {
-        var xxl = new XiaoXiaoLe("js-game", "../../assets/ingame", {
-            col:8,  //6 columns
-            row:7,  //5 rows
-        },function (score) {  //score changed calback
-            $("#js-score-num").text(score)
-        }, function (score) {   //game end calback
-            // alert("gameover!!,You get " + score + " points");
-            // swal("Game Over!", "You get " + score + " points");
-        }, function (time) {
-            $("#js-time-down").text(time)
-        });
-
-        $("#js-start").click(function () {
-            xxl.start();
-        })
-        $("#js-hint").click(function () {
-            xxl.hint();
-        })
-        $("#js-chint").click(function () {
-            xxl.closeHint();
-        })        
-    }
-
     function resetGame() {
         score = 0;
         addScore(0);
@@ -922,6 +897,31 @@
         + '<img src=' + allcontent.responseJSON['logo'] + '>' + '</a>';
         $('.swal2-container').append(logoDiv);
     }
+}
+
+function newGame() {
+    // var xxl = new XiaoXiaoLe("js-game", "img", {
+    var xxl = new XiaoXiaoLe("js-game", "../../assets/ingame", {
+        col:8,  //6 columns
+        row:7,  //5 rows
+    },function (score) {  //score changed calback
+        $("#js-score-num").text(score)
+    }, function (score) {   //game end calback
+        // alert("gameover!!,You get " + score + " points");
+        // swal("Game Over!", "You get " + score + " points");
+    }, function (time) {
+        $("#js-time-down").text(time)
+    });
+
+    $("#js-start").click(function () {
+        xxl.start();
+    })
+    $("#js-hint").click(function () {
+        xxl.hint();
+    })
+    $("#js-chint").click(function () {
+        xxl.closeHint();
+    })        
 }
 
 newGame();
