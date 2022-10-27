@@ -313,7 +313,7 @@ function resetGame() {
     lostStatus = true;
     lostTimer = setTimeout(() => {}, 0);
     window.addEventListener("keyup", keyup);
-    window.addEventListener("click", click);
+    window.addEventListener("touchstart", click);
     exitClick = true;
     statusText.trigger.classList.add("d-none");
     statusText.gameOver.classList.add("d-none");
@@ -326,7 +326,7 @@ function resetGame() {
 
 function showAd() {
     window.removeEventListener("keyup", keyup);
-    window.removeEventListener("click", click);
+    window.removeEventListener("touchstart", click);
     var adPath = allContent.responseJSON["adPath"];
     var total = allContent.responseJSON["totalAds"];
     var number = 1 + Math.floor(Math.random() * total);
