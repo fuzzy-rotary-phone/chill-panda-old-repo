@@ -37543,7 +37543,7 @@ var Game = function () {
       _Sound2.default.play('champ');
       this.gameStatus = 'You Win!';
       this.showReplay(this.getScoreMessage());
-      this.showEndScreen(this.gameStatus);
+      this.showAd(this.gameStatus);
     }
   }, {
     key: 'loss',
@@ -37551,7 +37551,7 @@ var Game = function () {
       _Sound2.default.play('loserSound');
       this.gameStatus = 'You Lose!';
       this.showReplay(this.getScoreMessage());
-      this.showEndScreen(this.gameStatus);
+      this.showAd(this.gameStatus);
     }
   }, {
     key: 'getScoreMessage',
@@ -37632,8 +37632,37 @@ var Game = function () {
       }      
     }
   }, {
+    key: 'showAd',
+    value: function showAd(key) {
+      var adPath = this.allContent.responseJSON["adPath"];
+      var total = this.allContent.responseJSON["totalAds"];
+      var number = 1 + Math.floor(Math.random() * total);
+      // $('canvas').addClass('d-none');
+      // $('canvas').remove();
+      $('body').empty();
+      $('body').addClass('ad-img');
+      $('body').css('background-image', 'url("' + adPath + '' + number + '.png")');
+      var closeDiv = document.createElement('div');
+      closeDiv.className = 'close-div';
+      closeDiv.innerHTML = '<i class="fa fa-times fa-2x" aria-hidden="true"></i>';
+      closeDiv.addEventListener('click', (e) => { this.showEndScreen(key); });
+      $('body').append(closeDiv);
+      setTimeout(function() {
+        closeDiv.classList.add('is-shown');
+      }, 3000);
+    }
+  }, {
+    key: 'removeAd',
+    value: function removeAd() {
+      $('body').removeClass('ad-img');
+      $('body').css('background-image', '');
+      $('.close-div').remove();
+      $('canvas').removeClass('d-none');
+    }
+  }, {
     key: 'showEndScreen',
     value: function showEndScreen(gameStatus) {
+      this.removeAd();
       Swal.fire({
         allowEscapeKey: false,
         allowOutsideClick: false,
@@ -37656,8 +37685,8 @@ var Game = function () {
           window.location.href = 'https://chillpanda.in';
         }
       });
-      var triggerDiv = '<div class="trigger-div">' + this.getContent() + '</div>';
-      $('.swal2-container').append(triggerDiv);
+      // var triggerDiv = '<div class="trigger-div">' + this.getContent() + '</div>';
+      // $('.swal2-container').append(triggerDiv);
       var shareDiv = document.createElement('div');
       shareDiv.className = 'share-div';
       shareDiv.innerHTML = '<i class="fa fa-share fa-2x" aria-hidden="true"></i>';

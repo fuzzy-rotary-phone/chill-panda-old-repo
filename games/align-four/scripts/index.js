@@ -303,12 +303,7 @@ function showAd(key) {
   var adPath = allContent.responseJSON["adPath"];
   var total = allContent.responseJSON["totalAds"];
   var number = 1 + Math.floor(Math.random() * total);
-  // var adDiv = document.createElement('div');
-  // adDiv.className = 'ad-div';
-  // adDiv.innerHTML = '<img class="ad-img" src=' + adPath + '' + number + '.png>';
-  // adDiv.addEventListener('click', (e) => { showEndScreen(key); });
   $('.wrapper').addClass('d-none');
-  // $('body').append(adDiv);
   $('body').addClass('ad-img');
   $('body').css('background-image', 'url("' + adPath + '' + number + '.png")');
   var closeDiv = document.createElement('div');

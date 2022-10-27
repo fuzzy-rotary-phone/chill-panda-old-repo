@@ -1,6 +1,6 @@
 $.getJSON('../../resources/content.json', allcontent => {
     $.getJSON('../../resources/config.json', config => {
-        showEndScreen(allcontent, config);
+        showAd(allcontent, config);
     });
 });
 
@@ -25,7 +25,32 @@ function resetGame() {
     location.href = 'index.html';
 }
 
+function showAd(allcontent, config) {
+  var adPath = allcontent["adPath"];
+  var total = allcontent["totalAds"];
+  var number = 1 + Math.floor(Math.random() * total);
+  $('.main').addClass('d-none');
+  $('body').addClass('ad-img');
+  $('body').css('background-image', 'url("' + adPath + '' + number + '.png")');
+  var closeDiv = document.createElement('div');
+  closeDiv.className = 'close-div';
+  closeDiv.innerHTML = '<i class="fa fa-times fa-2x" aria-hidden="true"></i>';
+  closeDiv.addEventListener('click', (e) => { showEndScreen(allcontent, config); });
+  $('body').append(closeDiv);
+  setTimeout(function() {
+    closeDiv.classList.add('is-shown');
+  }, 3000);
+}
+
+function removeAd() {
+  $('body').removeClass('ad-img');
+  $('body').css('background-image', '');
+  $('.close-div').remove();
+  $('.main').removeClass('d-none');
+}
+
 function showEndScreen(allcontent, config) {
+    removeAd();
     var score = localStorage['memoryGameMoves'];
     var total = allcontent["content"].length;
     var number = Math.floor(Math.random() * total);
@@ -51,8 +76,8 @@ function showEndScreen(allcontent, config) {
             window.location.href = 'https://chillpanda.in';
         }
     });
-    var triggerDiv = '<div class="trigger-div">' + allcontent["content"][number]["text"] + '</div>';
-    $('.swal2-container').append(triggerDiv);
+    // var triggerDiv = '<div class="trigger-div">' + allcontent["content"][number]["text"] + '</div>';
+    // $('.swal2-container').append(triggerDiv);
     var shareDiv = document.createElement('div');
     shareDiv.className = 'share-div';
     shareDiv.innerHTML = '<i class="fa fa-share fa-2x" aria-hidden="true"></i>';

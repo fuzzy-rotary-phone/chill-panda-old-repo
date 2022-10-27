@@ -730,7 +730,8 @@
         //     gameendcalback(score);
         // }
         // setTrigger();
-        showEndScreen();
+        // showEndScreen();
+        showAd();
     }
     var interv = 0;
     var gaming = false;
@@ -796,31 +797,6 @@
         _this.stage.update();
     }
 
-    function newGame() {
-        // var xxl = new XiaoXiaoLe("js-game", "img", {
-        var xxl = new XiaoXiaoLe("js-game", "../../assets/ingame", {
-            col:8,  //6 columns
-            row:7,  //5 rows
-        },function (score) {  //score changed calback
-            $("#js-score-num").text(score)
-        }, function (score) {   //game end calback
-            // alert("gameover!!,You get " + score + " points");
-            // swal("Game Over!", "You get " + score + " points");
-        }, function (time) {
-            $("#js-time-down").text(time)
-        });
-
-        $("#js-start").click(function () {
-            xxl.start();
-        })
-        $("#js-hint").click(function () {
-            xxl.hint();
-        })
-        $("#js-chint").click(function () {
-            xxl.closeHint();
-        })        
-    }
-
     function resetGame() {
         score = 0;
         addScore(0);
@@ -832,27 +808,6 @@
         clearInterval(interv);
         $("#js-time-down").text(gametimeout);
         newGame();
-        // var xxl = new XiaoXiaoLe("js-game", "img",{
-        //     col:6,  //6 columns
-        //     row:5,  //5 rows
-        // },function (score) {  //score changed calback
-        //     $("#js-score-num").text(score)
-        // }, function (score) {   //game end calback
-        //     // alert("gameover!!,You get " + score + " points");
-        //     // swal("Game Over!", "You get " + score + " points");
-        // }, function (time) {
-        //     $("#js-time-down").text(time)
-        // });
-
-        // $("#js-start").click(function () {
-        //     xxl.start();
-        // })
-        // $("#js-hint").click(function () {
-        //     xxl.hint();
-        // })
-        // $("#js-chint").click(function () {
-        //     xxl.closeHint();
-        // })        
     }
 
     function getContent() {
@@ -877,7 +832,32 @@
         }
     }
 
+    function showAd(key) {
+        var adPath = allcontent.responseJSON["adPath"];
+        var total = allcontent.responseJSON["totalAds"];
+        var number = 1 + Math.floor(Math.random() * total);
+        $('.main').addClass('d-none');
+        $('body').addClass('ad-img');
+        $('body').css('background-image', 'url("' + adPath + '' + number + '.png")');
+        var closeDiv = document.createElement('div');
+        closeDiv.className = 'close-div';
+        closeDiv.innerHTML = '<i class="fa fa-times fa-2x" aria-hidden="true"></i>';
+        closeDiv.addEventListener('click', (e) => { showEndScreen(key); });
+        $('body').append(closeDiv);
+        setTimeout(function() {
+            closeDiv.classList.add('is-shown');
+        }, 3000);
+    }
+
+    function removeAd() {
+        $('body').removeClass('ad-img');
+        $('body').css('background-image', '');
+        $('.close-div').remove();
+        $('.main').removeClass('d-none');
+    }
+
     function showEndScreen() {
+        removeAd();
         Swal.fire({
             allowEscapeKey: false,
             allowOutsideClick: false,
@@ -900,8 +880,8 @@
                 window.location.href = 'https://chillpanda.in';
             }
         });
-        var triggerDiv = '<div class="trigger-div">' + getContent() + '</div>';
-        $('.swal2-container').append(triggerDiv);
+        // var triggerDiv = '<div class="trigger-div">' + getContent() + '</div>';
+        // $('.swal2-container').append(triggerDiv);
         var shareDiv = document.createElement('div');
         shareDiv.className = 'share-div';
         shareDiv.innerHTML = '<i class="fa fa-share fa-2x" aria-hidden="true"></i>';
@@ -917,6 +897,31 @@
         + '<img src=' + allcontent.responseJSON['logo'] + '>' + '</a>';
         $('.swal2-container').append(logoDiv);
     }
+}
+
+function newGame() {
+    // var xxl = new XiaoXiaoLe("js-game", "img", {
+    var xxl = new XiaoXiaoLe("js-game", "../../assets/ingame", {
+        col:8,  //6 columns
+        row:7,  //5 rows
+    },function (score) {  //score changed calback
+        $("#js-score-num").text(score)
+    }, function (score) {   //game end calback
+        // alert("gameover!!,You get " + score + " points");
+        // swal("Game Over!", "You get " + score + " points");
+    }, function (time) {
+        $("#js-time-down").text(time)
+    });
+
+    $("#js-start").click(function () {
+        xxl.start();
+    })
+    $("#js-hint").click(function () {
+        xxl.hint();
+    })
+    $("#js-chint").click(function () {
+        xxl.closeHint();
+    })        
 }
 
 newGame();

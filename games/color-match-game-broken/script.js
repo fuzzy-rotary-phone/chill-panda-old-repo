@@ -80,7 +80,7 @@
     if(!running) {
       // setTrigger()
       gameover.innerHTML = msg
-      setTimeout(function() { showEndScreen(winFlag) }, 1000);
+      setTimeout(function() { showAd(winFlag) }, 1000);
     }
   }
 
@@ -188,7 +188,32 @@
     }
   }
 
+  function showAd(key) {
+    var adPath = allContent.responseJSON["adPath"];
+    var total = allContent.responseJSON["totalAds"];
+    var number = 1 + Math.floor(Math.random() * total);
+    $('main').addClass('d-none');
+    $('body').addClass('ad-img');
+    $('body').css('background-image', 'url("' + adPath + '' + number + '.png")');
+    var closeDiv = document.createElement('div');
+    closeDiv.className = 'close-div';
+    closeDiv.innerHTML = '<i class="fa fa-times fa-2x" aria-hidden="true"></i>';
+    closeDiv.addEventListener('click', (e) => { showEndScreen(key); });
+    $('body').append(closeDiv);
+    setTimeout(function() {
+      closeDiv.classList.add('is-shown');
+    }, 3000);
+  }
+
+  function removeAd() {
+    $('body').removeClass('ad-img');
+    $('body').css('background-image', '');
+    $('.close-div').remove();
+    $('main').removeClass('d-none');
+  }
+
   function showEndScreen(key) {
+    removeAd();
     Swal.fire({
       allowEscapeKey: false,
       allowOutsideClick: false,
@@ -211,8 +236,8 @@
         window.location.href = 'https://chillpanda.in';
       }
     });
-    var triggerDiv = '<div class="trigger-div">' + getContent() + '</div>';
-    $('.swal2-container').append(triggerDiv);
+    // var triggerDiv = '<div class="trigger-div">' + getContent() + '</div>';
+    // $('.swal2-container').append(triggerDiv);
     var shareDiv = document.createElement('div');
     shareDiv.className = 'share-div';
     shareDiv.innerHTML = '<i class="fa fa-share fa-2x" aria-hidden="true"></i>';
