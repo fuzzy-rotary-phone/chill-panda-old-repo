@@ -219,7 +219,7 @@ function userLost() {
     statusText.gameOver.classList.remove("d-none");
     // setTrigger();
     // statusText.trigger.classList.remove("d-none");
-    setTimeout(() => { showEndScreen() }, 1000);
+    setTimeout(() => { showAd() }, 1000);
 }
 
 let allContent = $.getJSON('../../resources/content.json');
@@ -324,9 +324,36 @@ function resetGame() {
     game.score.innerHTML = "0";
 }
 
-function showEndScreen() {
+function showAd() {
     window.removeEventListener("keyup", keyup);
     window.removeEventListener("click", click);
+    var adPath = allContent.responseJSON["adPath"];
+    var total = allContent.responseJSON["totalAds"];
+    var number = 1 + Math.floor(Math.random() * total);
+    $('.container').addClass('d-none');
+    $('html').addClass('fullscreen');
+    $('body').addClass('ad-img');
+    $('body').css('background-image', 'url("' + adPath + '' + number + '.png")');
+    var closeDiv = document.createElement('div');
+    closeDiv.className = 'close-div';
+    closeDiv.innerHTML = '<i class="fa fa-times fa-2x" aria-hidden="true"></i>';
+    closeDiv.addEventListener('click', (e) => { showEndScreen(); });
+    $('body').append(closeDiv);
+    setTimeout(function() {
+        closeDiv.classList.add('is-shown');
+    }, 3000);
+}
+
+function removeAd() {
+    $('html').removeClass('fullscreen');
+    $('body').removeClass('ad-img');
+    $('body').css('background-image', '');
+    $('.close-div').remove();
+    $('.container').removeClass('d-none');
+}
+
+function showEndScreen() {
+    removeAd();
     Swal.fire({
         allowEscapeKey: false,
         allowOutsideClick: false,
@@ -349,8 +376,8 @@ function showEndScreen() {
             window.location.href = 'https://chillpanda.in';
         }
     });
-    var triggerDiv = '<div class="trigger-div">' + get_content() + '</div>';
-    $('.swal2-container').append(triggerDiv);
+    // var triggerDiv = '<div class="trigger-div">' + get_content() + '</div>';
+    // $('.swal2-container').append(triggerDiv);
     var shareDiv = document.createElement('div');
     shareDiv.className = 'share-div';
     shareDiv.innerHTML = '<i class="fa fa-share fa-2x" aria-hidden="true"></i>';
