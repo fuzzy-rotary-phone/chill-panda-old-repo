@@ -65,8 +65,10 @@
 			default:
 				src = 'games/tower-blocks/dist/index.html';
 		}
-		$(".loader").fadeOut("1000");
     	$('#myiframe').attr('src', src);
+	});
+	$(window).on('load', function() {
+		$(".loader").fadeOut("1000");
 	});
 </script>
 </html>
