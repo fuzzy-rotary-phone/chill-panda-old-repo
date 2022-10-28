@@ -283,17 +283,23 @@ function getContent() {
   return allContent.responseJSON["content"][number]["text"];
 }
 
-function share() {
+function share(data) {
   if (navigator.share) {
-    navigator.share({
-      title: 'Chill Panda',
-      url: window.location.href
-    }).then(() => {
-      console.log('Thanks for sharing!');
-    }).catch(err => {
-      console.log('Error while using Web share API:');
-      console.log(err);
-    });
+    // if (navigator.canShare({ files: [data] })) {
+      navigator.share({
+        files: [ data ],
+        title: 'Chill Panda',
+        text: 'Haha! Play and beat me if you can'
+        url: window.location.href
+      }).then(() => {
+        console.log('Thanks for sharing!');
+      }).catch(err => {
+        console.log('Error while using Web share API:');
+        console.log(err);
+      });
+    // } else {
+    //   Swal.fire("Your system doesn't support sharing these files.");
+    // }
   } else {
     Swal.fire("Browser doesn't support this API !");
   }
@@ -352,7 +358,7 @@ function showEndScreen(key) {
   var shareDiv = document.createElement('div');
   shareDiv.className = 'share-div';
   shareDiv.innerHTML = '<i class="fa fa-share fa-2x" aria-hidden="true"></i>';
-  shareDiv.addEventListener('click', share);
+  shareDiv.addEventListener('click', (e) => { takeScreenshot(); });
   $('.swal2-container').append(shareDiv);
   var buttonTextDiv = document.createElement('div');
   buttonTextDiv.className = 'button-div';
@@ -363,4 +369,14 @@ function showEndScreen(key) {
   logoDiv.innerHTML = '<a href='+ allContent.responseJSON['website'] +' target="_blank">' 
   + '<img src=' + allContent.responseJSON['logo'] + '>' + '</a>';
   $('.swal2-container').append(logoDiv);
+}
+
+function takeScreenshot() {
+  let div = $('.swal2-container')[0];
+  html2canvas(div).then(function(canvas) {
+    canvas.toBlob((blob) => {
+      var file = new File([blob], "image");
+      share(file);
+    });
+  });
 }
