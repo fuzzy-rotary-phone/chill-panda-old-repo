@@ -376,9 +376,9 @@ function showEndScreen(key) {
 function takeScreenshot() {
   let div = $('.swal2-container')[0];
   html2canvas(div).then(function(canvas) {
-    download(canvas);
+    // download(canvas);
     canvas.toBlob((blob) => {
-      var file = new File([blob], "image");
+      var file = new File([blob], "image.png");
       share(file);
     });
   });
