@@ -285,7 +285,7 @@ function getContent() {
 
 function share(data) {
   if (navigator.share) {
-    if (navigator.canShare({ files: [data] })) {
+    // if (navigator.canShare({ files: [data] })) {
       navigator.share({
         files: [ data ],
         title: 'Chill Panda',
@@ -297,11 +297,13 @@ function share(data) {
         console.log('Error while using Web share API:');
         console.log(err);
       });
-    } else {
-      Swal.fire("Your system doesn't support sharing these files.");
-    }
+    // } else {
+    //   Swal.fire("Your system doesn't support sharing these files.");
+    //   reload();
+    // }
   } else {
     Swal.fire("Browser doesn't support this API !");
+    reload();
   }
 }
 
@@ -348,9 +350,9 @@ function showEndScreen(key) {
     if (result.isConfirmed) {
         resetGame();
     } else if (result.isDenied) {
-        window.location.href = 'https://chillpanda.in';
+        reload();
     } else if (result.dismiss === Swal.DismissReason.cancel) {
-        window.location.href = 'https://chillpanda.in';
+        reload();
     }
   });
   // var triggerDiv = '<div class="trigger-div">' + getContent() + '</div>';
@@ -379,4 +381,8 @@ function takeScreenshot() {
       share(file);
     });
   });
+}
+
+function reload() {
+  window.location.href = 'https://chillpanda.in';
 }
