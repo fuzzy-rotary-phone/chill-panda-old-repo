@@ -343,13 +343,19 @@ class Game {
         }
     }
     showAd() {
+        $('.loader').css('display','');
         document.removeEventListener('click', this.clickListener);
         var adPath = this.allContent.responseJSON["adPath"];
         var total = this.allContent.responseJSON["totalAds"];
         var number = 1 + Math.floor(Math.random() * total);
+        var urlPath = adPath + '' + number + '.png';
         $('#container').addClass('d-none');
         $('body').addClass('ad-img');
-        $('body').css('background-image', 'url("' + adPath + '' + number + '.png")');
+        $('<img/>').attr('src', urlPath).on('load', function() {
+            $(this).remove();
+            $('body').css('background-image', 'url("' + urlPath + '")');
+            $(".loader").fadeOut("1000");
+        });
         var closeDiv = document.createElement('div');
         closeDiv.className = 'close-div';
         closeDiv.innerHTML = '<i class="fa fa-times fa-2x" aria-hidden="true"></i>';

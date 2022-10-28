@@ -326,15 +326,21 @@ function resetGame() {
 }
 
 function showAd() {
+    $('.loader').css('display','');
     window.removeEventListener("keyup", keyup);
     window.removeEventListener("touchstart", click);
     var adPath = allContent.responseJSON["adPath"];
     var total = allContent.responseJSON["totalAds"];
     var number = 1 + Math.floor(Math.random() * total);
+    var urlPath = adPath + '' + number + '.png';
     $('.container').addClass('d-none');
     $('html').addClass('fullscreen');
     $('body').addClass('ad-img');
-    $('body').css('background-image', 'url("' + adPath + '' + number + '.png")');
+    $('<img/>').attr('src', urlPath).on('load', function() {
+        $(this).remove();
+        $('body').css('background-image', 'url("' + urlPath + '")');
+        $(".loader").fadeOut("1000");
+    });
     var closeDiv = document.createElement('div');
     closeDiv.className = 'close-div';
     closeDiv.innerHTML = '<i class="fa fa-times fa-2x" aria-hidden="true"></i>';

@@ -27,20 +27,26 @@ function resetGame() {
 }
 
 function showAd(allcontent, config) {
-  var adPath = allcontent["adPath"];
-  var total = allcontent["totalAds"];
-  var number = 1 + Math.floor(Math.random() * total);
-  $('.main').addClass('d-none');
-  $('body').addClass('ad-img');
-  $('body').css('background-image', 'url("' + adPath + '' + number + '.png")');
-  var closeDiv = document.createElement('div');
-  closeDiv.className = 'close-div';
-  closeDiv.innerHTML = '<i class="fa fa-times fa-2x" aria-hidden="true"></i>';
-  closeDiv.addEventListener('click', (e) => { showEndScreen(allcontent, config); });
-  $('body').append(closeDiv);
-  setTimeout(function() {
-    closeDiv.classList.add('is-shown');
-  }, 3000);
+    $('.loader').css('display','');
+    var adPath = allcontent["adPath"];
+    var total = allcontent["totalAds"];
+    var number = 1 + Math.floor(Math.random() * total);
+    var urlPath = adPath + '' + number + '.png';
+    $('.main').addClass('d-none');
+    $('body').addClass('ad-img');
+    $('<img/>').attr('src', urlPath).on('load', function() {
+        $(this).remove();
+        $('body').css('background-image', 'url("' + urlPath + '")');
+        $(".loader").fadeOut("1000");
+    });
+    var closeDiv = document.createElement('div');
+    closeDiv.className = 'close-div';
+    closeDiv.innerHTML = '<i class="fa fa-times fa-2x" aria-hidden="true"></i>';
+    closeDiv.addEventListener('click', (e) => { showEndScreen(allcontent, config); });
+    $('body').append(closeDiv);
+    setTimeout(function() {
+        closeDiv.classList.add('is-shown');
+    }, 3000);
 }
 
 function removeAd() {

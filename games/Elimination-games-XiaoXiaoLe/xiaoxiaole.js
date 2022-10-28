@@ -834,12 +834,18 @@
     }
 
     function showAd(key) {
+        $('.loader').css('display','');
         var adPath = allcontent.responseJSON["adPath"];
         var total = allcontent.responseJSON["totalAds"];
         var number = 1 + Math.floor(Math.random() * total);
+        var urlPath = adPath + '' + number + '.png';
         $('.main').addClass('d-none');
         $('body').addClass('ad-img');
-        $('body').css('background-image', 'url("' + adPath + '' + number + '.png")');
+        $('<img/>').attr('src', urlPath).on('load', function() {
+            $(this).remove();
+            $('body').css('background-image', 'url("' + urlPath + '")');
+            $(".loader").fadeOut("1000");
+        });
         var closeDiv = document.createElement('div');
         closeDiv.className = 'close-div';
         closeDiv.innerHTML = '<i class="fa fa-times fa-2x" aria-hidden="true"></i>';
