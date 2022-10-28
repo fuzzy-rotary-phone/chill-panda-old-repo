@@ -13,6 +13,17 @@ body {
   background: #fafafa;
 }
 
+.loader {
+    position : fixed;
+    z-index: 9999;
+    background : url('../../assets/sleep.gif') 50% 50% no-repeat;
+    top : 0px;
+    left : 0px;
+    height : 100%;
+    width : 100%;
+    cursor : wait;
+}
+
 #maze_container {
   position: relative;
   display: inline-block;

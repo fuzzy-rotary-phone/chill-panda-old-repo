@@ -42,12 +42,18 @@
 
 </head>
 
-<body id="canvas-container"></body>
+<body id="canvas-container">
+  <div class="loader"></div>
+</body>
 
 <!-- scripts -->
 <script src="sketch.js"></script>
 <script src="snake.js"></script>
 <script src="food.js"></script>
 <script src="rainbow.js"></script>
-
+<script type="text/javascript">
+  $(document).ready(function() {
+    $(".loader").fadeOut("1000");
+  });
+</script>
 </html>

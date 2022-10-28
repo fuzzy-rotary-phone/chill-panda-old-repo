@@ -27,7 +27,7 @@
 <body>
 <!-- partial:index.partial.html -->
 <meta name="viewport" content="width=device-width,user-scalable=no">
-
+<div class="loader"></div>
 <div id="container">
 	<div id="game"></div>
 	<div id="score">0</div>
@@ -53,5 +53,10 @@
 <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sweetalert2@11.5.1/dist/sweetalert2.min.js"></script>
 <script  src="./script.js"></script>  
+<script type="text/javascript">
+  $(document).ready(function() {
+    $(".loader").fadeOut("1000");
+  });
+</script>
 </body>
 </html>

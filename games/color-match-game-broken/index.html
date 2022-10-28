@@ -31,6 +31,7 @@
 </head>
 <body>
 <!-- partial:index.partial.html -->
+<div class="loader"></div>
 <main>
   <div class="title">
     Click the colour tiles below to change the color of star tiles on the left top
@@ -49,6 +50,10 @@
 <!-- partial -->
   <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
   <script  src="./script.js"></script>
-
+  <script type="text/javascript">
+    $(document).ready(function() {
+      $(".loader").fadeOut("1000");
+    });
+  </script>
 </body>
 </html>

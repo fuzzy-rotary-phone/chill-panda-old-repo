@@ -12,6 +12,17 @@ body {
     overflow: hidden;
 }
 
+.loader {
+    position : fixed;
+    z-index: 9999;
+    background : url('../../assets/sleep.gif') 50% 50% no-repeat;
+    top : 0px;
+    left : 0px;
+    height : 100%;
+    width : 100%;
+    cursor : wait;
+}
+
 div.main {
     margin: 0 auto;
     padding: 0 10px 30px 10px;

@@ -26,6 +26,7 @@
 </head>
 
 <body>
+	<div class="loader"></div>
 	<div id="instructions">
 		<span>Keep swiping in the direction to find the key and exit from the door in the shortest moves possible. Eating treasures gives you 10 extra moves.</span>
 	</div>
@@ -102,5 +103,10 @@
 		
 		Hide Background image <input type="checkbox" id="myCheck" onclick="myFunction()">
 
-	</div>	
+	</div>
+	<script type="text/javascript">
+		$(document).ready(function() {
+		  $(".loader").fadeOut("1000");
+		});
+	</script>
 </body>
