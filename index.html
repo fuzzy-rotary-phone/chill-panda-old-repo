@@ -25,47 +25,10 @@
 	</iframe>
 </body>
 <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
+<script type="text/javascript" src="index.js"></script>
 <script>
 	$(document).ready(function() {
-		var total = 10;
-		var number = 1 + Math.floor(Math.random() * total);
-		// var src = 'games/2048/index.html';
-		var src = 'games/DuckHunt-JS/dist/index.html';
-		switch(number) {
-			case 1:
-				src = 'games/DuckHunt-JS/dist/index.html';
-				break;
-			case 2:
-				src = 'games/align-four/index.html';
-				break;
-			case 3:
-				src = 'games/flappy-bird/index.html';
-				break;
-			case 4:
-				src = 'games/color-match-game-broken/index.html';
-				break;
-			case 5:
-				src = 'games/JoyRunner/runner.html';
-				break;
-			case 6:
-				src = 'games/snake/index.html';
-				break;
-			case 7:
-				src = 'games/sweet-memory-game/index.html';
-				break;
-			case 8:
-				src = 'games/tower-blocks/index.html';
-				break;
-			case 9:
-				src = 'games/Elimination-games-XiaoXiaoLe/index.html';
-				break;
-			case 10:
-				src = 'games/Maze2/maze.html';
-				break;
-			default:
-				src = 'games/tower-blocks/dist/index.html';
-		}
-    	$('#myiframe').attr('src', src);
+		loadGame();
 	});
 	$(window).on('load', function() {
 		$(".loader").fadeOut("1000");
