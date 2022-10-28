@@ -285,7 +285,7 @@ function getContent() {
 
 function share(data) {
   if (navigator.share) {
-    // if (navigator.canShare({ files: [data] })) {
+    if (navigator.canShare({ files: [data] })) {
       navigator.share({
         files: [ data ],
         title: 'Chill Panda',
@@ -297,10 +297,18 @@ function share(data) {
         console.log('Error while using Web share API:');
         console.log(err);
       });
-    // } else {
-    //   Swal.fire("Your system doesn't support sharing these files.");
-    //   reload();
-    // }
+    } else {
+      navigator.share({
+        title: 'Chill Panda',
+        text: 'Haha! Play and beat me if you can',
+        url: window.location.href
+      }).then(() => {
+        console.log('Thanks for sharing!');
+      }).catch(err => {
+        console.log('Error while using Web share API:');
+        console.log(err);
+      });
+    }
   } else {
     Swal.fire("Browser doesn't support this API !");
     reload();
