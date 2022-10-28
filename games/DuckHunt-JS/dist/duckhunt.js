@@ -37620,6 +37620,7 @@ var Game = function () {
       if (navigator.share) {
         navigator.share({
           title: 'Chill Panda',
+          text: 'Haha! Play and beat me if you can',
           url: window.location.href
         }).then(() => {
           console.log('Thanks for sharing!');
