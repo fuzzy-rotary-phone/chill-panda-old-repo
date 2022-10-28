@@ -376,11 +376,19 @@ function showEndScreen(key) {
 function takeScreenshot() {
   let div = $('.swal2-container')[0];
   html2canvas(div).then(function(canvas) {
+    download(canvas);
     canvas.toBlob((blob) => {
       var file = new File([blob], "image");
       share(file);
     });
   });
+}
+
+function download(canvas) {
+  var anchor = document.createElement("a");
+  anchor.href = canvas.toDataURL("image/png");
+  anchor.download = "IMAGE.PNG";
+  anchor.click();
 }
 
 function reload() {
