@@ -257,7 +257,7 @@ function moveCursorChip(col, callback) {
 
 function dropCursorChip(row, callback) {
   // speed of animation depends on how far the chip has to drop
-  var ms = (7 - row) * 40;
+  var ms = (6 - row) * 40;
   var duration = (ms / 1000) + 's';
   
   $('.chips .cursor')
@@ -274,7 +274,7 @@ function dropCursorChip(row, callback) {
 }
 
 function indexToPixels(index) {
-  return (index * 52 + 1) + 'px';
+  return (index * 51.3 + 1) + 'px';
 }
 
 function getContent() {
