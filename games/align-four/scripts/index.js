@@ -364,9 +364,9 @@ function showEndScreen(key) {
     if (result.isConfirmed) {
       resetGame();
     } else if (result.isDenied) {
-      reload();
+      loadNewGame();
     } else if (result.dismiss === Swal.DismissReason.cancel) {
-      reload();
+      loadNewGame();
     }
   });
   // var triggerDiv = '<div class="trigger-div">' + getContent() + '</div>';
@@ -406,6 +406,6 @@ function download(canvas) {
   anchor.click();
 }
 
-function reload() {
+function loadNewGame() {
   window.location.href = window.location.origin + '/' + gameMap[getRandomNumber()];
 }

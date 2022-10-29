@@ -452,9 +452,9 @@ function showEndScreen() {
             // loop();
             window.location = window.location.pathname;
         } else if (result.isDenied) {
-            window.location.href = 'https://chillpanda.in';
+            loadNewGame();
         } else if (result.dismiss === Swal.DismissReason.cancel) {
-            window.location.href = 'https://chillpanda.in';
+            loadNewGame();
         }
     });
     // var triggerDiv = '<div class="trigger-div">' + button.trigger.text + '</div>';
@@ -473,4 +473,9 @@ function showEndScreen() {
     logoDiv.innerHTML = '<a href='+ all_content['website'] +' target="_blank">' 
     + '<img src=' + all_content['logo'] + '>' + '</a>';
     $('.swal2-container').append(logoDiv);
+    localStorage.setItem('lastGame', 6);
+}
+
+function loadNewGame() {
+    window.location.href = window.location.origin + '/' + gameMap[getRandomNumber()];
 }
