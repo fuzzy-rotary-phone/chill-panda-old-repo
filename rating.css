@@ -1,0 +1,121 @@
+html, body {
+  height: 100%;
+  font-family: "Helvetica Neue",Helvetica,Arial,sans-serif !important;
+}
+
+.container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.container span {
+  text-align: center;
+  font-size: 1.5rem;
+  margin-top: 2em;
+}
+
+/* use reverse flexbox to take advantage of flex-direction: reverse */
+.place-rating {
+  display: flex;
+  align-items: center;
+  width: 160px;
+  flex-direction: row-reverse;
+  justify-content: space-between;
+  margin: 40px auto;
+  position: relative;
+  transform: scale(1.7);
+}
+/* hide the inputs */
+.place-rating input {
+  display: none;
+}
+/* set properties of all labels */
+.place-rating > label {
+  width: 30px;
+  height: 30px;
+  font-family: Arial;
+  font-size: 30px;
+  transition: 0.2s ease;
+  color: orange;
+}
+/* give label a hover state */
+.place-rating label:hover {
+  color: #ffb703;
+  transition: 0.2s ease;
+}
+.place-rating label:active::before {
+  transform:scale(1.1);
+}
+
+/* set shape of unselected label */
+.place-rating label::before {
+  content: '\2606';
+  position: absolute;
+  top: 0px;
+  line-height: 26px;
+}
+/* set full star shape for checked label and those that come after it */
+.place-rating input:checked ~ label:before {
+  content:'\2605';
+}
+
+@-moz-document url-prefix() {
+  .place-rating input:checked ~ label:before {
+  font-size: 36px;
+  line-height: 21px;
+  }
+}
+
+/* use reverse flexbox to take advantage of flex-direction: reverse */
+.app-rating {
+  display: flex;
+  align-items: center;
+  width: 160px;
+  flex-direction: row-reverse;
+  justify-content: space-between;
+  margin: 40px auto;
+  position: relative;
+  transform: scale(1.7);
+}
+/* hide the inputs */
+.app-rating input {
+  display: none;
+}
+/* set properties of all labels */
+.app-rating > label {
+  width: 30px;
+  height: 30px;
+  font-family: Arial;
+  font-size: 30px;
+  transition: 0.2s ease;
+  color: orange;
+}
+/* give label a hover state */
+.app-rating label:hover {
+  color: #ffb703;
+  transition: 0.2s ease;
+}
+.app-rating label:active::before {
+  transform:scale(1.1);
+}
+
+/* set shape of unselected label */
+.app-rating label::before {
+  content: '\2606';
+  position: absolute;
+  top: 0px;
+  line-height: 26px;
+}
+/* set full star shape for checked label and those that come after it */
+.app-rating input:checked ~ label:before {
+  content:'\2605';
+}
+
+@-moz-document url-prefix() {
+  .app-rating input:checked ~ label:before {
+  font-size: 36px;
+  line-height: 21px;
+  }
+}
