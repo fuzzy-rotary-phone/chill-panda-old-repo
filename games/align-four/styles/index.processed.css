@@ -189,9 +189,10 @@ h2 {
 .board {
   position: relative;
   width: 364px;
-  height: 364px;
+  height: 316px;
   margin-top: 3em;
-  background-image: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/77020/board.png");
+  /*background-image: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/77020/board.png");*/
+  background-image: url("../../../assets/ingame/board.png");
   box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.4);
   background-size: contain;
   object-fit: contain;
@@ -203,13 +204,13 @@ h2 {
 .click-columns {
   position: absolute;
   width: 364px;
-  height: 364px;
+  height: 312px;
 }
 
 .lit-columns div {
   float: left;
   width: 51px;
-  height: 363px;
+  height: 315px;
   margin: 1px 0 1px 1px;
   transition: background-color 0.1s;
 }
@@ -228,26 +229,29 @@ h2 {
 
 .chips div {
   position: absolute;
-  width: 51px;
-  height: 51px;
+  width: 42px;
+  height: 42px;
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
+  margin: 4px;
 }
 
 .chips .p1 {
-  background-image: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/77020/p1-chip.png");
+  /*background-image: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/77020/p1-chip.png");*/
+  background-image: url("../../../assets/ingame/p1.png");
   background-size: contain;
   object-fit: contain;
 }
 
 .chips .p2 {
-  background-image: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/77020/p2-chip.png");
+  /*background-image: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/77020/p2-chip.png");*/
+  background-image: url("../../../assets/ingame/p2.png");
   background-size: contain;
   object-fit: contain;
 }
 
 .chips .cursor {
-  bottom: 364px;
+  bottom: 316px;
   transition: left 0.1s ease-out;
 }
 
@@ -259,7 +263,7 @@ h2 {
 .click-columns div {
   float: left;
   width: 51px;
-  height: 364px;
+  height: 316px;
 }
 
 .click-columns div:first-child {

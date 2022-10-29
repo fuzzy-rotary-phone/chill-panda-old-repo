@@ -1,6 +1,6 @@
 // constants
 const TOTAL_COLUMNS = 7;
-const TOTAL_ROWS = 7;
+const TOTAL_ROWS = 6;
 const HUMAN_WIN_SCORE = -4;
 const COMPUTER_WIN_SCORE = 4;
 const NO_WIN_SCORE = 0;
