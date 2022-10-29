@@ -37685,9 +37685,9 @@ var Game = function () {
         if (result.isConfirmed) {
           window.location = window.location.pathname;
         } else if (result.isDenied) {
-          window.location.href = 'https://chillpanda.in';
+          this.loadNewGame();
         } else if (result.dismiss === Swal.DismissReason.cancel) {
-          window.location.href = 'https://chillpanda.in';
+          this.loadNewGame();
         }
       });
       // var triggerDiv = '<div class="trigger-div">' + this.getContent() + '</div>';
@@ -37706,6 +37706,12 @@ var Game = function () {
       logoDiv.innerHTML = '<a href='+ this.allContent.responseJSON['website'] +' target="_blank">' 
       + '<img src=../' + this.allContent.responseJSON['logo'] + '>' + '</a>';
       $('.swal2-container').append(logoDiv);
+      localStorage.setItem('lastGame', 1);
+    }
+  }, {
+    key: 'loadNewGame',
+    value: function loadNewGame() {
+      window.location.href = window.location.origin + '/' + gameMap[getRandomNumber()];
     }
   }, {
     key: 'openLevelCreator',

@@ -391,9 +391,9 @@ class Game {
                 document.addEventListener('click', this.clickListener);
                 this.updateState(this.STATES.ENDED);
             } else if (result.isDenied) {
-                window.location.href = 'https://chillpanda.in';
+                this.loadNewGame();
             } else if (result.dismiss === Swal.DismissReason.cancel) {
-                window.location.href = 'https://chillpanda.in';
+                this.loadNewGame();
             }
         });
         // var triggerDiv = '<div class="trigger-div">' + this.getContent() + '</div>';
@@ -412,6 +412,10 @@ class Game {
         logoDiv.innerHTML = '<a href='+ this.allContent.responseJSON['website'] +' target="_blank">' 
         + '<img src=' + this.allContent.responseJSON['logo'] + '>' + '</a>';
         $('.swal2-container').append(logoDiv);
+        localStorage.setItem('lastGame', 8);
+    }
+    loadNewGame() {
+        window.location.href = window.location.origin + '/' + gameMap[getRandomNumber()];
     }
 }
 let game = new Game();
