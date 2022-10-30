@@ -1,4 +1,4 @@
-var gameMap = {
+export const gameMap = {
 	1: 'games/DuckHunt-JS/dist/index.html',
 	2: 'games/align-four/index.html',
 	3: 'games/flappy-bird/index.html',
