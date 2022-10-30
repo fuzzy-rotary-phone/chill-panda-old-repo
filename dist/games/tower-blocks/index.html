@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+	<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+	<meta http-equiv="Pragma" content="no-cache">
+	<meta http-equiv="Expires" content="0">
+	<meta name="color-scheme" content="light">
+  <title>Tower Blocks</title>
+  <link rel="stylesheet" href="./style.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.5.1/dist/sweetalert2.min.css">
+	<link rel="stylesheet" href="../../assets/font-awesome-4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.5.1/dist/sweetalert2.min.css">
+	<link rel="stylesheet" href="../../assets/font-awesome-4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" href="../../assets/normalize.css">
+
+	<!-- Google tag (gtag.js) -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=G-Y5F32F5H64"></script>
+	<script>
+	  window.dataLayer = window.dataLayer || [];
+	  function gtag(){dataLayer.push(arguments);}
+	  gtag('js', new Date());
+
+	  gtag('config', 'G-Y5F32F5H64');
+	</script>
+
+</head>
+<body>
+<!-- partial:index.partial.html -->
+<meta name="viewport" content="width=device-width,user-scalable=no">
+<div class="loader"></div>
+<div id="container">
+	<div id="game"></div>
+	<div id="score">0</div>
+	<div id="instructions">Touch to place the block</div>
+	<!-- <div id="trigger-div">
+		<div id="trigger-text">
+		</div>
+	</div> -->
+	<div class="game-ready">
+		<div id="start-button">Start</div>
+		<div id="start-instructions">Build the largest tower by placing each slab over the previous one</div>
+	</div>
+	<div class="game-over">
+		<h2>Game Over</h2>
+		<p>Touch to start again</p>
+	</div>
+	<!-- <div id="trigger-content">Heelooo</div> -->
+</div>
+<!-- partial -->
+  <!-- <script src='https://codepen.io/ste-vg/pen/zBVaZw.js'></script> -->
+<script src='https://cdnjs.cloudflare.com/ajax/libs/three.js/r83/three.min.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/gsap/latest/TweenMax.min.js'></script>
+<script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sweetalert2@11.5.1/dist/sweetalert2.min.js"></script>
+<script  src="./script.js"></script>
+<script type="text/javascript" src="../../bundle.js"></script>
+<script type="text/javascript">
+  $(window).on('load', function() {
+		$(".loader").fadeOut("1000");
+	});
+</script>
+</body>
+</html>

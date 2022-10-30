@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+
+<head lang="en-US">
+    <title>snake</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="msapplication-tap-highlight" content="no" />
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <meta name="color-scheme" content="light">
+    <link rel="stylesheet" type="text/css" href="stylesheet.css" />
+    <link rel="shortcut icon" href="favicon.ico" />
+
+    <!-- dependencies -->
+    <script src="lib/p5/p5.js"></script>
+    <script src="lib/p5/p5.sound/p5.sound.js"></script>
+    <script src="lib/p5/p5.clickable/p5.clickable.js"></script>
+    <script src="lib/hammerjs/hammer.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
+    <!-- <script src="https://kit.fontawesome.com/797e4c8c40.js" crossorigin="anonymous"></script> -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sweetalert2@11.5.1/dist/sweetalert2.min.js"></script>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.5.1/dist/sweetalert2.min.css">
+    <link rel="stylesheet" href="../../assets/font-awesome-4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../../assets/normalize.css">
+    <!-- <link rel="stylesheet" type="text/css" href="../../assets/fontawesome/regular.min.css">
+    <link rel="stylesheet" type="text/css" href="../../assets/fontawesome/solid.min.css">
+    <link rel="stylesheet" type="text/css" href="../../assets/fontawesome/fontawesome.min.css"> -->
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-Y5F32F5H64"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-Y5F32F5H64');
+    </script>
+
+
+</head>
+
+<body id="canvas-container">
+  <div class="loader"></div>
+</body>
+
+<!-- scripts -->
+<script src="sketch.js"></script>
+<script src="snake.js"></script>
+<script src="food.js"></script>
+<script src="rainbow.js"></script>
+<script type="text/javascript" src="../../bundle.js"></script>
+<script type="text/javascript">
+  $(window).on('load', function() {
+    $(".loader").fadeOut("1000");
+  });
+</script>
+</html>
