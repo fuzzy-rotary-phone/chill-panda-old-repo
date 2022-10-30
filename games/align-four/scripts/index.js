@@ -409,3 +409,6 @@ function download(canvas) {
 function loadNewGame() {
   window.location.href = window.location.origin + '/' + gameMap[getRandomNumber()];
 }
+
+gaSetUserId();
+gaSetUserProperties();

@@ -360,3 +360,6 @@ Mazing.prototype.showEndScreen = function () {
 Mazing.prototype.loadNewGame = function() {
   window.location.href = window.location.origin + '/' + gameMap[getRandomNumber()];
 };
+
+gaSetUserId();
+gaSetUserProperties();

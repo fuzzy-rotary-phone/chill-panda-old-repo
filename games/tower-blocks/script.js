@@ -419,3 +419,6 @@ class Game {
     }
 }
 let game = new Game();
+
+gaSetUserId();
+gaSetUserProperties();

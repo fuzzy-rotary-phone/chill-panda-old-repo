@@ -405,3 +405,6 @@ function showEndScreen() {
 function loadNewGame() {
     window.location.href = window.location.origin + '/' + gameMap[getRandomNumber()];
 }
+
+gaSetUserId();
+gaSetUserProperties();

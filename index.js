@@ -1,4 +1,4 @@
-var gameMap = {
+const gameMap = {
 	1: 'games/DuckHunt-JS/dist/index.html',
 	2: 'games/align-four/index.html',
 	3: 'games/flappy-bird/index.html',
@@ -27,6 +27,54 @@ function loadGame() {
 	var number = getRandomNumber();
 	$('#myiframe').attr('src', gameMap[number]);
 }
+
+let s4 = () => {
+  return Math.floor((1 + Math.random()) * 0x10000)
+      .toString(16)
+      .substring(1);
+}
+
+//generates random id;
+let guid = () => {
+    let s4 = () => {
+        return Math.floor((1 + Math.random()) * 0x10000)
+            .toString(16)
+            .substring(1);
+    }
+    //return id of format 'aaaaaaaa'-'aaaa'-'aaaa'-'aaaa'-'aaaaaaaaaaaa'
+    return s4() + s4() + '-' + s4() + '-' + s4() + '-' + s4() + '-' + s4() + s4() + s4();
+}
+
+function gaSetUserId() {
+	if (!localStorage['guid']) {
+		var id = guid();
+		localStorage.setItem('guid', id);
+	}
+	gtag('set', 'user_id', localStorage['guid']);
+}
+
+function gaSetUserProperties() {
+	gtag('set', 'user_properties', {
+		'appCodeName': navigator["appCodeName"],
+		"appName": navigator["appName"],
+		"appMinorVersion": navigator["appMinorVersion"],
+		"cpuClass": navigator["cpuClass"],
+		"platform": navigator["platform"],
+		"plugins": navigator["plugins"],
+		"opsProfile": navigator["opsProfile"],
+		"userProfile": navigator["userProfile"],
+		"systemLanguage": navigator["systemLanguage"],
+		"userLanguage": navigator["userLanguage"],
+		"appVersion": navigator["appVersion"],
+		"userAgent": navigator["userAgent"],
+		"onLine": navigator["onLine"],
+		"cookieEnabled": navigator["cookieEnabled"],
+		"mimeTypes": navigator["mimeTypes"]
+	});
+}
+
+gaSetUserId();
+gaSetUserProperties();
 
 // // Import the functions you need from the SDKs you need
 // import { initializeApp } from "firebase/app";
