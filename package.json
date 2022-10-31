@@ -17,5 +17,8 @@
   "bugs": {
     "url": "https://github.com/chill-panda/chill-panda.github.io/issues"
   },
-  "homepage": "https://github.com/chill-panda/chill-panda.github.io#readme"
+  "homepage": "https://github.com/chill-panda/chill-panda.github.io#readme",
+  "dependencies": {
+    "firebase": "^9.13.0"
+  }
 }

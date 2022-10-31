@@ -264,5 +264,8 @@
 
   function loadNewGame() {
     window.location.href = window.location.origin + '/' + gameMap[getRandomNumber()];
-  }  
+  }
 })(document)
+
+gaSetUserId();
+gaSetUserProperties();

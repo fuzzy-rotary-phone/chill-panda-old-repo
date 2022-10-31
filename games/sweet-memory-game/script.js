@@ -128,3 +128,6 @@ $deck.on('click', '.card:not(".match, .open")', function() {
 });
 
 initGame();
+
+gaSetUserId();
+gaSetUserProperties();

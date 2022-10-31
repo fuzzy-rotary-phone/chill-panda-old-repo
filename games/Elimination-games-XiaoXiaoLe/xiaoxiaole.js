@@ -937,3 +937,6 @@ function newGame() {
 }
 
 newGame();
+
+gaSetUserId();
+gaSetUserProperties();
