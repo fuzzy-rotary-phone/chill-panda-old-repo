@@ -37687,7 +37687,7 @@ var Game = function () {
         } else if (result.isDenied) {
           this.loadNewGame();
         } else if (result.dismiss === Swal.DismissReason.cancel) {
-          this.loadNewGame();
+          this.openNPS();
         }
       });
       // var triggerDiv = '<div class="trigger-div">' + this.getContent() + '</div>';
@@ -37712,6 +37712,11 @@ var Game = function () {
     key: 'loadNewGame',
     value: function loadNewGame() {
       window.location.href = window.location.origin + '/' + gameMap[getRandomNumber()];
+    }
+  }, {
+    key: 'openNPS',
+    value: function openNPS() {
+      window.location.href = window.location.origin + '/rating.html';
     }
   }, {
     key: 'openLevelCreator',

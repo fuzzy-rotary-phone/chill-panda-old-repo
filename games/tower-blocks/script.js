@@ -393,7 +393,7 @@ class Game {
             } else if (result.isDenied) {
                 this.loadNewGame();
             } else if (result.dismiss === Swal.DismissReason.cancel) {
-                this.loadNewGame();
+                this.openNPS();
             }
         });
         // var triggerDiv = '<div class="trigger-div">' + this.getContent() + '</div>';
@@ -416,6 +416,9 @@ class Game {
     }
     loadNewGame() {
         window.location.href = window.location.origin + '/' + gameMap[getRandomNumber()];
+    }
+    openNPS() {
+        window.location.href = window.location.origin + '/rating.html';
     }
 }
 let game = new Game();

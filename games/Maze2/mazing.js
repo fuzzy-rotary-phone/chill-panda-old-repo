@@ -335,7 +335,7 @@ Mazing.prototype.showEndScreen = function () {
     } else if (result.isDenied) {
         this.loadNewGame();
     } else if (result.dismiss === Swal.DismissReason.cancel) {
-        this.loadNewGame();
+        this.openNPS();
     }
   });
   // var triggerDiv = '<div class="trigger-div">' + this.getContent() + '</div>';
@@ -360,6 +360,10 @@ Mazing.prototype.showEndScreen = function () {
 Mazing.prototype.loadNewGame = function() {
   window.location.href = window.location.origin + '/' + gameMap[getRandomNumber()];
 };
+
+Mazing.prototype.openNPS = function() {
+  window.location.href = window.location.origin + '/rating.html';
+}
 
 gaSetUserId();
 gaSetUserProperties();

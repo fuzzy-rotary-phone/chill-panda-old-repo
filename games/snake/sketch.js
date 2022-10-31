@@ -454,7 +454,7 @@ function showEndScreen() {
         } else if (result.isDenied) {
             loadNewGame();
         } else if (result.dismiss === Swal.DismissReason.cancel) {
-            loadNewGame();
+            openNPS();
         }
     });
     // var triggerDiv = '<div class="trigger-div">' + button.trigger.text + '</div>';
@@ -478,6 +478,10 @@ function showEndScreen() {
 
 function loadNewGame() {
     window.location.href = window.location.origin + '/' + gameMap[getRandomNumber()];
+}
+
+function openNPS() {
+    window.location.href = window.location.origin + '/rating.html';
 }
 
 gaSetUserId();
