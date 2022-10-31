@@ -240,7 +240,7 @@
       } else if (result.isDenied) {
         loadNewGame();
       } else if (result.dismiss === Swal.DismissReason.cancel) {
-        loadNewGame();
+        openNPS();
       }
     });
     // var triggerDiv = '<div class="trigger-div">' + getContent() + '</div>';
@@ -264,6 +264,10 @@
 
   function loadNewGame() {
     window.location.href = window.location.origin + '/' + gameMap[getRandomNumber()];
+  }
+
+  function openNPS() {
+    window.location.href = window.location.origin + '/rating.html';
   }
 })(document)
 

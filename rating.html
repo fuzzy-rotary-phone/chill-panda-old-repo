@@ -5,10 +5,36 @@
       <meta name="viewport" content="width=device-width, initial-scale=1">
       <title>NPS</title>
       <link rel="stylesheet" type="text/css" href="./rating.css">
+      <!-- Google tag (gtag.js) -->
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-Y5F32F5H64"></script>
+      <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-Y5F32F5H64');
+      </script>
+      <!-- Google Firebase tag -->
+      <script src="https://www.gstatic.com/firebasejs/9.13.0/firebase-app-compat.js"></script>
+      <script src="https://www.gstatic.com/firebasejs/9.13.0/firebase-firestore-compat.js"></script>
+      <script src="https://www.gstatic.com/firebasejs/9.13.0/firebase-auth-compat.js"></script>
+      <script>
+            const firebaseConfig = {
+                  apiKey: "AIzaSyBJQO8HWWCV6a-K33knwHYnIcZwm5-4G9w",
+                  authDomain: "chill-panda-c1184.firebaseapp.com",
+                  projectId: "chill-panda-c1184",
+                  storageBucket: "chill-panda-c1184.appspot.com",
+                  messagingSenderId: "97999123599",
+                  appId: "1:97999123599:web:c214990d78ab04860b6cfa",
+                  measurementId: "G-QNEMSD28TV"
+            };
+            const firebaseApp = firebase.initializeApp(firebaseConfig);
+            const db = firebaseApp.firestore();
+      </script>
 </head>
 <body>
       <div class="container">
-            <span>How likely are you to recommend <strong>CoffeeCrush</strong> to your friends?</span>
+            <!-- <span>How likely are you to recommend <strong>CoffeeCrush</strong> to your friends?</span>
             <div id="place-rating" class="place-rating">
                   <input type="radio" name="stars" id="place-star-a" value="5"/>
                   <label for="place-star-a"></label>
@@ -20,20 +46,23 @@
                   <label for="place-star-d"></label>
                   <input type="radio" name="stars" id="place-star-e" value="1"/>
                   <label for="place-star-e"></label>
-            </div>
+            </div> -->
             <span>How likely are you to recommend <strong>ChillPanda</strong> to your friends?</span>
             <div id="app-rating" class="app-rating">
-                  <input type="radio" name="stars" id="app-star-a" value="5"/>
+                  <input type="radio" name="stars" id="app-star-a" value="5" onclick="storeRating(5)" />
                   <label for="app-star-a"></label>
-                  <input type="radio" name="stars" id="app-star-b" value="4"/>
+                  <input type="radio" name="stars" id="app-star-b" value="4" onclick="storeRating(4)"/>
                   <label for="app-star-b"></label>
-                  <input type="radio" name="stars" id="app-star-c" value="3"/>
+                  <input type="radio" name="stars" id="app-star-c" value="3" onclick="storeRating(3)"/>
                   <label for="app-star-c"></label>
-                  <input type="radio" name="stars" id="app-star-d" value="2"/>
+                  <input type="radio" name="stars" id="app-star-d" value="2" onclick="storeRating(2)"/>
                   <label for="app-star-d"></label>
-                  <input type="radio" name="stars" id="app-star-e" value="1"/>
+                  <input type="radio" name="stars" id="app-star-e" value="1" onclick="storeRating(1)"/>
                   <label for="app-star-e"></label>
             </div>
       </div>
 </body>
+<script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
+<script type="text/javascript" src="index.js"></script>
+<script type="text/javascript" src="rating.js"></script>
 </html>

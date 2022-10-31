@@ -111,7 +111,7 @@ export default function (main) {
             } else if (result.isDenied) {
               window.location.href = window.location.origin + '/' + gameMap[getRandomNumber()];
             } else if (result.dismiss === Swal.DismissReason.cancel) {
-              window.location.href = window.location.origin + '/' + gameMap[getRandomNumber()];
+              window.location.href = window.location.origin + '/rating.html';
             }
           });
           // var triggerDiv = '<div class="trigger-div">' + global.allContent.responseJSON["content"][number]["text"] + '</div>';
