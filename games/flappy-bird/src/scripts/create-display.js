@@ -78,11 +78,6 @@ export default function (main) {
         $('canvas').addClass('d-none');
         $('#instructions').addClass('d-none');
         $('body').addClass('ad-img');
-        $('<img/>').attr('src', urlPath).on('load', function() {
-          $(this).remove();
-          $('body').css('background-image', 'url("' + urlPath + '")');
-          $(".loader").fadeOut("1000");
-        });
         var closeDiv = document.createElement('div');
         closeDiv.className = 'close-div';
         closeDiv.innerHTML = '<i class="fa fa-times fa-2x" aria-hidden="true"></i>';
@@ -147,10 +142,15 @@ export default function (main) {
           $('.swal2-container').append(logoDiv);
           localStorage.setItem('lastGame', 3);
         });
-        $('body').append(closeDiv);
-        setTimeout(function() {
-          closeDiv.classList.add('is-shown');
-        }, 3000);
+        $('<img/>').attr('src', urlPath).on('load', function() {
+          $(this).remove();
+          $('body').css('background-image', 'url("' + urlPath + '")');
+          $(".loader").fadeOut("1000");
+          $('body').append(closeDiv);
+          setTimeout(function() {
+            closeDiv.classList.add('is-shown');
+          }, 3000);
+        });
 
         global.storagedScore.save()
 

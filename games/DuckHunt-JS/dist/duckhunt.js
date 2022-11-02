@@ -37642,19 +37642,19 @@ var Game = function () {
       var urlPath = adPath + '' + number + '.png';
       $('body').empty();
       $('body').addClass('ad-img');
-      $('<img/>').attr('src', urlPath).on('load', function() {
-        $(this).remove();
-        $('body').css('background-image', 'url("' + urlPath + '")');
-        $(".loader").fadeOut("1000");
-      });
       var closeDiv = document.createElement('div');
       closeDiv.className = 'close-div';
       closeDiv.innerHTML = '<i class="fa fa-times fa-2x" aria-hidden="true"></i>';
       closeDiv.addEventListener('click', (e) => { this.showEndScreen(key); });
-      $('body').append(closeDiv);
-      setTimeout(function() {
-        closeDiv.classList.add('is-shown');
-      }, 3000);
+      $('<img/>').attr('src', urlPath).on('load', function() {
+        $(this).remove();
+        $('body').css('background-image', 'url("' + urlPath + '")');
+        $(".loader").fadeOut("1000");
+        $('body').append(closeDiv);
+        setTimeout(function() {
+          closeDiv.classList.add('is-shown');
+        }, 3000);
+      });
     }
   }, {
     key: 'removeAd',

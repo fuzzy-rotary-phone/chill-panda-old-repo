@@ -292,18 +292,23 @@ Mazing.prototype.showAd = function () {
   var adPath = this.allContent.responseJSON["adPath"];
   var total = this.allContent.responseJSON["totalAds"];
   var number = 1 + Math.floor(Math.random() * total);
+  var urlPath = adPath + '' + number + '.png';
   $('#maze_container').addClass('d-none');
   $('#instructions').addClass('d-none');
   $('body').addClass('ad-img');
-  $('body').css('background-image', 'url("' + adPath + '' + number + '.png")');
   var closeDiv = document.createElement('div');
   closeDiv.className = 'close-div';
   closeDiv.innerHTML = '<i class="fa fa-times fa-2x" aria-hidden="true"></i>';
   closeDiv.addEventListener('click', (e) => { this.showEndScreen(); });
-  $('body').append(closeDiv);
-  setTimeout(function() {
-    closeDiv.classList.add('is-shown');
-  }, 3000);  
+  $('<img/>').attr('src', urlPath).on('load', function() {
+    $(this).remove();
+    $('body').css('background-image', 'url("' + urlPath + '")');
+    $(".loader").fadeOut("1000");
+    $('body').append(closeDiv);
+    setTimeout(function() {
+      closeDiv.classList.add('is-shown');
+    }, 3000);
+  });
 };
 
 Mazing.prototype.removeAd = function () {
