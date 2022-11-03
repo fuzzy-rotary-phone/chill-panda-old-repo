@@ -1,5 +1,10 @@
-$.getJSON('../../resources/content.json', allcontent => {
+$.getJSON('../../resources/content.json', allretailcontent => {
     $.getJSON('../../resources/config.json', config => {
+        var allRetailLocationsContent = allretailcontent;
+        var allcontent = $.map(allRetailLocationsContent, function(entry) {
+                var match = entry.urlTag.indexOf(localStorage['retailLocation'] ? localStorage['retailLocation'] : '') !== -1;
+                return match ? entry : null;
+              });
         showAd(allcontent, config);
     });
 });

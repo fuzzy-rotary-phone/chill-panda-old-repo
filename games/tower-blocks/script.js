@@ -181,7 +181,11 @@ class Game {
         this.startInstructions = document.getElementById('start-instructions');
         this.scoreContainer.innerHTML = '0';
         // this.triggerFreq = 5;
-        this.allContent = $.getJSON('../../resources/content.json');
+        var allRetailLocationsContent = $.getJSON('../../resources/content.json');
+        this.allContent = $.map(allRetailLocationsContent, function(entry) {
+            var match = entry.urlTag.indexOf(localStorage['retailLocation'] ? localStorage['retailLocation'] : '') !== -1;
+            return match ? entry : null;
+        });
         // this.triggerContent = document.getElementById('trigger-content');
         // this.triggerContent.innerHTML = '';
         this.newBlocks = new THREE.Group();

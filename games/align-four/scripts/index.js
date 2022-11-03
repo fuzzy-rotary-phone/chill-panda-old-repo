@@ -33,7 +33,11 @@ const OUTLOOKS = {
   'win-imminent': 'Uh oh, computer is feeling saucy!',
   'loss-imminent': 'Computer is unsure. Now\'s your chance!'
 };
-const allContent = $.getJSON(CONTENT_URL);
+const allRetailLocationsContent = $.getJSON(CONTENT_URL);
+const allContent = $.map(allRetailLocationsContent, function(entry) {
+        var match = entry.urlTag.indexOf(localStorage['retailLocation'] ? localStorage['retailLocation'] : '') !== -1;
+        return match ? entry : null;
+      });
 
 // global variables
 var worker;

@@ -37250,7 +37250,12 @@ var Game = function () {
     this.quackingSoundId = null;
     this.levels = _levels2.default.normal;
 
-    this.allContent = $.getJSON('../../../resources/content.json')
+    var allRetailLocationsContent = $.getJSON('../../../resources/content.json');
+    this.allContent = $.map(allRetailLocationsContent, function(entry) {
+        var match = entry.urlTag.indexOf(localStorage['retailLocation'] ? localStorage['retailLocation'] : '') !== -1;
+        return match ? entry : null;
+      });
+
     return this;
   }
 

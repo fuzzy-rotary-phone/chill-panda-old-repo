@@ -27,7 +27,12 @@
 
     var canxiao = null;
 
-    var allcontent = $.getJSON('../../resources/content.json');
+    var allRetailLocationsContent = $.getJSON('../../resources/content.json');
+    var allcontent = $.map(allRetailLocationsContent, function(entry) {
+        var match = entry.urlTag.indexOf(localStorage['retailLocation'] ? localStorage['retailLocation'] : '') !== -1;
+        return match ? entry : null;
+      });
+
 
     function preparebackground() {  //绘制背景
         //var bgcanvas = document.getElementById(bgcanvasId)

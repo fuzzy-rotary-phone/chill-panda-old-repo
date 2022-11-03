@@ -67,7 +67,12 @@ function Mazing(id) {
   this.swipeHandler();
 
   //trigger control added
-  this.allContent = $.getJSON('../../resources/content.json');
+  var allRetailLocationsContent = $.getJSON('../../resources/content.json');
+  this.allContent = $.map(allRetailLocationsContent, function(entry) {
+        var match = entry.urlTag.indexOf(localStorage['retailLocation'] ? localStorage['retailLocation'] : '') !== -1;
+        return match ? entry : null;
+      });
+
   this.triggerDiv = document.getElementById("trigger-div");
   this.triggerText = document.getElementById("trigger-text");
   this.triggerDiv.classList.add("d-none");

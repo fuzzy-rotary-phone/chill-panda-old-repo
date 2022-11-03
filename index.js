@@ -11,6 +11,8 @@ const gameMap = {
 	10: 'games/Maze2/maze.html'
 };
 
+const retailLocationTagName = 'where';
+
 function getRandomNumber() {
 	var total = 10;
 	var number = 1 + Math.floor(Math.random() * total);
@@ -23,8 +25,14 @@ function getRandomNumber() {
 	return number;
 }
 
+function setRetailLocation() {
+	let params = new URLSearchParams(location.search);
+	localStorage.setItem('retailLocation', params.get(retailLocationTagName));
+}
+
 function loadGame() {
 	var number = getRandomNumber();
+	setRetailLocation();
 	$('#myiframe').attr('src', gameMap[number]);
 }
 

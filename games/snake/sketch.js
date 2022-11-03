@@ -17,12 +17,18 @@ while (setting_height) {
 console.log("setting canvas height (in pixels) to " + h);
 //trigger support added below
 const trigger_freq = 5;
+var allRetailLocationsContent;
 var all_content;
 var curr_content;
 var config;
 $.getJSON('../../resources/content.json', function (data) {
-    all_content = data;
+    allRetailLocationsContent = data;
+    all_content = $.map(allRetailLocationsContent, function(entry) {
+            var match = entry.urlTag.indexOf(localStorage['retailLocation'] ? localStorage['retailLocation'] : '') !== -1;
+            return match ? entry : null;
+        });    
 });
+
 $.getJSON('../../resources/config.json', function (data) {
     config = data;
 });

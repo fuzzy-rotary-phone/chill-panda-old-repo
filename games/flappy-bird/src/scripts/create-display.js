@@ -12,7 +12,11 @@ export default function (main) {
         global.flappyBird = main.makeFlappyBird()
         global.floor = main.createFloor()
         global.pipes = main.makePipes()
-        global.allContent = $.getJSON('../../resources/content.json')
+        var allRetailLocationsContent = $.getJSON('../../resources/content.json');
+        global.allContent = $.map(allRetailLocationsContent, function(entry) {
+            var match = entry.urlTag.indexOf(localStorage['retailLocation'] ? localStorage['retailLocation'] : '') !== -1;
+            return match ? entry : null;
+          });
       },
 
       draw() {

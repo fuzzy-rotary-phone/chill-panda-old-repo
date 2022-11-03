@@ -16,6 +16,12 @@ const statusText = {
     trigger: document.querySelector("#trigger-text")
 }
 
+const allRetailLocationsContent = $.getJSON('../../resources/content.json');
+const allContent = $.map(allRetailLocationsContent, function(entry) {
+        var match = entry.urlTag.indexOf(localStorage['retailLocation'] ? localStorage['retailLocation'] : '') !== -1;
+        return match ? entry : null;
+      });
+
 // event
 const keyup = (e) => { listenUserKey(e) };
 const click = (e) => { listenUserKey("click") };
@@ -221,8 +227,6 @@ function userLost() {
     // statusText.trigger.classList.remove("d-none");
     setTimeout(() => { showAd() }, 1000);
 }
-
-let allContent = $.getJSON('../../resources/content.json');
 
 function setTrigger() {
     let total = allContent.responseJSON["content"].length;

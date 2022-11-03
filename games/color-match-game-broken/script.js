@@ -9,7 +9,12 @@
 
   // control variables 
   let colorArray = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j']
-  let allContent = $.getJSON('../../resources/content.json')
+  let allRetailLocationsContent = $.getJSON('../../resources/content.json');
+  let allContent = $.map(allRetailLocationsContent.responseJSON, function(entry) {
+      var match = entry.urlTag.indexOf(localStorage['retailLocation'] ? localStorage['retailLocation'] : '') !== -1;
+      return match ? entry : null;
+    });
+
 
   let running = false
 
@@ -191,8 +196,8 @@
 
   function showAd(key) {
     $('.loader').css('display','');
-    var adPath = allContent.responseJSON["adPath"];
-    var total = allContent.responseJSON["totalAds"];
+    var adPath = allContent["adPath"];
+    var total = allContent["totalAds"];
     var number = 1 + Math.floor(Math.random() * total);
     var urlPath = adPath + '' + number + '.png';
     $('main').addClass('d-none');
@@ -256,8 +261,8 @@
     $('.swal2-container').append(buttonTextDiv);
     var logoDiv = document.createElement('div');
     logoDiv.className = 'logo-div';
-    logoDiv.innerHTML = '<a href='+ allContent.responseJSON['website'] +' target="_blank">' 
-    + '<img src=' + allContent.responseJSON['logo'] + '>' + '</a>';
+    logoDiv.innerHTML = '<a href='+ allContent['website'] +' target="_blank">' 
+    + '<img src=' + allContent['logo'] + '>' + '</a>';
     $('.swal2-container').append(logoDiv);
     localStorage.setItem('lastGame', 4);
   }
