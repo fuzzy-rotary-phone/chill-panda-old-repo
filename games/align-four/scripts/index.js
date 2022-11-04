@@ -96,6 +96,10 @@ function startGame() {
   worker.postMessage({
     messageType: 'reset',
   });
+
+  gtag("event", "game_start", {
+    game_name : $('title').innerText
+  })
 }
 
 function resetGame() {
