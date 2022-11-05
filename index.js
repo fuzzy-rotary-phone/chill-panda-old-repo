@@ -1,3 +1,29 @@
+// var gameMap;
+// var retailLocationTagName;
+
+// $.getJSON('resources/config.json', config => {
+// 	gameMap = config["gameMap"]
+// 	retailLocationTagName = config["tag1"]
+// 	if (!gameMap) {
+// 		gameMap = {
+// 			1: 'games/DuckHunt-JS/dist/index.html',
+// 			2: 'games/align-four/index.html',
+// 			3: 'games/flappy-bird/index.html',
+// 			4: 'games/color-match-game-broken/index.html',
+// 			5: 'games/JoyRunner/runner.html',
+// 			6: 'games/snake/index.html',
+// 			7: 'games/sweet-memory-game/index.html',
+// 			8: 'games/tower-blocks/index.html',
+// 			9: 'games/Elimination-games-XiaoXiaoLe/index.html',
+// 			10: 'games/Maze2/maze.html'
+// 		}
+// 	}
+// 	if (!retailLocationTagName) {
+// 		retailLocationTagName = 'where'
+// 	}
+// 	loadGame()
+// })
+
 const gameMap = {
 	1: 'games/DuckHunt-JS/dist/index.html',
 	2: 'games/align-four/index.html',
@@ -35,7 +61,7 @@ function setRetailLocation() {
 }
 
 function loadGame() {
-	var number = getRandomNumber();
+	var number = getRandomNumber().toString();
 	setRetailLocation();
 	$('#myiframe').attr('src', gameMap[number]);
 }
