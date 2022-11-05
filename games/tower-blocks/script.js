@@ -162,6 +162,20 @@ class Block {
         }
     }
 }
+var allRetailLocationsContent;
+var allContent;
+$.getJSON('../../resources/content.json', function (data) {
+    allRetailLocationsContent = data;
+    var matches = $.map(allRetailLocationsContent, function(entry) {
+            var match = entry.urlTag == localStorage['retailLocation'];
+            return match ? entry : null;
+        });
+    if (matches.length) {
+        allContent = matches[0]
+    } else {
+        allContent = allRetailLocationsContent[0]
+    }
+});
 class Game {
     constructor() {
         this.STATES = {
@@ -181,11 +195,6 @@ class Game {
         this.startInstructions = document.getElementById('start-instructions');
         this.scoreContainer.innerHTML = '0';
         // this.triggerFreq = 5;
-        var allRetailLocationsContent = $.getJSON('../../resources/content.json');
-        this.allContent = $.map(allRetailLocationsContent, function(entry) {
-            var match = entry.urlTag.indexOf(localStorage['retailLocation'] ? localStorage['retailLocation'] : '') !== -1;
-            return match ? entry : null;
-        });
         // this.triggerContent = document.getElementById('trigger-content');
         // this.triggerContent.innerHTML = '';
         this.newBlocks = new THREE.Group();
@@ -349,8 +358,8 @@ class Game {
     showAd() {
         $('.loader').css('display','');
         document.removeEventListener('click', this.clickListener);
-        var adPath = this.allContent.responseJSON["adPath"];
-        var total = this.allContent.responseJSON["totalAds"];
+        var adPath = allContent["adPath"];
+        var total = allContent["totalAds"];
         var number = 1 + Math.floor(Math.random() * total);
         var urlPath = adPath + '' + number + '.png';
         $('#container').addClass('d-none');
@@ -413,8 +422,8 @@ class Game {
         $('.swal2-container').append(buttonTextDiv);
         var logoDiv = document.createElement('div');
         logoDiv.className = 'logo-div';
-        logoDiv.innerHTML = '<a href='+ this.allContent.responseJSON['website'] +' target="_blank">' 
-        + '<img src=' + this.allContent.responseJSON['logo'] + '>' + '</a>';
+        logoDiv.innerHTML = '<a href='+ allContent['website'] +' target="_blank">' 
+        + '<img src=' + allContent['logo'] + '>' + '</a>';
         $('.swal2-container').append(logoDiv);
         localStorage.setItem('lastGame', 8);
     }

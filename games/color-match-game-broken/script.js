@@ -9,12 +9,20 @@
 
   // control variables 
   let colorArray = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j']
-  let allRetailLocationsContent = $.getJSON('../../resources/content.json');
-  let allContent = $.map(allRetailLocationsContent.responseJSON, function(entry) {
-      var match = entry.urlTag.indexOf(localStorage['retailLocation'] ? localStorage['retailLocation'] : '') !== -1;
-      return match ? entry : null;
-    });
-
+  let allRetailLocationsContent;
+  let allContent;
+  $.getJSON('../../resources/content.json', function (data) {
+    allRetailLocationsContent = data;
+    let matches = $.map(allRetailLocationsContent, function(entry) {
+        let match = entry.urlTag == localStorage['retailLocation'];
+        return match ? entry : null;
+      });
+    if (matches.length) {
+      allContent = matches[0]
+    } else {
+      allContent = allRetailLocationsContent[0]
+    }
+  });
 
   let running = false
 

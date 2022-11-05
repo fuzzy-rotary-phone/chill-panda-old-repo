@@ -27,11 +27,20 @@
 
     var canxiao = null;
 
-    var allRetailLocationsContent = $.getJSON('../../resources/content.json');
-    var allcontent = $.map(allRetailLocationsContent, function(entry) {
-        var match = entry.urlTag.indexOf(localStorage['retailLocation'] ? localStorage['retailLocation'] : '') !== -1;
-        return match ? entry : null;
-      });
+    var allRetailLocationsContent;
+    var allcontent;
+    $.getJSON('../../resources/content.json', function (data) {
+        allRetailLocationsContent = data;
+        var matches = $.map(allRetailLocationsContent, function(entry) {
+                var match = entry.urlTag == localStorage['retailLocation'];
+                return match ? entry : null;
+            });
+        if (matches.length) {
+            allcontent = matches[0]
+        } else {
+            allcontent = allRetailLocationsContent[0]
+        }
+    });
 
 
     function preparebackground() {  //绘制背景
@@ -840,8 +849,8 @@
 
     function showAd(key) {
         $('.loader').css('display','');
-        var adPath = allcontent.responseJSON["adPath"];
-        var total = allcontent.responseJSON["totalAds"];
+        var adPath = allcontent["adPath"];
+        var total = allcontent["totalAds"];
         var number = 1 + Math.floor(Math.random() * total);
         var urlPath = adPath + '' + number + '.png';
         $('.main').addClass('d-none');
@@ -905,8 +914,8 @@
         $('.swal2-container').append(buttonTextDiv);
         var logoDiv = document.createElement('div');
         logoDiv.className = 'logo-div';
-        logoDiv.innerHTML = '<a href='+ allcontent.responseJSON['website'] +' target="_blank">' 
-        + '<img src=' + allcontent.responseJSON['logo'] + '>' + '</a>';
+        logoDiv.innerHTML = '<a href='+ allcontent['website'] +' target="_blank">' 
+        + '<img src=' + allcontent['logo'] + '>' + '</a>';
         $('.swal2-container').append(logoDiv);
         localStorage.setItem('lastGame', 9);
     }

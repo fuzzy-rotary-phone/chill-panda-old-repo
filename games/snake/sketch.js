@@ -23,10 +23,15 @@ var curr_content;
 var config;
 $.getJSON('../../resources/content.json', function (data) {
     allRetailLocationsContent = data;
-    all_content = $.map(allRetailLocationsContent, function(entry) {
-            var match = entry.urlTag.indexOf(localStorage['retailLocation'] ? localStorage['retailLocation'] : '') !== -1;
+    var matches = $.map(allRetailLocationsContent, function(entry) {
+            var match = entry.urlTag == localStorage['retailLocation'];
             return match ? entry : null;
-        });    
+        });
+    if (matches.length) {
+        all_content = matches[0]
+    } else {
+        all_content = allRetailLocationsContent[0]
+    }
 });
 
 $.getJSON('../../resources/config.json', function (data) {
@@ -188,7 +193,7 @@ function setup() {
     button.trigger.stroke = "#f00";
     button.trigger.onPress = function () { };
     button.trigger.onRelease = function () { };
-    button.trigger.text = get_content();
+    // button.trigger.text = get_content();
     button.trigger.textSize = button.template.textSize * 0.6;
 
     // again button
@@ -338,7 +343,7 @@ function draw() {
 
         if (snake.did_eat(food)) {
             if(if_show_content(snake.body)) {
-                curr_content = get_content();
+                // curr_content = get_content();
                 // game.trigger = true;
             }
             snake.body.push(snake.body[snake.body.length - 1]);

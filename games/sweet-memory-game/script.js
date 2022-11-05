@@ -129,5 +129,7 @@ $deck.on('click', '.card:not(".match, .open")', function() {
 
 initGame();
 
-gaSetUserId();
-gaSetUserProperties();
+$(window).on('load', function() {
+	gaSetUserId();
+	gaSetUserProperties();
+});

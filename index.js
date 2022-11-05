@@ -27,7 +27,11 @@ function getRandomNumber() {
 
 function setRetailLocation() {
 	let params = new URLSearchParams(location.search);
-	localStorage.setItem('retailLocation', params.get(retailLocationTagName));
+	if (params.get(retailLocationTagName)) {
+		localStorage.setItem('retailLocation', params.get(retailLocationTagName));
+	} else {
+		localStorage.setItem('retailLocation', '');
+	}
 }
 
 function loadGame() {

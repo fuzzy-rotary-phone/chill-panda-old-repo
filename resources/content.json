@@ -7,7 +7,8 @@
 		"logo": "../../assets/ChillPanda/CoffeeCrush.jpg",
 		"ingamePath": "../../../assets/ChillPanda/ingame/",
 		"adPath": "../../../assets/ChillPanda/ads/",
-		"totalAds": 10		
+		"totalAds": 10,
+		"content": []
 	},
 	{
 		"id": "coffeecrush",

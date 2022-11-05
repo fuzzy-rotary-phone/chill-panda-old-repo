@@ -37223,6 +37223,19 @@ var BOTTOM_LINK_STYLE = {
   align: 'left',
   fill: 'white'
 };
+var allContent;
+$.getJSON('../../../resources/content.json', function (data) {
+  var allRetailLocationsContent = data;
+  let matches = $.map(allRetailLocationsContent, function(entry) {
+      let match = entry.urlTag == localStorage['retailLocation'];
+      return match ? entry : null;
+    });
+  if (matches.length) {
+    allContent = matches[0]
+  } else {
+    allContent = allRetailLocationsContent[0]
+  }
+});
 
 var Game = function () {
   /**
@@ -37249,12 +37262,6 @@ var Game = function () {
     this.waveEnding = false;
     this.quackingSoundId = null;
     this.levels = _levels2.default.normal;
-
-    var allRetailLocationsContent = $.getJSON('../../../resources/content.json');
-    this.allContent = $.map(allRetailLocationsContent, function(entry) {
-        var match = entry.urlTag.indexOf(localStorage['retailLocation'] ? localStorage['retailLocation'] : '') !== -1;
-        return match ? entry : null;
-      });
 
     return this;
   }
@@ -37641,8 +37648,8 @@ var Game = function () {
     key: 'showAd',
     value: function showAd(key) {
       $('.loader').css('display','');
-      var adPath = this.allContent.responseJSON["adPath"];
-      var total = this.allContent.responseJSON["totalAds"];
+      var adPath = allContent["adPath"];
+      var total = allContent["totalAds"];
       var number = 1 + Math.floor(Math.random() * total);
       var urlPath = adPath + '' + number + '.png';
       $('body').empty();
@@ -37708,8 +37715,8 @@ var Game = function () {
       $('.swal2-container').append(buttonTextDiv);
       var logoDiv = document.createElement('div');
       logoDiv.className = 'logo-div';
-      logoDiv.innerHTML = '<a href='+ this.allContent.responseJSON['website'] +' target="_blank">' 
-      + '<img src=../' + this.allContent.responseJSON['logo'] + '>' + '</a>';
+      logoDiv.innerHTML = '<a href='+ allContent['website'] +' target="_blank">' 
+      + '<img src=../' + allContent['logo'] + '>' + '</a>';
       $('.swal2-container').append(logoDiv);
       localStorage.setItem('lastGame', 1);
     }

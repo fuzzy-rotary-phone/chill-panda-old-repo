@@ -79,8 +79,8 @@ div.swal-alert {
 
 .close-div {
   display: flex;
-  width: 3em;
-  height: 3em;
+  width: 2.5em;
+  height: 2.5em;
   object-fit: contain;
   margin: auto;
   border-width: 0.3em;
@@ -111,6 +111,7 @@ div.swal-alert {
 
 .close-div i {
   margin-top: -0.2em;
+  font-size: 1.5em;
 }
 
 .ad-img {

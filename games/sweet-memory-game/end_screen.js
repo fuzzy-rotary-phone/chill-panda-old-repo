@@ -1,10 +1,16 @@
 $.getJSON('../../resources/content.json', allretailcontent => {
     $.getJSON('../../resources/config.json', config => {
         var allRetailLocationsContent = allretailcontent;
-        var allcontent = $.map(allRetailLocationsContent, function(entry) {
-                var match = entry.urlTag.indexOf(localStorage['retailLocation'] ? localStorage['retailLocation'] : '') !== -1;
+        var allcontent;
+        var matches = $.map(allRetailLocationsContent, function(entry) {
+                var match = entry.urlTag == localStorage['retailLocation'];
                 return match ? entry : null;
-              });
+            });
+        if (matches.length) {
+            allcontent = matches[0];
+        } else {
+            allcontent = allRetailLocationsContent[0];
+        }
         showAd(allcontent, config);
     });
 });
@@ -64,8 +70,6 @@ function removeAd() {
 function showEndScreen(allcontent, config) {
     removeAd();
     var score = localStorage['memoryGameMoves'];
-    var total = allcontent["content"].length;
-    var number = Math.floor(Math.random() * total);
     Swal.fire({
         allowEscapeKey: false,
         allowOutsideClick: false,

@@ -33,11 +33,20 @@ const OUTLOOKS = {
   'win-imminent': 'Uh oh, computer is feeling saucy!',
   'loss-imminent': 'Computer is unsure. Now\'s your chance!'
 };
-const allRetailLocationsContent = $.getJSON(CONTENT_URL);
-const allContent = $.map(allRetailLocationsContent, function(entry) {
-        var match = entry.urlTag.indexOf(localStorage['retailLocation'] ? localStorage['retailLocation'] : '') !== -1;
-        return match ? entry : null;
-      });
+var allRetailLocationsContent;
+var allContent;
+$.getJSON(CONTENT_URL, function (data) {
+    allRetailLocationsContent = data;
+    var matches = $.map(allRetailLocationsContent, function(entry) {
+            var match = entry.urlTag == localStorage['retailLocation'];
+            return match ? entry : null;
+        });
+    if (matches.length) {
+        allContent = matches[0]
+    } else {
+        allContent = allRetailLocationsContent[0]
+    }
+});
 
 // global variables
 var worker;
@@ -321,8 +330,8 @@ function share(data) {
 
 function showAd(key) {
   $('.loader').css('display','');
-  var adPath = allContent.responseJSON["adPath"];
-  var total = allContent.responseJSON["totalAds"];
+  var adPath = allContent["adPath"];
+  var total = allContent["totalAds"];
   var number = 1 + Math.floor(Math.random() * total);
   var urlPath = adPath + '' + number + '.png';
   $('.wrapper').addClass('d-none');
@@ -386,8 +395,8 @@ function showEndScreen(key) {
   $('.swal2-container').append(buttonTextDiv);
   var logoDiv = document.createElement('div');
   logoDiv.className = 'logo-div';
-  logoDiv.innerHTML = '<a href='+ allContent.responseJSON['website'] +' target="_blank">' 
-  + '<img src=' + allContent.responseJSON['logo'] + '>' + '</a>';
+  logoDiv.innerHTML = '<a href='+ allContent['website'] +' target="_blank">' 
+  + '<img src=' + allContent['logo'] + '>' + '</a>';
   $('.swal2-container').append(logoDiv);
   localStorage.setItem('lastGame', 2);
 }

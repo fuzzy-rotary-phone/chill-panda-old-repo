@@ -16,11 +16,21 @@ const statusText = {
     trigger: document.querySelector("#trigger-text")
 }
 
-const allRetailLocationsContent = $.getJSON('../../resources/content.json');
-const allContent = $.map(allRetailLocationsContent, function(entry) {
-        var match = entry.urlTag.indexOf(localStorage['retailLocation'] ? localStorage['retailLocation'] : '') !== -1;
-        return match ? entry : null;
-      });
+var allRetailLocationsContent;
+var allContent;
+$.getJSON('../../resources/content.json', function (data) {
+    allRetailLocationsContent = data;
+    var matches = $.map(allRetailLocationsContent, function(entry) {
+            var match = entry.urlTag == localStorage['retailLocation'];
+            return match ? entry : null;
+        });
+    if (matches.length) {
+        allContent = matches[0]
+    } else {
+        allContent = allRetailLocationsContent[0]
+    }
+});
+
 
 // event
 const keyup = (e) => { listenUserKey(e) };
@@ -333,8 +343,8 @@ function showAd() {
     $('.loader').css('display','');
     window.removeEventListener("keyup", keyup);
     window.removeEventListener("touchstart", click);
-    var adPath = allContent.responseJSON["adPath"];
-    var total = allContent.responseJSON["totalAds"];
+    var adPath = allContent["adPath"];
+    var total = allContent["totalAds"];
     var number = 1 + Math.floor(Math.random() * total);
     var urlPath = adPath + '' + number + '.png';
     $('.container').addClass('d-none');
@@ -400,8 +410,8 @@ function showEndScreen() {
     $('.swal2-container').append(buttonTextDiv);
     var logoDiv = document.createElement('div');
     logoDiv.className = 'logo-div';
-    logoDiv.innerHTML = '<a href='+ allContent.responseJSON['website'] +' target="_blank">' 
-    + '<img src=' + allContent.responseJSON['logo'] + '>' + '</a>';
+    logoDiv.innerHTML = '<a href='+ allContent['website'] +' target="_blank">' 
+    + '<img src=' + allContent['logo'] + '>' + '</a>';
     $('.swal2-container').append(logoDiv);
     localStorage.setItem('lastGame', 5);
 }

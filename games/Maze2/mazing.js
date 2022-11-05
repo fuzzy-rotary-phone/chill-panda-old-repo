@@ -7,6 +7,20 @@ Position.prototype.toString = function() {
   return this.x + ":" + this.y;
 };
 
+var allContent;
+$.getJSON('../../resources/content.json', function (data) {
+  var allRetailLocationsContent = data;
+  var matches = $.map(allRetailLocationsContent, function(entry) {
+      var match = entry.urlTag == localStorage['retailLocation'];
+      return match ? entry : null;
+    });
+  if (matches.length) {
+    allContent = matches[0];
+  } else {
+    allContent = allRetailLocationsContent[0];
+  }
+});
+
 function Mazing(id) {
 
   // bind to HTML element
@@ -65,13 +79,6 @@ function Mazing(id) {
   this.hammer = new Hammer(this.mazeContainer); // create hammer object to handle swipes
   this.hammer.get("swipe").set({ direction: Hammer.DIRECTION_ALL }); // enable vertical swipes
   this.swipeHandler();
-
-  //trigger control added
-  var allRetailLocationsContent = $.getJSON('../../resources/content.json');
-  this.allContent = $.map(allRetailLocationsContent, function(entry) {
-        var match = entry.urlTag.indexOf(localStorage['retailLocation'] ? localStorage['retailLocation'] : '') !== -1;
-        return match ? entry : null;
-      });
 
   this.triggerDiv = document.getElementById("trigger-div");
   this.triggerText = document.getElementById("trigger-text");
@@ -294,8 +301,8 @@ Mazing.prototype.resetGame = function () {
 };
 
 Mazing.prototype.showAd = function () {
-  var adPath = this.allContent.responseJSON["adPath"];
-  var total = this.allContent.responseJSON["totalAds"];
+  var adPath = allContent["adPath"];
+  var total = allContent["totalAds"];
   var number = 1 + Math.floor(Math.random() * total);
   var urlPath = adPath + '' + number + '.png';
   $('#maze_container').addClass('d-none');
@@ -361,8 +368,8 @@ Mazing.prototype.showEndScreen = function () {
   $('.swal2-container').append(buttonTextDiv);
   var logoDiv = document.createElement('div');
   logoDiv.className = 'logo-div';
-  logoDiv.innerHTML = '<a href='+ this.allContent.responseJSON['website'] +' target="_blank">' 
-  + '<img src=' + this.allContent.responseJSON['logo'] + '>' + '</a>';
+  logoDiv.innerHTML = '<a href='+ allContent['website'] +' target="_blank">' 
+  + '<img src=' + allContent['logo'] + '>' + '</a>';
   $('.swal2-container').append(logoDiv);
   localStorage.setItem('lastGame', 10);
 };
