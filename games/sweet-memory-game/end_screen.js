@@ -1,19 +1,36 @@
-$.getJSON('../../resources/content.json', allretailcontent => {
-    $.getJSON('../../resources/config.json', config => {
-        var allRetailLocationsContent = allretailcontent;
-        var allcontent;
-        var matches = $.map(allRetailLocationsContent, function(entry) {
-                var match = entry.urlTag == localStorage['retailLocation'];
-                return match ? entry : null;
-            });
-        if (matches.length) {
-            allcontent = matches[0];
-        } else {
-            allcontent = allRetailLocationsContent[0];
-        }
-        showAd(allcontent, config);
+let promise = new Promise(function(resolve, reject) {
+    loadInstanceVariables('../../' + CONTENT_PATH, '../../' + CONFIG_PATH)
+    if (INSTANCE_JSON) {
+        resolve()
+    } else {
+        reject()
+    }
+})
+
+promise.then(function () {
+    showAd(INSTANCE_JSON, CONFIG_JSON)
+}, function () {
+    loadJSONsAndShowAd()
+})
+
+function loadJSONsAndShowAd() {
+    $.getJSON('../../resources/content.json', allretailcontent => {
+        $.getJSON('../../resources/config.json', config => {
+            var allRetailLocationsContent = allretailcontent;
+            var allcontent;
+            var matches = $.map(allRetailLocationsContent, function(entry) {
+                    var match = entry.urlTag == localStorage['retailLocation'];
+                    return match ? entry : null;
+                });
+            if (matches.length) {
+                allcontent = matches[0];
+            } else {
+                allcontent = allRetailLocationsContent[0];
+            }
+            showAd(allcontent, config);
+        });
     });
-});
+}
 
 function share() {
     if (navigator.share) {
