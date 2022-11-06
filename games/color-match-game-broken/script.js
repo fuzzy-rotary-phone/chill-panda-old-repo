@@ -1,4 +1,7 @@
 ((document) => {
+  // instance variables to be loaded from index.js
+  loadInstanceVariables('../../' + CONTENT_PATH, '../../' + CONFIG_PATH)
+
   // parts of the game board
   let moves = document.querySelector('.moves')
   // ?
@@ -9,21 +12,7 @@
 
   // control variables 
   let colorArray = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j']
-  let allRetailLocationsContent;
-  let allContent;
-  $.getJSON('../../resources/content.json', function (data) {
-    allRetailLocationsContent = data;
-    let matches = $.map(allRetailLocationsContent, function(entry) {
-        let match = entry.urlTag == localStorage['retailLocation'];
-        return match ? entry : null;
-      });
-    if (matches.length) {
-      allContent = matches[0]
-    } else {
-      allContent = allRetailLocationsContent[0]
-    }
-  });
-
+  
   let running = false
 
   let cell = '-x'
@@ -59,14 +48,6 @@
     return n < 10 ? shuffle(collection).slice(0, n) : collection
   }
 
-  let setTrigger = () => {
-    let total = allContent.responseJSON["content"].length;
-    let number = Math.floor(Math.random() * total);
-    triggertext.innerHTML = allContent.responseJSON["content"][number]["text"];
-    triggertext.classList.remove("d-none");
-    triggertext.style.removeProperty("border");
-  }
-
   let checkWin = (moves) => {
     let n = 0
     let msg = ''
@@ -91,7 +72,6 @@
       }
     }
     if(!running) {
-      // setTrigger()
       gameover.innerHTML = msg
       setTimeout(function() { showAd(winFlag) }, 1000);
     }
@@ -129,12 +109,6 @@
     }
   }
 
-  let resetTrigger = () => {
-    triggertext.classList.add("d-none");
-    triggertext.innerHTML = '';
-    triggertext.style.setProperty('border','none');    
-  }
-
   let newGame = () => {
     let options = setColors(colorArray.slice(), skill)
     tally = 0
@@ -148,7 +122,6 @@
     board.className = ''
     board.childNodes[0].className = color + cell
     checkColor(color)
-    // resetTrigger()
   }
 
   let play = (chip) => {
@@ -179,12 +152,6 @@
     }
   })
 
-  function getContent() {
-    let total = allContent.responseJSON["content"].length;
-    let number = Math.floor(Math.random() * total);
-    return allContent.responseJSON["content"][number]["text"];
-  }
-
   function share() {
     if (navigator.share) {
       navigator.share({
@@ -204,8 +171,8 @@
 
   function showAd(key) {
     $('.loader').css('display','');
-    var adPath = allContent["adPath"];
-    var total = allContent["totalAds"];
+    var adPath = INSTANCE_JSON["adPath"];
+    var total = INSTANCE_JSON["totalAds"];
     var number = 1 + Math.floor(Math.random() * total);
     var urlPath = adPath + '' + number + '.png';
     $('main').addClass('d-none');
@@ -269,14 +236,14 @@
     $('.swal2-container').append(buttonTextDiv);
     var logoDiv = document.createElement('div');
     logoDiv.className = 'logo-div';
-    logoDiv.innerHTML = '<a href='+ allContent['website'] +' target="_blank">' 
-    + '<img src=' + allContent['logo'] + '>' + '</a>';
+    logoDiv.innerHTML = '<a href='+ INSTANCE_JSON['website'] +' target="_blank">' 
+    + '<img src=' + INSTANCE_JSON['logo'] + '>' + '</a>';
     $('.swal2-container').append(logoDiv);
     localStorage.setItem('lastGame', 4);
   }
 
   function loadNewGame() {
-    window.location.href = window.location.origin + '/' + gameMap[getRandomNumber()];
+    window.location.href = window.location.origin + '/' + GAME_MAP[getRandomNumber()];
   }
 
   function openNPS() {

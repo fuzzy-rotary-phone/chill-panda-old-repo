@@ -1,3 +1,6 @@
+// instance variables to be loaded from index.js
+loadInstanceVariables('../../' + CONTENT_PATH, '../../' + CONFIG_PATH)
+
 function Position(x, y) {
   this.x = x;
   this.y = y;
@@ -6,20 +9,6 @@ function Position(x, y) {
 Position.prototype.toString = function() {
   return this.x + ":" + this.y;
 };
-
-var allContent;
-$.getJSON('../../resources/content.json', function (data) {
-  var allRetailLocationsContent = data;
-  var matches = $.map(allRetailLocationsContent, function(entry) {
-      var match = entry.urlTag == localStorage['retailLocation'];
-      return match ? entry : null;
-    });
-  if (matches.length) {
-    allContent = matches[0];
-  } else {
-    allContent = allRetailLocationsContent[0];
-  }
-});
 
 function Mazing(id) {
 
@@ -53,13 +42,6 @@ function Mazing(id) {
     }
   }
 
-  var triggerDiv = document.createElement("div");
-  triggerDiv.id = "trigger-div";
-  var triggerText = document.createElement("div");
-  triggerText.id = "trigger-text";
-  triggerDiv.appendChild(triggerText);
-  this.mazeContainer.insertAdjacentElement("afterend", triggerDiv);
-
   var mazeOutputDiv = document.createElement("div");
   mazeOutputDiv.id = "maze_output";
 
@@ -79,10 +61,6 @@ function Mazing(id) {
   this.hammer = new Hammer(this.mazeContainer); // create hammer object to handle swipes
   this.hammer.get("swipe").set({ direction: Hammer.DIRECTION_ALL }); // enable vertical swipes
   this.swipeHandler();
-
-  this.triggerDiv = document.getElementById("trigger-div");
-  this.triggerText = document.getElementById("trigger-text");
-  this.triggerDiv.classList.add("d-none");
 
   this.winFlag = false;
 };
@@ -266,19 +244,6 @@ Mazing.prototype.setChildMode = function() {
   this.setMessage("collect all the treasure");
 };
 
-Mazing.prototype.setTrigger = function () {
-  var total = this.allContent.responseJSON["content"].length;
-  var number = Math.floor(Math.random() * total);
-  this.triggerText.innerHTML = this.allContent.responseJSON["content"][number]["text"];
-  this.triggerDiv.classList.remove("d-none");
-};
-
-Mazing.prototype.getContent = function () {
-  var total = this.allContent.responseJSON["content"].length;
-  var number = Math.floor(Math.random() * total);
-  return this.allContent.responseJSON["content"][number]["text"];
-};
-
 Mazing.prototype.share = function () {
   if (navigator.share) {
     navigator.share({
@@ -301,8 +266,8 @@ Mazing.prototype.resetGame = function () {
 };
 
 Mazing.prototype.showAd = function () {
-  var adPath = allContent["adPath"];
-  var total = allContent["totalAds"];
+  var adPath = INSTANCE_JSON["adPath"];
+  var total = INSTANCE_JSON["totalAds"];
   var number = 1 + Math.floor(Math.random() * total);
   var urlPath = adPath + '' + number + '.png';
   $('#maze_container').addClass('d-none');
@@ -355,8 +320,6 @@ Mazing.prototype.showEndScreen = function () {
         this.openNPS();
     }
   });
-  // var triggerDiv = '<div class="trigger-div">' + this.getContent() + '</div>';
-  // $('.swal2-container').append(triggerDiv);
   var shareDiv = document.createElement('div');
   shareDiv.className = 'share-div';
   shareDiv.innerHTML = '<i class="fa fa-share fa-2x" aria-hidden="true"></i>';
@@ -368,14 +331,14 @@ Mazing.prototype.showEndScreen = function () {
   $('.swal2-container').append(buttonTextDiv);
   var logoDiv = document.createElement('div');
   logoDiv.className = 'logo-div';
-  logoDiv.innerHTML = '<a href='+ allContent['website'] +' target="_blank">' 
-  + '<img src=' + allContent['logo'] + '>' + '</a>';
+  logoDiv.innerHTML = '<a href='+ INSTANCE_JSON['website'] +' target="_blank">' 
+  + '<img src=' + INSTANCE_JSON['logo'] + '>' + '</a>';
   $('.swal2-container').append(logoDiv);
   localStorage.setItem('lastGame', 10);
 };
 
 Mazing.prototype.loadNewGame = function() {
-  window.location.href = window.location.origin + '/' + gameMap[getRandomNumber()];
+  window.location.href = window.location.origin + '/' + GAME_MAP[getRandomNumber()];
 };
 
 Mazing.prototype.openNPS = function() {

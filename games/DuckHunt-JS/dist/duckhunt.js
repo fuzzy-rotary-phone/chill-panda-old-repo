@@ -37223,19 +37223,8 @@ var BOTTOM_LINK_STYLE = {
   align: 'left',
   fill: 'white'
 };
-var allContent;
-$.getJSON('../../../resources/content.json', function (data) {
-  var allRetailLocationsContent = data;
-  let matches = $.map(allRetailLocationsContent, function(entry) {
-      let match = entry.urlTag == localStorage['retailLocation'];
-      return match ? entry : null;
-    });
-  if (matches.length) {
-    allContent = matches[0]
-  } else {
-    allContent = allRetailLocationsContent[0]
-  }
-});
+// instance variables to be loaded from index.js
+loadInstanceVariables('../../../' + CONTENT_PATH, '../../../' + CONFIG_PATH)
 
 var Game = function () {
   /**
@@ -37620,13 +37609,6 @@ var Game = function () {
       this.stage.hud.instructionBox = '';
     }
   }, {
-    key: 'getContent',
-    value: function getContent() {
-      let total = this.allContent.responseJSON["content"].length;
-      let number = Math.floor(Math.random() * total);
-      return this.allContent.responseJSON["content"][number]["text"];
-    }
-  }, {
     key: 'share',
     value: function share() {
       if (navigator.share) {
@@ -37648,8 +37630,8 @@ var Game = function () {
     key: 'showAd',
     value: function showAd(key) {
       $('.loader').css('display','');
-      var adPath = allContent["adPath"];
-      var total = allContent["totalAds"];
+      var adPath = INSTANCE_JSON["adPath"];
+      var total = INSTANCE_JSON["totalAds"];
       var number = 1 + Math.floor(Math.random() * total);
       var urlPath = adPath + '' + number + '.png';
       $('body').empty();
@@ -37702,8 +37684,6 @@ var Game = function () {
           this.openNPS();
         }
       });
-      // var triggerDiv = '<div class="trigger-div">' + this.getContent() + '</div>';
-      // $('.swal2-container').append(triggerDiv);
       var shareDiv = document.createElement('div');
       shareDiv.className = 'share-div';
       shareDiv.innerHTML = '<i class="fa fa-share fa-2x" aria-hidden="true"></i>';
@@ -37715,15 +37695,15 @@ var Game = function () {
       $('.swal2-container').append(buttonTextDiv);
       var logoDiv = document.createElement('div');
       logoDiv.className = 'logo-div';
-      logoDiv.innerHTML = '<a href='+ allContent['website'] +' target="_blank">' 
-      + '<img src=../' + allContent['logo'] + '>' + '</a>';
+      logoDiv.innerHTML = '<a href='+ INSTANCE_JSON['website'] +' target="_blank">' 
+      + '<img src=../' + INSTANCE_JSON['logo'] + '>' + '</a>';
       $('.swal2-container').append(logoDiv);
       localStorage.setItem('lastGame', 1);
     }
   }, {
     key: 'loadNewGame',
     value: function loadNewGame() {
-      window.location.href = window.location.origin + '/' + gameMap[getRandomNumber()];
+      window.location.href = window.location.origin + '/' + GAME_MAP[getRandomNumber()];
     }
   }, {
     key: 'openNPS',

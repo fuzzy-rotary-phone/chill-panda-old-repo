@@ -1,30 +1,4 @@
-// var gameMap;
-// var retailLocationTagName;
-
-// $.getJSON('resources/config.json', config => {
-// 	gameMap = config["gameMap"]
-// 	retailLocationTagName = config["tag1"]
-// 	if (!gameMap) {
-// 		gameMap = {
-// 			1: 'games/DuckHunt-JS/dist/index.html',
-// 			2: 'games/align-four/index.html',
-// 			3: 'games/flappy-bird/index.html',
-// 			4: 'games/color-match-game-broken/index.html',
-// 			5: 'games/JoyRunner/runner.html',
-// 			6: 'games/snake/index.html',
-// 			7: 'games/sweet-memory-game/index.html',
-// 			8: 'games/tower-blocks/index.html',
-// 			9: 'games/Elimination-games-XiaoXiaoLe/index.html',
-// 			10: 'games/Maze2/maze.html'
-// 		}
-// 	}
-// 	if (!retailLocationTagName) {
-// 		retailLocationTagName = 'where'
-// 	}
-// 	loadGame()
-// })
-
-const gameMap = {
+const GAME_MAP = {
 	1: 'games/DuckHunt-JS/dist/index.html',
 	2: 'games/align-four/index.html',
 	3: 'games/flappy-bird/index.html',
@@ -36,8 +10,18 @@ const gameMap = {
 	9: 'games/Elimination-games-XiaoXiaoLe/index.html',
 	10: 'games/Maze2/maze.html'
 };
-
-const retailLocationTagName = 'where';
+const RETAIL_LOCATION_TAG_NAME = 'where'
+const JSON_KEY_FOR_RETAIL_LOCATION = 'urlTag'
+const JSON_KEY_FOR_IN_GAME_ASSETS = 'ingamePath'
+const JSON_KEY_FOR_AD_ASSETS = 'adPath'
+const CONTENT_PATH = 'resources/content.json'
+const CONFIG_PATH = 'resources/config.json'
+var IN_GAME_ASSETS_PATH
+var AD_ASSETS_PATH
+var RETAIL_LOCATION_TAG_VALUE
+var ALL_CONTENT_INSTANCE_JSON
+var INSTANCE_JSON
+var CONFIG_JSON
 
 function getRandomNumber() {
 	var total = 10;
@@ -51,19 +35,59 @@ function getRandomNumber() {
 	return number;
 }
 
-function setRetailLocation() {
-	let params = new URLSearchParams(location.search);
-	if (params.get(retailLocationTagName)) {
-		localStorage.setItem('retailLocation', params.get(retailLocationTagName));
+function setRetailLocation(retailLocation) {
+	if (retailLocation) {
+		localStorage.setItem('retailLocation', retailLocation)
 	} else {
-		localStorage.setItem('retailLocation', '');
+		localStorage.setItem('retailLocation', '')
 	}
+}
+
+function getJsonByKeyValue(data, tagName, tagValue) {
+    var matches = $.map(data, function(entry) {
+            var match = entry[tagName] == (tagValue ? tagValue : '')
+            return match ? entry : null
+        });
+    return matches.length ? matches[0] : null
+}
+
+function setInGameAssetsPath() {
+	IN_GAME_ASSETS_PATH = INSTANCE_JSON[JSON_KEY_FOR_IN_GAME_ASSETS]
+}
+
+function setAdAssetsPath() {
+	AD_ASSETS_PATH = INSTANCE_JSON[JSON_KEY_FOR_AD_ASSETS]
+}
+
+function setInstanceVariables() {
+	INSTANCE_JSON = getJsonByKeyValue(ALL_CONTENT_INSTANCE_JSON, JSON_KEY_FOR_RETAIL_LOCATION, RETAIL_LOCATION_TAG_VALUE)
+	if (!INSTANCE_JSON) {
+		INSTANCE_JSON = ALL_CONTENT_INSTANCE_JSON[0]
+	}
+	setInGameAssetsPath()
+	setAdAssetsPath()
+}
+
+function loadInstanceVariables(content_path, config_path) {
+	$.getJSON(content_path, function(content) {
+		$.getJSON(config_path, function(data) {
+			ALL_CONTENT_INSTANCE_JSON = content
+			CONFIG_JSON = data
+			setInstanceVariables()
+		})
+	})
+}
+
+function setVariablesInLocalStorage() {
+	var params = new URLSearchParams(location.search)
+	RETAIL_LOCATION_TAG_VALUE = params.get(RETAIL_LOCATION_TAG_NAME)
+	setRetailLocation(RETAIL_LOCATION_TAG_VALUE) // add retail location to local storage
 }
 
 function loadGame() {
 	var number = getRandomNumber().toString();
-	setRetailLocation();
-	$('#myiframe').attr('src', gameMap[number]);
+	setVariablesInLocalStorage()
+	$('#myiframe').attr('src', GAME_MAP[number])
 }
 
 let s4 = () => {

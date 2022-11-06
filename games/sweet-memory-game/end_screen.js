@@ -92,8 +92,6 @@ function showEndScreen(allcontent, config) {
             openNPS();
         }
     });
-    // var triggerDiv = '<div class="trigger-div">' + allcontent["content"][number]["text"] + '</div>';
-    // $('.swal2-container').append(triggerDiv);
     var shareDiv = document.createElement('div');
     shareDiv.className = 'share-div';
     shareDiv.innerHTML = '<i class="fa fa-share fa-2x" aria-hidden="true"></i>';
@@ -112,7 +110,7 @@ function showEndScreen(allcontent, config) {
 }
 
 function loadNewGame() {
-    window.location.href = window.location.origin + '/' + gameMap[getRandomNumber()];
+    window.location.href = window.location.origin + '/' + GAME_MAP[getRandomNumber()];
 }
 
 function openNPS() {

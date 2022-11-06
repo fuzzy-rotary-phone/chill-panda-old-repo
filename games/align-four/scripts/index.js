@@ -1,3 +1,6 @@
+// instance variables to be loaded from index.js
+loadInstanceVariables('../../' + CONTENT_PATH, '../../' + CONFIG_PATH)
+
 // constants
 const WEB_WORKER_URL = 'scripts/worker.js';
 const CONTENT_URL = '../../resources/content.json';
@@ -33,20 +36,6 @@ const OUTLOOKS = {
   'win-imminent': 'Uh oh, computer is feeling saucy!',
   'loss-imminent': 'Computer is unsure. Now\'s your chance!'
 };
-var allRetailLocationsContent;
-var allContent;
-$.getJSON(CONTENT_URL, function (data) {
-    allRetailLocationsContent = data;
-    var matches = $.map(allRetailLocationsContent, function(entry) {
-            var match = entry.urlTag == localStorage['retailLocation'];
-            return match ? entry : null;
-        });
-    if (matches.length) {
-        allContent = matches[0]
-    } else {
-        allContent = allRetailLocationsContent[0]
-    }
-});
 
 // global variables
 var worker;
@@ -211,13 +200,6 @@ function endComputerTurn(coords, isWin, winningChips, isBoardFull, isWinImminent
   });
 }
 
-function setTrigger() {
-  var total = allContent.responseJSON["content"].length;
-  var number = Math.floor(Math.random() * total);
-  $('#trigger-text').text(allContent.responseJSON["content"][number]["text"]);
-  $('#trigger-div').removeClass("d-none");
-}
-
 function endGame(blurbKey, winningChips) {
   $('.dif').removeClass('freeze');
   $('.dif input').prop('disabled', false);
@@ -290,12 +272,6 @@ function indexToPixels(index) {
   return (index * 51.3 + 1) + 'px';
 }
 
-function getContent() {
-  var total = allContent.responseJSON["content"].length;
-  var number = Math.floor(Math.random() * total);
-  return allContent.responseJSON["content"][number]["text"];
-}
-
 function share(data) {
   if (navigator.share) {
     if (navigator.canShare({ files: [data] })) {
@@ -330,8 +306,8 @@ function share(data) {
 
 function showAd(key) {
   $('.loader').css('display','');
-  var adPath = allContent["adPath"];
-  var total = allContent["totalAds"];
+  var adPath = INSTANCE_JSON["adPath"];
+  var total = INSTANCE_JSON["totalAds"];
   var number = 1 + Math.floor(Math.random() * total);
   var urlPath = adPath + '' + number + '.png';
   $('.wrapper').addClass('d-none');
@@ -382,8 +358,6 @@ function showEndScreen(key) {
       openNPS();
     }
   });
-  // var triggerDiv = '<div class="trigger-div">' + getContent() + '</div>';
-  // $('.swal2-container').append(triggerDiv);
   var shareDiv = document.createElement('div');
   shareDiv.className = 'share-div';
   shareDiv.innerHTML = '<i class="fa fa-share fa-2x" aria-hidden="true"></i>';
@@ -395,8 +369,8 @@ function showEndScreen(key) {
   $('.swal2-container').append(buttonTextDiv);
   var logoDiv = document.createElement('div');
   logoDiv.className = 'logo-div';
-  logoDiv.innerHTML = '<a href='+ allContent['website'] +' target="_blank">' 
-  + '<img src=' + allContent['logo'] + '>' + '</a>';
+  logoDiv.innerHTML = '<a href='+ INSTANCE_JSON['website'] +' target="_blank">' 
+  + '<img src=' + INSTANCE_JSON['logo'] + '>' + '</a>';
   $('.swal2-container').append(logoDiv);
   localStorage.setItem('lastGame', 2);
 }
@@ -420,7 +394,7 @@ function download(canvas) {
 }
 
 function loadNewGame() {
-  window.location.href = window.location.origin + '/' + gameMap[getRandomNumber()];
+  window.location.href = window.location.origin + '/' + GAME_MAP[getRandomNumber()];
 }
 
 function openNPS() {

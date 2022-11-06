@@ -12,20 +12,6 @@ export default function (main) {
         global.flappyBird = main.makeFlappyBird()
         global.floor = main.createFloor()
         global.pipes = main.makePipes()
-        var allRetailLocationsContent;
-        global.allContent = '';
-        $.getJSON('../../resources/content.json', function (data) {
-            allRetailLocationsContent = data;
-            var matches = $.map(allRetailLocationsContent, function(entry) {
-                    var match = entry.urlTag == localStorage['retailLocation'];
-                    return match ? entry : null;
-                });
-            if (matches.length) {
-                global.allContent = matches[0]
-            } else {
-                global.allContent = allRetailLocationsContent[0]
-            }
-        });
       },
 
       draw() {
@@ -84,8 +70,8 @@ export default function (main) {
       },
       click() {
         $('.loader').css('display','');
-        var adPath = global.allContent["adPath"];
-        var total = global.allContent["totalAds"];
+        var adPath = INSTANCE_JSON["adPath"];
+        var total = INSTANCE_JSON["totalAds"];
         var number = 1 + Math.floor(Math.random() * total);
         var urlPath = adPath + '' + number + '.png';
         $('canvas').addClass('d-none');
@@ -117,13 +103,11 @@ export default function (main) {
             if (result.isConfirmed) {
               main.changeScreen(main.display.start)
             } else if (result.isDenied) {
-              window.location.href = window.location.origin + '/' + gameMap[getRandomNumber()];
+              window.location.href = window.location.origin + '/' + GAME_MAP[getRandomNumber()];
             } else if (result.dismiss === Swal.DismissReason.cancel) {
               window.location.href = window.location.origin + '/rating.html';
             }
           });
-          // var triggerDiv = '<div class="trigger-div">' + global.allContent["content"][number]["text"] + '</div>';
-          // $('.swal2-container').append(triggerDiv);
           var shareDiv = document.createElement('div');
           shareDiv.className = 'share-div';
           shareDiv.innerHTML = '<i class="fa fa-share fa-2x" aria-hidden="true"></i>';
@@ -150,8 +134,8 @@ export default function (main) {
           $('.swal2-container').append(buttonTextDiv);
           var logoDiv = document.createElement('div');
           logoDiv.className = 'logo-div';
-          logoDiv.innerHTML = '<a href='+ global.allContent['website'] +' target="_blank">' 
-          + '<img src=' + global.allContent['logo'] + '>' + '</a>';
+          logoDiv.innerHTML = '<a href='+ INSTANCE_JSON['website'] +' target="_blank">' 
+          + '<img src=' + INSTANCE_JSON['logo'] + '>' + '</a>';
           $('.swal2-container').append(logoDiv);
           localStorage.setItem('lastGame', 3);
         });

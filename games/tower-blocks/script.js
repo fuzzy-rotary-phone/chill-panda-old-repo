@@ -1,5 +1,9 @@
 "use strict";
 console.clear();
+
+// instance variables to be loaded from index.js
+loadInstanceVariables('../../' + CONTENT_PATH, '../../' + CONFIG_PATH)
+
 class Stage {
     constructor() {
         // container
@@ -162,20 +166,7 @@ class Block {
         }
     }
 }
-var allRetailLocationsContent;
-var allContent;
-$.getJSON('../../resources/content.json', function (data) {
-    allRetailLocationsContent = data;
-    var matches = $.map(allRetailLocationsContent, function(entry) {
-            var match = entry.urlTag == localStorage['retailLocation'];
-            return match ? entry : null;
-        });
-    if (matches.length) {
-        allContent = matches[0]
-    } else {
-        allContent = allRetailLocationsContent[0]
-    }
-});
+
 class Game {
     constructor() {
         this.STATES = {
@@ -358,8 +349,8 @@ class Game {
     showAd() {
         $('.loader').css('display','');
         document.removeEventListener('click', this.clickListener);
-        var adPath = allContent["adPath"];
-        var total = allContent["totalAds"];
+        var adPath = INSTANCE_JSON["adPath"];
+        var total = INSTANCE_JSON["totalAds"];
         var number = 1 + Math.floor(Math.random() * total);
         var urlPath = adPath + '' + number + '.png';
         $('#container').addClass('d-none');
@@ -409,8 +400,6 @@ class Game {
                 this.openNPS();
             }
         });
-        // var triggerDiv = '<div class="trigger-div">' + this.getContent() + '</div>';
-        // $('.swal2-container').append(triggerDiv);
         var shareDiv = document.createElement('div');
         shareDiv.className = 'share-div';
         shareDiv.innerHTML = '<i class="fa fa-share fa-2x" aria-hidden="true"></i>';
@@ -422,13 +411,13 @@ class Game {
         $('.swal2-container').append(buttonTextDiv);
         var logoDiv = document.createElement('div');
         logoDiv.className = 'logo-div';
-        logoDiv.innerHTML = '<a href='+ allContent['website'] +' target="_blank">' 
-        + '<img src=' + allContent['logo'] + '>' + '</a>';
+        logoDiv.innerHTML = '<a href='+ INSTANCE_JSON['website'] +' target="_blank">' 
+        + '<img src=' + INSTANCE_JSON['logo'] + '>' + '</a>';
         $('.swal2-container').append(logoDiv);
         localStorage.setItem('lastGame', 8);
     }
     loadNewGame() {
-        window.location.href = window.location.origin + '/' + gameMap[getRandomNumber()];
+        window.location.href = window.location.origin + '/' + GAME_MAP[getRandomNumber()];
     }
     openNPS() {
         window.location.href = window.location.origin + '/rating.html';

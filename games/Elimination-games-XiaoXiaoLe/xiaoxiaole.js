@@ -1,4 +1,7 @@
-﻿function XiaoXiaoLe(canvasId, imgspath, options, scorechange, gameendcalback, timedowncalback) {
+﻿// instance variables to be loaded from index.js
+loadInstanceVariables('../../' + CONTENT_PATH, '../../' + CONFIG_PATH)
+
+function XiaoXiaoLe(canvasId, imgspath, options, scorechange, gameendcalback, timedowncalback) {
     var _this = this;
     var w = 600, h = 500, boxsize = 100;
     var wi = 6, hi = 5;
@@ -26,22 +29,6 @@
     var touching = false;   //必须由panstart开始的pan才有效
 
     var canxiao = null;
-
-    var allRetailLocationsContent;
-    var allcontent;
-    $.getJSON('../../resources/content.json', function (data) {
-        allRetailLocationsContent = data;
-        var matches = $.map(allRetailLocationsContent, function(entry) {
-                var match = entry.urlTag == localStorage['retailLocation'];
-                return match ? entry : null;
-            });
-        if (matches.length) {
-            allcontent = matches[0]
-        } else {
-            allcontent = allRetailLocationsContent[0]
-        }
-    });
-
 
     function preparebackground() {  //绘制背景
         //var bgcanvas = document.getElementById(bgcanvasId)
@@ -718,21 +705,6 @@
 
     init.bind(this)();
 
-    var triggerText = document.getElementById('trigger-text');
-    var triggerDiv = document.getElementById('trigger-div');
-
-    function resetTrigger() {
-        triggerText.innerHTML = '';
-        triggerDiv.classList.add('d-none');
-    }
-
-    function setTrigger() {
-        var total = allcontent.responseJSON["content"].length;
-        var number = Math.floor(Math.random() * total);
-        triggerText.innerHTML = allcontent.responseJSON["content"][number]["text"];
-        triggerDiv.classList.remove('d-none');
-    }
-
     function gameendfun() {
         gameend = true;
         gaming = false;
@@ -768,8 +740,6 @@
             createjs.Tween.get(mask).to({ alpha: 0 }, 100).call(function () {
                 mask.visible = false;
             });
-
-            // resetTrigger();
 
             panduan();
 
@@ -824,12 +794,6 @@
         newGame();
     }
 
-    function getContent() {
-        let total = allcontent.responseJSON["content"].length;
-        let number = Math.floor(Math.random() * total);
-        return allcontent.responseJSON["content"][number]["text"];
-    }
-
     function share() {
         if (navigator.share) {
             navigator.share({
@@ -848,9 +812,10 @@
     }
 
     function showAd(key) {
+        allcontent = INSTANCE_JSON
         $('.loader').css('display','');
-        var adPath = allcontent["adPath"];
-        var total = allcontent["totalAds"];
+        var adPath = INSTANCE_JSON["adPath"];
+        var total = INSTANCE_JSON["totalAds"];
         var number = 1 + Math.floor(Math.random() * total);
         var urlPath = adPath + '' + number + '.png';
         $('.main').addClass('d-none');
@@ -901,8 +866,6 @@
                 openNPS();
             }
         });
-        // var triggerDiv = '<div class="trigger-div">' + getContent() + '</div>';
-        // $('.swal2-container').append(triggerDiv);
         var shareDiv = document.createElement('div');
         shareDiv.className = 'share-div';
         shareDiv.innerHTML = '<i class="fa fa-share fa-2x" aria-hidden="true"></i>';
@@ -914,14 +877,14 @@
         $('.swal2-container').append(buttonTextDiv);
         var logoDiv = document.createElement('div');
         logoDiv.className = 'logo-div';
-        logoDiv.innerHTML = '<a href='+ allcontent['website'] +' target="_blank">' 
-        + '<img src=' + allcontent['logo'] + '>' + '</a>';
+        logoDiv.innerHTML = '<a href='+ INSTANCE_JSON['website'] +' target="_blank">' 
+        + '<img src=' + INSTANCE_JSON['logo'] + '>' + '</a>';
         $('.swal2-container').append(logoDiv);
         localStorage.setItem('lastGame', 9);
     }
 
     function loadNewGame() {
-        window.location.href = window.location.origin + '/' + gameMap[getRandomNumber()];
+        window.location.href = window.location.origin + '/' + GAME_MAP[getRandomNumber()];
     }
 
     function openNPS() {
