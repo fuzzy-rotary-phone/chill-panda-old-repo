@@ -1,5 +1,5 @@
 ﻿// instance variables to be loaded from index.js
-loadInstanceVariables('../../' + CONTENT_PATH, '../../' + CONFIG_PATH)
+loadInstanceVariables('../../' + CONTENT_PATH, '../../' + CONFIG_PATH, newGame)
 
 function XiaoXiaoLe(canvasId, imgspath, options, scorechange, gameendcalback, timedowncalback) {
     var _this = this;
@@ -10,6 +10,7 @@ function XiaoXiaoLe(canvasId, imgspath, options, scorechange, gameendcalback, ti
     wi = options.col || wi;
     hi = options.row || hi;
     boxsize = options.boxsize || boxsize;
+    classnum = options.items || classnum;
 
     w = wi * boxsize;
     h = hi * boxsize;
@@ -53,7 +54,7 @@ function XiaoXiaoLe(canvasId, imgspath, options, scorechange, gameendcalback, ti
     function loadimg() {    //加载图片
         for (var i = 0; i < classnum; i++) {
             bitimages[i] = new createjs.Bitmap(imgspath + "/" + (i + 1) + ".png");
-            bitimages[i].scaleX = bitimages[i].scaleY = 3;
+            bitimages[i].scaleX = bitimages[i].scaleY = 0.2;
             bitimages[i].regX = bitimages[i].regY = 0;
         }
     }
@@ -812,7 +813,6 @@ function XiaoXiaoLe(canvasId, imgspath, options, scorechange, gameendcalback, ti
     }
 
     function showAd(key) {
-        allcontent = INSTANCE_JSON
         $('.loader').css('display','');
         var adPath = INSTANCE_JSON["adPath"];
         var total = INSTANCE_JSON["totalAds"];
@@ -894,9 +894,10 @@ function XiaoXiaoLe(canvasId, imgspath, options, scorechange, gameendcalback, ti
 
 function newGame() {
     // var xxl = new XiaoXiaoLe("js-game", "img", {
-    var xxl = new XiaoXiaoLe("js-game", "../../assets/ingame", {
-        col:8,  //6 columns
-        row:7,  //5 rows
+    var xxl = new XiaoXiaoLe("js-game", IN_GAME_ASSETS_PATH + 'candycrush', {
+        col: 8,  //6 columns
+        row: 7,  //5 rows
+        items: RETAIL_LOCATION_TAG_VALUE ? 7 : 5 //7 types of items
     },function (score) {  //score changed calback
         $("#js-score-num").text(score)
     }, function (score) {   //game end calback
@@ -917,7 +918,7 @@ function newGame() {
     })        
 }
 
-newGame();
+// newGame();
 
 gaSetUserId();
 gaSetUserProperties();

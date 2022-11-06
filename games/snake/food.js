@@ -4,7 +4,7 @@ class Food {
 		this.y = floor(random(rangey));
 		this.size = 1;
 		this.c = color;
-		this.img = loadImage('../../assets/ingame/' + number + '.png');
+		this.img = loadImage(IN_GAME_ASSETS_PATH + 'snake/' + number + '.png');
 		// this.img = loadImage('\u1F354');
 	}
 

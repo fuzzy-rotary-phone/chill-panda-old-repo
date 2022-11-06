@@ -7,7 +7,7 @@ const GAME_MAP = {
 	6: 'games/snake/index.html',
 	7: 'games/sweet-memory-game/index.html',
 	8: 'games/tower-blocks/index.html',
-	9: 'games/Elimination-games-XiaoXiaoLe/index.html',
+	9: 'games/candycrush/index.html',
 	10: 'games/Maze2/maze.html'
 };
 const RETAIL_LOCATION_TAG_NAME = 'where'
@@ -68,12 +68,15 @@ function setInstanceVariables() {
 	setAdAssetsPath()
 }
 
-function loadInstanceVariables(content_path, config_path) {
+function loadInstanceVariables(content_path, config_path, callback) {
 	$.getJSON(content_path, function(content) {
 		$.getJSON(config_path, function(data) {
 			ALL_CONTENT_INSTANCE_JSON = content
 			CONFIG_JSON = data
 			setInstanceVariables()
+			if (callback) {
+				callback()
+			}
 		})
 	})
 }
