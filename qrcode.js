@@ -1,6 +1,9 @@
+const tag_for_qr = 'coffeecrush'
+const tag_required = false
+const qrcode_download = true
+
 var canvas = document.getElementById('canvas')
 var link = document.getElementById('link');
-var tag_for_qr = 'coffeecrush'
 var options = {
 	width: 300,
 	color: {
@@ -11,8 +14,9 @@ var options = {
 
 $.getJSON('resources/content.json', allretailcontent => {
     $.getJSON('resources/config.json', config => {
-    	var url = config['prod_url'] + '?' + config['tag1'] + '=' + tag_for_qr
-		QRCode.toCanvas(canvas, url, options, function (error) {
+    	const PROD_URL = config['prod_url']
+    	var url = PROD_URL + '?' + config['tag1'] + '=' + tag_for_qr
+		QRCode.toCanvas(canvas, tag_required ? url : PROD_URL, options, function (error) {
 			if (error) console.error(error)
 		  	console.log('success!');
 		})
@@ -20,7 +24,9 @@ $.getJSON('resources/content.json', allretailcontent => {
 		var save_to_file = 'qrcode.png'
 		link.setAttribute('download', save_to_file)
 		link.setAttribute('href', canvas.toDataURL("image/png").replace("image/png", "image/octet-stream"));
-		link.click();
+		if (qrcode_download) {
+			link.click();
+		}
 		// var save_to_file = 'qrcode.png'
 		// QRCode.toFile(config[config['tag1']][tag_for_qr] + save_to_file, url, options, function (err) {
 		//   if (err) throw err
