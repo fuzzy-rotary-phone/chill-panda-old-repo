@@ -10,14 +10,20 @@ const GAME_MAP = {
 	9: 'games/candycrush/index.html',
 	10: 'games/Maze2/maze.html'
 };
+const CONTENT_PATH = 'resources/content.json'
+const CONFIG_PATH = 'resources/config.json'
 const RETAIL_LOCATION_TAG_NAME = 'where'
 const JSON_KEY_FOR_RETAIL_LOCATION = 'urlTag'
 const JSON_KEY_FOR_IN_GAME_ASSETS = 'ingamePath'
 const JSON_KEY_FOR_AD_ASSETS = 'adPath'
-const CONTENT_PATH = 'resources/content.json'
-const CONFIG_PATH = 'resources/config.json'
+const JSON_KEY_FOR_TOTAL_ADS = 'totalAds'
+const JSON_KEY_FOR_WEBSITE = 'website'
+const JSON_KEY_FOR_LOGO = 'logo'
 var IN_GAME_ASSETS_PATH
 var AD_ASSETS_PATH
+var TOTAL_ADS
+var WEBSITE_LINK
+var LOGO_PATH
 var ALL_CONTENT_INSTANCE_JSON
 var INSTANCE_JSON
 var CONFIG_JSON
@@ -50,12 +56,15 @@ function getJsonByKeyValue(data, tagName, tagValue) {
     return matches.length ? matches[0] : null
 }
 
-function setInGameAssetsPath() {
+function setInGameVariables() {
 	IN_GAME_ASSETS_PATH = INSTANCE_JSON[JSON_KEY_FOR_IN_GAME_ASSETS]
 }
 
-function setAdAssetsPath() {
+function setAdVariables() {
 	AD_ASSETS_PATH = INSTANCE_JSON[JSON_KEY_FOR_AD_ASSETS]
+	TOTAL_ADS = INSTANCE_JSON[JSON_KEY_FOR_TOTAL_ADS]
+	WEBSITE_LINK = INSTANCE_JSON[JSON_KEY_FOR_WEBSITE]
+	LOGO_PATH = INSTANCE_JSON[JSON_KEY_FOR_LOGO]
 }
 
 function setInstanceVariables() {
@@ -63,8 +72,8 @@ function setInstanceVariables() {
 	if (!INSTANCE_JSON) {
 		INSTANCE_JSON = ALL_CONTENT_INSTANCE_JSON[0]
 	}
-	setInGameAssetsPath()
-	setAdAssetsPath()
+	setInGameVariables()
+	setAdVariables()
 }
 
 function loadInstanceVariables(content_path, config_path, callback) {

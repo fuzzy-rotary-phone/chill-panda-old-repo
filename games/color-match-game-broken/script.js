@@ -171,10 +171,8 @@
 
   function showAd(key) {
     $('.loader').css('display','');
-    var adPath = INSTANCE_JSON["adPath"];
-    var total = INSTANCE_JSON["totalAds"];
-    var number = 1 + Math.floor(Math.random() * total);
-    var urlPath = adPath + '' + number + '.png';
+    var number = 1 + Math.floor(Math.random() * TOTAL_ADS);
+    var urlPath = AD_ASSETS_PATH + '' + number + '.png';
     $('main').addClass('d-none');
     $('body').addClass('ad-img');
     var closeDiv = document.createElement('div');
@@ -223,8 +221,6 @@
         openNPS();
       }
     });
-    // var triggerDiv = '<div class="trigger-div">' + getContent() + '</div>';
-    // $('.swal2-container').append(triggerDiv);
     var shareDiv = document.createElement('div');
     shareDiv.className = 'share-div';
     shareDiv.innerHTML = '<i class="fa fa-share fa-2x" aria-hidden="true"></i>';
@@ -236,8 +232,8 @@
     $('.swal2-container').append(buttonTextDiv);
     var logoDiv = document.createElement('div');
     logoDiv.className = 'logo-div';
-    logoDiv.innerHTML = '<a href='+ INSTANCE_JSON['website'] +' target="_blank">' 
-    + '<img src=' + INSTANCE_JSON['logo'] + '>' + '</a>';
+    logoDiv.innerHTML = '<a href='+ WEBSITE_LINK +' target="_blank">' 
+    + '<img src=' + LOGO_PATH + '>' + '</a>';
     $('.swal2-container').append(logoDiv);
     localStorage.setItem('lastGame', 4);
   }
