@@ -897,7 +897,7 @@ function newGame() {
     var xxl = new XiaoXiaoLe("js-game", IN_GAME_ASSETS_PATH + 'candycrush', {
         col: 8,  //6 columns
         row: 7,  //5 rows
-        items: RETAIL_LOCATION_TAG_VALUE ? 7 : 5 //7 types of items
+        items: 5 //5 types of items
     },function (score) {  //score changed calback
         $("#js-score-num").text(score)
     }, function (score) {   //game end calback

@@ -18,7 +18,6 @@ const CONTENT_PATH = 'resources/content.json'
 const CONFIG_PATH = 'resources/config.json'
 var IN_GAME_ASSETS_PATH
 var AD_ASSETS_PATH
-var RETAIL_LOCATION_TAG_VALUE
 var ALL_CONTENT_INSTANCE_JSON
 var INSTANCE_JSON
 var CONFIG_JSON
@@ -60,7 +59,7 @@ function setAdAssetsPath() {
 }
 
 function setInstanceVariables() {
-	INSTANCE_JSON = getJsonByKeyValue(ALL_CONTENT_INSTANCE_JSON, JSON_KEY_FOR_RETAIL_LOCATION, RETAIL_LOCATION_TAG_VALUE)
+	INSTANCE_JSON = getJsonByKeyValue(ALL_CONTENT_INSTANCE_JSON, JSON_KEY_FOR_RETAIL_LOCATION, localStorage['retailLocation'])
 	if (!INSTANCE_JSON) {
 		INSTANCE_JSON = ALL_CONTENT_INSTANCE_JSON[0]
 	}
@@ -83,8 +82,7 @@ function loadInstanceVariables(content_path, config_path, callback) {
 
 function setVariablesInLocalStorage() {
 	var params = new URLSearchParams(location.search)
-	RETAIL_LOCATION_TAG_VALUE = params.get(RETAIL_LOCATION_TAG_NAME)
-	setRetailLocation(RETAIL_LOCATION_TAG_VALUE) // add retail location to local storage
+	setRetailLocation(params.get(RETAIL_LOCATION_TAG_NAME)) // add retail location to local storage
 }
 
 function loadGame() {
