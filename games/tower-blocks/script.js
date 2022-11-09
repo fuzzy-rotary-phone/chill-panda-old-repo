@@ -237,6 +237,8 @@ class Game {
             this.updateState(this.STATES.PLAYING);
             this.addBlock();
             this.startInstructions.classList.add('d-none');
+
+            gtag("event", "game_start")
         }
     }
     restartGame() {

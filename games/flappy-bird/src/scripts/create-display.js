@@ -25,6 +25,8 @@ export default function (main) {
 
       click() {
         main.changeScreen(main.display.game)
+        
+        gtag("event", "game_start")
       },
 
       update() {
