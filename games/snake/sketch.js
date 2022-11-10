@@ -105,6 +105,8 @@ function new_game(difficulty) {
     frameRate(fps);
     snake = new Snake(floor(w / 2), floor(h / 2) - 1, boundaries);
     new_food(snake.body);
+
+    gtag("event", "game_start")
 }
 
 function addCanvas() {
