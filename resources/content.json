@@ -11,6 +11,17 @@
 		"content": []
 	},
 	{
+		"id": "nostrocafe",
+		"urlTag": "nostrocafe",
+		"name": "Nostro Cafe",
+		"website": "https://chillpanda.in",
+		"logo": "../../assets/CoffeeCrush/CoffeeCrush.jpg",
+		"ingamePath": "../../../assets/CoffeeCrush/ingame/",
+		"adPath": "../../../assets/CoffeeCrush/ads/",
+		"totalAds": 10,
+		"content": []
+	},
+	{
 		"id": "coffeecrush",
 		"urlTag": "coffeecrush",
 		"name": "Coffee Crush",
