@@ -95,6 +95,8 @@ function startGame() {
   $('.lit-cells, .chips').empty();
   resetTrigger();
 
+  gtag("event", "game_start")
+
   worker.postMessage({
     messageType: 'reset',
   });

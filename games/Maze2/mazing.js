@@ -42,6 +42,9 @@ function Mazing(id) {
     }
   }
 
+  this.initialHeroPos = this.heroPos
+  this.initialHeroScore = this.heroScore
+
   var mazeOutputDiv = document.createElement("div");
   mazeOutputDiv.id = "maze_output";
 
@@ -112,6 +115,10 @@ Mazing.prototype.heroWins = function() {
 };
 
 Mazing.prototype.tryMoveHero = function(pos) {
+
+  if(this.initialHeroPos == this.heroPos && this.initialHeroScore == this.heroScore) {
+    gtag("event", "game_start")
+  }
 
   if("object" !== typeof this.maze[pos]) {
     return;

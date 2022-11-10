@@ -86,6 +86,10 @@ $restart.on('click', function() {
 // Card flip
 $deck.on('click', '.card:not(".match, .open")', function() {
 	if($('.show').length > 1) { return true; }
+
+	if(opened.length == 1 && moves == 0) {
+		gtag("event", "game_start") 
+	}
 	
 	var $this = $(this),
 			card = $this.context.innerHTML;

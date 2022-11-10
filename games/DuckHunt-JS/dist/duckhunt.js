@@ -37252,6 +37252,8 @@ var Game = function () {
     this.quackingSoundId = null;
     this.levels = _levels2.default.normal;
 
+    gtag("event", "game_start")
+
     return this;
   }
 

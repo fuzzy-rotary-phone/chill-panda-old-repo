@@ -735,6 +735,8 @@ function XiaoXiaoLe(canvasId, imgspath, options, scorechange, gameendcalback, ti
             gaming = true;  //设置游戏真正进行中的标识
             gameend = false;    //设置游戏结束的标识
 
+            gtag("event", "game_start")
+
             //icocontainer.removeAllChildren();
             //randomrect.bind(this)();
 
@@ -760,6 +762,7 @@ function XiaoXiaoLe(canvasId, imgspath, options, scorechange, gameendcalback, ti
                     clearInterval(interv);
                 }
             }, 1000);
+
         }
     }
 

@@ -132,6 +132,8 @@ const gameStatus = {
         sounds.playground.play();
         statusText.container.classList.add("d-none");
         statusText.trigger.classList.add("d-none");
+
+        gtag("event", "game_start")
     },
     stop: () => {
         gameStarted = false;

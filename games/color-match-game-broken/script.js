@@ -122,6 +122,8 @@
     board.className = ''
     board.childNodes[0].className = color + cell
     checkColor(color)
+
+    gtag("event", "game_start")
   }
 
   let play = (chip) => {
