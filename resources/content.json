@@ -1,54 +1,70 @@
-{
-	"name": "Coffee Crush",
-	"industry": "F&B",
-	"website": "http://coffeecrush.net/site/",
-	"logo": "../../assets/CoffeeCrush.jpg",
-	"adPath": "../../../assets/CoffeeCrush/",
-	"totalAds": 10,
-	"content": [
-		{
-			"text": "Sample to show Sample to show Sample to show Sample to show Sample to show Sample to show Sample to show ",
-			"content_type": 1
-		},
-		{
-			"text": "Another Sample to show Another Sample to show Another Sample to show Another Sample to show Another Sample to show Another Sample to show ",
-			"content_type": 2
-		},
-		{
-			"text": "Sample to show 2 Sample to show 2 Sample to show 2 Sample to show 2 Sample to show 2 Sample to show 2 Sample to show 2 ",
-			"content_type": 1
-		},
-		{
-			"text": "Sample to show 3 Sample to show 2 Sample to show 2 Sample to show 2 Sample to show 2 Sample to show 2 Sample to show 2 ",
-			"content_type": 1
-		},
-		{
-			"text": "Sample to show 4 Sample to show 2 Sample to show 2 Sample to show 2 Sample to show 2 Sample to show 2 Sample to show 2 Sample to show 2 ",
-			"content_type": 1
-		},
-		{
-			"text": "Sample to show 5 Sample to show 2 Sample to show 2 Sample to show 2 Sample to show 2 Sample to show 2 Sample to show 2 ",
-			"content_type": 1
-		},
-		{
-			"text": "Sample to show 6 Sample to show 2 Sample to show 2 Sample to show 2 Sample to show 2 Sample to show 2 Sample to show 2 Sample to show 2 ",
-			"content_type": 1
-		},
-		{
-			"text": "Sample to show 7 Sample to show 2 Sample to show 2 Sample to show 2 Sample to show 2 Sample to show 2 Sample to show 2 Sample to show 2 ",
-			"content_type": 1
-		},
-		{
-			"text": "COFFEE CRUSH sources and buys green coffees directly from the farmers. If you support the farmers, raise your cup and tag us on social media with #supportfarmers",
-			"content_type": 1
-		},
-		{
-			"text": "Today's chef special, XXX, is made with (ingredient); our chef brings this recipe from (place) \nGrab a taste of (place) at your table",
-			"content_type": 1
-		},
-		{
-			"text": "The ambiance of COFFEE CRUSH was inspired by XXX, it is designed to give you an experience of XXX. Do not hesitate to give us your take about the ambiance :)",
-			"content_type": 1
-		}
-	]
-}
+[
+	{
+		"id": "chill-panda",
+		"urlTag": "",
+		"name": "Chill Panda",
+		"website": "https://chillpanda.in",
+		"logo": "../../assets/ChillPanda/ChillPanda.png",
+		"ingamePath": "../../../assets/ChillPanda/ingame/",
+		"adPath": "../../../assets/ChillPanda/ads/",
+		"totalAds": 10,
+		"content": []
+	},
+	{
+		"id": "coffeecrush",
+		"urlTag": "coffeecrush",
+		"name": "Coffee Crush",
+		"industry": "F&B",
+		"website": "http://coffeecrush.net/site/",
+		"logo": "../../assets/CoffeeCrush/CoffeeCrush.jpg",
+		"ingamePath": "../../../assets/CoffeeCrush/ingame/",
+		"adPath": "../../../assets/CoffeeCrush/ads/",
+		"totalAds": 10,
+		"content": [
+			{
+				"text": "Sample to show Sample to show Sample to show Sample to show Sample to show Sample to show Sample to show ",
+				"content_type": 1
+			},
+			{
+				"text": "Another Sample to show Another Sample to show Another Sample to show Another Sample to show Another Sample to show Another Sample to show ",
+				"content_type": 2
+			},
+			{
+				"text": "Sample to show 2 Sample to show 2 Sample to show 2 Sample to show 2 Sample to show 2 Sample to show 2 Sample to show 2 ",
+				"content_type": 1
+			},
+			{
+				"text": "Sample to show 3 Sample to show 2 Sample to show 2 Sample to show 2 Sample to show 2 Sample to show 2 Sample to show 2 ",
+				"content_type": 1
+			},
+			{
+				"text": "Sample to show 4 Sample to show 2 Sample to show 2 Sample to show 2 Sample to show 2 Sample to show 2 Sample to show 2 Sample to show 2 ",
+				"content_type": 1
+			},
+			{
+				"text": "Sample to show 5 Sample to show 2 Sample to show 2 Sample to show 2 Sample to show 2 Sample to show 2 Sample to show 2 ",
+				"content_type": 1
+			},
+			{
+				"text": "Sample to show 6 Sample to show 2 Sample to show 2 Sample to show 2 Sample to show 2 Sample to show 2 Sample to show 2 Sample to show 2 ",
+				"content_type": 1
+			},
+			{
+				"text": "Sample to show 7 Sample to show 2 Sample to show 2 Sample to show 2 Sample to show 2 Sample to show 2 Sample to show 2 Sample to show 2 ",
+				"content_type": 1
+			},
+			{
+				"text": "COFFEE CRUSH sources and buys green coffees directly from the farmers. If you support the farmers, raise your cup and tag us on social media with #supportfarmers",
+				"content_type": 1
+			},
+			{
+				"text": "Today's chef special, XXX, is made with (ingredient); our chef brings this recipe from (place) \nGrab a taste of (place) at your table",
+				"content_type": 1
+			},
+			{
+				"text": "The ambiance of COFFEE CRUSH was inspired by XXX, it is designed to give you an experience of XXX. Do not hesitate to give us your take about the ambiance :)",
+				"content_type": 1
+			}
+		]
+	}	
+]

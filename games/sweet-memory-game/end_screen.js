@@ -1,8 +1,38 @@
-$.getJSON('../../resources/content.json', allcontent => {
-    $.getJSON('../../resources/config.json', config => {
-        showAd(allcontent, config);
+loadInstanceVariables('../../' + CONTENT_PATH, '../../' + CONFIG_PATH, showAd)
+
+// let promise = new Promise(function(resolve, reject) {
+//     loadInstanceVariables('../../' + CONTENT_PATH, '../../' + CONFIG_PATH)
+//     if (INSTANCE_JSON) {
+//         resolve()
+//     } else {
+//         reject()
+//     }
+// })
+
+// promise.then(function () {
+//     showAd(INSTANCE_JSON, CONFIG_JSON)
+// }, function () {
+//     loadJSONsAndShowAd()
+// })
+
+function loadJSONsAndShowAd() {
+    $.getJSON('../../resources/content.json', allretailcontent => {
+        $.getJSON('../../resources/config.json', config => {
+            var allRetailLocationsContent = allretailcontent;
+            var allcontent;
+            var matches = $.map(allRetailLocationsContent, function(entry) {
+                    var match = entry.urlTag == localStorage['retailLocation'];
+                    return match ? entry : null;
+                });
+            if (matches.length) {
+                allcontent = matches[0];
+            } else {
+                allcontent = allRetailLocationsContent[0];
+            }
+            showAd(allcontent, config);
+        });
     });
-});
+}
 
 function share() {
     if (navigator.share) {
@@ -26,18 +56,18 @@ function resetGame() {
     location.href = 'index.html';
 }
 
-function showAd(allcontent, config) {
+// function showAd(allcontent, config) {
+function showAd() {
     $('.loader').css('display','');
-    var adPath = allcontent["adPath"];
-    var total = allcontent["totalAds"];
-    var number = 1 + Math.floor(Math.random() * total);
-    var urlPath = adPath + '' + number + '.png';
+    var number = 1 + Math.floor(Math.random() * TOTAL_ADS);
+    var urlPath = AD_ASSETS_PATH + '' + number + '.png';
     $('.main').addClass('d-none');
     $('body').addClass('ad-img');
     var closeDiv = document.createElement('div');
     closeDiv.className = 'close-div';
     closeDiv.innerHTML = '<i class="fa fa-times fa-2x" aria-hidden="true"></i>';
-    closeDiv.addEventListener('click', (e) => { showEndScreen(allcontent, config); });
+    // closeDiv.addEventListener('click', (e) => { showEndScreen(allcontent, config); });
+    closeDiv.addEventListener('click', (e) => { showEndScreen(); });
     $('<img/>').attr('src', urlPath).on('load', function() {
         $(this).remove();
         $('body').css('background-image', 'url("' + urlPath + '")');
@@ -56,11 +86,10 @@ function removeAd() {
   $('.main').removeClass('d-none');
 }
 
-function showEndScreen(allcontent, config) {
+// function showEndScreen(allcontent, config) {
+function showEndScreen() {
     removeAd();
     var score = localStorage['memoryGameMoves'];
-    var total = allcontent["content"].length;
-    var number = Math.floor(Math.random() * total);
     Swal.fire({
         allowEscapeKey: false,
         allowOutsideClick: false,
@@ -83,8 +112,6 @@ function showEndScreen(allcontent, config) {
             openNPS();
         }
     });
-    // var triggerDiv = '<div class="trigger-div">' + allcontent["content"][number]["text"] + '</div>';
-    // $('.swal2-container').append(triggerDiv);
     var shareDiv = document.createElement('div');
     shareDiv.className = 'share-div';
     shareDiv.innerHTML = '<i class="fa fa-share fa-2x" aria-hidden="true"></i>';
@@ -96,14 +123,14 @@ function showEndScreen(allcontent, config) {
     $('.swal2-container').append(buttonTextDiv);
     var logoDiv = document.createElement('div');
     logoDiv.className = 'logo-div';
-    logoDiv.innerHTML = '<a href='+ allcontent['website'] +' target="_blank">' 
-    + '<img src=' + allcontent['logo'] + '>' + '</a>';
+    logoDiv.innerHTML = '<a href='+ WEBSITE_LINK +' target="_blank">' 
+    + '<img src=' + LOGO_PATH + '>' + '</a>';
     $('.swal2-container').append(logoDiv);
     localStorage.setItem('lastGame', 7);
 }
 
 function loadNewGame() {
-    window.location.href = window.location.origin + '/' + gameMap[getRandomNumber()];
+    window.location.href = window.location.origin + '/' + GAME_MAP[getRandomNumber()];
 }
 
 function openNPS() {
