@@ -1,5 +1,9 @@
 "use strict";
 console.clear();
+
+// instance variables to be loaded from index.js
+loadInstanceVariables('../../' + CONTENT_PATH, '../../' + CONFIG_PATH)
+
 class Stage {
     constructor() {
         // container
@@ -162,6 +166,7 @@ class Block {
         }
     }
 }
+
 class Game {
     constructor() {
         this.STATES = {
@@ -181,7 +186,6 @@ class Game {
         this.startInstructions = document.getElementById('start-instructions');
         this.scoreContainer.innerHTML = '0';
         // this.triggerFreq = 5;
-        this.allContent = $.getJSON('../../resources/content.json');
         // this.triggerContent = document.getElementById('trigger-content');
         // this.triggerContent.innerHTML = '';
         this.newBlocks = new THREE.Group();
@@ -345,10 +349,8 @@ class Game {
     showAd() {
         $('.loader').css('display','');
         document.removeEventListener('click', this.clickListener);
-        var adPath = this.allContent.responseJSON["adPath"];
-        var total = this.allContent.responseJSON["totalAds"];
-        var number = 1 + Math.floor(Math.random() * total);
-        var urlPath = adPath + '' + number + '.png';
+        var number = 1 + Math.floor(Math.random() * TOTAL_ADS);
+        var urlPath = AD_ASSETS_PATH + '' + number + '.png';
         $('#container').addClass('d-none');
         $('body').addClass('ad-img');
         var closeDiv = document.createElement('div');
@@ -396,8 +398,6 @@ class Game {
                 this.openNPS();
             }
         });
-        // var triggerDiv = '<div class="trigger-div">' + this.getContent() + '</div>';
-        // $('.swal2-container').append(triggerDiv);
         var shareDiv = document.createElement('div');
         shareDiv.className = 'share-div';
         shareDiv.innerHTML = '<i class="fa fa-share fa-2x" aria-hidden="true"></i>';
@@ -409,13 +409,13 @@ class Game {
         $('.swal2-container').append(buttonTextDiv);
         var logoDiv = document.createElement('div');
         logoDiv.className = 'logo-div';
-        logoDiv.innerHTML = '<a href='+ this.allContent.responseJSON['website'] +' target="_blank">' 
-        + '<img src=' + this.allContent.responseJSON['logo'] + '>' + '</a>';
+        logoDiv.innerHTML = '<a href='+ WEBSITE_LINK +' target="_blank">' 
+        + '<img src=' + LOGO_PATH + '>' + '</a>';
         $('.swal2-container').append(logoDiv);
         localStorage.setItem('lastGame', 8);
     }
     loadNewGame() {
-        window.location.href = window.location.origin + '/' + gameMap[getRandomNumber()];
+        window.location.href = window.location.origin + '/' + GAME_MAP[getRandomNumber()];
     }
     openNPS() {
         window.location.href = window.location.origin + '/rating.html';

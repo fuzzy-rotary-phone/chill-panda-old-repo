@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/chill-panda/chill-panda.github.io#readme",
   "dependencies": {
-    "firebase": "^9.13.0"
+    "firebase": "^9.13.0",
+    "qrcode": "^1.5.1"
   }
 }
