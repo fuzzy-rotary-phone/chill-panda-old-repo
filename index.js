@@ -19,6 +19,7 @@ const JSON_KEY_FOR_AD_ASSETS = 'adPath'
 const JSON_KEY_FOR_TOTAL_ADS = 'totalAds'
 const JSON_KEY_FOR_WEBSITE = 'website'
 const JSON_KEY_FOR_LOGO = 'logo'
+const IS_INSTANCE_HANDLED_BY_TAG = false
 var IN_GAME_ASSETS_PATH
 var AD_ASSETS_PATH
 var TOTAL_ADS
@@ -90,8 +91,14 @@ function loadInstanceVariables(content_path, config_path, callback) {
 }
 
 function setVariablesInLocalStorage() {
-	var params = new URLSearchParams(location.search)
-	setRetailLocation(params.get(RETAIL_LOCATION_TAG_NAME)) // add retail location to local storage
+	if (IS_INSTANCE_HANDLED_BY_TAG) {
+		var params = new URLSearchParams(location.search)
+		setRetailLocation(params.get(RETAIL_LOCATION_TAG_NAME)) // add retail location to local storage
+	} else {
+		var parts = location.hostname.split('.');
+		var subdomain = parts.shift();
+		setRetailLocation(subdomain) // add retail location to local storage
+	}
 }
 
 function loadGame() {
