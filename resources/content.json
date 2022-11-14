@@ -4,9 +4,9 @@
 		"urlTag": "",
 		"name": "Chill Panda",
 		"website": "https://chillpanda.in",
-		"logo": "../../assets/ChillPanda/ChillPanda.png",
-		"ingamePath": "../../../assets/ChillPanda/ingame/",
-		"adPath": "../../../assets/ChillPanda/ads/",
+		"logo": "../../assets/retailers/ChillPanda/ChillPanda.png",
+		"ingamePath": "../../../assets/retailers/ChillPanda/ingame/",
+		"adPath": "../../../assets/retailers/ChillPanda/ads/",
 		"totalAds": 6,
 		"content": []
 	},
@@ -15,9 +15,9 @@
 		"urlTag": "nostrocafe",
 		"name": "Nostro Cafe",
 		"website": "https://chillpanda.in",
-		"logo": "../../assets/CoffeeCrush/CoffeeCrush.jpg",
-		"ingamePath": "../../../assets/CoffeeCrush/ingame/",
-		"adPath": "../../../assets/CoffeeCrush/ads/",
+		"logo": "../../assets/retailers/CoffeeCrush/NostroCafe.png",
+		"ingamePath": "../../../assets/retailers/CoffeeCrush/ingame/",
+		"adPath": "../../../assets/retailers/CoffeeCrush/ads/",
 		"totalAds": 10,
 		"content": []
 	},
@@ -27,9 +27,9 @@
 		"name": "Coffee Crush",
 		"industry": "F&B",
 		"website": "http://coffeecrush.net/site/",
-		"logo": "../../assets/CoffeeCrush/CoffeeCrush.jpg",
-		"ingamePath": "../../../assets/CoffeeCrush/ingame/",
-		"adPath": "../../../assets/CoffeeCrush/ads/",
+		"logo": "../../assets/retailers/CoffeeCrush/CoffeeCrush.jpg",
+		"ingamePath": "../../../assets/retailers/CoffeeCrush/ingame/",
+		"adPath": "../../../assets/retailers/CoffeeCrush/ads/",
 		"totalAds": 10,
 		"content": [
 			{

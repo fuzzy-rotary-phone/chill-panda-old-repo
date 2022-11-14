@@ -1,4 +1,4 @@
-const tag_for_qr = 'coffeecrush'
+const tag_for_qr = 'nostrocafe'
 const tag_required = false
 const qrcode_download = true
 
