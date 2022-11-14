@@ -1,5 +1,8 @@
 "use strict";
 /***** DOM *****/
+// instance variables to be loaded from index.js
+loadInstanceVariables('../../' + CONTENT_PATH, '../../' + CONFIG_PATH)
+
 const game = {
     container: document.querySelector(".game-container"),
     character: document.querySelector("#game-character"),
@@ -224,14 +227,6 @@ function userLost() {
     setTimeout(() => { showAd() }, 1000);
 }
 
-let allContent = $.getJSON('../../resources/content.json');
-
-function setTrigger() {
-    let total = allContent.responseJSON["content"].length;
-    let number = Math.floor(Math.random() * total);
-    statusText.trigger.innerHTML = allContent.responseJSON["content"][number]["text"];
-}
-
 let barrierIndex;
 
 function setBarrierIndexRandom() {
@@ -277,12 +272,6 @@ function changeBestScore() {
 }
 
 changeBestScore();
-
-function get_content() {
-    var total = allContent.responseJSON["content"].length;
-    var number = Math.floor(Math.random() * total);
-    return allContent.responseJSON["content"][number]["text"];
-}
 
 function share() {
     if (navigator.share) {
@@ -331,10 +320,8 @@ function showAd() {
     $('.loader').css('display','');
     window.removeEventListener("keyup", keyup);
     window.removeEventListener("touchstart", click);
-    var adPath = allContent.responseJSON["adPath"];
-    var total = allContent.responseJSON["totalAds"];
-    var number = 1 + Math.floor(Math.random() * total);
-    var urlPath = adPath + '' + number + '.png';
+    var number = 1 + Math.floor(Math.random() * TOTAL_ADS);
+    var urlPath = AD_ASSETS_PATH + '' + number + '.png';
     $('.container').addClass('d-none');
     $('html').addClass('fullscreen');
     $('body').addClass('ad-img');
@@ -385,8 +372,6 @@ function showEndScreen() {
             openNPS();
         }
     });
-    // var triggerDiv = '<div class="trigger-div">' + get_content() + '</div>';
-    // $('.swal2-container').append(triggerDiv);
     var shareDiv = document.createElement('div');
     shareDiv.className = 'share-div';
     shareDiv.innerHTML = '<i class="fa fa-share fa-2x" aria-hidden="true"></i>';
@@ -398,14 +383,14 @@ function showEndScreen() {
     $('.swal2-container').append(buttonTextDiv);
     var logoDiv = document.createElement('div');
     logoDiv.className = 'logo-div';
-    logoDiv.innerHTML = '<a href='+ allContent.responseJSON['website'] +' target="_blank">' 
-    + '<img src=' + allContent.responseJSON['logo'] + '>' + '</a>';
+    logoDiv.innerHTML = '<a href='+ WEBSITE_LINK +' target="_blank">' 
+    + '<img src=' + LOGO_PATH + '>' + '</a>';
     $('.swal2-container').append(logoDiv);
     localStorage.setItem('lastGame', 5);
 }
 
 function loadNewGame() {
-    window.location.href = window.location.origin + '/' + gameMap[getRandomNumber()];
+    window.location.href = window.location.origin + '/' + GAME_MAP[getRandomNumber()];
 }
 
 function openNPS() {

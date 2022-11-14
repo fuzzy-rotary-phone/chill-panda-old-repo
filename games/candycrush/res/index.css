@@ -283,12 +283,12 @@ canvas.gamecanvas {
   display: grid;
   grid-column: 2;
   grid-row: 1;
-  align-self: start;
-  justify-self: safe start;
+  align-self: center;
+  justify-self: safe center;
 }
 
 .logo-div img {
-  height: 10vh;
+  height: 30vh;
 }
 
 .trigger-div {

@@ -1,4 +1,7 @@
-﻿function XiaoXiaoLe(canvasId, imgspath, options, scorechange, gameendcalback, timedowncalback) {
+﻿// instance variables to be loaded from index.js
+loadInstanceVariables('../../' + CONTENT_PATH, '../../' + CONFIG_PATH, newGame)
+
+function XiaoXiaoLe(canvasId, imgspath, options, scorechange, gameendcalback, timedowncalback) {
     var _this = this;
     var w = 600, h = 500, boxsize = 100;
     var wi = 6, hi = 5;
@@ -7,6 +10,7 @@
     wi = options.col || wi;
     hi = options.row || hi;
     boxsize = options.boxsize || boxsize;
+    classnum = options.items || classnum;
 
     w = wi * boxsize;
     h = hi * boxsize;
@@ -26,8 +30,6 @@
     var touching = false;   //必须由panstart开始的pan才有效
 
     var canxiao = null;
-
-    var allcontent = $.getJSON('../../resources/content.json');
 
     function preparebackground() {  //绘制背景
         //var bgcanvas = document.getElementById(bgcanvasId)
@@ -52,7 +54,7 @@
     function loadimg() {    //加载图片
         for (var i = 0; i < classnum; i++) {
             bitimages[i] = new createjs.Bitmap(imgspath + "/" + (i + 1) + ".png");
-            bitimages[i].scaleX = bitimages[i].scaleY = 3;
+            bitimages[i].scaleX = bitimages[i].scaleY = 0.2;
             bitimages[i].regX = bitimages[i].regY = 0;
         }
     }
@@ -704,21 +706,6 @@
 
     init.bind(this)();
 
-    var triggerText = document.getElementById('trigger-text');
-    var triggerDiv = document.getElementById('trigger-div');
-
-    function resetTrigger() {
-        triggerText.innerHTML = '';
-        triggerDiv.classList.add('d-none');
-    }
-
-    function setTrigger() {
-        var total = allcontent.responseJSON["content"].length;
-        var number = Math.floor(Math.random() * total);
-        triggerText.innerHTML = allcontent.responseJSON["content"][number]["text"];
-        triggerDiv.classList.remove('d-none');
-    }
-
     function gameendfun() {
         gameend = true;
         gaming = false;
@@ -756,8 +743,6 @@
             createjs.Tween.get(mask).to({ alpha: 0 }, 100).call(function () {
                 mask.visible = false;
             });
-
-            // resetTrigger();
 
             panduan();
 
@@ -813,12 +798,6 @@
         newGame();
     }
 
-    function getContent() {
-        let total = allcontent.responseJSON["content"].length;
-        let number = Math.floor(Math.random() * total);
-        return allcontent.responseJSON["content"][number]["text"];
-    }
-
     function share() {
         if (navigator.share) {
             navigator.share({
@@ -838,10 +817,8 @@
 
     function showAd(key) {
         $('.loader').css('display','');
-        var adPath = allcontent.responseJSON["adPath"];
-        var total = allcontent.responseJSON["totalAds"];
-        var number = 1 + Math.floor(Math.random() * total);
-        var urlPath = adPath + '' + number + '.png';
+        var number = 1 + Math.floor(Math.random() * TOTAL_ADS);
+        var urlPath = AD_ASSETS_PATH + '' + number + '.png';
         $('.main').addClass('d-none');
         $('body').addClass('ad-img');
         var closeDiv = document.createElement('div');
@@ -890,8 +867,6 @@
                 openNPS();
             }
         });
-        // var triggerDiv = '<div class="trigger-div">' + getContent() + '</div>';
-        // $('.swal2-container').append(triggerDiv);
         var shareDiv = document.createElement('div');
         shareDiv.className = 'share-div';
         shareDiv.innerHTML = '<i class="fa fa-share fa-2x" aria-hidden="true"></i>';
@@ -903,14 +878,14 @@
         $('.swal2-container').append(buttonTextDiv);
         var logoDiv = document.createElement('div');
         logoDiv.className = 'logo-div';
-        logoDiv.innerHTML = '<a href='+ allcontent.responseJSON['website'] +' target="_blank">' 
-        + '<img src=' + allcontent.responseJSON['logo'] + '>' + '</a>';
+        logoDiv.innerHTML = '<a href='+ WEBSITE_LINK +' target="_blank">' 
+        + '<img src=' + LOGO_PATH + '>' + '</a>';
         $('.swal2-container').append(logoDiv);
         localStorage.setItem('lastGame', 9);
     }
 
     function loadNewGame() {
-        window.location.href = window.location.origin + '/' + gameMap[getRandomNumber()];
+        window.location.href = window.location.origin + '/' + GAME_MAP[getRandomNumber()];
     }
 
     function openNPS() {
@@ -920,9 +895,10 @@
 
 function newGame() {
     // var xxl = new XiaoXiaoLe("js-game", "img", {
-    var xxl = new XiaoXiaoLe("js-game", "../../assets/ingame", {
-        col:8,  //6 columns
-        row:7,  //5 rows
+    var xxl = new XiaoXiaoLe("js-game", IN_GAME_ASSETS_PATH + 'candycrush', {
+        col: 8,  //6 columns
+        row: 7,  //5 rows
+        items: 5 //5 types of items
     },function (score) {  //score changed calback
         $("#js-score-num").text(score)
     }, function (score) {   //game end calback
@@ -943,7 +919,7 @@ function newGame() {
     })        
 }
 
-newGame();
+// newGame();
 
 gaSetUserId();
 gaSetUserProperties();

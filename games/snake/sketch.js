@@ -1,3 +1,6 @@
+// instance variables to be loaded from index.js
+loadInstanceVariables('../../' + CONTENT_PATH, '../../' + CONFIG_PATH)
+
 // global vars (sorry, very messy)
 // const Swal = require('sweetalert2');
 const vw = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
@@ -15,17 +18,6 @@ while (setting_height) {
     }
 }
 console.log("setting canvas height (in pixels) to " + h);
-//trigger support added below
-const trigger_freq = 5;
-var all_content;
-var curr_content;
-var config;
-$.getJSON('../../resources/content.json', function (data) {
-    all_content = data;
-});
-$.getJSON('../../resources/config.json', function (data) {
-    config = data;
-});
 
 var snake, food;
 var boundaries = { xmin: 0, xmax: w, ymin: 0, ymax: h };
@@ -50,8 +42,7 @@ var saved = {
 var game = {
     started: false,
     ended: false,
-    guide: true,
-    trigger: false
+    guide: true
 };
 
 const difficulties = {
@@ -176,20 +167,9 @@ function setup() {
     button.insane.stroke = "#6a040f";
     button.insane.difficulty = difficulties.insane;
 
-    // trigger button (not interactive)
-    button.trigger = { ...button.template };
-    button.trigger.resize(vw * 0.8, max(vw, vh) * 0.2);
-    button.trigger.y = centerbtns(3);
-    button.trigger.x = vw * 0.5 - button.trigger.width * 0.5;
-    button.trigger.stroke = "#f00";
-    button.trigger.onPress = function () { };
-    button.trigger.onRelease = function () { };
-    button.trigger.text = get_content();
-    button.trigger.textSize = button.template.textSize * 0.6;
-
     // again button
     button.again = { ...button.template };
-    button.again.y = button.trigger.y + button.trigger.height + btnspacing;
+    button.again.y = button.insane.y + button.insane.height + btnspacing;
     button.again.text = "again";
     button.again.onRelease = function () {
         if (game.ended) {
@@ -210,20 +190,10 @@ function setup() {
         }
     };
 
-    // trigger ok button
-    button.triggerok = { ...button.template };
-    button.triggerok.y = button.again.y + button.template.height + btnspacing;
-    button.triggerok.text = "OK";
-    button.triggerok.onRelease = function () {
-        if (game.trigger) {
-            game.trigger = false;
-        }
-    };
-
     // score button (not interactive)
     button.score = { ...button.template };
     button.score.resize(button.template.width * 1.3, button.template.height * 1.3);
-    button.score.y = button.trigger.y - button.score.height - btnspacing;
+    button.score.y = button.insane.y - button.score.height - btnspacing;
     button.score.x = vw * 0.5 - button.score.width * 0.5;
     button.score.stroke = "#00f";
     button.score.onPress = function () { };
@@ -271,13 +241,6 @@ function draw() {
 
     // die screen
     if (game.ended) {
-        // button.score.text = "Score: " + snake.score_final;
-        // button.again.stroke = saved.stroke;
-
-        // button.score.draw();
-        // button.again.draw();
-        // button.back.draw();
-        // button.trigger.draw();
         noLoop();
         $('.p5Canvas').addClass('d-none');
         setTimeout(function() { showAd() }, 1000);
@@ -293,7 +256,7 @@ function draw() {
     scale(pixel_size); // resets after draw loop begins again
 
     // gameplay
-    if (game.started && !game.trigger && !game.ended) {
+    if (game.started && !game.ended) {
         // draw over menu buttons
         drawbg();
         snake.input();
@@ -333,10 +296,6 @@ function draw() {
 
 
         if (snake.did_eat(food)) {
-            if(if_show_content(snake.body)) {
-                curr_content = get_content();
-                // game.trigger = true;
-            }
             snake.body.push(snake.body[snake.body.length - 1]);
             new_food(snake.body);
             eat_tune.cloneNode(true).play();
@@ -344,36 +303,7 @@ function draw() {
 
         food.show();
         snake.show();
-    }
-
-    // trigger
-    if (game.trigger && !game.ended) {
-        drawdimbg();
-        textSize(w * 0.05);
-        strokeWeight(0);
-        fill(80);
-        text(curr_content, w * 0.1, h * 0.1, w*0.8, h*0.8);
-        setTimeout(function() {sleep(2000);}, 100);
-        snake.hammer.on("swipe tap press", function () {
-            game.trigger = false;
-            game.pause = true;
-        });
-    }
-}
-
-//if to show trigger content
-function if_show_content(body) {
-    if(body.length > 1 && ((body.length - 1) % trigger_freq == 0)) {
-        return true;
-    }
-    return false;
-}
-
-//get trigger content
-function get_content() {
-    var total = all_content["content"].length;
-    var number = Math.floor(Math.random() * total);
-    return all_content["content"][number]["text"];
+    }    
 }
 
 function sleep(miliseconds) {
@@ -403,10 +333,8 @@ function share() {
 
 function showAd(key) {
     $('.loader').css('display','');
-    var adPath = all_content["adPath"];
-    var total = all_content["totalAds"];
-    var number = 1 + Math.floor(Math.random() * total);
-    var urlPath = adPath + '' + number + '.png';
+    var number = 1 + Math.floor(Math.random() * TOTAL_ADS);
+    var urlPath = AD_ASSETS_PATH + '' + number + '.png';
     $('canvas').addClass('d-none');
     $('body').addClass('ad-img');
     var closeDiv = document.createElement('div');
@@ -449,9 +377,6 @@ function showEndScreen() {
     }).then((result) => {
         /* Read more about isConfirmed, isDenied below */
         if (result.isConfirmed) {
-            // $('.p5Canvas').removeClass('d-none');
-            // button.back.onRelease();
-            // loop();
             window.location = window.location.pathname;
         } else if (result.isDenied) {
             loadNewGame();
@@ -459,8 +384,6 @@ function showEndScreen() {
             openNPS();
         }
     });
-    // var triggerDiv = '<div class="trigger-div">' + button.trigger.text + '</div>';
-    // $('.swal2-container').append(triggerDiv);
     var shareDiv = document.createElement('div');
     shareDiv.className = 'share-div';
     shareDiv.innerHTML = '<i class="fa fa-share fa-2x" aria-hidden="true"></i>';
@@ -472,14 +395,14 @@ function showEndScreen() {
     $('.swal2-container').append(buttonTextDiv);
     var logoDiv = document.createElement('div');
     logoDiv.className = 'logo-div';
-    logoDiv.innerHTML = '<a href='+ all_content['website'] +' target="_blank">' 
-    + '<img src=' + all_content['logo'] + '>' + '</a>';
+    logoDiv.innerHTML = '<a href='+ WEBSITE_LINK +' target="_blank">' 
+    + '<img src=' + LOGO_PATH + '>' + '</a>';
     $('.swal2-container').append(logoDiv);
     localStorage.setItem('lastGame', 6);
 }
 
 function loadNewGame() {
-    window.location.href = window.location.origin + '/' + gameMap[getRandomNumber()];
+    window.location.href = window.location.origin + '/' + GAME_MAP[getRandomNumber()];
 }
 
 function openNPS() {

@@ -12,7 +12,6 @@ export default function (main) {
         global.flappyBird = main.makeFlappyBird()
         global.floor = main.createFloor()
         global.pipes = main.makePipes()
-        global.allContent = $.getJSON('../../resources/content.json')
       },
 
       draw() {
@@ -73,10 +72,8 @@ export default function (main) {
       },
       click() {
         $('.loader').css('display','');
-        var adPath = global.allContent.responseJSON["adPath"];
-        var total = global.allContent.responseJSON["totalAds"];
-        var number = 1 + Math.floor(Math.random() * total);
-        var urlPath = adPath + '' + number + '.png';
+        var number = 1 + Math.floor(Math.random() * TOTAL_ADS);
+        var urlPath = AD_ASSETS_PATH + '' + number + '.png';
         $('canvas').addClass('d-none');
         $('#instructions').addClass('d-none');
         $('body').addClass('ad-img');
@@ -106,13 +103,11 @@ export default function (main) {
             if (result.isConfirmed) {
               main.changeScreen(main.display.start)
             } else if (result.isDenied) {
-              window.location.href = window.location.origin + '/' + gameMap[getRandomNumber()];
+              window.location.href = window.location.origin + '/' + GAME_MAP[getRandomNumber()];
             } else if (result.dismiss === Swal.DismissReason.cancel) {
               window.location.href = window.location.origin + '/rating.html';
             }
           });
-          // var triggerDiv = '<div class="trigger-div">' + global.allContent.responseJSON["content"][number]["text"] + '</div>';
-          // $('.swal2-container').append(triggerDiv);
           var shareDiv = document.createElement('div');
           shareDiv.className = 'share-div';
           shareDiv.innerHTML = '<i class="fa fa-share fa-2x" aria-hidden="true"></i>';
@@ -139,8 +134,8 @@ export default function (main) {
           $('.swal2-container').append(buttonTextDiv);
           var logoDiv = document.createElement('div');
           logoDiv.className = 'logo-div';
-          logoDiv.innerHTML = '<a href='+ global.allContent.responseJSON['website'] +' target="_blank">' 
-          + '<img src=' + global.allContent.responseJSON['logo'] + '>' + '</a>';
+          logoDiv.innerHTML = '<a href='+ WEBSITE_LINK +' target="_blank">' 
+          + '<img src=' + LOGO_PATH + '>' + '</a>';
           $('.swal2-container').append(logoDiv);
           localStorage.setItem('lastGame', 3);
         });

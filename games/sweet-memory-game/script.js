@@ -11,10 +11,8 @@ var symbols = ['bicycle', 'bicycle', 'leaf', 'leaf', 'cube', 'cube', 'anchor', '
 		gameCardsQTY = symbols.length / 2,
 		rank3stars = gameCardsQTY + 2,
 		rank2stars = gameCardsQTY + 6,
-		rank1stars = gameCardsQTY + 10,
-		allContent = $.getJSON('../../resources/content.json'),
-		config = $.getJSON('../../resources/config.json');
-
+		rank1stars = gameCardsQTY + 10;
+		
 // Shuffle function From http://stackoverflow.com/a/2450976
 function shuffle(array) {
   var currentIndex = array.length, temporaryValue, randomIndex;
@@ -133,5 +131,7 @@ $deck.on('click', '.card:not(".match, .open")', function() {
 
 initGame();
 
-gaSetUserId();
-gaSetUserProperties();
+$(window).on('load', function() {
+	gaSetUserId();
+	gaSetUserProperties();
+});
