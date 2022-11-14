@@ -97,7 +97,11 @@ function setVariablesInLocalStorage() {
 	} else {
 		var parts = location.hostname.split('.');
 		var subdomain = parts.shift();
-		setRetailLocation(subdomain) // add retail location to local storage
+		if (subdomain == 'chillpanda') {
+			setRetailLocation('')
+		} else {
+			setRetailLocation(subdomain) // add retail location to local storage
+		}
 	}
 }
 
