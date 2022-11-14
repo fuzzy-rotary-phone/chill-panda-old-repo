@@ -19,7 +19,7 @@ const JSON_KEY_FOR_AD_ASSETS = 'adPath'
 const JSON_KEY_FOR_TOTAL_ADS = 'totalAds'
 const JSON_KEY_FOR_WEBSITE = 'website'
 const JSON_KEY_FOR_LOGO = 'logo'
-const IS_INSTANCE_HANDLED_BY_TAG = false
+const IS_INSTANCE_HANDLED_BY_TAG = true
 var IN_GAME_ASSETS_PATH
 var AD_ASSETS_PATH
 var TOTAL_ADS
