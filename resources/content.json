@@ -15,9 +15,9 @@
 		"urlTag": "nostrocafe",
 		"name": "Nostro Cafe",
 		"website": "https://chillpanda.in",
-		"logo": "../../assets/retailers/CoffeeCrush/NostroCafe.png",
-		"ingamePath": "../../../assets/retailers/CoffeeCrush/ingame/",
-		"adPath": "../../../assets/retailers/CoffeeCrush/ads/",
+		"logo": "../../assets/retailers/NostroCafe/NostroCafe.png",
+		"ingamePath": "../../../assets/retailers/NostroCafe/ingame/",
+		"adPath": "../../../assets/retailers/NostroCafe/ads/",
 		"totalAds": 10,
 		"content": []
 	},
