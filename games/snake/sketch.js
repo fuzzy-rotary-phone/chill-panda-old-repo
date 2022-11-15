@@ -412,7 +412,10 @@ function showAd(key) {
     var closeDiv = document.createElement('div');
     closeDiv.className = 'close-div';
     closeDiv.innerHTML = '<i class="fa fa-times fa-2x" aria-hidden="true"></i>';
-    closeDiv.addEventListener('click', (e) => { showEndScreen(); });
+    closeDiv.addEventListener('click', (e) => { 
+      gtag("event", "seen_ad");
+      showEndScreen(key);                                              
+    });
     $('<img/>').attr('src', urlPath).on('load', function() {
         $(this).remove();
         $('body').css('background-image', 'url("' + urlPath + '")');

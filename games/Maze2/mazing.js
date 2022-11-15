@@ -306,7 +306,10 @@ Mazing.prototype.showAd = function () {
   var closeDiv = document.createElement('div');
   closeDiv.className = 'close-div';
   closeDiv.innerHTML = '<i class="fa fa-times fa-2x" aria-hidden="true"></i>';
-  closeDiv.addEventListener('click', (e) => { this.showEndScreen(); });
+  closeDiv.addEventListener('click', (e) => { 
+    gtag("event", "seen_ad");
+    this.showEndScreen();                                              
+  });
   $('<img/>').attr('src', urlPath).on('load', function() {
     $(this).remove();
     $('body').css('background-image', 'url("' + urlPath + '")');
