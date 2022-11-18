@@ -1,5 +1,5 @@
 const tag_for_qr = 'nostrocafe'
-const tag_required = false
+const tag_required = true
 const qrcode_download = true
 
 var canvas = document.getElementById('canvas')

@@ -32,5 +32,17 @@
 		"adPath": "../../../assets/retailers/CoffeeCrush/ads/",
 		"totalAds": 10,
 		"content": []
+	},
+	{
+		"id": "bbb",
+		"urlTag": "bbb",
+		"name": "Bangalore Biryani Bhawan",
+		"industry": "F&B",
+		"website": "http://coffeecrush.net/site/",
+		"logo": "../../assets/retailers/BangaloreBiryaniBhawan/CoffeeCrush.jpg",
+		"ingamePath": "../../../assets/retailers/BangaloreBiryaniBhawan/ingame/",
+		"adPath": "../../../assets/retailers/BangaloreBiryaniBhawan/ads/",
+		"totalAds": 10,
+		"content": []		
 	}
 ]
