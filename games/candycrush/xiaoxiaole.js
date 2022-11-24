@@ -706,6 +706,21 @@ function XiaoXiaoLe(canvasId, imgspath, options, scorechange, gameendcalback, ti
 
     init.bind(this)();
 
+    function showTimeup() {
+        var triggerText = document.getElementById('trigger-text');
+        var triggerDiv = document.getElementById('trigger-div');
+        triggerText.innerHTML = 'Time up!';
+        triggerDiv.classList.remove('d-none');
+    }
+
+    function resetGameChanges() {
+        var triggerText = document.getElementById('trigger-text');
+        var triggerDiv = document.getElementById('trigger-div');
+        triggerText.innerHTML = '';
+        triggerDiv.classList.add('d-none');
+        $("#start-button").removeClass('d-none');
+    }
+
     function gameendfun() {
         gameend = true;
         gaming = false;
@@ -713,12 +728,9 @@ function XiaoXiaoLe(canvasId, imgspath, options, scorechange, gameendcalback, ti
         canmove = false;
         mask.visible = true;
         createjs.Tween.get(mask).to({ alpha: 1 }, 300);
-        // if (gameendcalback) {
-        //     gameendcalback(score);
-        // }
-        // setTrigger();
-        // showEndScreen();
-        showAd();
+        showTimeup();
+        setTimeout(showAd, 2000);
+        // showAd();
     }
     var interv = 0;
     var gaming = false;
@@ -762,8 +774,8 @@ function XiaoXiaoLe(canvasId, imgspath, options, scorechange, gameendcalback, ti
                     clearInterval(interv);
                 }
             }, 1000);
-
         }
+        $("#start-button").addClass('d-none');
     }
 
     this.hint = function () {
@@ -816,6 +828,7 @@ function XiaoXiaoLe(canvasId, imgspath, options, scorechange, gameendcalback, ti
     }
 
     function showAd(key) {
+        resetGameChanges()
         $('.loader').css('display','');
         var number = 1 + Math.floor(Math.random() * TOTAL_ADS);
         var urlPath = AD_ASSETS_PATH + '' + number + '.png';

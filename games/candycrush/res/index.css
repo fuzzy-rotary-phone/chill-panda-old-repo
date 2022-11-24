@@ -44,27 +44,27 @@ div.score {
     grid-column: 1;
 }
 
-    div.score > button {
-        font-size: calc(1em + 1vmin);
-        padding: 0.5vh 3vh;
-        color: #fff;
-        background-color: #593f6b;
-        border: none;
-        border-radius: 3px;
-        cursor: pointer;
-        outline: none;
-        transition: all 0.3s;
-        border: solid 3px #ccc;
-        border-radius: 8px;
-        color: #fff;
-        cursor: pointer;
-        width: 10em;
-        height: 2em;
-    }
+div.score > button {
+    font-size: calc(1em + 1vmin);
+    padding: 0.5vh 3vh;
+    color: #fff;
+    background-color: #593f6b;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    outline: none;
+    transition: all 0.3s;
+    border: solid 3px #ccc;
+    border-radius: 8px;
+    color: #fff;
+    cursor: pointer;
+    width: 10em;
+    height: 2em;
+}
 
-        div.score > button:active {
-            background-color: #A92453;
-        }
+div.score > button:active {
+    background-color: #A92453;
+}
 
 .score.top {
     margin-top: 1em;
@@ -128,21 +128,18 @@ canvas.gamecanvas {
 
 #trigger-div {
     position: absolute;
+    left: 0;
+    right: 0;
     z-index: 3;
     text-align: center;
-    top: 10vh;
+    top: 15vh;
     padding: 2vh;
     margin: 1vh 5vh 1vh 5vh;
-    border-color: black;
-    border-style: solid;
-    border-radius: 1vh;
-    border-width: 0.5vh;
-    border-color: magenta;
 }
 
 #trigger-text {
     color: chartreuse;
-    font-size: 3vh;
+    font-size: 6vh;
     font-weight: bold;
 }
 
