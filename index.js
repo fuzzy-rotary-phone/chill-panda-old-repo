@@ -10,6 +10,11 @@ const GAME_MAP = {
 	9: 'games/candycrush/index.html',
 	10: 'games/Maze2/maze.html'
 };
+const TAG_FOR_PARTHA_DENTAL = 'parthadental'
+const TAG_FOR_NOSTRO_CAFE = 'nostrocafe'
+const TAG_FOR_COFFEECRUSH = 'coffeecrush'
+const TAG_FOR_BLR_BIRYANI_BHAWAN = 'bbb'
+
 const CONTENT_PATH = 'resources/content.json'
 const CONFIG_PATH = 'resources/config.json'
 const RETAIL_LOCATION_TAG_NAME = 'where'

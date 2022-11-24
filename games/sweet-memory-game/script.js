@@ -21,10 +21,10 @@ symbols = setSymbolsOnRetailLocation()
 
 function setSymbolsOnRetailLocation() {
 	var retailLocation = localStorage['retailLocation']
-	if (retailLocation == 'parthadental') {
+	if (retailLocation == TAG_FOR_PARTHA_DENTAL) {
 		return SYMBOLS_FOR_HOSPITALS
 	}
-	// if (retailLocation == 'nostrocafe' || retailLocation == 'coffeecrush' || retailLocation == 'bbb') {
+	// if (retailLocation == TAG_FOR_NOSTRO_CAFE || retailLocation == TAG_FOR_COFFEECRUSH || retailLocation == TAG_FOR_BLR_BIRYANI_BHAWAN) {
 	// 	return SYMBOLS_FOR_FOOD
 	// }
 	return SYMBOLS_DEFAULT

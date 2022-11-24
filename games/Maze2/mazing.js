@@ -66,7 +66,19 @@ function Mazing(id) {
   this.swipeHandler();
 
   this.winFlag = false;
+
+  this.retailLocation = localStorage['retailLocation']
+  this.customizeMaze()
 };
+
+Mazing.prototype.customizeMaze = function() {
+  if (this.retailLocation == TAG_FOR_PARTHA_DENTAL) {
+    $('.nubbin').not(".wall").toggleClass('hospital')
+  }
+  if (this.retailLocation == TAG_FOR_NOSTRO_CAFE || this.retailLocation == TAG_FOR_COFFEECRUSH || this.retailLocation == TAG_FOR_BLR_BIRYANI_BHAWAN) {
+    $('.nubbin').not(".wall").toggleClass('cafe')
+  }
+}
 
 Mazing.prototype.enableSpeech = function() {
   this.utter = new SpeechSynthesisUtterance()
@@ -86,7 +98,7 @@ Mazing.prototype.setMessage = function(text) {
 Mazing.prototype.heroTakeTreasure = function() {
   this.maze[this.heroPos].classList.remove("nubbin");
   this.heroScore += 10;
-  this.setMessage("yay, treasure!");
+  this.setMessage("yay, keep going!");
 };
 
 Mazing.prototype.heroTakeKey = function() {
@@ -248,7 +260,7 @@ Mazing.prototype.swipeHandler = function() {
 Mazing.prototype.setChildMode = function() {
   this.childMode = true;
   this.heroScore = 0;
-  this.setMessage("collect all the treasure");
+  this.setMessage("collect all the items");
 };
 
 Mazing.prototype.share = function () {

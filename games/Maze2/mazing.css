@@ -56,22 +56,57 @@ body {
   content: "\1F6AA";
 }
 #maze div div.nubbin::after {
+  content: "\1F33C";
+/*  content: "\01F370";*/
+}
+#maze div.nubbin:nth-of-type(3n)::after {
+  content: "\1F344";
+/*  content: "\01F369";*/
+}
+#maze div.nubbin:nth-of-type(5n)::after {
+  content: "\1F33B";
+/*  content: "\01F354";*/
+}
+#maze div.nubbin:nth-of-type(7n)::after {
+  content: "\1F48E";
+/*  content: "\01F355";*/
+}
+#maze div.nubbin:nth-of-type(13n)::after {
+  content: "\1F381";
+/*  content: "\01F357";*/
+}
+#maze div div.nubbin.hospital::after {
+  content: "\01F3E5";
+}
+#maze div.nubbin.hospital:nth-of-type(3n)::after {
+  content: "\01F9B7";
+}
+#maze div.nubbin.hospital:nth-of-type(5n)::after {
+  content: "\01F489";
+}
+#maze div.nubbin.hospital:nth-of-type(7n)::after {
+  content: "\01F48A";
+}
+#maze div.nubbin.hospital:nth-of-type(13n)::after {
+  content: "\01F9BD";
+}
+#maze div div.nubbin.cafe::after {
   /*content: "\1F33C";*/
   content: "\01F370";
 }
-#maze div.nubbin:nth-of-type(3n)::after {
+#maze div.nubbin.cafe:nth-of-type(3n)::after {
   /*content: "\1F344";*/
   content: "\01F369";
 }
-#maze div.nubbin:nth-of-type(5n)::after {
+#maze div.nubbin.cafe:nth-of-type(5n)::after {
   /*content: "\1F33B";*/
   content: "\01F354";
 }
-#maze div.nubbin:nth-of-type(7n)::after {
+#maze div.nubbin.cafe:nth-of-type(7n)::after {
   /*content: "\1F48E";*/
   content: "\01F355";
 }
-#maze div.nubbin:nth-of-type(13n)::after {
+#maze div.nubbin.cafe:nth-of-type(13n)::after {
   /*content: "\1F381";*/
   content: "\01F357";
 }
