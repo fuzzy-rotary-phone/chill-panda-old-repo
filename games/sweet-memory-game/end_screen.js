@@ -34,11 +34,11 @@ function loadJSONsAndShowAd() {
     });
 }
 
-function share() {
+function share(score) {
     if (navigator.share) {
         navigator.share({
             title: 'Chill Panda',
-            text: 'Haha! Play and beat me if you can',
+            text: 'Haha! I completed in ' + score + ' moves. Play and beat me if you can',
             url: window.location.href
         }).then(() => {
             console.log('Thanks for sharing!');
@@ -115,7 +115,9 @@ function showEndScreen() {
     var shareDiv = document.createElement('div');
     shareDiv.className = 'share-div';
     shareDiv.innerHTML = '<i class="fa fa-share fa-2x" aria-hidden="true"></i>';
-    shareDiv.addEventListener('click', share);
+    shareDiv.addEventListener('click', function() {
+        share(score)
+    });
     $('.swal2-container').append(shareDiv);
     var buttonTextDiv = document.createElement('div');
     buttonTextDiv.className = 'button-div';

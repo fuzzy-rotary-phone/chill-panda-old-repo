@@ -37612,11 +37612,11 @@ var Game = function () {
     }
   }, {
     key: 'share',
-    value: function share() {
+    value: function share(score) {
       if (navigator.share) {
         navigator.share({
           title: 'Chill Panda',
-          text: 'Haha! Play and beat me if you can',
+          text: 'Haha! I scored ' + score + '. Play and beat me if you can',
           url: window.location.href
         }).then(() => {
           console.log('Thanks for sharing!');
@@ -37662,6 +37662,7 @@ var Game = function () {
     key: 'showEndScreen',
     value: function showEndScreen(gameStatus) {
       this.removeAd();
+      var score = this.score
       Swal.fire({
         allowEscapeKey: false,
         allowOutsideClick: false,
@@ -37687,7 +37688,22 @@ var Game = function () {
       var shareDiv = document.createElement('div');
       shareDiv.className = 'share-div';
       shareDiv.innerHTML = '<i class="fa fa-share fa-2x" aria-hidden="true"></i>';
-      shareDiv.addEventListener('click', this.share);
+      shareDiv.addEventListener('click', function() {
+        if (navigator.share) {
+          navigator.share({
+            title: 'Chill Panda',
+            text: 'Haha! I scored ' + score + '. Play and beat me if you can',
+            url: window.location.href
+          }).then(() => {
+            console.log('Thanks for sharing!');
+          }).catch(err => {
+            console.log('Error while using Web share API:');
+            console.log(err);
+          });
+        } else {
+          Swal.fire("Browser doesn't support this API !");
+        }
+      });
       $('.swal2-container').append(shareDiv);
       var buttonTextDiv = document.createElement('div');
       buttonTextDiv.className = 'button-div';

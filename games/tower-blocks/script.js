@@ -332,22 +332,6 @@ class Game {
         let number = Math.floor(Math.random() * total);
         return this.allContent.responseJSON["content"][number]["text"];
     }
-    share() {
-        if (navigator.share) {
-            navigator.share({
-                title: 'Chill Panda',
-                text: 'Haha! Play and beat me if you can',
-                url: window.location.href
-            }).then(() => {
-                console.log('Thanks for sharing!');
-            }).catch(err => {
-                console.log('Error while using Web share API:');
-                console.log(err);
-            });
-        } else {
-            Swal.fire("Browser doesn't support this API !");
-        }
-    }
     showAd() {
         $('.loader').css('display','');
         document.removeEventListener('click', this.clickListener);
@@ -377,11 +361,12 @@ class Game {
     }
     showEndScreen() {
         this.removeAd();
+        var score = this.scoreContainer.innerHTML
         Swal.fire({
             allowEscapeKey: false,
             allowOutsideClick: false,
             title: 'Game over!',
-            html: '<span>Your score is </span><strong>' + this.scoreContainer.innerHTML + '</strong><br/>',
+            html: '<span>Your score is </span><strong>' + score + '</strong><br/>',
             icon: 'error',
             backdrop: 'white',
             showDenyButton: true,
@@ -403,7 +388,22 @@ class Game {
         var shareDiv = document.createElement('div');
         shareDiv.className = 'share-div';
         shareDiv.innerHTML = '<i class="fa fa-share fa-2x" aria-hidden="true"></i>';
-        shareDiv.addEventListener('click', this.share);
+        shareDiv.addEventListener('click', function() {
+            if (navigator.share) {
+                navigator.share({
+                    title: 'Chill Panda',
+                    text: 'Haha! I scored ' + score + '. Play and beat me if you can',
+                    url: window.location.href
+                }).then(() => {
+                    console.log('Thanks for sharing!');
+                }).catch(err => {
+                    console.log('Error while using Web share API:');
+                    console.log(err);
+                });
+            } else {
+                Swal.fire("Browser doesn't support this API !");
+            }
+        });
         $('.swal2-container').append(shareDiv);
         var buttonTextDiv = document.createElement('div');
         buttonTextDiv.className = 'button-div';
