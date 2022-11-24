@@ -1,4 +1,8 @@
-var symbols = ['bicycle', 'bicycle', 'leaf', 'leaf', 'cube', 'cube', 'anchor', 'anchor', 'paper-plane-o', 'paper-plane-o', 'bolt', 'bolt', 'bomb', 'bomb', 'diamond', 'diamond'],
+const SYMBOLS_FOR_HOSPITALS = ['ambulance', 'ambulance', 'heartbeat', 'heartbeat', 'stethoscope', 'stethoscope', 'wheelchair', 'wheelchair', 'user-md', 'user-md', 'hospital-o', 'hospital-o', 'life-ring', 'life-ring', 'thermometer-quarter', 'thermometer-quarter']
+// const SYMBOLS_FOR_FOOD = ['']
+const SYMBOLS_DEFAULT = ['bicycle', 'bicycle', 'leaf', 'leaf', 'cube', 'cube', 'anchor', 'anchor', 'paper-plane-o', 'paper-plane-o', 'bolt', 'bolt', 'bomb', 'bomb', 'diamond', 'diamond']
+
+var symbols = SYMBOLS_DEFAULT,
 		opened = [],
 		match = 0,
 		moves = 0,
@@ -13,6 +17,19 @@ var symbols = ['bicycle', 'bicycle', 'leaf', 'leaf', 'cube', 'cube', 'anchor', '
 		rank2stars = gameCardsQTY + 6,
 		rank1stars = gameCardsQTY + 10;
 		
+symbols = setSymbolsOnRetailLocation()
+
+function setSymbolsOnRetailLocation() {
+	var retailLocation = localStorage['retailLocation']
+	if (retailLocation == 'parthadental') {
+		return SYMBOLS_FOR_HOSPITALS
+	}
+	// if (retailLocation == 'nostrocafe' || retailLocation == 'coffeecrush' || retailLocation == 'bbb') {
+	// 	return SYMBOLS_FOR_FOOD
+	// }
+	return SYMBOLS_DEFAULT
+}
+
 // Shuffle function From http://stackoverflow.com/a/2450976
 function shuffle(array) {
   var currentIndex = array.length, temporaryValue, randomIndex;

@@ -1,4 +1,4 @@
-const tag_for_qr = 'nostrocafe'
+const tag_for_qr = 'parthadental'
 const tag_required = true
 const qrcode_download = true
 
