@@ -73,8 +73,9 @@ div.swal-alert {
 
 #instructions {
   margin-top: -2em;
-  padding: 1em;
-  max-width: 20em;  
+  padding: 0.5em;
+  max-width: 20em;
+  text-align: center;
 }
 
 .close-div {
