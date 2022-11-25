@@ -54,6 +54,7 @@ function share(score) {
 function resetGame() {
     // body...
     location.href = 'index.html';
+    localStorage['memoryGameMoves'] = 0
 }
 
 // function showAd(allcontent, config) {

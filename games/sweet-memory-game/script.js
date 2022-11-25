@@ -45,6 +45,39 @@ function shuffle(array) {
   return array;
 }
 
+function showConfirmExitPopup() {
+  swal({
+    allowEscapeKey: false,
+    allowOutsideClick: false,
+    title: 'Are you sure to exit?',
+    type: 'warning',
+    // backdrop: 'white',
+    showCancelButton: true,
+    confirmButtonColor: '#9BCB3C',
+    cancelButtonColor: '#EE0E51',
+    confirmButtonText: 'Yes',
+    cancelButtonText: 'No',
+  }).then(function(isConfirm) {
+    if (isConfirm) {
+      location.href = 'end_screen.html'
+    }
+  });
+}
+
+function addCloseButton() {
+  var closeDiv = document.createElement('div');
+  closeDiv.className = 'close-div';
+  closeDiv.innerHTML = '<i class="fa fa-times fa-2x" aria-hidden="true"></i>';
+  // closeDiv.addEventListener('click', (e) => { showEndScreen(allcontent, config); });
+  closeDiv.addEventListener('click', (e) => {
+  	showConfirmExitPopup()
+  });
+  $('body').append(closeDiv);
+  setTimeout(function() {
+  	closeDiv.classList.add('is-shown');
+  }, 1000);
+}
+
 // Initial Game
 function initGame() {
 	var cards = shuffle(symbols);
@@ -56,6 +89,7 @@ function initGame() {
 	for (var i = 0; i < cards.length; i++) {
 		$deck.append($('<li class="card"><i class="fa fa-' + cards[i] + '"></i></li>'))
 	}
+	addCloseButton()
 };
 
 // Set Rating and final Score
@@ -92,7 +126,8 @@ $restart.on('click', function() {
     showCancelButton: true,
     confirmButtonColor: '#9BCB3C',
     cancelButtonColor: '#EE0E51',
-    confirmButtonText: 'Yes, Restart Game!'
+    confirmButtonText: 'Yes',
+    cancelButtonText: 'No'
   }).then(function(isConfirm) {
     if (isConfirm) {
       initGame();
