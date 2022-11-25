@@ -321,7 +321,7 @@ function showAd() {
     window.removeEventListener("keyup", keyup);
     window.removeEventListener("touchstart", click);
     var number = 1 + Math.floor(Math.random() * TOTAL_ADS);
-    var urlPath = AD_ASSETS_PATH + '' + number + '.png';
+    var urlPath = AD_ASSETS_PATH + '' + number + AD_FORMAT;
     $('.container').addClass('d-none');
     $('html').addClass('fullscreen');
     $('body').addClass('ad-img');

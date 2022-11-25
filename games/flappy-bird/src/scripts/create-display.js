@@ -81,7 +81,7 @@ export default function (main) {
           $('.loader').css('display','');
           currentScore = score
           var number = 1 + Math.floor(Math.random() * TOTAL_ADS);
-          var urlPath = AD_ASSETS_PATH + '' + number + '.png';
+          var urlPath = AD_ASSETS_PATH + '' + number + AD_FORMAT;
           $('canvas').addClass('d-none');
           $('#instructions').addClass('d-none');
           $('body').addClass('ad-img');

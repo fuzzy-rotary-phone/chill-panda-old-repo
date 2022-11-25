@@ -309,7 +309,7 @@ function share(data) {
 function showAd(key) {
   $('.loader').css('display','');
   var number = 1 + Math.floor(Math.random() * TOTAL_ADS);
-  var urlPath = AD_ASSETS_PATH + '' + number + '.png';
+  var urlPath = AD_ASSETS_PATH + '' + number + AD_FORMAT;
   $('.wrapper').addClass('d-none');
   $('body').addClass('ad-img');
   var closeDiv = document.createElement('div');

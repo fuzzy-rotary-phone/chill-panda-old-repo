@@ -31,7 +31,8 @@
 		"logo": "../../assets/retailers/NostroCafe/NostroCafe.png",
 		"ingamePath": "../../../assets/retailers/NostroCafe/ingame/",
 		"adPath": "../../../assets/retailers/NostroCafe/ads/",
-		"totalAds": 10,
+		"totalAds": 6,
+		"adFormat": ".gif",
 		"content": []
 	},
 	{
@@ -55,7 +56,7 @@
 		"logo": "../../assets/retailers/BangaloreBiryaniBhawan/CoffeeCrush.jpg",
 		"ingamePath": "../../../assets/retailers/BangaloreBiryaniBhawan/ingame/",
 		"adPath": "../../../assets/retailers/BangaloreBiryaniBhawan/ads/",
-		"totalAds": 10,
+		"totalAds": 5,
 		"content": []		
 	}
 ]
