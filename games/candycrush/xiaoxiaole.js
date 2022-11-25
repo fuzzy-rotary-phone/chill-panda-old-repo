@@ -54,7 +54,7 @@ function XiaoXiaoLe(canvasId, imgspath, options, scorechange, gameendcalback, ti
     function loadimg() {    //加载图片
         for (var i = 0; i < classnum; i++) {
             bitimages[i] = new createjs.Bitmap(imgspath + "/" + (i + 1) + ".png");
-            bitimages[i].scaleX = bitimages[i].scaleY = 0.2;
+            bitimages[i].scaleX = bitimages[i].scaleY = 0.19;
             bitimages[i].regX = bitimages[i].regY = 0;
         }
     }

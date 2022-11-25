@@ -3,6 +3,8 @@ loadInstanceVariables('../../' + CONTENT_PATH, '../../' + CONFIG_PATH)
 
 // global vars (sorry, very messy)
 // const Swal = require('sweetalert2');
+const TOTAL_IMAGES_FOR_HOSPITAL = 12
+const TOTAL_IMAGES_DEFAULT = 30
 const vw = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
 const vh = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
 const w = 12; // snake pixel size
@@ -52,7 +54,15 @@ const difficulties = {
     insane: 'insane' // 17
 }
 
-var total_images = 30;
+var total_images = setTotalImages()
+
+function setTotalImages() {
+    var retailLocation = localStorage['retailLocation']
+    if (retailLocation == TAG_FOR_PARTHA_DENTAL) {
+        return TOTAL_IMAGES_FOR_HOSPITAL
+    }
+    return TOTAL_IMAGES_DEFAULT
+}
 
 function new_food(body) {
     var number = 1 + floor(random(total_images));
