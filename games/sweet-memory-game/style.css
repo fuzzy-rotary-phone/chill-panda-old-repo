@@ -1,6 +1,7 @@
 html,
 body {
   height: 100%;
+  width: 100%;
 }
 
 body {
@@ -11,6 +12,9 @@ body {
   background: #FF9090;
   overflow: hidden;
   font-family: "Coda", cursive;
+}
+
+.main {
   transform: scale(0.8);
 }
 
