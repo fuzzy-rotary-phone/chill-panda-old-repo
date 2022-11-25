@@ -1,6 +1,6 @@
 const SYMBOLS_FOR_HOSPITALS = ['ambulance', 'ambulance', 'heartbeat', 'heartbeat', 'stethoscope', 'stethoscope', 'wheelchair', 'wheelchair', 'user-md', 'user-md', 'hospital-o', 'hospital-o', 'life-ring', 'life-ring', 'thermometer-quarter', 'thermometer-quarter']
-const SYMBOLS_FOR_CAFE = ['cupcake', 'cupcake', 'pizza-slice', 'pizza-slice', 'burger-soda', 'burger-soda', 'ice-cream', 'ice-cream', 'donut', 'donut', 'cake-candles', 'cake-candles', 'user-chef', 'user-chef', 'mug-hot', 'mug-hot']
-const SYMBOLS_FOR_BIRYANI = ['pepper-hot', 'pepper-hot', 'drumstick', 'drumstick', 'fish-fins', 'fish-fins', 'french-fries', 'french-fries', 'pizza-slice', 'pizza-slice', 'user-chef', 'user-chef', 'burger-soda', 'burger-soda', 'bowl-rice', 'bowl-rice']
+const SYMBOLS_FOR_CAFE = ['cookie-bite', 'cookie-bite', 'pizza-slice', 'pizza-slice', 'burger', 'burger', 'ice-cream', 'ice-cream', 'champagne-glasses', 'champagne-glasses', 'cake-candles', 'cake-candles', 'candy-cane', 'candy-cane', 'mug-hot', 'mug-hot']
+const SYMBOLS_FOR_BIRYANI = ['pepper-hot', 'pepper-hot', 'drumstick-bite', 'drumstick-bite', 'fish-fins', 'fish-fins', 'champagne-glasses', 'champagne-glasses', 'pizza-slice', 'pizza-slice', 'ice-cream', 'ice-cream', 'burger', 'burger', 'bowl-rice', 'bowl-rice']
 const SYMBOLS_DEFAULT = ['bicycle', 'bicycle', 'leaf', 'leaf', 'cube', 'cube', 'anchor', 'anchor', 'paper-plane-o', 'paper-plane-o', 'bolt', 'bolt', 'bomb', 'bomb', 'diamond', 'diamond']
 
 var symbols = SYMBOLS_DEFAULT,
