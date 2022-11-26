@@ -79,6 +79,7 @@ export default function (main) {
       draw() {
         if (!isOverDraw) {
           $('.loader').css('display','');
+          localStorage.setItem('lastGame', 3);
           currentScore = score
           var number = 1 + Math.floor(Math.random() * TOTAL_ADS);
           var urlPath = AD_ASSETS_PATH + '' + number + AD_FORMAT;
@@ -99,55 +100,54 @@ export default function (main) {
               allowOutsideClick: false,
               title: 'Game over!',
               html: "<p>You've earned <strong>" + currentScore + "</strong> points</p>",
-              icon: 'error',
               backdrop: 'white',
               showDenyButton: true,
               showCancelButton: true,
-              confirmButtonText: '<i class="fa fa-repeat fa-2x" aria-hidden="true"></i>',
-              denyButtonText: '<i class="fa fa-random fa-2x" aria-hidden="true"></i>',
-              cancelButtonText: '<i class="fa fa-times fa-2x" aria-hidden="true"></i>',
+              confirmButtonText: 'Try a different game?',
+              denyButtonText: 'Play again',
+              cancelButtonText: 'Challenge a friend',
             }).then((result) => {
               /* Read more about isConfirmed, isDenied below */
               if (result.isConfirmed) {
+                window.location.href = window.location.origin + '/' + GAME_MAP[getRandomNumber()];
+              } else if (result.isDenied) {
                 currentScore = 0
                 isOverDraw = false
                 main.changeScreen(main.display.start)
-              } else if (result.isDenied) {
-                window.location.href = window.location.origin + '/' + GAME_MAP[getRandomNumber()];
               } else if (result.dismiss === Swal.DismissReason.cancel) {
-                window.location.href = window.location.origin + '/rating.html';
+                if (navigator.share) {
+                  navigator.share({
+                    title: 'Chill Panda',
+                    text: 'Haha! I scored ' + currentScore + '. Play and beat me if you can',
+                    url: window.location.href
+                  }).then(() => {
+                    console.log('Thanks for sharing!');
+                  }).catch(err => {
+                    console.log('Error while using Web share API:');
+                    console.log(err);
+                  });
+                } else {
+                  Swal.fire("Browser doesn't support this API !");
+                }
               }
             });
-            var shareDiv = document.createElement('div');
-            shareDiv.className = 'share-div';
-            shareDiv.innerHTML = '<i class="fa fa-share fa-2x" aria-hidden="true"></i>';
-            shareDiv.addEventListener('click', () => {
-              if (navigator.share) {
-                navigator.share({
-                  title: 'Chill Panda',
-                  text: 'Haha! I scored ' + currentScore + '. Play and beat me if you can',
-                  url: window.location.href
-                }).then(() => {
-                  console.log('Thanks for sharing!');
-                }).catch(err => {
-                  console.log('Error while using Web share API:');
-                  console.log(err);
-                });
-              } else {
-                Swal.fire("Browser doesn't support this API !");
-              }          
+            var closeDiv = document.createElement('div');
+            closeDiv.className = 'share-div';
+            closeDiv.innerHTML = '<i class="fa fa-times fa-2x" aria-hidden="true"></i>';
+            closeDiv.addEventListener('click', function() {
+              window.location.href = window.location.origin + '/rating.html';
             });
-            $('.swal2-container').append(shareDiv);
-            var buttonTextDiv = document.createElement('div');
-            buttonTextDiv.className = 'button-div';
-            buttonTextDiv.innerHTML = '<span>Repeat</span><span>Shuffle</span><span>Exit</span>';
-            $('.swal2-container').append(buttonTextDiv);
+            $('.swal2-container').append(closeDiv);            
             var logoDiv = document.createElement('div');
             logoDiv.className = 'logo-div';
             logoDiv.innerHTML = '<a href='+ WEBSITE_LINK +' target="_blank">' 
             + '<img src=' + LOGO_PATH + '>' + '</a>';
             $('.swal2-container').append(logoDiv);
-            localStorage.setItem('lastGame', 3);
+            var gifDiv = document.createElement('div');
+            gifDiv.className = 'gif-div'
+            gifDiv.innerHTML = '<a href='+ WEBSITE_LINK +' target="_blank">'
+            + '<img src=' + GIF_PATH + '>' + '</a>';
+            $('.swal2-container').append(gifDiv)            
           });
           $('<img/>').attr('src', urlPath).on('load', function() {
             $(this).remove();
