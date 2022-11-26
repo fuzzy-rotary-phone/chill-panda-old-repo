@@ -37662,59 +37662,59 @@ var Game = function () {
     key: 'showEndScreen',
     value: function showEndScreen(gameStatus) {
       this.removeAd();
+      localStorage.setItem('lastGame', 1);
       var score = this.score
       Swal.fire({
         allowEscapeKey: false,
         allowOutsideClick: false,
         title: gameStatus,
         html: '<span>' + this.getScoreMessage() + ' Your score is <strong>' + this.score + '</strong></span>',
-        icon: this.gameStatus == 'You Win!' ? 'success' : 'error',
         backdrop: 'white',
         showDenyButton: true,
         showCancelButton: true,
-        confirmButtonText: '<i class="fa fa-repeat fa-2x" aria-hidden="true"></i>',
-        denyButtonText: '<i class="fa fa-random fa-2x" aria-hidden="true"></i>',
-        cancelButtonText: '<i class="fa fa-times fa-2x" aria-hidden="true"></i>',
+        confirmButtonText: 'Try a different game?',
+        denyButtonText: 'Play again',
+        cancelButtonText: 'Challenge a friend',
       }).then((result) => {
         /* Read more about isConfirmed, isDenied below */
         if (result.isConfirmed) {
-          window.location = window.location.pathname;
-        } else if (result.isDenied) {
           this.loadNewGame();
+        } else if (result.isDenied) {
+          window.location = window.location.pathname;
         } else if (result.dismiss === Swal.DismissReason.cancel) {
-          this.openNPS();
+          if (navigator.share) {
+            navigator.share({
+              title: 'Chill Panda',
+              text: 'Haha! I scored ' + score + '. Play and beat me if you can',
+              url: window.location.href
+            }).then(() => {
+              console.log('Thanks for sharing!');
+            }).catch(err => {
+              console.log('Error while using Web share API:');
+              console.log(err);
+            });
+          } else {
+            Swal.fire("Browser doesn't support this API !");
+          }
         }
       });
-      var shareDiv = document.createElement('div');
-      shareDiv.className = 'share-div';
-      shareDiv.innerHTML = '<i class="fa fa-share fa-2x" aria-hidden="true"></i>';
-      shareDiv.addEventListener('click', function() {
-        if (navigator.share) {
-          navigator.share({
-            title: 'Chill Panda',
-            text: 'Haha! I scored ' + score + '. Play and beat me if you can',
-            url: window.location.href
-          }).then(() => {
-            console.log('Thanks for sharing!');
-          }).catch(err => {
-            console.log('Error while using Web share API:');
-            console.log(err);
-          });
-        } else {
-          Swal.fire("Browser doesn't support this API !");
-        }
+      var closeDiv = document.createElement('div');
+      closeDiv.className = 'share-div';
+      closeDiv.innerHTML = '<i class="fa fa-times fa-2x" aria-hidden="true"></i>';
+      closeDiv.addEventListener('click', function() {
+          openNPS()
       });
-      $('.swal2-container').append(shareDiv);
-      var buttonTextDiv = document.createElement('div');
-      buttonTextDiv.className = 'button-div';
-      buttonTextDiv.innerHTML = '<span>Repeat</span><span>Shuffle</span><span>Exit</span>';
-      $('.swal2-container').append(buttonTextDiv);
+      $('.swal2-container').append(closeDiv);
       var logoDiv = document.createElement('div');
       logoDiv.className = 'logo-div';
       logoDiv.innerHTML = '<a href='+ WEBSITE_LINK +' target="_blank">' 
       + '<img src=../' + LOGO_PATH + '>' + '</a>';
       $('.swal2-container').append(logoDiv);
-      localStorage.setItem('lastGame', 1);
+      var gifDiv = document.createElement('div');
+      gifDiv.className = 'gif-div'
+      gifDiv.innerHTML = '<a href='+ WEBSITE_LINK +' target="_blank">'
+      + '<img src=../' + GIF_PATH + '>' + '</a>';
+      $('.swal2-container').append(gifDiv)
     }
   }, {
     key: 'loadNewGame',

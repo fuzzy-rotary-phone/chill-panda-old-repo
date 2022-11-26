@@ -239,7 +239,7 @@
     gifDiv.className = 'gif-div'
     gifDiv.innerHTML = '<a href='+ WEBSITE_LINK +' target="_blank">'
     + '<img src=' + GIF_PATH + '>' + '</a>';
-    $('.swal2-container').append(gifDiv)    
+    $('.swal2-container').append(gifDiv)
   }
 
   function loadNewGame() {
