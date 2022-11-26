@@ -201,43 +201,45 @@
 
   function showEndScreen(key) {
     removeAd();
+    localStorage.setItem('lastGame', 4);
     Swal.fire({
       allowEscapeKey: false,
       allowOutsideClick: false,
       title: BLURBS[key].header + '!',
       html: '<span>' + BLURBS[key].blurb + '</span>',
-      icon: BLURBS[key].type,
       backdrop: 'white',
       showDenyButton: true,
       showCancelButton: true,
-      confirmButtonText: '<i class="fa fa-repeat fa-2x" aria-hidden="true"></i>',
-      denyButtonText: '<i class="fa fa-random fa-2x" aria-hidden="true"></i>',
-      cancelButtonText: '<i class="fa fa-times fa-2x" aria-hidden="true"></i>',
+      confirmButtonText: 'Try a different game?',
+      denyButtonText: 'Play again',
+      cancelButtonText: 'Challenge a friend',
     }).then((result) => {
       /* Read more about isConfirmed, isDenied below */
       if (result.isConfirmed) {
-        newGame();
-      } else if (result.isDenied) {
         loadNewGame();
+      } else if (result.isDenied) {
+        newGame();
       } else if (result.dismiss === Swal.DismissReason.cancel) {
-        openNPS();
+        share()
       }
     });
-    var shareDiv = document.createElement('div');
-    shareDiv.className = 'share-div';
-    shareDiv.innerHTML = '<i class="fa fa-share fa-2x" aria-hidden="true"></i>';
-    shareDiv.addEventListener('click', share);
-    $('.swal2-container').append(shareDiv);
-    var buttonTextDiv = document.createElement('div');
-    buttonTextDiv.className = 'button-div';
-    buttonTextDiv.innerHTML = '<span>Repeat</span><span>Shuffle</span><span>Exit</span>';
-    $('.swal2-container').append(buttonTextDiv);
+    var closeDiv = document.createElement('div');
+    closeDiv.className = 'share-div';
+    closeDiv.innerHTML = '<i class="fa fa-times fa-2x" aria-hidden="true"></i>';
+    closeDiv.addEventListener('click', function() {
+        openNPS()
+    });
+    $('.swal2-container').append(closeDiv);
     var logoDiv = document.createElement('div');
     logoDiv.className = 'logo-div';
     logoDiv.innerHTML = '<a href='+ WEBSITE_LINK +' target="_blank">' 
     + '<img src=' + LOGO_PATH + '>' + '</a>';
     $('.swal2-container').append(logoDiv);
-    localStorage.setItem('lastGame', 4);
+    var gifDiv = document.createElement('div');
+    gifDiv.className = 'gif-div'
+    gifDiv.innerHTML = '<a href='+ WEBSITE_LINK +' target="_blank">'
+    + '<img src=' + GIF_PATH + '>' + '</a>';
+    $('.swal2-container').append(gifDiv)    
   }
 
   function loadNewGame() {
