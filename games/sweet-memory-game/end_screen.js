@@ -115,9 +115,9 @@ function showEndScreen() {
     }).then((result) => {
         /* Read more about isConfirmed, isDenied below */
         if (result.isConfirmed) {
-            resetGame();
-        } else if (result.isDenied) {
             loadNewGame();
+        } else if (result.isDenied) {
+            resetGame();
         } else if (result.dismiss === Swal.DismissReason.cancel) {
             share(score)
         }
