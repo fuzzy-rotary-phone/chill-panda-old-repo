@@ -91,6 +91,7 @@ function initGame() {
 	for (var i = 0; i < cards.length; i++) {
 		$deck.append($('<li class="card"><i class="fa fa-' + cards[i] + '"></i></li>'))
 	}
+	localStorage['memoryGameMoves'] = 0
 	addCloseButton()
 };
 
