@@ -1,4 +1,7 @@
 ((document) => {
+  // instance variables to be loaded from index.js
+  loadInstanceVariables('../../' + CONTENT_PATH, '../../' + CONFIG_PATH)
+
   // parts of the game board
   let moves = document.querySelector('.moves')
   // ?
@@ -9,8 +12,7 @@
 
   // control variables 
   let colorArray = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j']
-  let allContent = $.getJSON('../../resources/content.json')
-
+  
   let running = false
 
   let cell = '-x'
@@ -46,14 +48,6 @@
     return n < 10 ? shuffle(collection).slice(0, n) : collection
   }
 
-  let setTrigger = () => {
-    let total = allContent.responseJSON["content"].length;
-    let number = Math.floor(Math.random() * total);
-    triggertext.innerHTML = allContent.responseJSON["content"][number]["text"];
-    triggertext.classList.remove("d-none");
-    triggertext.style.removeProperty("border");
-  }
-
   let checkWin = (moves) => {
     let n = 0
     let msg = ''
@@ -78,7 +72,6 @@
       }
     }
     if(!running) {
-      // setTrigger()
       gameover.innerHTML = msg
       setTimeout(function() { showAd(winFlag) }, 1000);
     }
@@ -114,12 +107,6 @@
       child.className = randomize ? collection[Math.floor((Math.random() * collection.length))] : collection[i]
       container.appendChild(child)
     }
-  }
-
-  let resetTrigger = () => {
-    triggertext.classList.add("d-none");
-    triggertext.innerHTML = '';
-    triggertext.style.setProperty('border','none');    
   }
 
   let newGame = () => {
@@ -167,12 +154,6 @@
     }
   })
 
-  function getContent() {
-    let total = allContent.responseJSON["content"].length;
-    let number = Math.floor(Math.random() * total);
-    return allContent.responseJSON["content"][number]["text"];
-  }
-
   function share() {
     if (navigator.share) {
       navigator.share({
@@ -192,10 +173,8 @@
 
   function showAd(key) {
     $('.loader').css('display','');
-    var adPath = allContent.responseJSON["adPath"];
-    var total = allContent.responseJSON["totalAds"];
-    var number = 1 + Math.floor(Math.random() * total);
-    var urlPath = adPath + '' + number + '.png';
+    var number = 1 + Math.floor(Math.random() * TOTAL_ADS);
+    var urlPath = AD_ASSETS_PATH + '' + number + AD_FORMAT;
     $('main').addClass('d-none');
     $('body').addClass('ad-img');
     var closeDiv = document.createElement('div');
@@ -225,49 +204,49 @@
 
   function showEndScreen(key) {
     removeAd();
+    localStorage.setItem('lastGame', 4);
     Swal.fire({
       allowEscapeKey: false,
       allowOutsideClick: false,
       title: BLURBS[key].header + '!',
       html: '<span>' + BLURBS[key].blurb + '</span>',
-      icon: BLURBS[key].type,
       backdrop: 'white',
       showDenyButton: true,
       showCancelButton: true,
-      confirmButtonText: '<i class="fa fa-repeat fa-2x" aria-hidden="true"></i>',
-      denyButtonText: '<i class="fa fa-random fa-2x" aria-hidden="true"></i>',
-      cancelButtonText: '<i class="fa fa-times fa-2x" aria-hidden="true"></i>',
+      confirmButtonText: 'Try a different game?',
+      denyButtonText: 'Play again',
+      cancelButtonText: 'Challenge a friend',
     }).then((result) => {
       /* Read more about isConfirmed, isDenied below */
       if (result.isConfirmed) {
-        newGame();
-      } else if (result.isDenied) {
         loadNewGame();
+      } else if (result.isDenied) {
+        newGame();
       } else if (result.dismiss === Swal.DismissReason.cancel) {
-        openNPS();
+        share()
       }
     });
-    // var triggerDiv = '<div class="trigger-div">' + getContent() + '</div>';
-    // $('.swal2-container').append(triggerDiv);
-    var shareDiv = document.createElement('div');
-    shareDiv.className = 'share-div';
-    shareDiv.innerHTML = '<i class="fa fa-share fa-2x" aria-hidden="true"></i>';
-    shareDiv.addEventListener('click', share);
-    $('.swal2-container').append(shareDiv);
-    var buttonTextDiv = document.createElement('div');
-    buttonTextDiv.className = 'button-div';
-    buttonTextDiv.innerHTML = '<span>Repeat</span><span>Shuffle</span><span>Exit</span>';
-    $('.swal2-container').append(buttonTextDiv);
+    var closeDiv = document.createElement('div');
+    closeDiv.className = 'share-div';
+    closeDiv.innerHTML = '<i class="fa fa-times fa-2x" aria-hidden="true"></i>';
+    closeDiv.addEventListener('click', function() {
+        openNPS()
+    });
+    $('.swal2-container').append(closeDiv);
     var logoDiv = document.createElement('div');
     logoDiv.className = 'logo-div';
-    logoDiv.innerHTML = '<a href='+ allContent.responseJSON['website'] +' target="_blank">' 
-    + '<img src=' + allContent.responseJSON['logo'] + '>' + '</a>';
+    logoDiv.innerHTML = '<a href='+ WEBSITE_LINK +' target="_blank">' 
+    + '<img src=' + LOGO_PATH + '>' + '</a>';
     $('.swal2-container').append(logoDiv);
-    localStorage.setItem('lastGame', 4);
+    var gifDiv = document.createElement('div');
+    gifDiv.className = 'gif-div'
+    gifDiv.innerHTML = '<a href='+ WEBSITE_LINK +' target="_blank">'
+    + '<img src=' + GIF_PATH + '>' + '</a>';
+    $('.swal2-container').append(gifDiv)
   }
 
   function loadNewGame() {
-    window.location.href = window.location.origin + '/' + gameMap[getRandomNumber()];
+    window.location.href = window.location.origin + '/' + GAME_MAP[getRandomNumber()];
   }
 
   function openNPS() {

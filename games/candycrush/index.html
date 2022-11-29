@@ -1,0 +1,75 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>CandyCrush</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <meta name="color-scheme" content="light">
+
+    <link rel="stylesheet" href="res/index.css" />
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-Y5F32F5H64"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-Y5F32F5H64');
+    </script>
+
+    <!--  Script  -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sweetalert2@11.5.1/dist/sweetalert2.min.js"></script>
+
+    <!--  Styles  -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.5.1/dist/sweetalert2.min.css">
+    <link rel="stylesheet" href="../../assets/font-awesome-4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../../assets/normalize.css">
+        
+</head>
+<body>
+    <div class="loader"></div>
+    <div class="main">
+        <div id="instructions">
+            <span>
+                Align similar shapes in a line to gain score
+            </span>
+        </div>
+        <div class="score top">
+            <div class="score-num">Score:<span id="js-score-num">0</span></div>
+            <div class="score-time">Time left: <span id="js-time-down">60</span><span style="font-size: calc(1em + 1vmin);">s</span></div>
+        </div>
+        <div class="game-container">
+            <div id="trigger-div" class="d-none">
+                <div id="trigger-text"></div>
+            </div>
+            <canvas id="js-game" width="300" height="250" class="gamecanvas"></canvas>
+        </div>
+        <div id="start-button" class="score buttons">
+            <button id="js-start">Start</button>
+            <!-- <button id="js-hint">Hint</button>
+            <button id="js-chint">Close hint</button> -->
+        </div>        
+    </div>
+
+    <script src="res/zepto.min.1.1.6.js"></script>
+    <script src="res/easeljs-0.8.2.min.js"></script>
+    <script src="res/tweenjs-0.6.2.min.js"></script>
+    <script src="res/hammer.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <!-- <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script> -->
+    <script type="text/javascript" src="../../index.js"></script>
+    <script src="xiaoxiaole.js"></script>
+    <script type="text/javascript">
+        $(window).on('load', function() {
+            $(".loader").fadeOut("1000");
+        });
+    </script>
+</body>
+</html>

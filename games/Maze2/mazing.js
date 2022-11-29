@@ -1,3 +1,6 @@
+// instance variables to be loaded from index.js
+loadInstanceVariables('../../' + CONTENT_PATH, '../../' + CONFIG_PATH)
+
 function Position(x, y) {
   this.x = x;
   this.y = y;
@@ -42,13 +45,6 @@ function Mazing(id) {
   this.initialHeroPos = this.heroPos
   this.initialHeroScore = this.heroScore
 
-  var triggerDiv = document.createElement("div");
-  triggerDiv.id = "trigger-div";
-  var triggerText = document.createElement("div");
-  triggerText.id = "trigger-text";
-  triggerDiv.appendChild(triggerText);
-  this.mazeContainer.insertAdjacentElement("afterend", triggerDiv);
-
   var mazeOutputDiv = document.createElement("div");
   mazeOutputDiv.id = "maze_output";
 
@@ -69,14 +65,20 @@ function Mazing(id) {
   this.hammer.get("swipe").set({ direction: Hammer.DIRECTION_ALL }); // enable vertical swipes
   this.swipeHandler();
 
-  //trigger control added
-  this.allContent = $.getJSON('../../resources/content.json');
-  this.triggerDiv = document.getElementById("trigger-div");
-  this.triggerText = document.getElementById("trigger-text");
-  this.triggerDiv.classList.add("d-none");
-
   this.winFlag = false;
+
+  this.retailLocation = localStorage['retailLocation']
+  this.customizeMaze()
 };
+
+Mazing.prototype.customizeMaze = function() {
+  if (this.retailLocation == TAG_FOR_PARTHA_DENTAL) {
+    $('.nubbin').not(".wall").toggleClass('hospital')
+  }
+  if (this.retailLocation == TAG_FOR_NOSTRO_CAFE || this.retailLocation == TAG_FOR_COFFEECRUSH || this.retailLocation == TAG_FOR_BLR_BIRYANI_BHAWAN) {
+    $('.nubbin').not(".wall").toggleClass('cafe')
+  }
+}
 
 Mazing.prototype.enableSpeech = function() {
   this.utter = new SpeechSynthesisUtterance()
@@ -96,7 +98,7 @@ Mazing.prototype.setMessage = function(text) {
 Mazing.prototype.heroTakeTreasure = function() {
   this.maze[this.heroPos].classList.remove("nubbin");
   this.heroScore += 10;
-  this.setMessage("yay, treasure!");
+  this.setMessage("yay, keep going!");
 };
 
 Mazing.prototype.heroTakeKey = function() {
@@ -258,20 +260,7 @@ Mazing.prototype.swipeHandler = function() {
 Mazing.prototype.setChildMode = function() {
   this.childMode = true;
   this.heroScore = 0;
-  this.setMessage("collect all the treasure");
-};
-
-Mazing.prototype.setTrigger = function () {
-  var total = this.allContent.responseJSON["content"].length;
-  var number = Math.floor(Math.random() * total);
-  this.triggerText.innerHTML = this.allContent.responseJSON["content"][number]["text"];
-  this.triggerDiv.classList.remove("d-none");
-};
-
-Mazing.prototype.getContent = function () {
-  var total = this.allContent.responseJSON["content"].length;
-  var number = Math.floor(Math.random() * total);
-  return this.allContent.responseJSON["content"][number]["text"];
+  this.setMessage("collect all the items");
 };
 
 Mazing.prototype.share = function () {
@@ -296,10 +285,8 @@ Mazing.prototype.resetGame = function () {
 };
 
 Mazing.prototype.showAd = function () {
-  var adPath = this.allContent.responseJSON["adPath"];
-  var total = this.allContent.responseJSON["totalAds"];
-  var number = 1 + Math.floor(Math.random() * total);
-  var urlPath = adPath + '' + number + '.png';
+  var number = 1 + Math.floor(Math.random() * TOTAL_ADS);
+  var urlPath = AD_ASSETS_PATH + '' + number + AD_FORMAT;
   $('#maze_container').addClass('d-none');
   $('#instructions').addClass('d-none');
   $('body').addClass('ad-img');
@@ -331,49 +318,50 @@ Mazing.prototype.removeAd = function () {
 
 Mazing.prototype.showEndScreen = function () {
   this.removeAd();
+  localStorage.setItem('lastGame', 10);
   Swal.fire({
     allowEscapeKey: false,
     allowOutsideClick: false,
     title: this.winFlag ? 'Congratulations!' : 'Game over!',
     html: '<span>' + this.mazeMessage.innerHTML + '</span>',
-    icon: this.winFlag ? 'success' : 'error',
     backdrop: 'white',
     showDenyButton: true,
     showCancelButton: true,
-    confirmButtonText: '<i class="fa fa-repeat fa-2x" aria-hidden="true"></i>',
-    denyButtonText: '<i class="fa fa-random fa-2x" aria-hidden="true"></i>',
-    cancelButtonText: '<i class="fa fa-times fa-2x" aria-hidden="true"></i>',
+    confirmButtonText: 'Try a different game?',
+    denyButtonText: 'Play again',
+    cancelButtonText: 'Challenge a friend',
   }).then((result) => {
     /* Read more about isConfirmed, isDenied below */
     if (result.isConfirmed) {
-        this.resetGame();
+      this.loadNewGame();
     } else if (result.isDenied) {
-        this.loadNewGame();
+      this.resetGame();
     } else if (result.dismiss === Swal.DismissReason.cancel) {
+      this.share()
         this.openNPS();
     }
   });
-  // var triggerDiv = '<div class="trigger-div">' + this.getContent() + '</div>';
-  // $('.swal2-container').append(triggerDiv);
-  var shareDiv = document.createElement('div');
-  shareDiv.className = 'share-div';
-  shareDiv.innerHTML = '<i class="fa fa-share fa-2x" aria-hidden="true"></i>';
-  shareDiv.addEventListener('click', this.share);
-  $('.swal2-container').append(shareDiv);
-  var buttonTextDiv = document.createElement('div');
-  buttonTextDiv.className = 'button-div';
-  buttonTextDiv.innerHTML = '<span>Repeat</span><span>Shuffle</span><span>Exit</span>';
-  $('.swal2-container').append(buttonTextDiv);
+  var closeDiv = document.createElement('div');
+  closeDiv.className = 'share-div';
+  closeDiv.innerHTML = '<i class="fa fa-times fa-2x" aria-hidden="true"></i>';
+  closeDiv.addEventListener('click', function() {
+    this.openNPS()
+  });
+  $('.swal2-container').append(closeDiv)
   var logoDiv = document.createElement('div');
   logoDiv.className = 'logo-div';
-  logoDiv.innerHTML = '<a href='+ this.allContent.responseJSON['website'] +' target="_blank">' 
-  + '<img src=' + this.allContent.responseJSON['logo'] + '>' + '</a>';
+  logoDiv.innerHTML = '<a href='+ WEBSITE_LINK +' target="_blank">' 
+  + '<img src=' + LOGO_PATH + '>' + '</a>';
   $('.swal2-container').append(logoDiv);
-  localStorage.setItem('lastGame', 10);
+  var gifDiv = document.createElement('div');
+  gifDiv.className = 'gif-div'
+  gifDiv.innerHTML = '<a href='+ WEBSITE_LINK +' target="_blank">'
+  + '<img src=' + GIF_PATH + '>' + '</a>';
+  $('.swal2-container').append(gifDiv)  
 };
 
 Mazing.prototype.loadNewGame = function() {
-  window.location.href = window.location.origin + '/' + gameMap[getRandomNumber()];
+  window.location.href = window.location.origin + '/' + GAME_MAP[getRandomNumber()];
 };
 
 Mazing.prototype.openNPS = function() {

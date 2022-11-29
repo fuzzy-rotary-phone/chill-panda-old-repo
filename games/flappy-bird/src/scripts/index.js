@@ -29,3 +29,6 @@ createScreen(main)
 createMenus(main)
 
 export default main
+
+// instance variables to be loaded from index.js
+loadInstanceVariables('../../' + CONTENT_PATH, '../../' + CONFIG_PATH)

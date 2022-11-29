@@ -1,4 +1,4 @@
-const gameMap = {
+const GAME_MAP = {
 	1: 'games/DuckHunt-JS/dist/index.html',
 	2: 'games/align-four/index.html',
 	3: 'games/flappy-bird/index.html',
@@ -7,9 +7,36 @@ const gameMap = {
 	6: 'games/snake/index.html',
 	7: 'games/sweet-memory-game/index.html',
 	8: 'games/tower-blocks/index.html',
-	9: 'games/Elimination-games-XiaoXiaoLe/index.html',
+	9: 'games/candycrush/index.html',
 	10: 'games/Maze2/maze.html'
 };
+const TAG_FOR_PARTHA_DENTAL = 'parthadental'
+const TAG_FOR_NOSTRO_CAFE = 'nostrocafe'
+const TAG_FOR_COFFEECRUSH = 'coffeecrush'
+const TAG_FOR_BLR_BIRYANI_BHAWAN = 'bbb'
+
+const CONTENT_PATH = 'resources/content.json'
+const CONFIG_PATH = 'resources/config.json'
+const RETAIL_LOCATION_TAG_NAME = 'where'
+const JSON_KEY_FOR_RETAIL_LOCATION = 'urlTag'
+const JSON_KEY_FOR_IN_GAME_ASSETS = 'ingamePath'
+const JSON_KEY_FOR_AD_ASSETS = 'adPath'
+const JSON_KEY_FOR_TOTAL_ADS = 'totalAds'
+const JSON_KEY_FOR_AD_FORMAT = 'adFormat'
+const JSON_KEY_FOR_WEBSITE = 'website'
+const JSON_KEY_FOR_LOGO = 'logo'
+const JSON_KEY_FOR_GIF = 'gif'
+const IS_INSTANCE_HANDLED_BY_TAG = true
+var IN_GAME_ASSETS_PATH
+var AD_ASSETS_PATH
+var TOTAL_ADS
+var AD_FORMAT
+var WEBSITE_LINK
+var LOGO_PATH
+var GIF_PATH
+var ALL_CONTENT_INSTANCE_JSON
+var INSTANCE_JSON
+var CONFIG_JSON
 
 function getRandomNumber() {
 	var total = 10;
@@ -23,9 +50,76 @@ function getRandomNumber() {
 	return number;
 }
 
+function setRetailLocation(retailLocation) {
+	if (retailLocation) {
+		localStorage.setItem('retailLocation', retailLocation)
+	} else {
+		localStorage.setItem('retailLocation', '')
+	}
+}
+
+function getJsonByKeyValue(data, tagName, tagValue) {
+    var matches = $.map(data, function(entry) {
+            var match = entry[tagName] == (tagValue ? tagValue : '')
+            return match ? entry : null
+        });
+    return matches.length ? matches[0] : null
+}
+
+function setInGameVariables() {
+	IN_GAME_ASSETS_PATH = INSTANCE_JSON[JSON_KEY_FOR_IN_GAME_ASSETS]
+}
+
+function setAdVariables() {
+	AD_ASSETS_PATH = INSTANCE_JSON[JSON_KEY_FOR_AD_ASSETS]
+	TOTAL_ADS = INSTANCE_JSON[JSON_KEY_FOR_TOTAL_ADS]
+	WEBSITE_LINK = INSTANCE_JSON[JSON_KEY_FOR_WEBSITE]
+	LOGO_PATH = INSTANCE_JSON[JSON_KEY_FOR_LOGO]
+	GIF_PATH = INSTANCE_JSON[JSON_KEY_FOR_GIF]
+	AD_FORMAT = INSTANCE_JSON[JSON_KEY_FOR_AD_FORMAT] ? INSTANCE_JSON[JSON_KEY_FOR_AD_FORMAT] : '.png'
+}
+
+function setInstanceVariables() {
+	INSTANCE_JSON = getJsonByKeyValue(ALL_CONTENT_INSTANCE_JSON, JSON_KEY_FOR_RETAIL_LOCATION, localStorage['retailLocation'])
+	if (!INSTANCE_JSON) {
+		INSTANCE_JSON = ALL_CONTENT_INSTANCE_JSON[0]
+	}
+	setInGameVariables()
+	setAdVariables()
+}
+
+function loadInstanceVariables(content_path, config_path, callback) {
+	$.getJSON(content_path, function(content) {
+		$.getJSON(config_path, function(data) {
+			ALL_CONTENT_INSTANCE_JSON = content
+			CONFIG_JSON = data
+			setInstanceVariables()
+			if (callback) {
+				callback()
+			}
+		})
+	})
+}
+
+function setVariablesInLocalStorage() {
+	if (IS_INSTANCE_HANDLED_BY_TAG) {
+		var params = new URLSearchParams(location.search)
+		setRetailLocation(params.get(RETAIL_LOCATION_TAG_NAME)) // add retail location to local storage
+	} else {
+		var parts = location.hostname.split('.');
+		var subdomain = parts.shift();
+		if (subdomain == 'chillpanda') {
+			setRetailLocation('')
+		} else {
+			setRetailLocation(subdomain) // add retail location to local storage
+		}
+	}
+}
+
 function loadGame() {
-	var number = getRandomNumber();
-	$('#myiframe').attr('src', gameMap[number]);
+	var number = getRandomNumber().toString();
+	setVariablesInLocalStorage()
+	$('#myiframe').attr('src', GAME_MAP[number])
 }
 
 let s4 = () => {
