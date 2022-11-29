@@ -3,6 +3,8 @@ loadInstanceVariables('../../' + CONTENT_PATH, '../../' + CONFIG_PATH)
 
 // global vars (sorry, very messy)
 // const Swal = require('sweetalert2');
+const TOTAL_IMAGES_FOR_HOSPITAL = 12
+const TOTAL_IMAGES_DEFAULT = 30
 const vw = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
 const vh = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
 const w = 12; // snake pixel size
@@ -52,7 +54,15 @@ const difficulties = {
     insane: 'insane' // 17
 }
 
-var total_images = 30;
+var total_images = setTotalImages()
+
+function setTotalImages() {
+    var retailLocation = localStorage['retailLocation']
+    if (retailLocation == TAG_FOR_PARTHA_DENTAL) {
+        return TOTAL_IMAGES_FOR_HOSPITAL
+    }
+    return TOTAL_IMAGES_DEFAULT
+}
 
 function new_food(body) {
     var number = 1 + floor(random(total_images));
@@ -314,11 +324,11 @@ function sleep(miliseconds) {
    }
 }
 
-function share() {
+function share(score) {
     if (navigator.share) {
         navigator.share({
             title: 'Chill Panda',
-            text: 'Haha! Play and beat me if you can',
+            text: 'Haha! I scored ' + score + '. Play and beat me if you can',
             url: window.location.href
         }).then(() => {
             console.log('Thanks for sharing!');
@@ -334,13 +344,16 @@ function share() {
 function showAd(key) {
     $('.loader').css('display','');
     var number = 1 + Math.floor(Math.random() * TOTAL_ADS);
-    var urlPath = AD_ASSETS_PATH + '' + number + '.png';
+    var urlPath = AD_ASSETS_PATH + '' + number + AD_FORMAT;
     $('canvas').addClass('d-none');
     $('body').addClass('ad-img');
     var closeDiv = document.createElement('div');
     closeDiv.className = 'close-div';
     closeDiv.innerHTML = '<i class="fa fa-times fa-2x" aria-hidden="true"></i>';
-    closeDiv.addEventListener('click', (e) => { showEndScreen(); });
+    closeDiv.addEventListener('click', (e) => { 
+      gtag("event", "seen_ad");
+      showEndScreen(key);                                              
+    });
     $('<img/>').attr('src', urlPath).on('load', function() {
         $(this).remove();
         $('body').css('background-image', 'url("' + urlPath + '")');
@@ -361,44 +374,46 @@ function removeAd() {
 
 function showEndScreen() {
     removeAd();
+    localStorage.setItem('lastGame', 6);
     Swal.fire({
         allowEscapeKey: false,
         allowOutsideClick: false,
         title: 'Game over!',
         html: '<span>Your snake length is </span><strong>' + snake.score_final + 
         '</strong><br/>',
-        icon: 'error',
         backdrop: 'white',
         showDenyButton: true,
         showCancelButton: true,
-        confirmButtonText: '<i class="fa fa-repeat fa-2x" aria-hidden="true"></i>',
-        denyButtonText: '<i class="fa fa-random fa-2x" aria-hidden="true"></i>',
-        cancelButtonText: '<i class="fa fa-times fa-2x" aria-hidden="true"></i>',
+        confirmButtonText: 'Try a different game?',
+        denyButtonText: 'Play again',
+        cancelButtonText: 'Challenge a friend',
     }).then((result) => {
         /* Read more about isConfirmed, isDenied below */
         if (result.isConfirmed) {
-            window.location = window.location.pathname;
-        } else if (result.isDenied) {
             loadNewGame();
+        } else if (result.isDenied) {
+            window.location = window.location.pathname;
         } else if (result.dismiss === Swal.DismissReason.cancel) {
-            openNPS();
+            share(snake.score_final)
         }
     });
-    var shareDiv = document.createElement('div');
-    shareDiv.className = 'share-div';
-    shareDiv.innerHTML = '<i class="fa fa-share fa-2x" aria-hidden="true"></i>';
-    shareDiv.addEventListener('click', share);
-    $('.swal2-container').append(shareDiv);
-    var buttonTextDiv = document.createElement('div');
-    buttonTextDiv.className = 'button-div';
-    buttonTextDiv.innerHTML = '<span>Repeat</span><span>Shuffle</span><span>Exit</span>';
-    $('.swal2-container').append(buttonTextDiv);
+    var closeDiv = document.createElement('div');
+    closeDiv.className = 'share-div';
+    closeDiv.innerHTML = '<i class="fa fa-times fa-2x" aria-hidden="true"></i>';
+    closeDiv.addEventListener('click', function() {
+        openNPS()
+    });
+    $('.swal2-container').append(closeDiv)
     var logoDiv = document.createElement('div');
     logoDiv.className = 'logo-div';
     logoDiv.innerHTML = '<a href='+ WEBSITE_LINK +' target="_blank">' 
     + '<img src=' + LOGO_PATH + '>' + '</a>';
     $('.swal2-container').append(logoDiv);
-    localStorage.setItem('lastGame', 6);
+    var gifDiv = document.createElement('div');
+    gifDiv.className = 'gif-div'
+    gifDiv.innerHTML = '<a href='+ WEBSITE_LINK +' target="_blank">'
+    + '<img src=' + GIF_PATH + '>' + '</a>';
+    $('.swal2-container').append(gifDiv)
 }
 
 function loadNewGame() {

@@ -44,27 +44,27 @@ div.score {
     grid-column: 1;
 }
 
-    div.score > button {
-        font-size: calc(1em + 1vmin);
-        padding: 0.5vh 3vh;
-        color: #fff;
-        background-color: #593f6b;
-        border: none;
-        border-radius: 3px;
-        cursor: pointer;
-        outline: none;
-        transition: all 0.3s;
-        border: solid 3px #ccc;
-        border-radius: 8px;
-        color: #fff;
-        cursor: pointer;
-        width: 10em;
-        height: 2em;
-    }
+div.score > button {
+    font-size: calc(1em + 1vmin);
+    padding: 0.5vh 3vh;
+    color: #fff;
+    background-color: #593f6b;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    outline: none;
+    transition: all 0.3s;
+    border: solid 3px #ccc;
+    border-radius: 8px;
+    color: #fff;
+    cursor: pointer;
+    width: 10em;
+    height: 2em;
+}
 
-        div.score > button:active {
-            background-color: #A92453;
-        }
+div.score > button:active {
+    background-color: #A92453;
+}
 
 .score.top {
     margin-top: 1em;
@@ -128,21 +128,18 @@ canvas.gamecanvas {
 
 #trigger-div {
     position: absolute;
+    left: 0;
+    right: 0;
     z-index: 3;
     text-align: center;
-    top: 10vh;
+    top: 15vh;
     padding: 2vh;
     margin: 1vh 5vh 1vh 5vh;
-    border-color: black;
-    border-style: solid;
-    border-radius: 1vh;
-    border-width: 0.5vh;
-    border-color: magenta;
 }
 
 #trigger-text {
     color: chartreuse;
-    font-size: 3vh;
+    font-size: 6vh;
     font-weight: bold;
 }
 
@@ -245,16 +242,18 @@ canvas.gamecanvas {
 }
 
 .swal2-actions {
+  display: grid;
   flex-direction: row;
+  position: relative;
+  margin: 0;
+  height: 10em;
 }
 
 .swal2-actions button {
-  width: 4em;
+  width: 12em;
   height: 4em;
   border-radius: 2em !important;
-  margin-right: 1em;
-  margin-left: 1em;
-  box-shadow: 3px 3px 18px -8px #263238;
+  box-shadow: 8px 5px 20px -8px #263238;
 }
 
 .swal2-actions button i {
@@ -262,15 +261,26 @@ canvas.gamecanvas {
 }
 
 .swal2-confirm {
-  background-color: #fcbf49 !important;
+  background-color: #0096c7 !important;
+  position: absolute;
+  top: 0;
+  width: 15em !important;
 }
 
 .swal2-deny {
-  background-color: #f77f00 !important;
+  background-color: #eef4ed !important;
+  color: black !important;
+  position: absolute;
+  right: 0;
+  top: 50%;
 }
 
 .swal2-cancel {
-  background-color: #d62828 !important;
+  background-color: #eef4ed !important;
+  color: black !important;
+  position: absolute;
+  left: 0;
+  top: 50%;
 }
 
 .swal2-title {
@@ -279,12 +289,32 @@ canvas.gamecanvas {
   padding-top: 0.1em !important;
 }
 
+.gif-div {
+  display: grid;
+  grid-column: 2;
+  grid-row: 3;
+  align-self: flex-end;
+  justify-self: safe center;
+  margin: auto;
+  margin-right: 0.3em;
+  margin-top: 0.3em;
+  margin-bottom: 0.3em;
+  font-size: 1.2em;
+  position: absolute;
+  right: 0;
+ }
+
+ .gif-div img {
+  height: 10vh;
+ }
+
 .logo-div {
   display: grid;
   grid-column: 2;
   grid-row: 1;
   align-self: center;
   justify-self: safe center;
+  margin-top: 1em;
 }
 
 .logo-div img {
@@ -317,11 +347,12 @@ canvas.gamecanvas {
 .share-div {
   display: grid;
   grid-column: 2;
-  grid-row: 4;
+  grid-row: 1;
   align-self: start;
   justify-self: safe end;
   margin: auto;
   margin-right: 0.3em;
+  margin-top: 0.3em;
   font-size: 1.2em;
 }
 

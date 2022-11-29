@@ -66,7 +66,19 @@ function Mazing(id) {
   this.swipeHandler();
 
   this.winFlag = false;
+
+  this.retailLocation = localStorage['retailLocation']
+  this.customizeMaze()
 };
+
+Mazing.prototype.customizeMaze = function() {
+  if (this.retailLocation == TAG_FOR_PARTHA_DENTAL) {
+    $('.nubbin').not(".wall").toggleClass('hospital')
+  }
+  if (this.retailLocation == TAG_FOR_NOSTRO_CAFE || this.retailLocation == TAG_FOR_COFFEECRUSH || this.retailLocation == TAG_FOR_BLR_BIRYANI_BHAWAN) {
+    $('.nubbin').not(".wall").toggleClass('cafe')
+  }
+}
 
 Mazing.prototype.enableSpeech = function() {
   this.utter = new SpeechSynthesisUtterance()
@@ -86,7 +98,7 @@ Mazing.prototype.setMessage = function(text) {
 Mazing.prototype.heroTakeTreasure = function() {
   this.maze[this.heroPos].classList.remove("nubbin");
   this.heroScore += 10;
-  this.setMessage("yay, treasure!");
+  this.setMessage("yay, keep going!");
 };
 
 Mazing.prototype.heroTakeKey = function() {
@@ -248,7 +260,7 @@ Mazing.prototype.swipeHandler = function() {
 Mazing.prototype.setChildMode = function() {
   this.childMode = true;
   this.heroScore = 0;
-  this.setMessage("collect all the treasure");
+  this.setMessage("collect all the items");
 };
 
 Mazing.prototype.share = function () {
@@ -274,14 +286,17 @@ Mazing.prototype.resetGame = function () {
 
 Mazing.prototype.showAd = function () {
   var number = 1 + Math.floor(Math.random() * TOTAL_ADS);
-  var urlPath = AD_ASSETS_PATH + '' + number + '.png';
+  var urlPath = AD_ASSETS_PATH + '' + number + AD_FORMAT;
   $('#maze_container').addClass('d-none');
   $('#instructions').addClass('d-none');
   $('body').addClass('ad-img');
   var closeDiv = document.createElement('div');
   closeDiv.className = 'close-div';
   closeDiv.innerHTML = '<i class="fa fa-times fa-2x" aria-hidden="true"></i>';
-  closeDiv.addEventListener('click', (e) => { this.showEndScreen(); });
+  closeDiv.addEventListener('click', (e) => { 
+    gtag("event", "seen_ad");
+    this.showEndScreen();                                              
+  });
   $('<img/>').attr('src', urlPath).on('load', function() {
     $(this).remove();
     $('body').css('background-image', 'url("' + urlPath + '")');
@@ -303,43 +318,46 @@ Mazing.prototype.removeAd = function () {
 
 Mazing.prototype.showEndScreen = function () {
   this.removeAd();
+  localStorage.setItem('lastGame', 10);
   Swal.fire({
     allowEscapeKey: false,
     allowOutsideClick: false,
     title: this.winFlag ? 'Congratulations!' : 'Game over!',
     html: '<span>' + this.mazeMessage.innerHTML + '</span>',
-    icon: this.winFlag ? 'success' : 'error',
     backdrop: 'white',
     showDenyButton: true,
     showCancelButton: true,
-    confirmButtonText: '<i class="fa fa-repeat fa-2x" aria-hidden="true"></i>',
-    denyButtonText: '<i class="fa fa-random fa-2x" aria-hidden="true"></i>',
-    cancelButtonText: '<i class="fa fa-times fa-2x" aria-hidden="true"></i>',
+    confirmButtonText: 'Try a different game?',
+    denyButtonText: 'Play again',
+    cancelButtonText: 'Challenge a friend',
   }).then((result) => {
     /* Read more about isConfirmed, isDenied below */
     if (result.isConfirmed) {
-        this.resetGame();
+      this.loadNewGame();
     } else if (result.isDenied) {
-        this.loadNewGame();
+      this.resetGame();
     } else if (result.dismiss === Swal.DismissReason.cancel) {
+      this.share()
         this.openNPS();
     }
   });
-  var shareDiv = document.createElement('div');
-  shareDiv.className = 'share-div';
-  shareDiv.innerHTML = '<i class="fa fa-share fa-2x" aria-hidden="true"></i>';
-  shareDiv.addEventListener('click', this.share);
-  $('.swal2-container').append(shareDiv);
-  var buttonTextDiv = document.createElement('div');
-  buttonTextDiv.className = 'button-div';
-  buttonTextDiv.innerHTML = '<span>Repeat</span><span>Shuffle</span><span>Exit</span>';
-  $('.swal2-container').append(buttonTextDiv);
+  var closeDiv = document.createElement('div');
+  closeDiv.className = 'share-div';
+  closeDiv.innerHTML = '<i class="fa fa-times fa-2x" aria-hidden="true"></i>';
+  closeDiv.addEventListener('click', function() {
+    this.openNPS()
+  });
+  $('.swal2-container').append(closeDiv)
   var logoDiv = document.createElement('div');
   logoDiv.className = 'logo-div';
   logoDiv.innerHTML = '<a href='+ WEBSITE_LINK +' target="_blank">' 
   + '<img src=' + LOGO_PATH + '>' + '</a>';
   $('.swal2-container').append(logoDiv);
-  localStorage.setItem('lastGame', 10);
+  var gifDiv = document.createElement('div');
+  gifDiv.className = 'gif-div'
+  gifDiv.innerHTML = '<a href='+ WEBSITE_LINK +' target="_blank">'
+  + '<img src=' + GIF_PATH + '>' + '</a>';
+  $('.swal2-container').append(gifDiv)  
 };
 
 Mazing.prototype.loadNewGame = function() {

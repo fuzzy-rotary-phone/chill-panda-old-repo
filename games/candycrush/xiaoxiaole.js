@@ -54,7 +54,7 @@ function XiaoXiaoLe(canvasId, imgspath, options, scorechange, gameendcalback, ti
     function loadimg() {    //加载图片
         for (var i = 0; i < classnum; i++) {
             bitimages[i] = new createjs.Bitmap(imgspath + "/" + (i + 1) + ".png");
-            bitimages[i].scaleX = bitimages[i].scaleY = 0.2;
+            bitimages[i].scaleX = bitimages[i].scaleY = 0.19;
             bitimages[i].regX = bitimages[i].regY = 0;
         }
     }
@@ -706,6 +706,21 @@ function XiaoXiaoLe(canvasId, imgspath, options, scorechange, gameendcalback, ti
 
     init.bind(this)();
 
+    function showTimeup() {
+        var triggerText = document.getElementById('trigger-text');
+        var triggerDiv = document.getElementById('trigger-div');
+        triggerText.innerHTML = 'Time up!';
+        triggerDiv.classList.remove('d-none');
+    }
+
+    function resetGameChanges() {
+        var triggerText = document.getElementById('trigger-text');
+        var triggerDiv = document.getElementById('trigger-div');
+        triggerText.innerHTML = '';
+        triggerDiv.classList.add('d-none');
+        $("#start-button").removeClass('d-none');
+    }
+
     function gameendfun() {
         gameend = true;
         gaming = false;
@@ -713,12 +728,9 @@ function XiaoXiaoLe(canvasId, imgspath, options, scorechange, gameendcalback, ti
         canmove = false;
         mask.visible = true;
         createjs.Tween.get(mask).to({ alpha: 1 }, 300);
-        // if (gameendcalback) {
-        //     gameendcalback(score);
-        // }
-        // setTrigger();
-        // showEndScreen();
-        showAd();
+        showTimeup();
+        setTimeout(showAd, 2000);
+        // showAd();
     }
     var interv = 0;
     var gaming = false;
@@ -762,8 +774,8 @@ function XiaoXiaoLe(canvasId, imgspath, options, scorechange, gameendcalback, ti
                     clearInterval(interv);
                 }
             }, 1000);
-
         }
+        $("#start-button").addClass('d-none');
     }
 
     this.hint = function () {
@@ -798,11 +810,11 @@ function XiaoXiaoLe(canvasId, imgspath, options, scorechange, gameendcalback, ti
         newGame();
     }
 
-    function share() {
+    function share(score) {
         if (navigator.share) {
             navigator.share({
                 title: 'Chill Panda',
-                text: 'Haha! Play and beat me if you can',
+                text: 'Haha! I scored ' + score + '. Play and beat me if you can',
                 url: window.location.href
             }).then(() => {
                 console.log('Thanks for sharing!');
@@ -816,15 +828,19 @@ function XiaoXiaoLe(canvasId, imgspath, options, scorechange, gameendcalback, ti
     }
 
     function showAd(key) {
+        resetGameChanges()
         $('.loader').css('display','');
         var number = 1 + Math.floor(Math.random() * TOTAL_ADS);
-        var urlPath = AD_ASSETS_PATH + '' + number + '.png';
+        var urlPath = AD_ASSETS_PATH + '' + number + AD_FORMAT;
         $('.main').addClass('d-none');
         $('body').addClass('ad-img');
         var closeDiv = document.createElement('div');
         closeDiv.className = 'close-div';
         closeDiv.innerHTML = '<i class="fa fa-times fa-2x" aria-hidden="true"></i>';
-        closeDiv.addEventListener('click', (e) => { showEndScreen(key); });
+        closeDiv.addEventListener('click', (e) => { 
+          gtag("event", "seen_ad");
+          showEndScreen(key);                                              
+        });
         $('<img/>').attr('src', urlPath).on('load', function() {
             $(this).remove();
             $('body').css('background-image', 'url("' + urlPath + '")');
@@ -845,43 +861,45 @@ function XiaoXiaoLe(canvasId, imgspath, options, scorechange, gameendcalback, ti
 
     function showEndScreen() {
         removeAd();
+        localStorage.setItem('lastGame', 9);
         Swal.fire({
             allowEscapeKey: false,
             allowOutsideClick: false,
             title: 'Game Over!',
             html: '<span>Your score is <strong>' + score + '</strong></span>',
-            icon: 'error',
             backdrop: 'white',
             showDenyButton: true,
             showCancelButton: true,
-            confirmButtonText: '<i class="fa fa-repeat fa-2x" aria-hidden="true"></i>',
-            denyButtonText: '<i class="fa fa-random fa-2x" aria-hidden="true"></i>',
-            cancelButtonText: '<i class="fa fa-times fa-2x" aria-hidden="true"></i>',
+            confirmButtonText: 'Try a different game?',
+            denyButtonText: 'Play again',
+            cancelButtonText: 'Challenge a friend',
         }).then((result) => {
             /* Read more about isConfirmed, isDenied below */
             if (result.isConfirmed) {
-                resetGame();
-            } else if (result.isDenied) {
                 loadNewGame();
+            } else if (result.isDenied) {
+                resetGame();                
             } else if (result.dismiss === Swal.DismissReason.cancel) {
-                openNPS();
+                share(score)
             }
         });
-        var shareDiv = document.createElement('div');
-        shareDiv.className = 'share-div';
-        shareDiv.innerHTML = '<i class="fa fa-share fa-2x" aria-hidden="true"></i>';
-        shareDiv.addEventListener('click', share);
-        $('.swal2-container').append(shareDiv);
-        var buttonTextDiv = document.createElement('div');
-        buttonTextDiv.className = 'button-div';
-        buttonTextDiv.innerHTML = '<span>Repeat</span><span>Shuffle</span><span>Exit</span>';
-        $('.swal2-container').append(buttonTextDiv);
+        var closeDiv = document.createElement('div');
+        closeDiv.className = 'share-div';
+        closeDiv.innerHTML = '<i class="fa fa-times fa-2x" aria-hidden="true"></i>';
+        closeDiv.addEventListener('click', function() {
+            openNPS()
+        });
+        $('.swal2-container').append(closeDiv);
         var logoDiv = document.createElement('div');
         logoDiv.className = 'logo-div';
         logoDiv.innerHTML = '<a href='+ WEBSITE_LINK +' target="_blank">' 
         + '<img src=' + LOGO_PATH + '>' + '</a>';
         $('.swal2-container').append(logoDiv);
-        localStorage.setItem('lastGame', 9);
+        var gifDiv = document.createElement('div');
+        gifDiv.className = 'gif-div'
+        gifDiv.innerHTML = '<a href='+ WEBSITE_LINK +' target="_blank">'
+        + '<img src=' + GIF_PATH + '>' + '</a>';
+        $('.swal2-container').append(gifDiv)
     }
 
     function loadNewGame() {

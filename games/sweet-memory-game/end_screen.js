@@ -34,11 +34,11 @@ function loadJSONsAndShowAd() {
     });
 }
 
-function share() {
+function share(score) {
     if (navigator.share) {
         navigator.share({
             title: 'Chill Panda',
-            text: 'Haha! Play and beat me if you can',
+            text: 'Haha! I completed in ' + score + ' moves. Play and beat me if you can',
             url: window.location.href
         }).then(() => {
             console.log('Thanks for sharing!');
@@ -54,20 +54,26 @@ function share() {
 function resetGame() {
     // body...
     location.href = 'index.html';
+    localStorage['memoryGameMoves'] = 0
 }
 
 // function showAd(allcontent, config) {
 function showAd() {
     $('.loader').css('display','');
     var number = 1 + Math.floor(Math.random() * TOTAL_ADS);
-    var urlPath = AD_ASSETS_PATH + '' + number + '.png';
+    var urlPath = AD_ASSETS_PATH + '' + number + AD_FORMAT;
     $('.main').addClass('d-none');
     $('body').addClass('ad-img');
     var closeDiv = document.createElement('div');
     closeDiv.className = 'close-div';
     closeDiv.innerHTML = '<i class="fa fa-times fa-2x" aria-hidden="true"></i>';
+
     // closeDiv.addEventListener('click', (e) => { showEndScreen(allcontent, config); });
-    closeDiv.addEventListener('click', (e) => { showEndScreen(); });
+    closeDiv.addEventListener('click', (e) => { 
+        gtag("event", "seen_ad");
+        showEndScreen(); 
+    });
+
     $('<img/>').attr('src', urlPath).on('load', function() {
         $(this).remove();
         $('body').css('background-image', 'url("' + urlPath + '")');
@@ -90,43 +96,58 @@ function removeAd() {
 function showEndScreen() {
     removeAd();
     var score = localStorage['memoryGameMoves'];
+    localStorage.setItem('lastGame', 7);
     Swal.fire({
         allowEscapeKey: false,
         allowOutsideClick: false,
         title: 'Congratulations!',
         html: '<span>You won with </span><strong>' + score + '</strong> moves<br/>',
-        icon: 'success',
+        // icon: 'success',
         backdrop: 'white',
         showDenyButton: true,
         showCancelButton: true,
-        confirmButtonText: '<i class="fa fa-repeat fa-2x" aria-hidden="true"></i>',
-        denyButtonText: '<i class="fa fa-random fa-2x" aria-hidden="true"></i>',
-        cancelButtonText: '<i class="fa fa-times fa-2x" aria-hidden="true"></i>',
+        // confirmButtonText: '<i class="fa fa-repeat fa-2x" aria-hidden="true"></i>',
+        // denyButtonText: '<i class="fa fa-random fa-2x" aria-hidden="true"></i>',
+        // cancelButtonText: '<i class="fa fa-times fa-2x" aria-hidden="true"></i>',
+        confirmButtonText: 'Try a different game?',
+        denyButtonText: 'Play again',
+        cancelButtonText: 'Challenge a friend',
+        customClass: {
+            confirmButton: 'btn-success',
+            denyButton: 'btn-deny',
+            cancelButton: 'btn-cancel'
+        }
     }).then((result) => {
         /* Read more about isConfirmed, isDenied below */
         if (result.isConfirmed) {
-            resetGame();
-        } else if (result.isDenied) {
             loadNewGame();
+        } else if (result.isDenied) {
+            resetGame();
         } else if (result.dismiss === Swal.DismissReason.cancel) {
-            openNPS();
+            share(score)
         }
     });
-    var shareDiv = document.createElement('div');
-    shareDiv.className = 'share-div';
-    shareDiv.innerHTML = '<i class="fa fa-share fa-2x" aria-hidden="true"></i>';
-    shareDiv.addEventListener('click', share);
-    $('.swal2-container').append(shareDiv);
-    var buttonTextDiv = document.createElement('div');
-    buttonTextDiv.className = 'button-div';
-    buttonTextDiv.innerHTML = '<span>Repeat</span><span>Shuffle</span><span>Exit</span>';
-    $('.swal2-container').append(buttonTextDiv);
+    var closeDiv = document.createElement('div');
+    closeDiv.className = 'share-div';
+    closeDiv.innerHTML = '<i class="fa fa-times fa-2x" aria-hidden="true"></i>';
+    closeDiv.addEventListener('click', function() {
+        openNPS()
+    });
+    $('.swal2-container').append(closeDiv);
+    // var buttonTextDiv = document.createElement('div');
+    // buttonTextDiv.className = 'button-div';
+    // buttonTextDiv.innerHTML = '<span>Repeat</span><span>Shuffle</span><span>Exit</span>';
+    // $('.swal2-container').append(buttonTextDiv);
     var logoDiv = document.createElement('div');
     logoDiv.className = 'logo-div';
     logoDiv.innerHTML = '<a href='+ WEBSITE_LINK +' target="_blank">' 
     + '<img src=' + LOGO_PATH + '>' + '</a>';
     $('.swal2-container').append(logoDiv);
-    localStorage.setItem('lastGame', 7);
+    var gifDiv = document.createElement('div');
+    gifDiv.className = 'gif-div'
+    gifDiv.innerHTML = '<a href='+ WEBSITE_LINK +' target="_blank">'
+    + '<img src=' + GIF_PATH + '>' + '</a>';
+    $('.swal2-container').append(gifDiv);
 }
 
 function loadNewGame() {
