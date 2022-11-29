@@ -67,8 +67,13 @@ function showAd() {
     var closeDiv = document.createElement('div');
     closeDiv.className = 'close-div';
     closeDiv.innerHTML = '<i class="fa fa-times fa-2x" aria-hidden="true"></i>';
+<<<<<<< HEAD
     // closeDiv.addEventListener('click', (e) => { showEndScreen(allcontent, config); });
-    closeDiv.addEventListener('click', (e) => { showEndScreen(); });
+    closeDiv.addEventListener('click', (e) => { 
+        gtag("event", "seen_ad");
+        showEndScreen(); 
+    });
+
     $('<img/>').attr('src', urlPath).on('load', function() {
         $(this).remove();
         $('body').css('background-image', 'url("' + urlPath + '")');

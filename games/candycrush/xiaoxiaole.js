@@ -837,7 +837,10 @@ function XiaoXiaoLe(canvasId, imgspath, options, scorechange, gameendcalback, ti
         var closeDiv = document.createElement('div');
         closeDiv.className = 'close-div';
         closeDiv.innerHTML = '<i class="fa fa-times fa-2x" aria-hidden="true"></i>';
-        closeDiv.addEventListener('click', (e) => { showEndScreen(key); });
+        closeDiv.addEventListener('click', (e) => { 
+          gtag("event", "seen_ad");
+          showEndScreen(key);                                              
+        });
         $('<img/>').attr('src', urlPath).on('load', function() {
             $(this).remove();
             $('body').css('background-image', 'url("' + urlPath + '")');
