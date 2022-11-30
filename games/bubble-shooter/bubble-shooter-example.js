@@ -760,7 +760,8 @@ window.onload = function() {
     }
 
     function showEndScreen() {
-        localStorage['bubble-score'] = score
+        localStorage.setItem('bubble-score', score)
+        localStorage.setItem('lastGame', 11)
         window.location.href = window.location.origin + '/end_screen.html'
     }
     

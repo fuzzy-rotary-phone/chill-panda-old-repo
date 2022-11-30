@@ -94,7 +94,6 @@ function removeAd() {
 function showEndScreen() {
     removeAd();
     var score = localStorage['bubble-score'];
-    localStorage.setItem('lastGame', 11);
     Swal.fire({
         allowEscapeKey: false,
         allowOutsideClick: false,
