@@ -8,7 +8,8 @@ const GAME_MAP = {
 	7: 'games/sweet-memory-game/index.html',
 	8: 'games/tower-blocks/index.html',
 	9: 'games/candycrush/index.html',
-	10: 'games/Maze2/maze.html'
+	10: 'games/Maze2/maze.html',
+	11: 'games/bubble-shooter/bubble-shooter.html'
 };
 const TAG_FOR_PARTHA_DENTAL = 'parthadental'
 const TAG_FOR_NOSTRO_CAFE = 'nostrocafe'
@@ -39,7 +40,7 @@ var INSTANCE_JSON
 var CONFIG_JSON
 
 function getRandomNumber() {
-	var total = 10;
+	var total = Object.keys(GAME_MAP).length;
 	var number = 1 + Math.floor(Math.random() * total);
 	if (!localStorage['lastGame']) {
 		return number;
