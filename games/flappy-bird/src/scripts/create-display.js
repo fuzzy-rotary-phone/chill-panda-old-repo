@@ -122,6 +122,7 @@ export default function (main) {
                     url: window.location.href
                   }).then(() => {
                     console.log('Thanks for sharing!');
+                    window.location.href = window.location.origin + '/' + GAME_MAP[getRandomNumber()];
                   }).catch(err => {
                     console.log('Error while using Web share API:');
                     console.log(err);
@@ -137,7 +138,7 @@ export default function (main) {
             closeDiv.addEventListener('click', function() {
               window.location.href = window.location.origin + '/rating.html';
             });
-            $('.swal2-container').append(closeDiv);            
+            $('.swal2-container').append(closeDiv);
             var logoDiv = document.createElement('div');
             logoDiv.className = 'logo-div';
             logoDiv.innerHTML = '<a href='+ WEBSITE_LINK +' target="_blank">' 

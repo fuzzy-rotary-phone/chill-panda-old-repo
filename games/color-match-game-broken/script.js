@@ -154,7 +154,7 @@
     }
   })
 
-  function share() {
+  function share(key) {
     if (navigator.share) {
       navigator.share({
         title: 'Chill Panda',
@@ -162,6 +162,7 @@
         url: window.location.href
       }).then(() => {
         console.log('Thanks for sharing!');
+        showEndScreen(key)
       }).catch(err => {
         console.log('Error while using Web share API:');
         console.log(err);
@@ -220,7 +221,7 @@
       } else if (result.isDenied) {
         newGame();
       } else if (result.dismiss === Swal.DismissReason.cancel) {
-        share()
+        share(key)
       }
     });
     var closeDiv = document.createElement('div');

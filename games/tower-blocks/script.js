@@ -389,6 +389,7 @@ class Game {
                         url: window.location.href
                     }).then(() => {
                         console.log('Thanks for sharing!');
+                        showEndScreen()
                     }).catch(err => {
                         console.log('Error while using Web share API:');
                         console.log(err);

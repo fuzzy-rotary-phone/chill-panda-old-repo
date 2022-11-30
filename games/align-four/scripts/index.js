@@ -274,7 +274,7 @@ function indexToPixels(index) {
   return (index * 51.3 + 1) + 'px';
 }
 
-function share(data) {
+function share(data, key) {
   if (navigator.share) {
     if (navigator.canShare({ files: [data] })) {
       navigator.share({
@@ -284,6 +284,7 @@ function share(data) {
         url: window.location.href
       }).then(() => {
         console.log('Thanks for sharing!');
+        showEndScreen(key)
       }).catch(err => {
         console.log('Error while using Web share API:');
         console.log(err);
@@ -295,6 +296,7 @@ function share(data) {
         url: window.location.href
       }).then(() => {
         console.log('Thanks for sharing!');
+        showEndScreen(key)
       }).catch(err => {
         console.log('Error while using Web share API:');
         console.log(err);
@@ -355,7 +357,7 @@ function showEndScreen(key) {
     } else if (result.isDenied) {
       resetGame();
     } else if (result.dismiss === Swal.DismissReason.cancel) {
-      takeScreenshot()
+      takeScreenshot(key)
     }
   });
   var closeDiv = document.createElement('div');
@@ -377,13 +379,13 @@ function showEndScreen(key) {
   $('.swal2-container').append(gifDiv);
 }
 
-function takeScreenshot() {
+function takeScreenshot(key) {
   let div = $('.swal2-container')[0];
   html2canvas(div).then(function(canvas) {
     // download(canvas);
     canvas.toBlob((blob) => {
       var file = new File([blob], "image.png");
-      share(file);
+      share(file, key);
     });
   });
 }

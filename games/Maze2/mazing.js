@@ -271,6 +271,7 @@ Mazing.prototype.share = function () {
       url: window.location.href
     }).then(() => {
       console.log('Thanks for sharing!');
+      this.showEndScreen()
     }).catch(err => {
       console.log('Error while using Web share API:');
       console.log(err);
