@@ -15,7 +15,7 @@ loadInstanceVariables(CONTENT_PATH, CONFIG_PATH, showAd)
 //     loadJSONsAndShowAd()
 // })
 
-const game_number = 11
+const game_number = localStorage['lastGame']
 
 function loadJSONsAndShowAd() {
     $.getJSON('../../resources/content.json', allretailcontent => {
