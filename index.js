@@ -121,7 +121,8 @@ function setVariablesInLocalStorage() {
 }
 
 function customizeLandingPage() {
-	document.getElementById('greeting').innerText = 'Welcome to ' + RETAIL_NAME + '!'
+	document.getElementById('greeting').innerText = "Welcome   to "
+	document.getElementById('retailname').innerText = RETAIL_NAME + '!'
 	document.querySelector('h1').insertAdjacentHTML('afterend', '<img src="' + LOGO_PATH + '" alt="image">')
 	document.getElementById('button2').addEventListener('click', function() {
 	  openGame();

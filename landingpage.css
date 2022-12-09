@@ -2,11 +2,32 @@ html {
   height: 100%;
 }
 
+@font-face {
+    font-family: 'Neon2';
+    src: url('assets/fonts/neon2.ttf');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'ARCADECLASSIC';
+    src: url('assets/fonts/ARCADECLASSIC.ttf');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'DIGITALDREAM';
+    src: url('assets/fonts/DIGITALDREAM.ttf');
+    font-weight: normal;
+    font-style: normal;
+}
+
 body {
   font-family: sans-serif;
   font-size: 16px;
   color: #333333;
-  background-color: #f1f1f1;
+  background-color: #ffffff;
   text-align: center;
   display: grid;
   grid-template-columns: 1fr;
@@ -15,11 +36,22 @@ body {
 }
 
 h1 {
+  font-family: 'ARCADECLASSIC';
   font-weight: bold;
   color: #0066cc;
   vertical-align: middle;
   grid-column: 1;
   grid-row: 1;
+}
+
+#greeting {
+  word-spacing: 0.5em;
+}
+
+#retailname {
+  margin-top: 3em;
+  font-size: 3em;
+  word-spacing: 0.2em;
 }
 
 p {
@@ -40,17 +72,24 @@ img {
 #button1, #button2 {
   width: 20em;
   height: 5em;
-  padding: 2em;
   margin: auto;
-  background-color: #00ff00;
-  border: 1px solid #00cc00;
-  box-shadow: 2px 2px 2px #cccccc;
+  margin-bottom: 2em;
+  background-color: #0096c7;
+  color: whitesmoke;
+  border-radius: 2em !important;
+  box-shadow: 8px 5px 20px -8px #263238;
+  border: 1px solid #000;
   transition: all 0.3s ease-in-out;
   vertical-align: middle;
   grid-column: 1;
   grid-row: 3;
   font-size: 1em;
   font-weight: bold;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif !important;
+}
+
+#button1, #button2 span {
+  font-size: 1.5em;
 }
 
 #button1:hover, #button2:hover {
@@ -60,6 +99,6 @@ img {
 }
 
 #button1:active, #button2:active {
-  background-color: #009900;
+  background-color: #0096c7;
   box-shadow: 0px 0px 0px #cccccc;
 }
