@@ -1,0 +1,65 @@
+html {
+  height: 100%;
+}
+
+body {
+  font-family: sans-serif;
+  font-size: 16px;
+  color: #333333;
+  background-color: #f1f1f1;
+  text-align: center;
+  display: grid;
+  grid-template-columns: 1fr;
+  align-items: center;
+  height: 100%;
+}
+
+h1 {
+  font-weight: bold;
+  color: #0066cc;
+  vertical-align: middle;
+  grid-column: 1;
+  grid-row: 1;
+}
+
+p {
+  margin-top: 0;
+  margin-bottom: 20px;
+  line-height: 1.5;
+  vertical-align: middle;
+}
+
+img {
+  margin: auto;
+  vertical-align: middle;
+  grid-column: 1;
+  grid-row: 2;
+  height: 40vh;
+}
+
+#button1, #button2 {
+  width: 20em;
+  height: 5em;
+  padding: 2em;
+  margin: auto;
+  background-color: #00ff00;
+  border: 1px solid #00cc00;
+  box-shadow: 2px 2px 2px #cccccc;
+  transition: all 0.3s ease-in-out;
+  vertical-align: middle;
+  grid-column: 1;
+  grid-row: 3;
+  font-size: 1em;
+  font-weight: bold;
+}
+
+#button1:hover, #button2:hover {
+  background-color: #00cc00;
+  box-shadow: 1px 1px 1px #cccccc;
+  cursor: pointer;
+}
+
+#button1:active, #button2:active {
+  background-color: #009900;
+  box-shadow: 0px 0px 0px #cccccc;
+}
