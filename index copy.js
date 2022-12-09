@@ -120,19 +120,6 @@ function setVariablesInLocalStorage() {
 	}
 }
 
-function customizeLandingPage() {
-	document.getElementById('greeting').innerText = 'Welcome to ' + RETAIL_NAME + '!'
-	document.querySelector('h1').insertAdjacentHTML('afterend', '<img src="' + LOGO_PATH + '" alt="image">')
-	document.getElementById('button2').addEventListener('click', function() {
-	  openGame();
-	});
-}
-
-function openGame() {
-	var number = getRandomNumber().toString();
-	window.location.href = window.location.origin + '/' + GAME_MAP[number];
-}
-
 function loadGame() {
 	setVariablesInLocalStorage()
 	var number = getRandomNumber().toString();
@@ -141,7 +128,7 @@ function loadGame() {
 
 function loadLandingPage() {
 	setVariablesInLocalStorage()
-	loadInstanceVariables(CONTENT_PATH, CONFIG_PATH, customizeLandingPage)
+	window.location.href = window.location.origin + '/landingpage.html';
 }
 
 let s4 = () => {
