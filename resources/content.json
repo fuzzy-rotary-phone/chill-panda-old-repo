@@ -62,6 +62,19 @@
 		"ingamePath": "../../../assets/retailers/BangaloreBiryaniBhawan/ingame/",
 		"adPath": "../../../assets/retailers/BangaloreBiryaniBhawan/ads/",
 		"totalAds": 5,
+		"content": []
+	},
+	{
+		"id": "toniguy",
+		"urlTag": "toniguy",
+		"name": "Toni & Guy",
+		"industry": "Salon",
+		"website": "http://toniandguy.com",
+		"logo": "../../assets/retailers/ToniGuy/Toni_and_Guy_logo.png",
+		"gif": "../../assets/retailers/ToniGuy/scissors.gif",
+		"ingamePath": "../../../assets/retailers/ToniGuy/ingame/",
+		"adPath": "../../../assets/retailers/ToniGuy/ads/",
+		"totalAds": 6,
 		"content": []		
 	}
 ]

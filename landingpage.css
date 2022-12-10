@@ -66,7 +66,9 @@ img {
   vertical-align: middle;
   grid-column: 1;
   grid-row: 2;
-  height: 40vh;
+  height: 30vh;
+  max-width: 25em;
+  max-height: 4em;
 }
 
 #button1, #button2 {
