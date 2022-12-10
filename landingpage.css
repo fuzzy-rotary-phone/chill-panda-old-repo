@@ -63,6 +63,7 @@ p {
 
 img {
   margin: auto;
+  margin-bottom: 40px;
   vertical-align: middle;
   grid-column: 1;
   grid-row: 2;
