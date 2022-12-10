@@ -10,8 +10,10 @@ body {
   background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
   background-size: 400% 400%;
   animation: gradient 15s ease infinite;
-  height: 100vh;
+  height: 100%;
+  width: 100%;
   font-family: 'Open Sans', Arial, Helvetica, Sans-serif, Verdana, Tahoma;
+  display: grid;
 }
 
 @keyframes gradient {
@@ -153,3 +155,35 @@ h1 a {
     margin-right: 10px;
     color: #d9d9d9;
  }
+
+ #button2 {
+  width: 250px;
+  height: 80px;
+  margin: auto;
+  margin-bottom: 20px;
+  background-color: #0096c7;
+  color: whitesmoke;
+  border-radius: 40px !important;
+  box-shadow: 8px 5px 20px -8px #263238;
+  border: 1px solid #000;
+  transition: all 0.3s ease-in-out;
+  vertical-align: middle;
+  font-size: 1em;
+  font-weight: bold;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif !important;
+}
+
+#button1, #button2 span {
+  font-size: 1.5em;
+}
+
+#button1:hover, #button2:hover {
+  background-color: #00cc00;
+  box-shadow: 1px 1px 1px #cccccc;
+  cursor: pointer;
+}
+
+#button1:active, #button2:active {
+  background-color: #0096c7;
+  box-shadow: 0px 0px 0px #cccccc;
+}

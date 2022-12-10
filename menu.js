@@ -2,6 +2,9 @@ $(document).ready(function(){
 
 	$('#link').href = WEBSITE_LINK
 	$('#link').innerText = RETAIL_NAME
+	document.getElementById('button2').addEventListener('click', function() {
+	  openGame();
+	});
 
 	$(function() {
 		var Accordion = function(el, multiple) {
