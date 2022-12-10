@@ -127,6 +127,13 @@ function customizeLandingPage() {
 	document.getElementById('button2').addEventListener('click', function() {
 	  openGame();
 	});
+	document.getElementById('button1').addEventListener('click', function() {
+	  openMenu();
+	});
+}
+
+function openMenu() {
+	window.location.href = window.location.origin + '/menu.html';
 }
 
 function openGame() {

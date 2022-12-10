@@ -67,24 +67,46 @@ img {
   grid-column: 1;
   grid-row: 2;
   height: 30vh;
-  max-width: 25em;
-  max-height: 4em;
+  max-height:100%; 
+  max-width:100%;
 }
 
-#button1, #button2 {
-  width: 20em;
-  height: 5em;
+.button-group {
+  display: grid;
+  vertical-align: middle;
+  grid-column: 1;
+  grid-row: 3;  
+}
+
+#button1 {
+  width: 250px;
+  height: 80px;
   margin: auto;
-  margin-bottom: 2em;
+  margin-bottom: 20px;
   background-color: #0096c7;
   color: whitesmoke;
-  border-radius: 2em !important;
+  border-radius: 40px !important;
   box-shadow: 8px 5px 20px -8px #263238;
   border: 1px solid #000;
   transition: all 0.3s ease-in-out;
   vertical-align: middle;
-  grid-column: 1;
-  grid-row: 3;
+  font-size: 1em;
+  font-weight: bold;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif !important;  
+}
+
+#button2 {
+  width: 250px;
+  height: 80px;
+  margin: auto;
+  margin-bottom: 20px;
+  background-color: #0096c7;
+  color: whitesmoke;
+  border-radius: 40px !important;
+  box-shadow: 8px 5px 20px -8px #263238;
+  border: 1px solid #000;
+  transition: all 0.3s ease-in-out;
+  vertical-align: middle;
   font-size: 1em;
   font-weight: bold;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif !important;
