@@ -39,7 +39,7 @@ function share(score) {
         navigator.share({
             title: 'Chill Panda',
             text: 'Haha! I completed in ' + score + ' moves. Play and beat me if you can',
-            url: window.location.href
+            url: window.location.href.split('/').slice(0, -1).join('/')
         }).then(() => {
             console.log('Thanks for sharing!');
             showEndScreen()
