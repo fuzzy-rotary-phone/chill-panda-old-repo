@@ -125,7 +125,7 @@ function showEndScreen() {
         } else if (result.isDenied) {
             loadSameGame()
         } else if (result.dismiss === Swal.DismissReason.cancel) {
-            share(score)
+            share()
         }
     });
     var closeDiv = document.createElement('div');

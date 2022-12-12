@@ -37223,8 +37223,6 @@ var BOTTOM_LINK_STYLE = {
   align: 'left',
   fill: 'white'
 };
-// instance variables to be loaded from index.js
-loadInstanceVariables('../../../' + CONTENT_PATH, '../../../' + CONFIG_PATH)
 
 var Game = function () {
   /**
@@ -37611,121 +37609,13 @@ var Game = function () {
       this.stage.hud.instructionBox = '';
     }
   }, {
-    key: 'share',
-    value: function share(score) {
-      if (navigator.share) {
-        navigator.share({
-          title: 'Chill Panda',
-          text: 'Haha! I scored ' + score + '. Play and beat me if you can',
-          url: window.location.href
-        }).then(() => {
-          console.log('Thanks for sharing!');
-        }).catch(err => {
-          console.log('Error while using Web share API:');
-          console.log(err);
-        });
-      } else {
-        Swal.fire("Browser doesn't support this API !");
-      }      
-    }
-  }, {
     key: 'showAd',
-    value: function showAd(key) {
-      $('.loader').css('display','');
-      var number = 1 + Math.floor(Math.random() * TOTAL_ADS);
-      var urlPath = AD_ASSETS_PATH + '' + number + AD_FORMAT;
-      $('body').empty();
-      $('body').addClass('ad-img');
-      var closeDiv = document.createElement('div');
-      closeDiv.className = 'close-div';
-      closeDiv.innerHTML = '<i class="fa fa-times fa-2x" aria-hidden="true"></i>';
-      closeDiv.addEventListener('click', (e) => { this.showEndScreen(key); });
-      $('<img/>').attr('src', urlPath).on('load', function() {
-        $(this).remove();
-        $('body').css('background-image', 'url("' + urlPath + '")');
-        $(".loader").fadeOut("1000");
-        $('body').append(closeDiv);
-        setTimeout(function() {
-          closeDiv.classList.add('is-shown');
-        }, 3000);
-      });
-    }
-  }, {
-    key: 'removeAd',
-    value: function removeAd() {
-      $('body').removeClass('ad-img');
-      $('body').css('background-image', '');
-      $('.close-div').remove();
-      $('canvas').removeClass('d-none');
-    }
-  }, {
-    key: 'showEndScreen',
-    value: function showEndScreen(gameStatus) {
-      this.removeAd();
+    value: function showAd(gameStatus) {
       localStorage.setItem('lastGame', 1);
-      var score = this.score
-      Swal.fire({
-        allowEscapeKey: false,
-        allowOutsideClick: false,
-        title: gameStatus,
-        html: '<span>' + this.getScoreMessage() + ' Your score is <strong>' + this.score + '</strong></span>',
-        backdrop: 'white',
-        showDenyButton: true,
-        showCancelButton: true,
-        confirmButtonText: 'Try a different game?',
-        denyButtonText: 'Play again',
-        cancelButtonText: 'Challenge a friend',
-      }).then((result) => {
-        /* Read more about isConfirmed, isDenied below */
-        if (result.isConfirmed) {
-          this.loadNewGame();
-        } else if (result.isDenied) {
-          window.location = window.location.pathname;
-        } else if (result.dismiss === Swal.DismissReason.cancel) {
-          if (navigator.share) {
-            navigator.share({
-              title: 'Chill Panda',
-              text: 'Haha! I scored ' + score + '. Play and beat me if you can',
-              url: window.location.href
-            }).then(() => {
-              console.log('Thanks for sharing!');
-              showEndScreen(gameStatus)
-            }).catch(err => {
-              console.log('Error while using Web share API:');
-              console.log(err);
-            });
-          } else {
-            Swal.fire("Browser doesn't support this API !");
-          }
-        }
-      });
-      var closeDiv = document.createElement('div');
-      closeDiv.className = 'share-div';
-      closeDiv.innerHTML = '<i class="fa fa-times fa-2x" aria-hidden="true"></i>';
-      closeDiv.addEventListener('click', function() {
-          openNPS()
-      });
-      $('.swal2-container').append(closeDiv);
-      var logoDiv = document.createElement('div');
-      logoDiv.className = 'logo-div';
-      logoDiv.innerHTML = '<a href='+ WEBSITE_LINK +' target="_blank">' 
-      + '<img src=../' + LOGO_PATH + '>' + '</a>';
-      $('.swal2-container').append(logoDiv);
-      var gifDiv = document.createElement('div');
-      gifDiv.className = 'gif-div'
-      gifDiv.innerHTML = '<a href='+ WEBSITE_LINK +' target="_blank">'
-      + '<img src=../' + GIF_PATH + '>' + '</a>';
-      $('.swal2-container').append(gifDiv)
-    }
-  }, {
-    key: 'loadNewGame',
-    value: function loadNewGame() {
-      window.location.href = window.location.origin + '/' + GAME_MAP[getRandomNumber()];
-    }
-  }, {
-    key: 'openNPS',
-    value: function openNPS() {
-      window.location.href = window.location.origin + '/rating.html';
+      sessionStorage.setItem('title', gameStatus)
+      sessionStorage.setItem('html', '<span>' + this.getScoreMessage() + ' Your score is <strong>' + this.score + '</strong></span>')
+      sessionStorage.setItem('share', 'Haha! I scored ' + this.score + '. Play and beat me if you can')
+      window.open(window.location.origin + '/end_screen.html', '_self')      
     }
   }, {
     key: 'openLevelCreator',

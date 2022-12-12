@@ -263,107 +263,12 @@ Mazing.prototype.setChildMode = function() {
   this.setMessage("collect all the items");
 };
 
-Mazing.prototype.share = function () {
-  if (navigator.share) {
-    navigator.share({
-      title: 'Chill Panda',
-      text: 'Haha! Play and beat me if you can',
-      url: window.location.href
-    }).then(() => {
-      console.log('Thanks for sharing!');
-      this.showEndScreen()
-    }).catch(err => {
-      console.log('Error while using Web share API:');
-      console.log(err);
-    });
-  } else {
-    Swal.fire("Browser doesn't support this API !");
-  }
-};
-
-Mazing.prototype.resetGame = function () {
-  window.location = window.location.pathname;
-};
-
-Mazing.prototype.showAd = function () {
-  var number = 1 + Math.floor(Math.random() * TOTAL_ADS);
-  var urlPath = AD_ASSETS_PATH + '' + number + AD_FORMAT;
-  $('#maze_container').addClass('d-none');
-  $('#instructions').addClass('d-none');
-  $('body').addClass('ad-img');
-  var closeDiv = document.createElement('div');
-  closeDiv.className = 'close-div';
-  closeDiv.innerHTML = '<i class="fa fa-times fa-2x" aria-hidden="true"></i>';
-  closeDiv.addEventListener('click', (e) => { this.showEndScreen(); });
-  $('<img/>').attr('src', urlPath).on('load', function() {
-    $(this).remove();
-    $('body').css('background-image', 'url("' + urlPath + '")');
-    $(".loader").fadeOut("1000");
-    $('body').append(closeDiv);
-    setTimeout(function() {
-      closeDiv.classList.add('is-shown');
-    }, 3000);
-  });
-};
-
-Mazing.prototype.removeAd = function () {
-  $('body').removeClass('ad-img');
-  $('body').css('background-image', '');
-  $('.close-div').remove();
-  $('#instructions').removeClass('d-none');
-  $('#maze_container').removeClass('d-none');
-};
-
-Mazing.prototype.showEndScreen = function () {
-  this.removeAd();
-  localStorage.setItem('lastGame', 10);
-  Swal.fire({
-    allowEscapeKey: false,
-    allowOutsideClick: false,
-    title: this.winFlag ? 'Congratulations!' : 'Game over!',
-    html: '<span>' + this.mazeMessage.innerHTML + '</span>',
-    backdrop: 'white',
-    showDenyButton: true,
-    showCancelButton: true,
-    confirmButtonText: 'Try a different game?',
-    denyButtonText: 'Play again',
-    cancelButtonText: 'Challenge a friend',
-  }).then((result) => {
-    /* Read more about isConfirmed, isDenied below */
-    if (result.isConfirmed) {
-      this.loadNewGame();
-    } else if (result.isDenied) {
-      this.resetGame();
-    } else if (result.dismiss === Swal.DismissReason.cancel) {
-      this.share()
-        this.openNPS();
-    }
-  });
-  var closeDiv = document.createElement('div');
-  closeDiv.className = 'share-div';
-  closeDiv.innerHTML = '<i class="fa fa-times fa-2x" aria-hidden="true"></i>';
-  closeDiv.addEventListener('click', function() {
-    this.openNPS()
-  });
-  $('.swal2-container').append(closeDiv)
-  var logoDiv = document.createElement('div');
-  logoDiv.className = 'logo-div';
-  logoDiv.innerHTML = '<a href='+ WEBSITE_LINK +' target="_blank">' 
-  + '<img src=' + LOGO_PATH + '>' + '</a>';
-  $('.swal2-container').append(logoDiv);
-  var gifDiv = document.createElement('div');
-  gifDiv.className = 'gif-div'
-  gifDiv.innerHTML = '<a href='+ WEBSITE_LINK +' target="_blank">'
-  + '<img src=' + GIF_PATH + '>' + '</a>';
-  $('.swal2-container').append(gifDiv)  
-};
-
-Mazing.prototype.loadNewGame = function() {
-  window.location.href = window.location.origin + '/' + GAME_MAP[getRandomNumber()];
-};
-
-Mazing.prototype.openNPS = function() {
-  window.location.href = window.location.origin + '/rating.html';
+Mazing.prototype.showAd = function() {
+  localStorage.setItem('lastGame', 10)
+  sessionStorage.setItem('title', this.winFlag ? 'Congratulations!' : 'Game over!')
+  sessionStorage.setItem('html', '<span>' + this.mazeMessage.innerHTML + '</span>')
+  sessionStorage.setItem('share', 'Haha! Play and beat me if you can')
+  window.open(window.location.origin + '/end_screen.html', '_self')    
 }
 
 gaSetUserId();

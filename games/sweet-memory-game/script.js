@@ -112,10 +112,17 @@ function setRating(moves) {
 };
 
 // End Game
-function endGame(moves, score) {
+function endGame(score) {
 	$deck.empty();
-	window.localStorage.setItem('memoryGameMoves', moves);
-	location.href = 'end_screen.html';
+	showAd(score)
+}
+
+function showAd(score) {
+  localStorage.setItem('lastGame', 7)
+  sessionStorage.setItem('title', 'Congratulations!')
+  sessionStorage.setItem('html', '<span>You won with </span><strong>' + score + '</strong> moves<br/>')
+  sessionStorage.setItem('share', 'Haha! I completed in ' + score + ' moves. Play and beat me if you can')
+  window.open(window.location.origin + '/end_screen.html', '_self')
 }
 
 // Restart Game
@@ -179,7 +186,7 @@ $deck.on('click', '.card:not(".match, .open")', function() {
 		setRating(moves);
 		var score = setRating(moves).score;
 		setTimeout(function() {
-			endGame(moves, score);
+			endGame(moves);
 		}, 500);
   }
 });

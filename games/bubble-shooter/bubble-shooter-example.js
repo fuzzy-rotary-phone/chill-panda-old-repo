@@ -754,7 +754,17 @@ window.onload = function() {
             context.font = "24px Verdana";
             drawCenterText("Game Over!", level.x, level.y + level.height / 2 + 10, level.width);
             drawCenterText("Click to start", level.x, level.y + level.height / 2 + 40, level.width);
+
+            showAd()
         }
+    }
+
+    function showAd() {
+        localStorage.setItem('lastGame', 11);
+        sessionStorage.setItem('title', 'Congratulations!')
+        sessionStorage.setItem('html', '<span>You score is </span><strong>' + score + '</strong><br/>')
+        sessionStorage.setItem('share', 'Haha! I scored ' + score + '. Play and beat me if you can')
+        window.open(window.location.origin + '/end_screen.html', '_self')
     }
     
     // Draw a frame around the game

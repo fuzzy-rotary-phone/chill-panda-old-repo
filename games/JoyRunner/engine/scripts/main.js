@@ -1,7 +1,5 @@
 "use strict";
 /***** DOM *****/
-// instance variables to be loaded from index.js
-loadInstanceVariables('../../' + CONTENT_PATH, '../../' + CONFIG_PATH)
 
 const game = {
     container: document.querySelector(".game-container"),
@@ -273,131 +271,12 @@ function changeBestScore() {
 
 changeBestScore();
 
-function share(score) {
-    if (navigator.share) {
-        navigator.share({
-            title: 'Chill Panda',
-            text: 'Haha! I scored ' + score + '. Play and beat me if you can',
-            url: window.location.href
-        }).then(() => {
-            console.log('Thanks for sharing!');
-            showEndScreen()
-        }).catch(err => {
-            console.log('Error while using Web share API:');
-            console.log(err);
-        });
-    } else {
-        Swal.fire("Browser doesn't support this API !");
-    }
-}
-
-function resetGame() {
-    isJumped = false;
-    score = 0;
-    isLosted = false;
-    characterJumpTimer = setTimeout(() => {}, 0);
-    scoreCounterTimer = setInterval(() => {}, 0);
-    lostListenerTimer = setInterval(() => {}, 0);    
-    barrierAnimTimer = setInterval(() => {}, 0);
-    barrierLeftOffset = 90;
-    barrierRounds = 0;
-    barrierDurationValue = 15;
-    gameStarted = false;
-    lostStatus = true;
-    lostTimer = setTimeout(() => {}, 0);
-    window.addEventListener("keyup", keyup);
-    window.addEventListener("touchstart", click);
-    exitClick = true;
-    statusText.trigger.classList.add("d-none");
-    statusText.gameOver.classList.add("d-none");
-    game.character.src = "content/gifs/character.png";
-    game.character.style.bottom = '0px';
-    game.barrier.src = "content/images/barrier-1.png";
-    game.barrier.style.left = '60%';
-    game.score.innerHTML = "0";
-}
-
 function showAd() {
-    $('.loader').css('display','');
-    window.removeEventListener("keyup", keyup);
-    window.removeEventListener("touchstart", click);
-    var number = 1 + Math.floor(Math.random() * TOTAL_ADS);
-    var urlPath = AD_ASSETS_PATH + '' + number + AD_FORMAT;
-    $('.container').addClass('d-none');
-    $('html').addClass('fullscreen');
-    $('body').addClass('ad-img');
-    var closeDiv = document.createElement('div');
-    closeDiv.className = 'close-div';
-    closeDiv.innerHTML = '<i class="fa fa-times fa-2x" aria-hidden="true"></i>';
-    closeDiv.addEventListener('click', (e) => { showEndScreen(); });
-    $('<img/>').attr('src', urlPath).on('load', function() {
-        $(this).remove();
-        $('body').css('background-image', 'url("' + urlPath + '")');
-        $(".loader").fadeOut("1000");
-        $('body').append(closeDiv);
-        setTimeout(function() {
-            closeDiv.classList.add('is-shown');
-        }, 3000);
-    });
-}
-
-function removeAd() {
-    $('html').removeClass('fullscreen');
-    $('body').removeClass('ad-img');
-    $('body').css('background-image', '');
-    $('.close-div').remove();
-    $('.container').removeClass('d-none');
-}
-
-function showEndScreen() {
-    removeAd();
-    localStorage.setItem('lastGame', 5);
-    Swal.fire({
-        allowEscapeKey: false,
-        allowOutsideClick: false,
-        title: 'Game over!',
-        html: '<span>Your score is </span><strong>' + score + '</strong><br/>',
-        backdrop: 'white',
-        showDenyButton: true,
-        showCancelButton: true,
-        confirmButtonText: 'Try a different game?',
-        denyButtonText: 'Play again',
-        cancelButtonText: 'Challenge a friend',
-    }).then((result) => {
-        /* Read more about isConfirmed, isDenied below */
-        if (result.isConfirmed) {
-            loadNewGame();
-        } else if (result.isDenied) {
-            resetGame();
-        } else if (result.dismiss === Swal.DismissReason.cancel) {
-            share(score)
-        }
-    });
-    var closeDiv = document.createElement('div');
-    closeDiv.className = 'share-div';
-    closeDiv.innerHTML = '<i class="fa fa-times fa-2x" aria-hidden="true"></i>';
-    closeDiv.addEventListener('click', function() {
-        openNPS()
-    });
-    $('.swal2-container').append(closeDiv)
-    var logoDiv = document.createElement('div');
-    logoDiv.className = 'logo-div';
-    logoDiv.innerHTML = '<a href='+ WEBSITE_LINK +' target="_blank">' 
-    + '<img src=' + LOGO_PATH + '>' + '</a>';
-    $('.swal2-container').append(logoDiv);
-    var gifDiv = document.createElement('div');
-    gifDiv.className = 'gif-div'
-    gifDiv.innerHTML = '<a href='+ WEBSITE_LINK +' target="_blank">'
-    + '<img src=' + GIF_PATH + '>' + '</a>';
-    $('.swal2-container').append(gifDiv)    
-}
-
-function loadNewGame() {
-    window.location.href = window.location.origin + '/' + GAME_MAP[getRandomNumber()];
-}
-
-function openNPS() {
-    window.location.href = window.location.origin + '/rating.html';
+    localStorage.setItem('lastGame', 5)
+    sessionStorage.setItem('title', 'Game over!')
+    sessionStorage.setItem('html', '<span>Your score is </span><strong>' + score + '</strong><br/>')
+    sessionStorage.setItem('share', 'Haha! I scored ' + score + '. Play and beat me if you can')
+    window.open(window.location.origin + '/end_screen.html', '_self')    
 }
 
 gaSetUserId();

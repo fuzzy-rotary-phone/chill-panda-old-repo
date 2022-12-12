@@ -194,7 +194,7 @@ function endGame() {
   saveHighScore();
   showHighScore();
   renderGameOver();
-  showEndScreen()
+  showAd()
 }
 
 function playBackgroundMusic() {
@@ -215,7 +215,7 @@ async function init() {
   });
 }
 
-function showEndScreen() {
+function showAd() {
   localStorage.setItem('lastGame', 12)
   sessionStorage.setItem('title', 'Game over!')
   sessionStorage.setItem('html', '<span>Your death streak is </span><strong>' + store.score + 

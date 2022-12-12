@@ -324,102 +324,13 @@ function sleep(miliseconds) {
    }
 }
 
-function share(score) {
-    if (navigator.share) {
-        navigator.share({
-            title: 'Chill Panda',
-            text: 'Haha! I scored ' + score + '. Play and beat me if you can',
-            url: window.location.href
-        }).then(() => {
-            console.log('Thanks for sharing!');
-            showEndScreen()
-        }).catch(err => {
-            console.log('Error while using Web share API:');
-            console.log(err);
-        });
-    } else {
-        Swal.fire("Browser doesn't support this API !");
-    }
-}
-
-function showAd(key) {
-    $('.loader').css('display','');
-    var number = 1 + Math.floor(Math.random() * TOTAL_ADS);
-    var urlPath = AD_ASSETS_PATH + '' + number + AD_FORMAT;
-    $('canvas').addClass('d-none');
-    $('body').addClass('ad-img');
-    var closeDiv = document.createElement('div');
-    closeDiv.className = 'close-div';
-    closeDiv.innerHTML = '<i class="fa fa-times fa-2x" aria-hidden="true"></i>';
-    closeDiv.addEventListener('click', (e) => { showEndScreen(); });
-    $('<img/>').attr('src', urlPath).on('load', function() {
-        $(this).remove();
-        $('body').css('background-image', 'url("' + urlPath + '")');
-        $(".loader").fadeOut("1000");
-        $('body').append(closeDiv);
-        setTimeout(function() {
-            closeDiv.classList.add('is-shown');
-        }, 3000);
-    });
-}
-
-function removeAd() {
-    $('body').removeClass('ad-img');
-    $('body').css('background-image', '');
-    $('.close-div').remove();
-    $('canvas').removeClass('d-none');
-}
-
-function showEndScreen() {
-    removeAd();
-    localStorage.setItem('lastGame', 6);
-    Swal.fire({
-        allowEscapeKey: false,
-        allowOutsideClick: false,
-        title: 'Game over!',
-        html: '<span>Your snake length is </span><strong>' + snake.score_final + 
-        '</strong><br/>',
-        backdrop: 'white',
-        showDenyButton: true,
-        showCancelButton: true,
-        confirmButtonText: 'Try a different game?',
-        denyButtonText: 'Play again',
-        cancelButtonText: 'Challenge a friend',
-    }).then((result) => {
-        /* Read more about isConfirmed, isDenied below */
-        if (result.isConfirmed) {
-            loadNewGame();
-        } else if (result.isDenied) {
-            window.location = window.location.pathname;
-        } else if (result.dismiss === Swal.DismissReason.cancel) {
-            share(snake.score_final)
-        }
-    });
-    var closeDiv = document.createElement('div');
-    closeDiv.className = 'share-div';
-    closeDiv.innerHTML = '<i class="fa fa-times fa-2x" aria-hidden="true"></i>';
-    closeDiv.addEventListener('click', function() {
-        openNPS()
-    });
-    $('.swal2-container').append(closeDiv)
-    var logoDiv = document.createElement('div');
-    logoDiv.className = 'logo-div';
-    logoDiv.innerHTML = '<a href='+ WEBSITE_LINK +' target="_blank">' 
-    + '<img src=' + LOGO_PATH + '>' + '</a>';
-    $('.swal2-container').append(logoDiv);
-    var gifDiv = document.createElement('div');
-    gifDiv.className = 'gif-div'
-    gifDiv.innerHTML = '<a href='+ WEBSITE_LINK +' target="_blank">'
-    + '<img src=' + GIF_PATH + '>' + '</a>';
-    $('.swal2-container').append(gifDiv)
-}
-
-function loadNewGame() {
-    window.location.href = window.location.origin + '/' + GAME_MAP[getRandomNumber()];
-}
-
-function openNPS() {
-    window.location.href = window.location.origin + '/rating.html';
+function showAd() {
+  localStorage.setItem('lastGame', 6)
+  sessionStorage.setItem('title', 'Game over!')
+  sessionStorage.setItem('html', '<span>Your snake length is </span><strong>' + snake.score_final + 
+        '</strong><br/>')
+  sessionStorage.setItem('share', 'Haha! I scored ' + snake.score_final + '. Play and beat me if you can')
+  window.open(window.location.origin + '/end_screen.html', '_self')    
 }
 
 gaSetUserId();
