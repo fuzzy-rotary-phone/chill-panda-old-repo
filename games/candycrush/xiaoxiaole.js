@@ -1,4 +1,7 @@
-﻿function XiaoXiaoLe(canvasId, imgspath, options, scorechange, gameendcalback, timedowncalback) {
+﻿// instance variables to be loaded from index.js
+ loadInstanceVariables('../../' + CONTENT_PATH, '../../' + CONFIG_PATH, newGame)
+
+function XiaoXiaoLe(canvasId, imgspath, options, scorechange, gameendcalback, timedowncalback) {
     var _this = this;
     var w = 600, h = 500, boxsize = 100;
     var wi = 6, hi = 5;
