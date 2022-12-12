@@ -194,6 +194,7 @@ function endGame() {
   saveHighScore();
   showHighScore();
   renderGameOver();
+  showEndScreen()
 }
 
 function playBackgroundMusic() {
@@ -214,4 +215,16 @@ async function init() {
   });
 }
 
+function showEndScreen() {
+  localStorage.setItem('lastGame', 12)
+  sessionStorage.setItem('title', 'Game over!')
+  sessionStorage.setItem('html', '<span>Your death streak is </span><strong>' + store.score + 
+        '</strong><br/>')
+  sessionStorage.setItem('share', 'Haha! My death streak is ' + store.score + '. Play and beat me if you can')
+  window.open(window.location.origin + '/end_screen.html', '_self')
+}
+
 init();
+
+gaSetUserId();
+gaSetUserProperties();
