@@ -6,6 +6,15 @@ html, body, #wrapper {
   position: relative;
 }
 
+body {
+  background-image: url(assets/background-2.jpeg);
+  background-position: center center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-blend-mode: darken;
+}
+
 .loader {
     position : fixed;
     z-index: 9999;

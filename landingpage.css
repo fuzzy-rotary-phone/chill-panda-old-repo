@@ -38,10 +38,10 @@ body {
 h1 {
   font-family: 'ARCADECLASSIC';
   font-weight: bold;
-  color: #0066cc;
+  color: black;
   vertical-align: middle;
   grid-column: 1;
-  grid-row: 1;
+  grid-row: 2;
 }
 
 #greeting {
@@ -84,16 +84,16 @@ img {
   height: 80px;
   margin: auto;
   margin-bottom: 20px;
-  background-color: #0096c7;
-  color: whitesmoke;
+  background-color: #eef4ed;
+  color: black;
   border-radius: 40px !important;
   box-shadow: 8px 5px 20px -8px #263238;
-  border: 1px solid #000;
+  border: 3px solid #000;
   transition: all 0.3s ease-in-out;
   vertical-align: middle;
   font-size: 1em;
   font-weight: bold;
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif !important;  
+  font-family: 'ARCADECLASSIC';
 }
 
 #button2 {
@@ -101,16 +101,16 @@ img {
   height: 80px;
   margin: auto;
   margin-bottom: 20px;
-  background-color: #0096c7;
-  color: whitesmoke;
+  background-color: #eef4ed;
+  color: black;
   border-radius: 40px !important;
   box-shadow: 8px 5px 20px -8px #263238;
-  border: 1px solid #000;
+  border: 3px solid #000;
   transition: all 0.3s ease-in-out;
   vertical-align: middle;
   font-size: 1em;
   font-weight: bold;
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif !important;
+  font-family: 'ARCADECLASSIC';
 }
 
 #button1, #button2 span {
