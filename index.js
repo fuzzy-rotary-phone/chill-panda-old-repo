@@ -1,3 +1,17 @@
+// const GAME_MAP = {
+// 	1: 'games/DuckHunt-JS/dist/index.html',
+// 	2: 'games/align-four/index.html',
+// 	3: 'games/flappy-bird/index.html',
+// 	4: 'games/color-match-game-broken/index.html',
+// 	5: 'games/JoyRunner/runner.html',
+// 	6: 'games/snake/index.html',
+// 	7: 'games/sweet-memory-game/index.html',
+// 	8: 'games/tower-blocks/index.html',
+// 	9: 'games/candycrush/index.html',
+// 	10: 'games/Maze2/maze.html',
+// 	11: 'games/bubble-shooter/bubble-shooter.html',
+// 	12: 'games/got-death-quiz/index.html'
+// };
 const GAME_MAP = {
 	1: 'games/DuckHunt-JS/dist/index.html',
 	2: 'games/align-four/index.html',
@@ -8,9 +22,7 @@ const GAME_MAP = {
 	7: 'games/sweet-memory-game/index.html',
 	8: 'games/tower-blocks/index.html',
 	9: 'games/candycrush/index.html',
-	10: 'games/Maze2/maze.html',
-	11: 'games/bubble-shooter/bubble-shooter.html',
-	12: 'games/got-death-quiz/index.html'
+	10: 'games/Maze2/maze.html'
 };
 const TAG_FOR_PARTHA_DENTAL = 'parthadental'
 const TAG_FOR_NOSTRO_CAFE = 'nostrocafe'
