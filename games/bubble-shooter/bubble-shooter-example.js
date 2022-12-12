@@ -754,15 +754,7 @@ window.onload = function() {
             context.font = "24px Verdana";
             drawCenterText("Game Over!", level.x, level.y + level.height / 2 + 10, level.width);
             drawCenterText("Click to start", level.x, level.y + level.height / 2 + 40, level.width);
-
-            showEndScreen()
         }
-    }
-
-    function showEndScreen() {
-        localStorage.setItem('bubble-score', score)
-        localStorage.setItem('lastGame', 11)
-        window.location.href = window.location.origin + '/end_screen.html'
     }
     
     // Draw a frame around the game

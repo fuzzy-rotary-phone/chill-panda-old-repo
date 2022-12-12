@@ -9,7 +9,8 @@ const GAME_MAP = {
 	8: 'games/tower-blocks/index.html',
 	9: 'games/candycrush/index.html',
 	10: 'games/Maze2/maze.html',
-	11: 'games/bubble-shooter/bubble-shooter.html'
+	11: 'games/bubble-shooter/bubble-shooter.html',
+	12: 'games/got-death-quiz/index.html'
 };
 const TAG_FOR_PARTHA_DENTAL = 'parthadental'
 const TAG_FOR_NOSTRO_CAFE = 'nostrocafe'

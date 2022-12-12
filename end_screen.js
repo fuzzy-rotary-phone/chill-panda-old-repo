@@ -40,7 +40,7 @@ function share(score) {
     if (navigator.share) {
         navigator.share({
             title: 'Chill Panda',
-            text: 'Haha! I scored ' + score + '. Play and beat me if you can',
+            text: sessionStorage.getItem('share'),
             url: window.location.origin + '/' + GAME_MAP[game_number]
         }).then(() => {
             console.log('Thanks for sharing!');
@@ -54,11 +54,16 @@ function share(score) {
     }
 }
 
-function resetGame() {
-    // body...
-    location.href = GAME_MAP[game_number];
-    localStorage['bubble-score'] = 0
-}
+// function resetGame() {
+//     // body...
+//     if (game_number == 11) {
+//         location.href = GAME_MAP[game_number];
+//         localStorage['bubble-score'] = 0
+//     }
+//     if (game_number == 12) {
+
+//     }
+// }
 
 // function showAd(allcontent, config) {
 function showAd() {
@@ -93,12 +98,11 @@ function removeAd() {
 // function showEndScreen(allcontent, config) {
 function showEndScreen() {
     removeAd();
-    var score = localStorage['bubble-score'];
     Swal.fire({
         allowEscapeKey: false,
         allowOutsideClick: false,
-        title: 'Congratulations!',
-        html: '<span>You score is </span><strong>' + score + '</strong><br/>',
+        title: sessionStorage.getItem('title'),
+        html: sessionStorage.getItem('html'),
         // icon: 'success',
         backdrop: 'white',
         showDenyButton: true,
@@ -119,7 +123,7 @@ function showEndScreen() {
         if (result.isConfirmed) {
             loadNewGame();
         } else if (result.isDenied) {
-            resetGame();
+            loadSameGame()
         } else if (result.dismiss === Swal.DismissReason.cancel) {
             share(score)
         }
@@ -145,6 +149,10 @@ function showEndScreen() {
     gifDiv.innerHTML = '<a href='+ WEBSITE_LINK +' target="_blank">'
     + '<img src=' + GIF_PATH + '>' + '</a>';
     $('.swal2-container').append(gifDiv);
+}
+
+function loadSameGame() {
+    window.location.href = window.location.origin + '/' + GAME_MAP[game_number];
 }
 
 function loadNewGame() {
