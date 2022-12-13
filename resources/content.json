@@ -36,7 +36,8 @@
 		"adPath": "../../../assets/retailers/NostroCafe/ads/",
 		"totalAds": 6,
 		"adFormat": ".gif",
-		"content": []
+		"content": [],
+		"games": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 	},
 	{
 		"id": "coffeecrush",

@@ -1,3 +1,18 @@
+const ALL_GAME_MAP = {
+	1: 'games/DuckHunt-JS/dist/index.html',
+	2: 'games/align-four/index.html',
+	3: 'games/flappy-bird/index.html',
+	4: 'games/color-match-game-broken/index.html',
+	5: 'games/JoyRunner/runner.html',
+	6: 'games/snake/index.html',
+	7: 'games/sweet-memory-game/index.html',
+	8: 'games/tower-blocks/index.html',
+	9: 'games/candycrush/index.html',
+	10: 'games/Maze2/maze.html',
+	11: 'games/bubble-shooter/bubble-shooter.html',
+	12: 'games/got-death-quiz/index.html',
+	13: 'games/Friendly_Quiz_Game/index.html'
+};
 // const GAME_MAP = {
 // 	1: 'games/DuckHunt-JS/dist/index.html',
 // 	2: 'games/align-four/index.html',
@@ -8,22 +23,10 @@
 // 	7: 'games/sweet-memory-game/index.html',
 // 	8: 'games/tower-blocks/index.html',
 // 	9: 'games/candycrush/index.html',
-// 	10: 'games/Maze2/maze.html',
-// 	11: 'games/bubble-shooter/bubble-shooter.html',
-// 	12: 'games/got-death-quiz/index.html'
+// 	10: 'games/Maze2/maze.html'
 // };
-const GAME_MAP = {
-	1: 'games/DuckHunt-JS/dist/index.html',
-	2: 'games/align-four/index.html',
-	3: 'games/flappy-bird/index.html',
-	4: 'games/color-match-game-broken/index.html',
-	5: 'games/JoyRunner/runner.html',
-	6: 'games/snake/index.html',
-	7: 'games/sweet-memory-game/index.html',
-	8: 'games/tower-blocks/index.html',
-	9: 'games/candycrush/index.html',
-	10: 'games/Maze2/maze.html'
-};
+var GAME_MAP = {}
+
 const TAG_FOR_PARTHA_DENTAL = 'parthadental'
 const TAG_FOR_NOSTRO_CAFE = 'nostrocafe'
 const TAG_FOR_COFFEECRUSH = 'coffeecrush'
@@ -41,6 +44,7 @@ const JSON_KEY_FOR_WEBSITE = 'website'
 const JSON_KEY_FOR_LOGO = 'logo'
 const JSON_KEY_FOR_GIF = 'gif'
 const JSON_KEY_FOR_RETAIL_NAME = 'name'
+const JSON_KEY_FOR_GAMES_LIST = 'games'
 const IS_INSTANCE_HANDLED_BY_TAG = true
 var IN_GAME_ASSETS_PATH
 var AD_ASSETS_PATH
@@ -94,6 +98,14 @@ function setLocationVariables() {
 	GIF_PATH = INSTANCE_JSON[JSON_KEY_FOR_GIF]
 	AD_FORMAT = INSTANCE_JSON[JSON_KEY_FOR_AD_FORMAT] ? INSTANCE_JSON[JSON_KEY_FOR_AD_FORMAT] : '.png'
 	RETAIL_NAME = INSTANCE_JSON[JSON_KEY_FOR_RETAIL_NAME]
+	if (INSTANCE_JSON[JSON_KEY_FOR_GAMES_LIST]) {
+		var games = INSTANCE_JSON[JSON_KEY_FOR_GAMES_LIST]
+		for(var i in games) {
+			GAME_MAP[games[i]] = ALL_GAME_MAP[games[i]]
+		}
+	} else {
+		GAME_MAP = ALL_GAME_MAP
+	}
 }
 
 function setInstanceVariables() {
