@@ -10,7 +10,8 @@ const ALL_GAME_MAP = {
 	9: 'games/candycrush/index.html',
 	10: 'games/Maze2/maze.html',
 	11: 'games/bubble-shooter/bubble-shooter.html',
-	12: 'games/got-death-quiz/index.html'
+	12: 'games/got-death-quiz/index.html',
+	13: 'games/Friendly_Quiz_Game/index.html'
 };
 // const GAME_MAP = {
 // 	1: 'games/DuckHunt-JS/dist/index.html',
