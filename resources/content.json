@@ -76,5 +76,18 @@
 		"adPath": "../../../assets/retailers/ToniGuy/ads/",
 		"totalAds": 6,
 		"content": []		
-	}
+	},
+	{
+		"id": "nhs",
+		"urlTag": "nhs",
+		"name": "NHS Hospitals",
+		"industry": "Hospital",
+		"website": "http://nhshospitals.in",
+		"logo": "../../assets/retailers/NHS/NHS_logo.jpeg",
+		"gif": "../../assets/retailers/NHS/scissors.gif",
+		"ingamePath": "../../../assets/retailers/NHS/ingame/",
+		"adPath": "../../../assets/retailers/NHS/ads/",
+		"totalAds": 9,
+		"content": []		
+	}	
 ]
