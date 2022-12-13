@@ -24,6 +24,8 @@ const ALL_GAME_MAP = {
 // 	9: 'games/candycrush/index.html',
 // 	10: 'games/Maze2/maze.html'
 // };
+var GAME_MAP = {}
+
 const TAG_FOR_PARTHA_DENTAL = 'parthadental'
 const TAG_FOR_NOSTRO_CAFE = 'nostrocafe'
 const TAG_FOR_COFFEECRUSH = 'coffeecrush'
@@ -54,7 +56,6 @@ var RETAIL_NAME
 var ALL_CONTENT_INSTANCE_JSON
 var INSTANCE_JSON
 var CONFIG_JSON
-var GAME_MAP
 
 function getRandomNumber() {
 	var total = Object.keys(GAME_MAP).length;
@@ -99,7 +100,7 @@ function setLocationVariables() {
 	if (INSTANCE_JSON[JSON_KEY_FOR_GAMES_LIST]) {
 		var games = INSTANCE_JSON[JSON_KEY_FOR_GAMES_LIST]
 		for(var i in games) {
-			GAME_MAP[i] = ALL_GAME_MAP[i]
+			GAME_MAP[games[i]] = ALL_GAME_MAP[games[i]]
 		}
 	} else {
 		GAME_MAP = ALL_GAME_MAP
