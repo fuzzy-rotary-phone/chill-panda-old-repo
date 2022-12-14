@@ -4,8 +4,7 @@
 <head>
   <meta charset="utf-8">
 
-  <title>GoT Death Quiz</title>
-  <meta name="description" content="Do you know who died before who in Game Of Thrones?">
+  <title>Tetris game</title>
   <meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no,user-scalable=0">
   <meta name="color-scheme" content="light">
   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
@@ -23,12 +22,66 @@
 
   </script>
   <link rel="stylesheet" type="text/css" href="blockrain.css">
+  <!-- <link rel="stylesheet" type="text/css" href="index.css"> -->
 </head>
 <body>
   <div class="game" style="width:300px; height:600px; margin: auto;"></div>
   <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
   <script src="blockrain.jquery.min.js"></script>
   <script>
-      $('.game').blockrain();
+      function simulateKeyup(code) { 
+        var e = jQuery.Event("keyup");
+        e.keyCode = code;
+        jQuery('body').trigger(e);
+      }
+
+      function simulateKeydown(code) { 
+        var e = jQuery.Event("keydown");
+        e.keyCode = code;
+        jQuery('body').trigger(e);
+      }
+
+      $('.game').blockrain({
+        'controls': true,
+        'touchcontrols': true,
+        onGameOver: function(score) {
+          localStorage.setItem('lastGame', 16)
+          sessionStorage.setItem('title', 'Game over')
+          sessionStorage.setItem('html', '<span>Your score is <strong>' + score + '</strong></span>')
+          sessionStorage.setItem('share', 'Haha! I scored ' +score + '. Play and beat me if you can')
+          window.open(window.location.origin + '/end_screen.html', '_self')
+        }
+      });
+
+      // $('.blockrain-game-holder').append('<div id="control-up-big"></div>')
+      // $('.blockrain-game-holder').append('<div id="control-down-big"></div>')
+      // $('.blockrain-game-holder').append('<div id="control-left-big"></div>')
+      // $('.blockrain-game-holder').append('<div id="control-right-big"></div>')
+
+      // $("#control-up-big").on("mousedown touchstart", function(e) { 
+      //   e.preventDefault();
+      //   simulateKeydown(38);
+      //   simulateKeyup(13);
+      // });
+      // $("#control-down-big").on("mousedown touchstart", function(e) { 
+      //   e.preventDefault();
+      //   simulateKeydown(40);
+      //   simulateKeyup(13);
+      // });
+      // $("#control-left-big").on("mousedown touchstart", function(e) { 
+      //   e.preventDefault();
+      //   simulateKeydown(37);
+      //   simulateKeyup(13);
+      // });
+      // $("#control-right-big").on("mousedown touchstart", function(e) { 
+      //   e.preventDefault();
+      //   simulateKeydown(39);
+      //   simulateKeyup(13);
+      // });
+
+      // $('.game').blockrain({
+      //   speed: 100,
+      //   autoplay: true
+      // });
   </script>  
 </body>
