@@ -12,7 +12,8 @@ const ALL_GAME_MAP = {
 	11: 'games/bubble-shooter/bubble-shooter.html',
 	12: 'games/got-death-quiz/index.html',
 	13: 'games/Friendly_Quiz_Game/index.html',
-	14: 'games/pacman/index.html'
+	14: 'games/pacman/index.html',
+	15: 'games/Smash_game/index.html'
 };
 // const GAME_MAP = {
 // 	1: 'games/DuckHunt-JS/dist/index.html',

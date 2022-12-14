@@ -1463,8 +1463,17 @@ function endGame() {
 		setHighScore(state.game.score);
 	}
 	setActiveMenu(MENU_SCORE);
+
+	setTimeout(showAd, 1000)
 }
 
+function showAd() {
+  localStorage.setItem('lastGame', 15)
+  sessionStorage.setItem('title', 'Game over')
+  sessionStorage.setItem('html', '<span>Your score is <strong>' + state.game.score + '</strong></span>')
+  sessionStorage.setItem('share', 'Haha! I scored ' + state.game.score + '. Play and beat me if you can')
+  window.open(window.location.origin + '/end_screen.html', '_self')	
+}
 
 
 ////////////////////////
