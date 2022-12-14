@@ -1,0 +1,43 @@
+#control-up-big, #control-down-big, #control-left-big, #control-right-big { 
+  position: absolute;
+  opacity: 0.2;
+  margin: auto;
+  padding: 0px;
+  display: none;
+  background-size: 98px;
+  z-index: 999999;
+}
+
+#control-up-big { 
+  bottom: -120px;
+  left: 0px;
+  right: 0px;
+  width: 125px;
+  height: 125px;
+  content: '^';
+}
+
+#control-down-big { 
+  bottom: -250px;
+  left: 0px;
+  right: 0px;
+  width: 125px;
+  height: 125px;
+  content: '.';
+}
+
+#control-left-big { 
+  left: 80px;
+  bottom: -220px;
+  width: 125px;
+  height: 175px;
+  content: '<';
+}
+
+#control-right-big { 
+  right: 80px;
+  bottom: -220px;
+  width: 125px;
+  height: 175px;
+  content: '>';
+}
