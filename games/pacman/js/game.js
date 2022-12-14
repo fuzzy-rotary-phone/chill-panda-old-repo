@@ -292,6 +292,8 @@ function gameover() {
 	
 	resetPacman();
 	resetGhosts();
+
+	showAd()
 	
 	TIME_GAME = 0;
 	TIME_LEVEL = 0;
@@ -301,6 +303,14 @@ function gameover() {
 	LIFES = 2;
 	LEVEL = 1;
 	SCORE = 0;
+}
+
+function showAd() {
+  localStorage.setItem('lastGame', 14)
+  sessionStorage.setItem('title', 'Game over')
+  sessionStorage.setItem('html', '<span>Your score is <strong>' + SCORE + '</strong></span>')
+  sessionStorage.setItem('share', 'Haha! I scored ' + SCORE + '. Play and beat me if you can')
+  window.open(window.location.origin + '/end_screen.html', '_self')	
 }
 
 function message(m) { 
