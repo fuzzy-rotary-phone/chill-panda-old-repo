@@ -1,3 +1,5 @@
+// TO DO: Need to add bottle flip game - it is using npm
+// TO DO: Need to add controls to tetris and add this game
 const ALL_GAME_MAP = {
 	1: 'games/DuckHunt-JS/dist/index.html',
 	2: 'games/align-four/index.html',
@@ -13,7 +15,8 @@ const ALL_GAME_MAP = {
 	12: 'games/got-death-quiz/index.html',
 	13: 'games/Friendly_Quiz_Game/index.html',
 	14: 'games/pacman/index.html',
-	15: 'games/Smash_game/index.html'
+	15: 'games/Smash_game/index.html',
+	16: 'games/ZigZag/index.html'
 };
 // const GAME_MAP = {
 // 	1: 'games/DuckHunt-JS/dist/index.html',

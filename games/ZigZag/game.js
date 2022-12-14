@@ -455,6 +455,14 @@ playGame.prototype = {
 }
 
 
+var showAd = function(score) {
+    localStorage.setItem('lastGame', 16)
+    sessionStorage.setItem('title', 'Game over')
+    sessionStorage.setItem('html', '<span>Your score is <strong>' + score + '</strong></span>')
+    sessionStorage.setItem('share', 'Haha! I scored ' + score + '. Play and beat me if you can')
+    window.open(window.location.origin + '/end_screen.html', '_self')
+}
+
 var gameOverScreen = function(game){};
 gameOverScreen.prototype = {
 
@@ -509,6 +517,9 @@ gameOverScreen.prototype = {
         }, 1500, "Linear", true, 0, -1);
         tween.yoyo(true);
 
+        setTimeout(function() {
+            showAd(score)
+        }, 1000)
     },
     
     
