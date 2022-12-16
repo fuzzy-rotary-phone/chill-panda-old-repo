@@ -65,6 +65,10 @@ var CONFIG_JSON
 
 function getRandomNumber() {
 	var total = Object.keys(GAME_MAP).length;
+	if(!total) {
+		loadGameMap()
+		total = Object.keys(GAME_MAP).length
+	}
 	var number = 1 + Math.floor(Math.random() * total);
 	if (!localStorage['lastGame']) {
 		return number;
@@ -95,14 +99,7 @@ function setInGameVariables() {
 	IN_GAME_ASSETS_PATH = INSTANCE_JSON[JSON_KEY_FOR_IN_GAME_ASSETS]
 }
 
-function setLocationVariables() {
-	AD_ASSETS_PATH = INSTANCE_JSON[JSON_KEY_FOR_AD_ASSETS]
-	TOTAL_ADS = INSTANCE_JSON[JSON_KEY_FOR_TOTAL_ADS]
-	WEBSITE_LINK = INSTANCE_JSON[JSON_KEY_FOR_WEBSITE]
-	LOGO_PATH = INSTANCE_JSON[JSON_KEY_FOR_LOGO]
-	GIF_PATH = INSTANCE_JSON[JSON_KEY_FOR_GIF]
-	AD_FORMAT = INSTANCE_JSON[JSON_KEY_FOR_AD_FORMAT] ? INSTANCE_JSON[JSON_KEY_FOR_AD_FORMAT] : '.png'
-	RETAIL_NAME = INSTANCE_JSON[JSON_KEY_FOR_RETAIL_NAME]
+function loadGameMap() {
 	if (INSTANCE_JSON[JSON_KEY_FOR_GAMES_LIST]) {
 		var games = INSTANCE_JSON[JSON_KEY_FOR_GAMES_LIST]
 		for(var i in games) {
@@ -111,6 +108,17 @@ function setLocationVariables() {
 	} else {
 		GAME_MAP = ALL_GAME_MAP
 	}
+}
+
+function setLocationVariables() {
+	AD_ASSETS_PATH = INSTANCE_JSON[JSON_KEY_FOR_AD_ASSETS]
+	TOTAL_ADS = INSTANCE_JSON[JSON_KEY_FOR_TOTAL_ADS]
+	WEBSITE_LINK = INSTANCE_JSON[JSON_KEY_FOR_WEBSITE]
+	LOGO_PATH = INSTANCE_JSON[JSON_KEY_FOR_LOGO]
+	GIF_PATH = INSTANCE_JSON[JSON_KEY_FOR_GIF]
+	AD_FORMAT = INSTANCE_JSON[JSON_KEY_FOR_AD_FORMAT] ? INSTANCE_JSON[JSON_KEY_FOR_AD_FORMAT] : '.png'
+	RETAIL_NAME = INSTANCE_JSON[JSON_KEY_FOR_RETAIL_NAME]
+	loadGameMap()
 }
 
 function setInstanceVariables() {

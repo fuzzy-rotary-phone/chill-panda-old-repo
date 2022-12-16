@@ -11,7 +11,7 @@ html {
 
 @font-face {
     font-family: 'ARCADECLASSIC';
-    src: url('assets/fonts/ARCADECLASSIC.ttf');
+    src: url('assets/fonts/ARCADECLASSIC.TTF');
     font-weight: normal;
     font-style: normal;
 }
