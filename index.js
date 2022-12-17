@@ -175,6 +175,9 @@ function openMenu() {
 }
 
 function openGame() {
+	if(!INSTANCE_JSON) {
+		loadInstanceVariables(CONTENT_PATH, CONFIG_PATH)
+	}
 	var number = getRandomNumber().toString();
 	window.location.href = window.location.origin + '/' + GAME_MAP[number];
 }

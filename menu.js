@@ -1,5 +1,7 @@
 $(document).ready(function(){
 
+	loadInstanceVariables(CONTENT_PATH, CONFIG_PATH)
+
 	$('#link').href = WEBSITE_LINK
 	$('#link').innerText = RETAIL_NAME
 	document.getElementById('button2').addEventListener('click', function() {
