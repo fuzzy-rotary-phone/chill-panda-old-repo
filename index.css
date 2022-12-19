@@ -7,7 +7,6 @@ html, body, #wrapper {
 }
 
 body {
-  background-image: url(assets/background-2.jpeg);
   background-position: center center;
   background-size: cover;
   background-repeat: no-repeat;

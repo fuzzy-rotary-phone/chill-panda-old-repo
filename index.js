@@ -39,6 +39,9 @@ const TAG_FOR_BLR_BIRYANI_BHAWAN = 'bbb'
 
 const CONTENT_PATH = 'resources/content.json'
 const CONFIG_PATH = 'resources/config.json'
+const DEFAULT_HOME_PAGE_PATH = 'assets/background-2.jpeg'
+const LOCAL_STORAGE_KEY_FOR_RETAIL_LOCATION = 'retailLocation'
+const LOCAL_STORAGE_KEY_FOR_LAST_GAME = 'lastGame'
 const RETAIL_LOCATION_TAG_NAME = 'where'
 const JSON_KEY_FOR_RETAIL_LOCATION = 'urlTag'
 const JSON_KEY_FOR_IN_GAME_ASSETS = 'ingamePath'
@@ -50,6 +53,7 @@ const JSON_KEY_FOR_LOGO = 'logo'
 const JSON_KEY_FOR_GIF = 'gif'
 const JSON_KEY_FOR_RETAIL_NAME = 'name'
 const JSON_KEY_FOR_GAMES_LIST = 'games'
+const JSON_KEY_FOR_HOME_PAGE = 'homePage'
 const IS_INSTANCE_HANDLED_BY_TAG = true
 var IN_GAME_ASSETS_PATH
 var AD_ASSETS_PATH
@@ -59,6 +63,7 @@ var WEBSITE_LINK
 var LOGO_PATH
 var GIF_PATH
 var RETAIL_NAME
+var HOME_PAGE_PATH
 var ALL_CONTENT_INSTANCE_JSON
 var INSTANCE_JSON
 var CONFIG_JSON
@@ -70,10 +75,10 @@ function getRandomNumber() {
 		total = Object.keys(GAME_MAP).length
 	}
 	var number = 1 + Math.floor(Math.random() * total);
-	if (!localStorage['lastGame']) {
+	if (!localStorage[LOCAL_STORAGE_KEY_FOR_LAST_GAME]) {
 		return number;
 	}
-	while (number == localStorage['lastGame']) {
+	while (number == localStorage[LOCAL_STORAGE_KEY_FOR_LAST_GAME]) {
 		number = 1 + Math.floor(Math.random() * total);
 	}
 	return number;
@@ -81,9 +86,9 @@ function getRandomNumber() {
 
 function setRetailLocation(retailLocation) {
 	if (retailLocation) {
-		localStorage.setItem('retailLocation', retailLocation)
+		localStorage.setItem(LOCAL_STORAGE_KEY_FOR_RETAIL_LOCATION, retailLocation)
 	} else {
-		localStorage.setItem('retailLocation', '')
+		localStorage.setItem(LOCAL_STORAGE_KEY_FOR_RETAIL_LOCATION, '')
 	}
 }
 
@@ -110,7 +115,17 @@ function loadGameMap() {
 	}
 }
 
+function loadHomePage() {
+	var body = document.getElementsByTagName('body')[0]
+	if(HOME_PAGE_PATH) {
+		body.style.backgroundImage = 'url(' + HOME_PAGE_PATH + ')'
+	} else {
+		body.style.backgroundImage = 'url(' + DEFAULT_HOME_PAGE_PATH + ')'
+	}
+}
+
 function setLocationVariables() {
+	HOME_PAGE_PATH = INSTANCE_JSON[JSON_KEY_FOR_HOME_PAGE]
 	AD_ASSETS_PATH = INSTANCE_JSON[JSON_KEY_FOR_AD_ASSETS]
 	TOTAL_ADS = INSTANCE_JSON[JSON_KEY_FOR_TOTAL_ADS]
 	WEBSITE_LINK = INSTANCE_JSON[JSON_KEY_FOR_WEBSITE]
@@ -122,7 +137,7 @@ function setLocationVariables() {
 }
 
 function setInstanceVariables() {
-	INSTANCE_JSON = getJsonByKeyValue(ALL_CONTENT_INSTANCE_JSON, JSON_KEY_FOR_RETAIL_LOCATION, localStorage['retailLocation'])
+	INSTANCE_JSON = getJsonByKeyValue(ALL_CONTENT_INSTANCE_JSON, JSON_KEY_FOR_RETAIL_LOCATION, localStorage[LOCAL_STORAGE_KEY_FOR_RETAIL_LOCATION])
 	if (!INSTANCE_JSON) {
 		INSTANCE_JSON = ALL_CONTENT_INSTANCE_JSON[0]
 	}
@@ -159,6 +174,7 @@ function setVariablesInLocalStorage() {
 }
 
 function customizeLandingPage() {
+	loadHomePage()
 	document.getElementById('greeting').innerText = "Welcome   to "
 	document.getElementById('retailname').innerText = RETAIL_NAME + '!'
 	// document.querySelector('h1').insertAdjacentHTML('afterend', '<img src="' + LOGO_PATH + '" alt="image">')
@@ -168,6 +184,12 @@ function customizeLandingPage() {
 	document.getElementById('button1').addEventListener('click', function() {
 	  openMenu();
 	});
+
+	if(localStorage.getItem(LOCAL_STORAGE_KEY_FOR_RETAIL_LOCATION) == TAG_FOR_NOSTRO_CAFE) {
+		document.getElementById('retailname').innerText = ''
+		document.getElementById('greeting').style.marginBottom = '3em'
+		document.getElementById('greeting').style.fontSize = '3em'
+	}
 }
 
 function openMenu() {
