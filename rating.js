@@ -8,7 +8,8 @@ function storeRating(stars) {
 	    game_id: localStorage['lastGame'] ? parseInt(localStorage['lastGame']) : null,
 	    rating: stars,
 	    created_at: Math.round(Date.now() / 1000),
-	    hostname: window.location.hostname
+	    hostname: window.location.hostname,
+		retail_location: localStorage['retailLocation']
 	})
 	.then((docRef) => {
 	    console.log("Document written with ID: ", docRef.id);

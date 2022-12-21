@@ -35,4 +35,7 @@ $(document).ready(function(){
 		var accordion = new Accordion($('#accordion'), false);
 	});
 
+	gaSetUserId();
+	gaSetUserProperties();	
+
 });
