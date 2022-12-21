@@ -3,14 +3,18 @@ function storeRating(stars) {
 		gaSetUserId();
 	}
 
-	db.collection("rating").add({
+	var row = {
 	    guid: localStorage['guid'] ? localStorage['guid'] : null,
 	    game_id: localStorage['lastGame'] ? parseInt(localStorage['lastGame']) : null,
 	    rating: stars,
 	    created_at: Math.round(Date.now() / 1000),
 	    hostname: window.location.hostname,
 		retail_location: localStorage['retailLocation']
-	})
+	}
+
+	gtag('event', 'rating', row)
+
+	db.collection("rating").add(row)
 	.then((docRef) => {
 	    console.log("Document written with ID: ", docRef.id);
 	    home();

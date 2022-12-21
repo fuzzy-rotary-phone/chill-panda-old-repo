@@ -15,7 +15,8 @@ loadInstanceVariables(CONTENT_PATH, CONFIG_PATH, showAd)
 //     loadJSONsAndShowAd()
 // })
 
-const game_number = localStorage['lastGame']
+const gameNumber = localStorage['lastGame']
+const retailLocation = localStorage['retailLocation']
 
 function loadJSONsAndShowAd() {
     $.getJSON('../../resources/content.json', allretailcontent => {
@@ -37,12 +38,20 @@ function loadJSONsAndShowAd() {
 }
 
 function share(score) {
+    var content = {
+        title: 'Chill Panda',
+        text: sessionStorage.getItem('share'),
+        url: window.location.origin + '/' + GAME_MAP[gameNumber]
+    }
+    gtag('event', 'share', {
+        'method': 'Challenge a friend',
+        'content_type': 'Text with URL',
+        'content': content,
+        'retail_location': retailLocation,
+        'game_number': gameNumber
+    })
     if (navigator.share) {
-        navigator.share({
-            title: 'Chill Panda',
-            text: sessionStorage.getItem('share'),
-            url: window.location.origin + '/' + GAME_MAP[game_number]
-        }).then(() => {
+        navigator.share(content).then(() => {
             console.log('Thanks for sharing!');
             showEndScreen()
         }).catch(err => {
@@ -56,11 +65,11 @@ function share(score) {
 
 // function resetGame() {
 //     // body...
-//     if (game_number == 11) {
-//         location.href = GAME_MAP[game_number];
+//     if (gameNumber == 11) {
+//         location.href = GAME_MAP[gameNumber];
 //         localStorage['bubble-score'] = 0
 //     }
-//     if (game_number == 12) {
+//     if (gameNumber == 12) {
 
 //     }
 // }
@@ -86,6 +95,11 @@ function showAd() {
             closeDiv.classList.add('is-shown');
         }, 3000);
     });
+    gtag('event', 'seen_ad', {
+        'retail_location': retailLocation,
+        'game_number': gameNumber,
+        'ad_id': number
+    })
 }
 
 function removeAd() {
@@ -152,7 +166,7 @@ function showEndScreen() {
 }
 
 function loadSameGame() {
-    window.location.href = window.location.origin + '/' + GAME_MAP[game_number];
+    window.location.href = window.location.origin + '/' + GAME_MAP[gameNumber];
 }
 
 function loadNewGame() {
