@@ -1,3 +1,15 @@
+const firebaseConfig = {
+	apiKey: "AIzaSyBJQO8HWWCV6a-K33knwHYnIcZwm5-4G9w",
+	authDomain: "chill-panda-c1184.firebaseapp.com",
+	projectId: "chill-panda-c1184",
+	storageBucket: "chill-panda-c1184.appspot.com",
+	messagingSenderId: "97999123599",
+	appId: "1:97999123599:web:c214990d78ab04860b6cfa",
+	measurementId: "G-QNEMSD28TV"
+};
+const firebaseApp = firebase.initializeApp(firebaseConfig);
+const db = firebaseApp.firestore();
+
 loadInstanceVariables(CONTENT_PATH, CONFIG_PATH, loadQuestion)
 
 var questionText
