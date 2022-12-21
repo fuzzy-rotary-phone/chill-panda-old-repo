@@ -54,6 +54,7 @@ const JSON_KEY_FOR_GIF = 'gif'
 const JSON_KEY_FOR_RETAIL_NAME = 'name'
 const JSON_KEY_FOR_GAMES_LIST = 'games'
 const JSON_KEY_FOR_HOME_PAGE = 'homePage'
+const JSON_KEY_FOR_CSS = 'cssPath'
 const IS_INSTANCE_HANDLED_BY_TAG = true
 var IN_GAME_ASSETS_PATH
 var AD_ASSETS_PATH
@@ -64,6 +65,7 @@ var LOGO_PATH
 var GIF_PATH
 var RETAIL_NAME
 var HOME_PAGE_PATH
+var CSS_PATH
 var ALL_CONTENT_INSTANCE_JSON
 var INSTANCE_JSON
 var CONFIG_JSON
@@ -133,6 +135,7 @@ function setLocationVariables() {
 	GIF_PATH = INSTANCE_JSON[JSON_KEY_FOR_GIF]
 	AD_FORMAT = INSTANCE_JSON[JSON_KEY_FOR_AD_FORMAT] ? INSTANCE_JSON[JSON_KEY_FOR_AD_FORMAT] : '.png'
 	RETAIL_NAME = INSTANCE_JSON[JSON_KEY_FOR_RETAIL_NAME]
+	CSS_PATH = INSTANCE_JSON[JSON_KEY_FOR_CSS]
 	loadGameMap()
 }
 
@@ -173,7 +176,17 @@ function setVariablesInLocalStorage() {
 	}
 }
 
+function loadCSS() {
+	var head = document.getElementsByTagName('HEAD')[0]
+	var link = document.createElement('link')
+	link.rel = 'stylesheet'
+	link.type = 'text/css'
+	link.href = CSS_PATH
+	head.appendChild(link)
+}
+
 function customizeLandingPage() {
+	loadCSS()
 	loadHomePage()
 	document.getElementById('greeting').innerText = "Welcome   to "
 	document.getElementById('retailname').innerText = RETAIL_NAME + '!'
