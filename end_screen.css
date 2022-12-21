@@ -9,14 +9,14 @@ body {
 
 .close-div {
   display: flex;
-  width: 3em;
-  height: 3em;
+  width: 2.5em;
+  height: 2.5em;
   object-fit: contain;
   margin: auto;
-  border-width: 0.3em;
-  border-color: black;
+  /* border-width: 0.3em;
+  border-color: whitesmoke;
   border-radius: 2em;
-  border-style: solid;
+  border-style: solid; */
   position: absolute;
   top: 90%;
   left: 45%;
@@ -24,12 +24,17 @@ body {
   vertical-align: middle;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 5px 10px black;
+  box-shadow: 0 8px 12px black;
   transform: translateY(200%);
   transition-timing-function: ease-in;
   transition: 0.2s;
   cursor: pointer;
-  background-color: #D00000;
+  /* background-color: #D00000; */
+}
+
+.close-div img {
+	width: 3em;
+	height: 3em;
 }
 
 .close-div.is-shown {

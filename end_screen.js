@@ -83,7 +83,8 @@ function showAd() {
     $('body').addClass('ad-img');
     var closeDiv = document.createElement('div');
     closeDiv.className = 'close-div';
-    closeDiv.innerHTML = '<i class="fa fa-times fa-2x" aria-hidden="true"></i>';
+    // closeDiv.innerHTML = '<i class="fa fa-times fa-2x" aria-hidden="true"></i>';
+    closeDiv.innerHTML = '<img src="' + CLOSE_BUTTON_PATH + '" alt="">'
     // closeDiv.addEventListener('click', (e) => { showEndScreen(allcontent, config); });
     closeDiv.addEventListener('click', (e) => { showEndScreen(); });
     $('<img/>').attr('src', urlPath).on('load', function() {
