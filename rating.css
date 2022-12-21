@@ -96,6 +96,7 @@ html, body {
 .app-rating label:hover {
   color: #ffb703;
   transition: 0.2s ease;
+  cursor: pointer;
 }
 .app-rating label:active::before {
   transform:scale(1.1);
