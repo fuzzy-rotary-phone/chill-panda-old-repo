@@ -144,7 +144,7 @@ function showEndScreen() {
     });
     var closeDiv = document.createElement('div');
     closeDiv.className = 'share-div';
-    closeDiv.innerHTML = '<i class="fa fa-times fa-2x" aria-hidden="true"></i>';
+    closeDiv.innerHTML = '<i class="fa fa-times fa-2x" aria-hidden="true"></i><span>Exit</span>';
     closeDiv.addEventListener('click', function() {
         openNPS()
     });
