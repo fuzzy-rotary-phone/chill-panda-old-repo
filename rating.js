@@ -48,7 +48,7 @@ function storeRating(stars) {
 }
 
 function home() {
-	window.location.href = window.location.origin;
+	window.location.href = window.location.origin
 }
 
 gaSetUserId();

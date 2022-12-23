@@ -70,6 +70,7 @@ var CSS_PATH
 var ALL_CONTENT_INSTANCE_JSON
 var INSTANCE_JSON
 var CONFIG_JSON
+var URL_SEARCH_PARAM_FOR_RETAIL_LOCATION
 
 function getRandomNumber() {
 	var total = Object.keys(GAME_MAP).length;
@@ -93,6 +94,7 @@ function setRetailLocation(retailLocation) {
 	} else {
 		localStorage.setItem(LOCAL_STORAGE_KEY_FOR_RETAIL_LOCATION, '')
 	}
+	URL_SEARCH_PARAM_FOR_RETAIL_LOCATION = (localStorage[LOCAL_STORAGE_KEY_FOR_RETAIL_LOCATION] ? ('?' + RETAIL_LOCATION_TAG_NAME + '=' + localStorage[LOCAL_STORAGE_KEY_FOR_RETAIL_LOCATION]) : '')
 }
 
 function getJsonByKeyValue(data, tagName, tagValue) {
@@ -207,7 +209,10 @@ function customizeLandingPage() {
 }
 
 function openMenu() {
-	window.location.href = window.location.origin + '/menu.html';
+	window.location.href = window.location.origin + '/menu.html' + 
+	// Temporary fix to always capture the location in GA from where the URL was first reached. Every change in href needs to add this for consistency.
+	// TODO: move to location based subdomains for permanent fix
+	URL_SEARCH_PARAM_FOR_RETAIL_LOCATION
 }
 
 function openGame() {
@@ -215,7 +220,7 @@ function openGame() {
 		loadInstanceVariables(CONTENT_PATH, CONFIG_PATH)
 	}
 	var number = getRandomNumber().toString();
-	window.location.href = window.location.origin + '/' + GAME_MAP[number];
+	window.location.href = window.location.origin + '/' + GAME_MAP[number] + URL_SEARCH_PARAM_FOR_RETAIL_LOCATION
 }
 
 function loadGame() {

@@ -167,13 +167,13 @@ function showEndScreen() {
 }
 
 function loadSameGame() {
-    window.location.href = window.location.origin + '/' + GAME_MAP[gameNumber];
+    window.location.href = window.location.origin + '/' + GAME_MAP[gameNumber]
 }
 
 function loadNewGame() {
-    window.location.href = window.location.origin + '/' + GAME_MAP[getRandomNumber()];
+    window.location.href = window.location.origin + '/' + GAME_MAP[getRandomNumber()]
 }
 
 function openNPS() {
-    window.location.href = window.location.origin + '/rating.html';
+    window.location.href = window.location.origin + '/rating.html'
 }
