@@ -21,30 +21,30 @@
 </head>
 <body>
       <div class="container">
-            <!-- <span>How likely are you to recommend <strong>CoffeeCrush</strong> to your friends?</span>
+            <span id="place-question">How likely are you to recommend <strong>Chill Panda</strong> to your friends?</span>
             <div id="place-rating" class="place-rating">
-                  <input type="radio" name="stars" id="place-star-a" value="5"/>
+                  <input type="radio" name="place-stars" id="place-star-a" value="5" onclick="storeRating(5, 'place')"/>
                   <label for="place-star-a"></label>
-                  <input type="radio" name="stars" id="place-star-b" value="4"/>
+                  <input type="radio" name="place-stars" id="place-star-b" value="4" onclick="storeRating(4, 'place')"/>
                   <label for="place-star-b"></label>
-                  <input type="radio" name="stars" id="place-star-c" value="3"/>
+                  <input type="radio" name="place-stars" id="place-star-c" value="3" onclick="storeRating(3, 'place')"/>
                   <label for="place-star-c"></label>
-                  <input type="radio" name="stars" id="place-star-d" value="2"/>
+                  <input type="radio" name="place-stars" id="place-star-d" value="2" onclick="storeRating(2, 'place')"/>
                   <label for="place-star-d"></label>
-                  <input type="radio" name="stars" id="place-star-e" value="1"/>
+                  <input type="radio" name="place-stars" id="place-star-e" value="1" onclick="storeRating(1, 'place')"/>
                   <label for="place-star-e"></label>
-            </div> -->
-            <span id="question">How likely are you to recommend <strong>ChillPanda</strong> to your friends?</span>
+            </div>
+            <span id="app-question">How likely are you to recommend <strong>ChillPanda</strong> to your friends?</span>
             <div id="app-rating" class="app-rating">
-                  <input type="radio" name="stars" id="app-star-a" value="5" onclick="storeRating(5)" />
+                  <input type="radio" name="app-stars" id="app-star-a" value="5" onclick="storeRating(5, 'app')"/>
                   <label for="app-star-a"></label>
-                  <input type="radio" name="stars" id="app-star-b" value="4" onclick="storeRating(4)"/>
+                  <input type="radio" name="app-stars" id="app-star-b" value="4" onclick="storeRating(4, 'app')"/>
                   <label for="app-star-b"></label>
-                  <input type="radio" name="stars" id="app-star-c" value="3" onclick="storeRating(3)"/>
+                  <input type="radio" name="app-stars" id="app-star-c" value="3" onclick="storeRating(3, 'app')"/>
                   <label for="app-star-c"></label>
-                  <input type="radio" name="stars" id="app-star-d" value="2" onclick="storeRating(2)"/>
+                  <input type="radio" name="app-stars" id="app-star-d" value="2" onclick="storeRating(2, 'app')"/>
                   <label for="app-star-d"></label>
-                  <input type="radio" name="stars" id="app-star-e" value="1" onclick="storeRating(1)"/>
+                  <input type="radio" name="app-stars" id="app-star-e" value="1" onclick="storeRating(1, 'app')"/>
                   <label for="app-star-e"></label>
             </div>
       </div>

@@ -10,16 +10,15 @@ const firebaseConfig = {
 const firebaseApp = firebase.initializeApp(firebaseConfig);
 const db = firebaseApp.firestore();
 
-loadInstanceVariables(CONTENT_PATH, CONFIG_PATH, loadQuestion)
+loadInstanceVariables(CONTENT_PATH, CONFIG_PATH, loadPlaceQuestion)
 
-var questionText
-
-function loadQuestion() {
-	questionText = 'How likely are you to recommend ' + RETAIL_NAME + ' to your friends?'
-	document.getElementById('question').innerText = questionText	
+function loadPlaceQuestion() {
+	var question = 'How likely are you to recommend <strong>' + RETAIL_NAME + '</strong> to your friends?'
+	document.getElementById('place-question').innerHTML = question
 }
 
-function storeRating(stars) {
+function storeRating(stars, type) {
+	
 	if(!localStorage['guid']) {
 		gaSetUserId();
 	}
@@ -27,11 +26,12 @@ function storeRating(stars) {
 	var row = {
 	    guid: localStorage['guid'] ? localStorage['guid'] : null,
 	    game_id: localStorage['lastGame'] ? parseInt(localStorage['lastGame']) : null,
-		question: questionText,
+		question: (type === 'place') ? $('#place-question')[0].innerText : $('#app-question')[0].innerText,
 	    rating: stars,
 	    created_at: Math.round(Date.now() / 1000),
 	    hostname: window.location.hostname,
-		retail_location: localStorage['retailLocation']
+		retail_location: localStorage['retailLocation'],
+		type: type
 	}
 
 	gtag('event', 'rating', row)
@@ -39,11 +39,15 @@ function storeRating(stars) {
 	db.collection("rating").add(row)
 	.then((docRef) => {
 	    console.log("Document written with ID: ", docRef.id);
-	    home();
+		if(type == 'app') {
+			home();
+		}
 	})
 	.catch((error) => {
 	    console.error("Error adding document: ", error);
-	    home();
+	    if(type == 'app') {
+			home();
+		}
 	});
 }
 
