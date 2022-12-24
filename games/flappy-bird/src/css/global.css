@@ -80,14 +80,14 @@ div.swal-alert {
 
 .close-div {
   display: flex;
-  width: 2.5em;
-  height: 2.5em;
+  width: 2em;
+  height: 2em;
   object-fit: contain;
   margin: auto;
-  border-width: 0.3em;
+  /* border-width: 0.3em;
   border-color: black;
   border-radius: 2em;
-  border-style: solid;
+  border-style: solid; */
   position: absolute;
   top: 90%;
   left: 45%;
@@ -95,12 +95,17 @@ div.swal-alert {
   vertical-align: middle;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 5px 10px black;
+  box-shadow: 0 8px 12px black;
   transform: translateY(200%);
   transition-timing-function: ease-in;
   transition: 0.2s;
   cursor: pointer;
-  background-color: #D00000;
+  /* background-color: #D00000; */
+}
+
+.close-div img {
+	width: 2.5em;
+	height: 2.5em;
 }
 
 .close-div.is-shown {
@@ -273,12 +278,20 @@ div.swal-alert {
   display: grid;
   grid-column: 2;
   grid-row: 1;
+  text-align: center;
   align-self: start;
   justify-self: safe end;
   margin: auto;
   margin-right: 0.3em;
   font-size: 0.8em;
   margin-top: 0.3em;
+	font-weight: 500;
+	color: black;
+	font-family: "Helvetica Neue",Helvetica,Arial,sans-serif !important;
+}
+
+.share-div:hover {
+	cursor: pointer;
 }
 
 .button-div {

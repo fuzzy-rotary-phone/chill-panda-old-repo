@@ -18,6 +18,8 @@
 // http://rembound.com/articles/bubble-shooter-game-tutorial-with-html5-and-javascript
 // ------------------------------------------------------------------------
 
+loadInstanceVariables('../../' + CONTENT_PATH, '../../' + CONFIG_PATH)
+
 // The function gets called when the window is fully loaded
 window.onload = function() {
     $(".loader").fadeOut("1000");
@@ -764,7 +766,7 @@ window.onload = function() {
         sessionStorage.setItem('title', 'Congratulations!')
         sessionStorage.setItem('html', '<span>You score is </span><strong>' + score + '</strong><br/>')
         sessionStorage.setItem('share', 'Haha! I scored ' + score + '. Play and beat me if you can')
-        window.open(window.location.origin + '/end_screen.html', '_self')
+        window.open(window.location.origin + '/end_screen.html' + (URL_SEARCH_PARAM_FOR_RETAIL_LOCATION ? URL_SEARCH_PARAM_FOR_RETAIL_LOCATION : ''), '_self')
     }
     
     // Draw a frame around the game

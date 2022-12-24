@@ -37250,6 +37250,8 @@ var Game = function () {
     this.quackingSoundId = null;
     this.levels = _levels2.default.normal;
 
+    loadInstanceVariables('../../../' + CONTENT_PATH, '../../../' + CONFIG_PATH)
+
     gtag("event", "game_start")
 
     return this;
@@ -37615,7 +37617,7 @@ var Game = function () {
       sessionStorage.setItem('title', gameStatus)
       sessionStorage.setItem('html', '<span>' + this.getScoreMessage() + ' Your score is <strong>' + this.score + '</strong></span>')
       sessionStorage.setItem('share', 'Haha! I scored ' + this.score + '. Play and beat me if you can')
-      window.open(window.location.origin + '/end_screen.html', '_self')      
+      window.open(window.location.origin + '/end_screen.html' + (URL_SEARCH_PARAM_FOR_RETAIL_LOCATION ? URL_SEARCH_PARAM_FOR_RETAIL_LOCATION : ''), '_self')
     }
   }, {
     key: 'openLevelCreator',
@@ -37952,7 +37954,7 @@ module.exports.parseLevelQueryString = function () {
 };
 
 module.exports.urlContainsLevelData = function () {
-  return window.location.href.indexOf('?') !== -1;
+  return window.location.href.indexOf('?') !== -1 && window.location.href.indexOf('?where') === -1
 };
 
 /***/ }),

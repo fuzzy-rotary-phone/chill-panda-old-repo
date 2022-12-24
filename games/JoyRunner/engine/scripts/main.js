@@ -1,5 +1,6 @@
 "use strict";
 /***** DOM *****/
+loadInstanceVariables('../../' + CONTENT_PATH, '../../' + CONFIG_PATH)
 
 const game = {
     container: document.querySelector(".game-container"),
@@ -276,7 +277,7 @@ function showAd() {
     sessionStorage.setItem('title', 'Game over!')
     sessionStorage.setItem('html', '<span>Your score is </span><strong>' + score + '</strong><br/>')
     sessionStorage.setItem('share', 'Haha! I scored ' + score + '. Play and beat me if you can')
-    window.open(window.location.origin + '/end_screen.html', '_self')    
+    window.open(window.location.origin + '/end_screen.html' + (URL_SEARCH_PARAM_FOR_RETAIL_LOCATION ? URL_SEARCH_PARAM_FOR_RETAIL_LOCATION : ''), '_self')    
 }
 
 gaSetUserId();

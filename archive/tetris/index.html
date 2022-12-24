@@ -49,7 +49,7 @@
           sessionStorage.setItem('title', 'Game over')
           sessionStorage.setItem('html', '<span>Your score is <strong>' + score + '</strong></span>')
           sessionStorage.setItem('share', 'Haha! I scored ' +score + '. Play and beat me if you can')
-          window.open(window.location.origin + '/end_screen.html', '_self')
+          window.open(window.location.origin + '/end_screen.html' + (URL_SEARCH_PARAM_FOR_RETAIL_LOCATION ? URL_SEARCH_PARAM_FOR_RETAIL_LOCATION : ''), '_self')
         }
       });
 

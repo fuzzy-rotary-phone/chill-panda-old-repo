@@ -1,5 +1,7 @@
 //----------------------- G O O D   L U C K -------------------------------//
 
+loadInstanceVariables('../../' + CONTENT_PATH, '../../' + CONFIG_PATH)
+
 // select all elements by id
 const start = document.getElementById("start");
 const quiz = document.getElementById("quiz");
@@ -343,7 +345,7 @@ function showAd(score) {
   sessionStorage.setItem('html', '<span>Your score percent is </span><strong>' + score + 
         '</strong><br/>')
   sessionStorage.setItem('share', 'Haha! My score percent is ' + score + '. Play and beat me if you can')
-  window.open(window.location.origin + '/end_screen.html', '_self')  
+  window.open(window.location.origin + '/end_screen.html' + (URL_SEARCH_PARAM_FOR_RETAIL_LOCATION ? URL_SEARCH_PARAM_FOR_RETAIL_LOCATION : ''), '_self')  
 }
 
 //////////////////////////////////////////////////////
@@ -356,3 +358,6 @@ function myLoader() {
 function showPage() {
   document.getElementById("loader").style.display = "none";
 }
+
+gaSetUserId();
+gaSetUserProperties();

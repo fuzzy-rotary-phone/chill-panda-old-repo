@@ -1,12 +1,14 @@
 $(document).ready(function(){
 
-	loadInstanceVariables(CONTENT_PATH, CONFIG_PATH)
+	loadInstanceVariables(CONTENT_PATH, CONFIG_PATH, customizeMenu)
 
-	$('#link').href = WEBSITE_LINK
-	$('#link').innerText = RETAIL_NAME
-	document.getElementById('button2').addEventListener('click', function() {
-	  openGame();
-	});
+	function customizeMenu() {
+		$('#link')[0].href = WEBSITE_LINK
+		$('#link')[0].innerText = RETAIL_NAME
+		document.getElementById('button2').addEventListener('click', function() {
+		  openGame();
+		});	
+	}
 
 	$(function() {
 		var Accordion = function(el, multiple) {

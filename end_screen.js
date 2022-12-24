@@ -41,7 +41,7 @@ function share(score) {
     var content = {
         title: 'Chill Panda',
         text: sessionStorage.getItem('share'),
-        url: window.location.origin + '/' + GAME_MAP[gameNumber]
+        url: window.location.origin + '/' + GAME_MAP[gameNumber] + (URL_SEARCH_PARAM_FOR_RETAIL_LOCATION ? URL_SEARCH_PARAM_FOR_RETAIL_LOCATION : '')
     }
     gtag('event', 'share', {
         'method': 'Challenge a friend',
@@ -167,13 +167,13 @@ function showEndScreen() {
 }
 
 function loadSameGame() {
-    window.location.href = window.location.origin + '/' + GAME_MAP[gameNumber]
+    window.location.href = window.location.origin + '/' + GAME_MAP[gameNumber] + (URL_SEARCH_PARAM_FOR_RETAIL_LOCATION ? URL_SEARCH_PARAM_FOR_RETAIL_LOCATION : '')
 }
 
 function loadNewGame() {
-    window.location.href = window.location.origin + '/' + GAME_MAP[getRandomNumber()]
+    window.location.href = window.location.origin + '/' + GAME_MAP[getRandomNumber()] + (URL_SEARCH_PARAM_FOR_RETAIL_LOCATION ? URL_SEARCH_PARAM_FOR_RETAIL_LOCATION : '')
 }
 
 function openNPS() {
-    window.location.href = window.location.origin + '/rating.html'
+    window.location.href = window.location.origin + '/rating.html' + (URL_SEARCH_PARAM_FOR_RETAIL_LOCATION ? URL_SEARCH_PARAM_FOR_RETAIL_LOCATION : '')
 }

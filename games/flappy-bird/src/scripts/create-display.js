@@ -88,7 +88,8 @@ export default function (main) {
           $('body').addClass('ad-img');
           var closeDiv = document.createElement('div');
           closeDiv.className = 'close-div';
-          closeDiv.innerHTML = '<i class="fa fa-times fa-2x" aria-hidden="true"></i>';
+          // closeDiv.innerHTML = '<i class="fa fa-times fa-2x" aria-hidden="true"></i>';
+          closeDiv.innerHTML = '<img src="' + '../../' + CLOSE_BUTTON_PATH + '" alt="">'
           closeDiv.addEventListener('click', (e) => {
             $('body').removeClass('ad-img');
             $('body').css('background-image', '');
@@ -109,7 +110,7 @@ export default function (main) {
             }).then((result) => {
               /* Read more about isConfirmed, isDenied below */
               if (result.isConfirmed) {
-                window.location.href = window.location.origin + '/' + GAME_MAP[getRandomNumber()];
+                window.location.href = window.location.origin + '/' + GAME_MAP[getRandomNumber()] + (URL_SEARCH_PARAM_FOR_RETAIL_LOCATION ? URL_SEARCH_PARAM_FOR_RETAIL_LOCATION : '')
               } else if (result.isDenied) {
                 currentScore = 0
                 isOverDraw = false
@@ -119,10 +120,10 @@ export default function (main) {
                   navigator.share({
                     title: 'Chill Panda',
                     text: 'Haha! I scored ' + currentScore + '. Play and beat me if you can',
-                    url: window.location.href
+                    url: window.location.href + (URL_SEARCH_PARAM_FOR_RETAIL_LOCATION ? URL_SEARCH_PARAM_FOR_RETAIL_LOCATION : '')
                   }).then(() => {
                     console.log('Thanks for sharing!');
-                    window.location.href = window.location.origin + '/' + GAME_MAP[getRandomNumber()];
+                    window.location.href = window.location.origin + '/' + GAME_MAP[getRandomNumber()] + (URL_SEARCH_PARAM_FOR_RETAIL_LOCATION ? URL_SEARCH_PARAM_FOR_RETAIL_LOCATION : '')
                   }).catch(err => {
                     console.log('Error while using Web share API:');
                     console.log(err);
@@ -136,7 +137,7 @@ export default function (main) {
             closeDiv.className = 'share-div';
             closeDiv.innerHTML = '<i class="fa fa-times fa-2x" aria-hidden="true"></i>';
             closeDiv.addEventListener('click', function() {
-              window.location.href = window.location.origin + '/rating.html';
+              window.location.href = window.location.origin + '/rating.html' + (URL_SEARCH_PARAM_FOR_RETAIL_LOCATION ? URL_SEARCH_PARAM_FOR_RETAIL_LOCATION : '')
             });
             $('.swal2-container').append(closeDiv);
             var logoDiv = document.createElement('div');

@@ -268,7 +268,7 @@ Mazing.prototype.showAd = function() {
   sessionStorage.setItem('title', this.winFlag ? 'Congratulations!' : 'Game over!')
   sessionStorage.setItem('html', '<span>' + this.mazeMessage.innerHTML + '</span>')
   sessionStorage.setItem('share', 'Haha! Play and beat me if you can')
-  window.open(window.location.origin + '/end_screen.html', '_self')    
+  window.open(window.location.origin + '/end_screen.html' + (URL_SEARCH_PARAM_FOR_RETAIL_LOCATION ? URL_SEARCH_PARAM_FOR_RETAIL_LOCATION : ''), '_self')    
 }
 
 gaSetUserId();

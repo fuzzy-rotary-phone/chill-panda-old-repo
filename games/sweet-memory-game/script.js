@@ -1,3 +1,5 @@
+loadInstanceVariables('../../' + CONTENT_PATH, '../../' + CONFIG_PATH)
+
 const SYMBOLS_FOR_HOSPITALS = ['ambulance', 'ambulance', 'heartbeat', 'heartbeat', 'stethoscope', 'stethoscope', 'wheelchair', 'wheelchair', 'user-md', 'user-md', 'hospital-o', 'hospital-o', 'life-ring', 'life-ring', 'thermometer-quarter', 'thermometer-quarter']
 const SYMBOLS_FOR_CAFE = ['cookie-bite', 'cookie-bite', 'pizza-slice', 'pizza-slice', 'burger', 'burger', 'ice-cream', 'ice-cream', 'champagne-glasses', 'champagne-glasses', 'cake-candles', 'cake-candles', 'candy-cane', 'candy-cane', 'mug-hot', 'mug-hot']
 const SYMBOLS_FOR_BIRYANI = ['pepper-hot', 'pepper-hot', 'drumstick-bite', 'drumstick-bite', 'fish-fins', 'fish-fins', 'champagne-glasses', 'champagne-glasses', 'pizza-slice', 'pizza-slice', 'ice-cream', 'ice-cream', 'burger', 'burger', 'bowl-rice', 'bowl-rice']
@@ -122,7 +124,7 @@ function showAd(score) {
   sessionStorage.setItem('title', 'Congratulations!')
   sessionStorage.setItem('html', '<span>You won with </span><strong>' + score + '</strong> moves<br/>')
   sessionStorage.setItem('share', 'Haha! I completed in ' + score + ' moves. Play and beat me if you can')
-  window.open(window.location.origin + '/end_screen.html', '_self')
+  window.open(window.location.origin + '/end_screen.html' + (URL_SEARCH_PARAM_FOR_RETAIL_LOCATION ? URL_SEARCH_PARAM_FOR_RETAIL_LOCATION : ''), '_self')
 }
 
 // Restart Game

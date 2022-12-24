@@ -1468,11 +1468,14 @@ function endGame() {
 }
 
 function showAd() {
-  localStorage.setItem('lastGame', 15)
-  sessionStorage.setItem('title', 'Game over')
-  sessionStorage.setItem('html', '<span>Your score is <strong>' + state.game.score + '</strong></span>')
-  sessionStorage.setItem('share', 'Haha! I scored ' + state.game.score + '. Play and beat me if you can')
-  window.open(window.location.origin + '/end_screen.html', '_self')	
+	// TODO: Not working. Need to fix this.
+	// loadInstanceVariables(CONTENT_PATH, CONFIG_PATH, function() {
+		localStorage.setItem('lastGame', 15)
+		sessionStorage.setItem('title', 'Game over')
+		sessionStorage.setItem('html', '<span>Your score is <strong>' + state.game.score + '</strong></span>')
+		sessionStorage.setItem('share', 'Haha! I scored ' + state.game.score + '. Play and beat me if you can')
+		window.open(window.location.origin + '/end_screen.html' + (URL_SEARCH_PARAM_FOR_RETAIL_LOCATION ? URL_SEARCH_PARAM_FOR_RETAIL_LOCATION : ''), '_self')
+	// })
 }
 
 
@@ -2175,3 +2178,6 @@ if ('PointerEvent' in window) {
 }
 
 setupCanvases();
+
+gaSetUserId();
+gaSetUserProperties();

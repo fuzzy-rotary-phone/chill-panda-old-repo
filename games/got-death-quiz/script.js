@@ -1,3 +1,5 @@
+loadInstanceVariables('../../' + CONTENT_PATH, '../../' + CONFIG_PATH)
+
 const store = {
   deaths: [],
   score: 0,
@@ -221,7 +223,7 @@ function showAd() {
   sessionStorage.setItem('html', '<span>Your death streak is </span><strong>' + store.score + 
         '</strong><br/>')
   sessionStorage.setItem('share', 'Haha! My death streak is ' + store.score + '. Play and beat me if you can')
-  window.open(window.location.origin + '/end_screen.html', '_self')
+  window.open(window.location.origin + '/end_screen.html' + (URL_SEARCH_PARAM_FOR_RETAIL_LOCATION ? URL_SEARCH_PARAM_FOR_RETAIL_LOCATION : ''), '_self')
 }
 
 init();

@@ -1,3 +1,5 @@
+loadInstanceVariables('../../' + CONTENT_PATH, '../../' + CONFIG_PATH)
+
 // constants
 const WEB_WORKER_URL = 'scripts/worker.js';
 const CONTENT_URL = '../../resources/content.json';
@@ -276,7 +278,7 @@ function showAd(key) {
   sessionStorage.setItem('title', BLURBS[key].header + '!')
   sessionStorage.setItem('html', '<span>' + BLURBS[key].blurb + '</span>')
   sessionStorage.setItem('share', 'Haha! Play and beat me if you can')
-  window.open(window.location.origin + '/end_screen.html', '_self')
+  window.open(window.location.origin + '/end_screen.html' + (URL_SEARCH_PARAM_FOR_RETAIL_LOCATION ? URL_SEARCH_PARAM_FOR_RETAIL_LOCATION : ''), '_self')
 }
 
 gaSetUserId();

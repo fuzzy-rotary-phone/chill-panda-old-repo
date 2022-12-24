@@ -1,4 +1,5 @@
 ((document) => {
+  loadInstanceVariables('../../' + CONTENT_PATH, '../../' + CONFIG_PATH)
   // parts of the game board
   let moves = document.querySelector('.moves')
   // ?
@@ -156,7 +157,7 @@
     sessionStorage.setItem('title', BLURBS[key].header + '!')
     sessionStorage.setItem('html', '<span>' + BLURBS[key].blurb + '</span>')
     sessionStorage.setItem('share', 'Haha! Play and beat me if you can')
-    window.open(window.location.origin + '/end_screen.html', '_self')
+    window.open(window.location.origin + '/end_screen.html' + (URL_SEARCH_PARAM_FOR_RETAIL_LOCATION ? URL_SEARCH_PARAM_FOR_RETAIL_LOCATION : ''), '_self')  
   }
 })(document)
 

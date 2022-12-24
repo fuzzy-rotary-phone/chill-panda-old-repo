@@ -1,3 +1,5 @@
+loadInstanceVariables('../../' + CONTENT_PATH, '../../' + CONFIG_PATH)
+
 var KEYDOWN = false;
 var PAUSE = false;
 var LOCK = false;
@@ -310,7 +312,7 @@ function showAd() {
   sessionStorage.setItem('title', 'Game over')
   sessionStorage.setItem('html', '<span>Your score is <strong>' + SCORE + '</strong></span>')
   sessionStorage.setItem('share', 'Haha! I scored ' + SCORE + '. Play and beat me if you can')
-  window.open(window.location.origin + '/end_screen.html', '_self')	
+  window.open(window.location.origin + '/end_screen.html' + (URL_SEARCH_PARAM_FOR_RETAIL_LOCATION ? URL_SEARCH_PARAM_FOR_RETAIL_LOCATION : ''), '_self')	
 }
 
 function message(m) { 
@@ -361,3 +363,6 @@ function score(s, type) {
 		$("#board span.fruits").css('left', (FRUITS_POSITION_X - 14) + 'px');
 	}
 }
+
+gaSetUserId();
+gaSetUserProperties();

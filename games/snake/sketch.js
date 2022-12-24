@@ -330,7 +330,7 @@ function showAd() {
   sessionStorage.setItem('html', '<span>Your snake length is </span><strong>' + snake.score_final + 
         '</strong><br/>')
   sessionStorage.setItem('share', 'Haha! I scored ' + snake.score_final + '. Play and beat me if you can')
-  window.open(window.location.origin + '/end_screen.html', '_self')    
+  window.open(window.location.origin + '/end_screen.html' + (URL_SEARCH_PARAM_FOR_RETAIL_LOCATION ? URL_SEARCH_PARAM_FOR_RETAIL_LOCATION : ''), '_self')    
 }
 
 gaSetUserId();
