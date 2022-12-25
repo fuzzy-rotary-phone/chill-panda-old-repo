@@ -63,7 +63,7 @@ function showConfirmExitPopup() {
     cancelButtonText: 'No',
   }).then(function(isConfirm) {
     if (isConfirm) {
-      location.href = 'end_screen.html'
+      showAd(0)
     }
   });
 }
@@ -116,14 +116,14 @@ function setRating(moves) {
 // End Game
 function endGame(score) {
 	$deck.empty();
-	showAd(score)
+	showAd(true, score)
 }
 
-function showAd(score) {
+function showAd(win, score) {
   localStorage.setItem('lastGame', 7)
-  sessionStorage.setItem('title', 'Congratulations!')
-  sessionStorage.setItem('html', '<span>You won with </span><strong>' + score + '</strong> moves<br/>')
-  sessionStorage.setItem('share', 'Haha! I completed in ' + score + ' moves. Play and beat me if you can')
+  sessionStorage.setItem('title', win ? 'Congratulations!' : 'Game over!')
+  sessionStorage.setItem('html', win ? ('<span>You won with </span><strong>' + score + '</strong> moves<br/>') : ('<span>Winners never quit and quitters never win<br/>'))
+  sessionStorage.setItem('share', win ? ('Haha! I completed in ' + score + ' moves. Play and beat me if you can') : ('Haha! I quit this game. Can you help me win?'))
   window.open(window.location.origin + '/end_screen.html' + (URL_SEARCH_PARAM_FOR_RETAIL_LOCATION ? URL_SEARCH_PARAM_FOR_RETAIL_LOCATION : ''), '_self')
 }
 
