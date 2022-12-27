@@ -57,9 +57,11 @@ function share(score) {
         }).catch(err => {
             console.log('Error while using Web share API:');
             console.log(err);
+            loadNewGame()
         });
     } else {
         Swal.fire("Browser doesn't support this API !");
+        loadNewGame()
     }
 }
 
