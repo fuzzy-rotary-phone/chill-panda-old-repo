@@ -56,6 +56,8 @@ const JSON_KEY_FOR_RETAIL_NAME = 'name'
 const JSON_KEY_FOR_GAMES_LIST = 'games'
 const JSON_KEY_FOR_HOME_PAGE = 'homePage'
 const JSON_KEY_FOR_CSS = 'cssPath'
+const MENU_PATH = 'menu.html'
+const CLIENT_PATH = 'client/index.html'
 const IS_INSTANCE_HANDLED_BY_TAG = true
 var IN_GAME_ASSETS_PATH
 var AD_ASSETS_PATH
@@ -119,15 +121,6 @@ function loadGameMap() {
 	}
 }
 
-function loadHomePage() {
-	var body = document.getElementsByTagName('body')[0]
-	if(HOME_PAGE_PATH) {
-		body.style.backgroundImage = 'url(' + HOME_PAGE_PATH + ')'
-	} else {
-		body.style.backgroundImage = 'url(' + DEFAULT_HOME_PAGE_PATH + ')'
-	}
-}
-
 function setLocationVariables() {
 	HOME_PAGE_PATH = INSTANCE_JSON[JSON_KEY_FOR_HOME_PAGE]
 	AD_ASSETS_PATH = INSTANCE_JSON[JSON_KEY_FOR_AD_ASSETS]
@@ -188,19 +181,27 @@ function loadCSS() {
 	head.appendChild(link)
 }
 
-function customizeLandingPage() {
-	loadCSS()
-	loadHomePage()
+function loadHomePage() {
+	var body = document.getElementsByTagName('body')[0]
+	if(HOME_PAGE_PATH) {
+		body.style.backgroundImage = 'url(' + HOME_PAGE_PATH + ')'
+	} else {
+		body.style.backgroundImage = 'url(' + DEFAULT_HOME_PAGE_PATH + ')'
+	}
 	document.getElementById('greeting').innerText = "Welcome   to "
 	document.getElementById('retailname').innerText = RETAIL_NAME + '!'
-	// document.querySelector('h1').insertAdjacentHTML('afterend', '<img src="' + LOGO_PATH + '" alt="image">')
+}
+
+function loadEventListeners() {
 	document.getElementById('button2').addEventListener('click', function() {
-	  openGame();
+		openGame();
 	});
 	document.getElementById('button1').addEventListener('click', function() {
-	  openMenu();
+		openMenu();
 	});
+}
 
+function customizeBasedOnRetailLocation() {
 	if(localStorage.getItem(LOCAL_STORAGE_KEY_FOR_RETAIL_LOCATION) == TAG_FOR_NOSTRO_CAFE) {
 		document.getElementById('retailname').innerText = ''
 		document.getElementById('greeting').style.marginBottom = '3em'
@@ -208,8 +209,27 @@ function customizeLandingPage() {
 	}
 }
 
+function checkIfRetailLocation() {
+	return localStorage.getItem(LOCAL_STORAGE_KEY_FOR_RETAIL_LOCATION) !== ''
+}
+
+function customizeLandingPage() {
+	if(checkIfRetailLocation()) {
+		loadCSS()
+		loadHomePage()
+		loadEventListeners()
+		customizeBasedOnRetailLocation()
+	} else {
+		openClientPage()
+	}
+}
+
+function openClientPage() {
+	window.location.href = window.location.origin + '/' + CLIENT_PATH
+}
+
 function openMenu() {
-	window.location.href = window.location.origin + '/menu.html' + 
+	window.location.href = window.location.origin + '/' + MENU_PATH +
 	// Temporary fix to always capture the location in GA from where the URL was first reached. Every change in href needs to add this for consistency.
 	// TODO: move to location based subdomains for permanent fix
 	(URL_SEARCH_PARAM_FOR_RETAIL_LOCATION ? URL_SEARCH_PARAM_FOR_RETAIL_LOCATION : '')
