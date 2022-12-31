@@ -188,6 +188,7 @@ function loadHomePage() {
 	} else {
 		body.style.backgroundImage = 'url(' + DEFAULT_HOME_PAGE_PATH + ')'
 	}
+	document.title = RETAIL_NAME
 	document.getElementById('greeting').innerText = "Welcome   to "
 	document.getElementById('retailname').innerText = RETAIL_NAME + '!'
 }
