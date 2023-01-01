@@ -18862,6 +18862,8 @@ Webflow.define('forms', module.exports = function ($, _) {
   var siteId;
   var emailField = /e(-)?mail/i;
   var emailValue = /^\S+@\S+$/;
+  var phoneField = /number/i;
+  var phoneValue = /^\d{10}$/
   var alert = window.alert;
   var inApp = Webflow.env();
   var listening;
@@ -18958,7 +18960,8 @@ Webflow.define('forms', module.exports = function ($, _) {
 
 
     if (siteId) {
-      data.handler = typeof hostedSubmitWebflow === 'function' ? hostedSubmitWebflow : exportedSubmitWebflow;
+      // data.handler = typeof hostedSubmitWebflow === 'function' ? hostedSubmitWebflow : exportedSubmitWebflow;
+      data.handler = typeof hostedSubmitWebflow === 'function' ? hostedSubmitWebflow : defaultSubmitForm;
       return;
     } // Alert for disconnected Webflow forms
 
@@ -19115,6 +19118,10 @@ Webflow.define('forms', module.exports = function ($, _) {
         if (!emailValue.test(value)) {
           status = 'Please enter a valid email address for: ' + name;
         }
+      } else if (phoneField.test(field.attr('type'))) {
+        if (!phoneValue.test(value)) {
+          status = 'Please enter a valid phone number for: ' + name;
+        }
       }
     } else if (name === 'g-recaptcha-response' && !value) {
       status = 'Please confirm you’re not a robot.';
@@ -19128,6 +19135,65 @@ Webflow.define('forms', module.exports = function ($, _) {
     afterSubmit(data);
   } // Submit form to MailChimp
 
+  function defaultSubmitForm(data) {
+    reset(data)
+
+    var form = data.form
+    var payload = {}
+
+    preventDefault(data)
+
+    var status = findFields(form, payload)
+
+    if (status) {
+      return alert(status);
+    } // Disable submit button
+
+
+    disableBtn(data)
+
+    var fullName;
+
+    _.each(payload, function (value, key) {
+      if (emailField.test(key)) {
+        payload.EMAIL = value;
+      }
+
+      if (/^((full[ _-]?)?name)$/i.test(key)) {
+        fullName = value;
+      }
+
+      if (/^(first[ _-]?name)$/i.test(key)) {
+        payload.FNAME = value;
+      }
+
+      if (/^(last[ _-]?name)$/i.test(key)) {
+        payload.LNAME = value;
+      }
+    });
+
+    if (fullName && !payload.FNAME) {
+      fullName = fullName.split(' ');
+      payload.FNAME = fullName[0];
+      payload.LNAME = payload.LNAME || fullName[1];
+    }
+
+    Email.send({
+      SecureToken: "a91c32bf-076c-461f-ba23-b2f23771d0bb",
+      Host: "smtp.elasticemail.com",
+      Port: 2525,
+      Username: "deepakcool208@gmail.com",
+      Password: "3F71CD2163ABAB9B8749F17DC65463A2EF5D",
+      To: 'deepak@chillpanda.in, srikarraj@chillpanda.in, vamsi@chillpanda.in',
+      From: "deepakcool208@gmail.com",
+      Subject: "Sending Email using javascript",
+      Body: payload,
+    })
+    .then(function (message) {
+      data.success = message === 'OK'
+      afterSubmit(data)
+    });
+  }
 
   function submitMailChimp(data) {
     reset(data);
@@ -19178,6 +19244,7 @@ Webflow.define('forms', module.exports = function ($, _) {
 
 
     var url = data.action.replace('/post?', '/post-json?') + '&c=?'; // Add special param to prevent bot signups
+    console.log(url)
 
     var userId = url.indexOf('u=') + 2;
     userId = url.substring(userId, url.indexOf('&', userId));
@@ -19206,6 +19273,7 @@ Webflow.define('forms', module.exports = function ($, _) {
     var form = data.form;
     var redirect = data.redirect;
     var success = data.success; // Redirect to a success url if defined
+    console.log(success)
 
     if (success && redirect) {
       Webflow.location(redirect);
