@@ -172,6 +172,29 @@ function setVariablesInLocalStorage() {
 	}
 }
 
+function createLandingPage() {
+	var h1Greeting = document.createElement('h1')
+	h1Greeting.id = 'greeting'
+	var h1Retailname = document.createElement('h1')
+	h1Retailname.id = 'retailname'
+	var buttonGroup = document.createElement('div')
+	buttonGroup.className = 'button-group'
+	var button1 = document.createElement('button')
+	button1.id = 'button1'
+	button1.className = 'btn-hover color-10'
+	button1.innerHTML = '<span>Menu</span>'
+	var button2 = document.createElement('button')
+	button2.id = 'button2'
+	button2.innerHTML = '<span>Play games</span>'
+	button2.className = 'btn-hover color-10'
+	
+	document.body.appendChild(h1Greeting)
+	document.body.appendChild(h1Retailname)
+	buttonGroup.appendChild(button1)
+	buttonGroup.appendChild(button2)
+	document.body.appendChild(buttonGroup)
+}
+
 function loadCSS() {
 	var head = document.getElementsByTagName('HEAD')[0]
 	var link = document.createElement('link')
@@ -216,6 +239,7 @@ function checkIfRetailLocation() {
 
 function customizeLandingPage() {
 	if(checkIfRetailLocation()) {
+		createLandingPage()
 		loadCSS()
 		loadHomePage()
 		loadEventListeners()
