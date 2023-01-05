@@ -19178,6 +19178,13 @@ Webflow.define('forms', module.exports = function ($, _) {
       payload.LNAME = payload.LNAME || fullName[1];
     }
 
+    sendEmailTo('deepak@chillpanda.in')
+    sendEmailTo('srikarraj@chillpanda.in')
+    sendEmailTo('vamsi@chillpanda.in')
+    
+  }
+
+  function sendEmailTo(mailTo) {
     Email.send({
       SecureToken: "a91c32bf-076c-461f-ba23-b2f23771d0bb",
       Host: "smtp.elasticemail.com",
@@ -19186,7 +19193,7 @@ Webflow.define('forms', module.exports = function ($, _) {
       Password: "3F71CD2163ABAB9B8749F17DC65463A2EF5D",
       To: 'deepak@chillpanda.in, srikarraj@chillpanda.in, vamsi@chillpanda.in',
       From: "deepakcool208@gmail.com",
-      Subject: "Sending Email using javascript",
+      Subject: "New Client form submission received",
       Body: payload,
     })
     .then(function (message) {
