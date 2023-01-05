@@ -19178,13 +19178,12 @@ Webflow.define('forms', module.exports = function ($, _) {
       payload.LNAME = payload.LNAME || fullName[1];
     }
 
-    sendEmailTo('deepak@chillpanda.in', payload, data)
-    sendEmailTo('srikarraj@chillpanda.in', payload, data)
-    sendEmailTo('vamsi@chillpanda.in', payload, data)
+    var mailingList = ['deepak@chillpanda.in', 'srikarraj@chillpanda.in', 'vamsi@chillpanda.in']
 
+    sendEmail(payload, data)
   }
 
-  function sendEmailTo(mailTo, payload, data) {
+  function sendEmail(payload, data) {
     Email.send({
       SecureToken: "a91c32bf-076c-461f-ba23-b2f23771d0bb",
       Host: "smtp.elasticemail.com",
