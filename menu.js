@@ -13,7 +13,7 @@ $(document).ready(function(){
 
 	function customizeMenuBasedonLocation() {
 		if(isLocationNostroCafe()) {
-			$('#menu-head').innerText = 'Menu'
+			document.getElementById('menu-head').innerHTML = 'Menu'
 		}
 	}
 
