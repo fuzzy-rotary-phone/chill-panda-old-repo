@@ -66,8 +66,9 @@ body {
 	font-family: "Helvetica Neue",Helvetica,Arial,sans-serif !important;
 	overflow: hidden;
 	padding: 0 !important;
-	height: 100% !important;
-	grid-row: 2 !important;
+	height: 90% !important;
+	grid-row: 3 !important;
+	margin-bottom: 5em;
 }
 
 .swal2-html-container div {
@@ -147,7 +148,7 @@ body {
 .gif-div {
 	display: grid;
 	grid-column: 2;
-	grid-row: 3;
+	grid-row: 5;
 	align-self: flex-end;
 	justify-self: safe center;
 	margin: auto;
@@ -167,9 +168,8 @@ body {
 	display: grid;
 	grid-column: 2;
 	grid-row: 1;
-	align-self: center;
+	align-self: flex-start;
 	justify-self: safe center;
-	margin-top: 2em;
 }
 
 .logo-div img {
@@ -223,7 +223,7 @@ body {
 
 .button-div {
 	grid-column: 2;
-	grid-row: 3;
+	grid-row: 4;
 	align-self: start;
 	justify-self: safe end;
 	margin: auto;
@@ -261,3 +261,101 @@ body {
 .d-none {
 	display: none;
 }
+
+.coupon-div {
+	display: grid;
+	grid-column: 2;
+	grid-row: 2;
+	align-self: flex-start;
+	justify-self: safe center;
+	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+	position: relative;
+	bottom: 60%;
+}
+
+.card {
+	width: 300px;
+	height: 70px;
+	border-radius: 5px;
+	box-shadow: 0 4px 6px 0 rgba(0, 0, 0, 0.2);
+	background-color: #fff;
+	padding: 10px 10px;
+	position: relative;
+  }
+  
+  .main,
+  .copy-button {
+	display: flex;
+	justify-content: space-between;
+	padding: 0 10px;
+	align-items: center;
+  }
+  
+  .co-img img {
+	width: 70px;
+	height: 70px;
+  }
+  .vertical {
+	border-left: 3px dotted black;
+	height: 60px;
+	position: absolute;
+	left: 30%;
+	top: 20%
+  }
+  
+  .content {
+	position: absolute;
+	left: 75%
+  }
+  
+  .content h1 {
+	font-size: 35px;
+	margin: 0;
+	margin-left: -100px;
+	margin-bottom: -15px;
+	color: #565656;
+  }
+  
+  .content h1 span {
+	font-size: 14px;
+  }
+  .content h2 {
+	font-size: 14px;
+	margin: 0;
+	margin-left: -100px;
+	color: #565656;
+	text-transform: uppercase;
+  }
+  
+  p {
+	margin: 0;
+	margin-left: -100px;
+	margin-top: 10px;
+	font-size: 10px;
+	color: #696969;
+  }
+  
+  .copy-button {
+	margin: 12px 0 -5px 0;
+	height: 45px;
+	border-radius: 4px;
+	padding: 0 5px;
+	border: 1px solid #e1e1e1;
+  }
+  
+  .copy-button input {
+	width: 100%;
+	height: 100%;
+	border: none;
+	outline: none;
+	font-size: 24px;
+	padding-left: 10px;
+  }
+  
+  .copy-button button {
+	font-size: 18px;
+	padding: 5px 25px;
+	background-color: #dc143c;
+	color: #fff;
+	border: 1px solid transparent;
+  }

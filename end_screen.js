@@ -166,6 +166,45 @@ function showEndScreen() {
     gifDiv.innerHTML = '<a href='+ WEBSITE_LINK +' target="_blank">'
     + '<img src=' + GIF_PATH + '>' + '</a>';
     $('.swal2-container').append(gifDiv);
+
+    couponDiv = createCouponDiv()
+    if(ifAddCoupon()) {
+        $('.swal2-container').append(couponDiv);
+    }
+}
+
+function ifAddCoupon() {
+    return isLocationNostroCafe()
+}
+
+function createCouponDiv() {
+    couponDiv = document.createElement('div')
+    couponDiv.className = 'coupon-div'
+    couponDiv.innerHTML = '<div class="card">' +
+    '<div class="main">' +
+      '<div class="co-img">' +
+        '<img src=' + LOGO_PATH + ' alt=""/>' +
+      '</div>' +
+      '<div class="vertical"></div>' +
+      '<div class="content">' +
+        '<h2>You won!</h2>' +
+        '<h1>10% <span>Coupon</span></h1>' +
+        '<p>valid once on Desserts</p>' +
+      '</div>' +
+    '</div>' +
+    '<div class="copy-button">' +
+      '<input id="copyvalue" type="text" readonly value="GOFREE" />' +
+      '<button onclick="copyIt()" class="copybtn">COPY</button>' +
+    '</div>' +
+    '</div>'
+    return couponDiv
+}
+
+function copyIt() {
+    copybtn = document.querySelector(".copybtn");
+    copyInput = document.querySelector('#copyvalue');
+    navigator.clipboard.writeText(copyInput.value);
+    copybtn.textContent = "COPIED";
 }
 
 function loadSameGame() {
