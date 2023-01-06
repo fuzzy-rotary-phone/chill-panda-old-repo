@@ -13,6 +13,7 @@ $(document).ready(function(){
 		document.getElementById('button2').addEventListener('click', function() {
 			openGame();
 		});
+		customizeMenuBasedonLocation()
 	}
 
 	function loadMenu() {
@@ -66,6 +67,12 @@ $(document).ready(function(){
 			openGame();
 		});
 		return button
+	}
+
+	function customizeMenuBasedonLocation() {
+		if(isLocationNostroCafe()) {
+			document.getElementById('menu-head').innerHTML = 'Menu'
+		}
 	}
 
 	$(function() {
