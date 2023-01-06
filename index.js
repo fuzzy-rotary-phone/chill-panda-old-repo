@@ -182,11 +182,11 @@ function createLandingPage() {
 	var button1 = document.createElement('button')
 	button1.id = 'button1'
 	button1.className = 'btn-hover color-10'
-	button1.innerHTML = '<span>Menu</span>'
+	button1.innerHTML = '<span>Services</span>'
 	var button2 = document.createElement('button')
 	button2.id = 'button2'
-	button2.innerHTML = '<span>Play games</span>'
 	button2.className = 'btn-hover color-10'
+	button2.innerHTML = '<span>Play games</span>'
 	
 	document.body.appendChild(h1Greeting)
 	document.body.appendChild(h1Retailname)
@@ -214,6 +214,7 @@ function loadHomePage() {
 	document.title = RETAIL_NAME
 	document.getElementById('greeting').innerText = "Welcome   to "
 	document.getElementById('retailname').innerText = RETAIL_NAME + '!'
+	// document.getElementById('button1').innerHTML = '<span>Menu</span>'
 }
 
 function loadEventListeners() {
@@ -225,8 +226,13 @@ function loadEventListeners() {
 	});
 }
 
+function isLocationNostroCafe() {
+	return localStorage.getItem(LOCAL_STORAGE_KEY_FOR_RETAIL_LOCATION) == TAG_FOR_NOSTRO_CAFE
+}
+
 function customizeBasedOnRetailLocation() {
-	if(localStorage.getItem(LOCAL_STORAGE_KEY_FOR_RETAIL_LOCATION) == TAG_FOR_NOSTRO_CAFE) {
+	if(isLocationNostroCafe()) {
+		document.getElementById('button1').innerHTML = '<span>Menu</span>'
 		document.getElementById('retailname').innerText = ''
 		document.getElementById('greeting').style.marginBottom = '3em'
 		document.getElementById('greeting').style.fontSize = '3em'

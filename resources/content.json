@@ -1,7 +1,7 @@
 [
 	{
 		"id": "chill-panda",
-		"urlTag": "",
+		"urlTag": "chillpanda",
 		"name": "Chill Panda",
 		"website": "https://chillpanda.in",
 		"logo": "../../assets/retailers/ChillPanda/ChillPanda.png",
@@ -78,7 +78,7 @@
 		"ingamePath": "../../../assets/retailers/ingame/Salon/",
 		"adPath": "../../../assets/retailers/ToniGuy/ads/",
 		"totalAds": 6,
-		"content": []		
+		"content": []
 	},
 	{
 		"id": "nhs",
@@ -91,7 +91,7 @@
 		"ingamePath": "../../../assets/retailers/ingame/Hospital",
 		"adPath": "../../../assets/retailers/NHS/ads/",
 		"totalAds": 9,
-		"content": []		
+		"content": []
 	},
 	{
 		"id": "cafeuntitled",

@@ -189,15 +189,11 @@ a {
   -webkit-align-items: center;
   -ms-flex-align: center;
   align-items: center;
-  background-color: #1b1b1b;
+  /* background-color: #1b1b1b; */
 }
 
 .section.wide.img {
   padding-bottom: 0vh;
-}
-
-.section.wide.img.problem {
-  background-color: #cf0063;
 }
 
 .section.wide.purple {
@@ -625,10 +621,11 @@ a {
   display: inline-block;
   padding-bottom: 5px;
   border-bottom: 1px none #2e2e2e;
-  color: #a8a8a8;
+  color: darkgray;
   font-size: 12px;
   letter-spacing: 2px;
   text-transform: uppercase;
+  font-weight: 900;
 }
 
 .title.white {
@@ -641,6 +638,9 @@ a {
   -webkit-flex: 0 0 auto;
   -ms-flex: 0 0 auto;
   flex: 0 0 auto;
+  border-radius: 20px;
+  background-clip: border-box;
+  -webkit-text-fill-color: inherit;
 }
 
 .div-block-6 {
@@ -898,6 +898,16 @@ a {
   color: #000;
 }
 
+.text-center {
+  text-align: center;
+}
+
+.header-text {
+  margin-top: 60px;
+  font-size: 36px;
+  padding: 10px;
+}
+
 .hero-content {
   position: relative;
   z-index: 90;
@@ -985,10 +995,17 @@ a {
 }
 
 .hero-subhead {
-  max-width: 60%;
+  max-width: 55%;
   color: #fff;
   font-size: 30px;
   line-height: 44px;
+}
+
+.hero-subhead-subhead {
+  max-width: 60%;
+  color: #fff;
+  font-size: 24px;
+  line-height: 36px;
 }
 
 .bottom-image-wrap {
@@ -1178,6 +1195,7 @@ a {
 }
 
 .quote-icon {
+  opacity: 0.4;
   margin-bottom: 45px;
 }
 
@@ -1557,6 +1575,13 @@ a {
   .hero-subhead {
     font-size: 24px;
     line-height: 31px;
+    text-align: center;
+  }
+
+  .hero-subhead-subhead {
+    font-size: 18px;
+    line-height: 31px;
+    text-align: center;
   }
 
   .bottom-image-wrap {
@@ -1641,11 +1666,11 @@ a {
     padding-right: 0px;
     padding-bottom: 30px;
     padding-left: 0px;
-    -webkit-box-align: start;
-    -webkit-align-items: flex-start;
-    -ms-flex-align: start;
-    align-items: flex-start;
     text-align: left;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
   }
 
   .feature-content.icons.numbers {
@@ -1924,7 +1949,11 @@ a {
   }
 
   .hero-subhead {
-    text-align: left;
+    text-align: center;
+  }
+
+  .hero-subhead-subhead {
+    text-align: center;
   }
 
   .feature-icon {
