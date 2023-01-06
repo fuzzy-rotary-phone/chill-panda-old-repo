@@ -9,7 +9,8 @@
 		"ingamePath": "../../../assets/retailers/ChillPanda/ingame/",
 		"adPath": "../../../assets/retailers/ChillPanda/ads/",
 		"totalAds": 6,
-		"content": []
+		"content": [],
+		"menuPath": "assets/retailers/ChillPanda/menu.csv"
 	},
 	{
 		"id": "parthadental",
@@ -22,7 +23,8 @@
 		"ingamePath": "../../../assets/retailers/ingame/Hospital/",
 		"adPath": "../../../assets/retailers/ParthaDental/ads/",
 		"totalAds": 4,
-		"content": []
+		"content": [],
+		"menuPath": "assets/retailers/ParthaDental/menu.csv"
 	},
 	{
 		"id": "nostrocafe",
@@ -39,7 +41,8 @@
 		"content": [],
 		"games": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
 		"homePage": "assets/retailers/NostroCafe/home.jpeg",
-		"cssPath": "assets/retailers/NostroCafe/style.css"
+		"cssPath": "assets/retailers/NostroCafe/style.css",
+		"menuPath": "assets/retailers/NostroCafe/menu.csv"
 	},
 	{
 		"id": "coffeecrush",
@@ -52,7 +55,8 @@
 		"ingamePath": "../../../assets/retailers/ingame/Cafe/",
 		"adPath": "../../../assets/retailers/CoffeeCrush/ads/",
 		"totalAds": 10,
-		"content": []
+		"content": [],
+		"menuPath": "assets/retailers/CoffeeCrush/menu.csv"
 	},
 	{
 		"id": "bbb",
@@ -65,7 +69,8 @@
 		"ingamePath": "../../../assets/retailers/ingame/Biryani/",
 		"adPath": "../../../assets/retailers/BangaloreBiryaniBhawan/ads/",
 		"totalAds": 5,
-		"content": []
+		"content": [],
+		"menuPath": "assets/retailers/BangaloreBiryaniBhawan/menu.csv"
 	},
 	{
 		"id": "toniguy",
@@ -78,7 +83,8 @@
 		"ingamePath": "../../../assets/retailers/ingame/Salon/",
 		"adPath": "../../../assets/retailers/ToniGuy/ads/",
 		"totalAds": 6,
-		"content": []		
+		"content": [],
+		"menuPath": "assets/retailers/ToniGuy/menu.csv"
 	},
 	{
 		"id": "nhs",
@@ -91,7 +97,8 @@
 		"ingamePath": "../../../assets/retailers/ingame/Hospital",
 		"adPath": "../../../assets/retailers/NHS/ads/",
 		"totalAds": 9,
-		"content": []		
+		"content": [],
+		"menuPath": "assets/retailers/NHS/menu.csv"
 	},
 	{
 		"id": "cafeuntitled",
@@ -104,6 +111,7 @@
 		"ingamePath": "../../../assets/retailers/ingame/Cafe",
 		"adPath": "../../../assets/retailers/CafeUntitled/ads/",
 		"totalAds": 5,
-		"content": []
+		"content": [],
+		"menuPath": "assets/retailers/CafeUntitled/menu.csv"
 	}	
 ]
