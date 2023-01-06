@@ -78,7 +78,7 @@
 		"ingamePath": "../../../assets/retailers/ToniGuy/ingame/",
 		"adPath": "../../../assets/retailers/ToniGuy/ads/",
 		"totalAds": 6,
-		"content": []		
+		"content": []
 	},
 	{
 		"id": "nhs",
@@ -91,6 +91,6 @@
 		"ingamePath": "../../../assets/retailers/NHS/ingame/",
 		"adPath": "../../../assets/retailers/NHS/ads/",
 		"totalAds": 9,
-		"content": []		
-	}	
+		"content": []
+	}
 ]

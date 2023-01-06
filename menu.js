@@ -7,7 +7,14 @@ $(document).ready(function(){
 		$('#link')[0].innerText = RETAIL_NAME
 		document.getElementById('button2').addEventListener('click', function() {
 		  openGame();
-		});	
+		});
+		customizeMenuBasedonLocation()
+	}
+
+	function customizeMenuBasedonLocation() {
+		if(isLocationNostroCafe()) {
+			$('#menu-head').innerText = 'Menu'
+		}
 	}
 
 	$(function() {

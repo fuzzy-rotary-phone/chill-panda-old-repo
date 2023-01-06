@@ -226,8 +226,13 @@ function loadEventListeners() {
 	});
 }
 
+function isLocationNostroCafe() {
+	return localStorage.getItem(LOCAL_STORAGE_KEY_FOR_RETAIL_LOCATION) == TAG_FOR_NOSTRO_CAFE
+}
+
 function customizeBasedOnRetailLocation() {
-	if(localStorage.getItem(LOCAL_STORAGE_KEY_FOR_RETAIL_LOCATION) == TAG_FOR_NOSTRO_CAFE) {
+	if(isLocationNostroCafe()) {
+		document.getElementById('button1').innerHTML = '<span>Menu</span>'
 		document.getElementById('retailname').innerText = ''
 		document.getElementById('greeting').style.marginBottom = '3em'
 		document.getElementById('greeting').style.fontSize = '3em'
