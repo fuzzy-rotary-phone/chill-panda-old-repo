@@ -73,12 +73,12 @@ function Mazing(id) {
   this.customizeMaze()
 };
 
-Mazing.prototype.customizeMaze = function update() {
-  // Wait until INSTANCE_JSON has value already loaded
-  if(typeof INSTANCE_JSON !== "undefined"){
-    $('.nubbin').not(".wall").toggleClass(INSTANCE_JSON['industry'])
-  } else {
-      setTimeout(update, 100);
+Mazing.prototype.customizeMaze = function() {
+  if (this.retailLocation == TAG_FOR_PARTHA_DENTAL) {
+    $('.nubbin').not(".wall").toggleClass('hospital')
+  }
+  if (this.retailLocation == TAG_FOR_NOSTRO_CAFE || this.retailLocation == TAG_FOR_COFFEECRUSH || this.retailLocation == TAG_FOR_BLR_BIRYANI_BHAWAN) {
+    $('.nubbin').not(".wall").toggleClass('cafe')
   }
 }
 

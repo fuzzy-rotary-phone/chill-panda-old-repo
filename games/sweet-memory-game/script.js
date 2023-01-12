@@ -47,7 +47,6 @@ function setSymbolsOnRetailLocation() {
   //     setTimeout(setSymbolsOnRetailLocation, 100);
   // }
   // var retailLocation = localStorage['retailLocation']
-	
 }
 
 // Shuffle function From http://stackoverflow.com/a/2450976

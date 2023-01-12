@@ -98,6 +98,7 @@ function setRetailLocation(retailLocation) {
 	}
 }
 
+// INCOMPLETE FUNCTION - to be changed
 function setRetailIndustry(retailIndustry) {
 	if (retailLocation) {
 		localStorage.setItem(LOCAL_STORAGE_KEY_FOR_RETAIL_LOCATION, retailLocation)
