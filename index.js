@@ -32,6 +32,7 @@ const ALL_GAME_MAP = {
 // };
 var GAME_MAP = {}
 
+const TAG_FOR_MODULUS = 'modulushyd'
 const TAG_FOR_PARTHA_DENTAL = 'parthadental'
 const TAG_FOR_NOSTRO_CAFE = 'nostrocafe'
 const TAG_FOR_COFFEECRUSH = 'coffeecrush'

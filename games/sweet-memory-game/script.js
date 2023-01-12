@@ -3,6 +3,7 @@ loadInstanceVariables('../../' + CONTENT_PATH, '../../' + CONFIG_PATH)
 const SYMBOLS_FOR_HOSPITALS = ['ambulance', 'ambulance', 'heartbeat', 'heartbeat', 'stethoscope', 'stethoscope', 'wheelchair', 'wheelchair', 'user-md', 'user-md', 'hospital-o', 'hospital-o', 'life-ring', 'life-ring', 'thermometer-quarter', 'thermometer-quarter']
 const SYMBOLS_FOR_CAFE = ['cookie-bite', 'cookie-bite', 'pizza-slice', 'pizza-slice', 'burger', 'burger', 'ice-cream', 'ice-cream', 'champagne-glasses', 'champagne-glasses', 'cake-candles', 'cake-candles', 'candy-cane', 'candy-cane', 'mug-hot', 'mug-hot']
 const SYMBOLS_FOR_BIRYANI = ['pepper-hot', 'pepper-hot', 'drumstick-bite', 'drumstick-bite', 'fish-fins', 'fish-fins', 'champagne-glasses', 'champagne-glasses', 'pizza-slice', 'pizza-slice', 'ice-cream', 'ice-cream', 'burger', 'burger', 'bowl-rice', 'bowl-rice']
+const SYMBOLS_FOR_EDUCATION = ['user-graduate', 'user-graduate', 'award', 'award', 'pencil', 'pencil', 'hands-holding-child', 'hands-holding-child', 'puzzle-piece', 'puzzle-piece', 'school', 'school', 'calculator', 'calculator', 'bus', 'bus']
 const SYMBOLS_DEFAULT = ['bicycle', 'bicycle', 'leaf', 'leaf', 'cube', 'cube', 'anchor', 'anchor', 'paper-plane-o', 'paper-plane-o', 'bolt', 'bolt', 'bomb', 'bomb', 'diamond', 'diamond']
 
 var symbols = SYMBOLS_DEFAULT,
@@ -28,6 +29,8 @@ function setSymbolsOnRetailLocation() {
     return SYMBOLS_FOR_HOSPITALS
   } else if (retailLocation == TAG_FOR_NOSTRO_CAFE || retailLocation == TAG_FOR_COFFEECRUSH) {
     return SYMBOLS_FOR_CAFE
+  } else if (retailLocation == TAG_FOR_MODULUS) {
+    return SYMBOLS_FOR_EDUCATION
   } else if (retailLocation == TAG_FOR_BLR_BIRYANI_BHAWAN) {
     return SYMBOLS_FOR_BIRYANI
   }
