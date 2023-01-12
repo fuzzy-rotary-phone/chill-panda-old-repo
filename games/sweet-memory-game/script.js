@@ -23,15 +23,30 @@ var symbols = SYMBOLS_DEFAULT,
 symbols = setSymbolsOnRetailLocation()
 
 function setSymbolsOnRetailLocation() {
-	var retailLocation = localStorage['retailLocation']
-	if (retailLocation == TAG_FOR_PARTHA_DENTAL) {
-		return SYMBOLS_FOR_HOSPITALS
-	} else if (retailLocation == TAG_FOR_NOSTRO_CAFE || retailLocation == TAG_FOR_COFFEECRUSH) {
-		return SYMBOLS_FOR_CAFE
-	} else if (retailLocation == TAG_FOR_BLR_BIRYANI_BHAWAN) {
-		return SYMBOLS_FOR_BIRYANI
-	}
-	return SYMBOLS_DEFAULT
+  var retailLocation = localStorage['retailLocation']
+  if (retailLocation == TAG_FOR_PARTHA_DENTAL) {
+    return SYMBOLS_FOR_HOSPITALS
+  } else if (retailLocation == TAG_FOR_NOSTRO_CAFE || retailLocation == TAG_FOR_COFFEECRUSH) {
+    return SYMBOLS_FOR_CAFE
+  } else if (retailLocation == TAG_FOR_BLR_BIRYANI_BHAWAN) {
+    return SYMBOLS_FOR_BIRYANI
+  }
+  return SYMBOLS_DEFAULT
+	// if(typeof INSTANCE_JSON !== "undefined"){
+  //   console.log(INSTANCE_JSON['industry']);
+  //   if (INSTANCE_JSON['industry'] == 'Hospital') {
+  //     return SYMBOLS_FOR_HOSPITALS
+  //   } else if (INSTANCE_JSON['industry'] == 'Cafe') {
+  //     console.log(SYMBOLS_FOR_HOSPITALS)
+  //     return SYMBOLS_FOR_CAFE
+  //   } else if (INSTANCE_JSON['industry'] == 'Biryani') {
+  //     return SYMBOLS_FOR_BIRYANI
+  //   }
+  //   return SYMBOLS_DEFAULT
+  // } else {
+  //     setTimeout(setSymbolsOnRetailLocation, 100);
+  // }
+  // var retailLocation = localStorage['retailLocation']
 }
 
 // Shuffle function From http://stackoverflow.com/a/2450976
@@ -84,17 +99,21 @@ function addCloseButton() {
 
 // Initial Game
 function initGame() {
-	var cards = shuffle(symbols);
-  $deck.empty();
-  match = 0;
-  moves = 0;
-  $moveNum.html(moves);
-  $ratingStars.removeClass('fa-star-o').addClass('fa-star');
-	for (var i = 0; i < cards.length; i++) {
-		$deck.append($('<li class="card"><i class="fa fa-' + cards[i] + '"></i></li>'))
-	}
-	localStorage['memoryGameMoves'] = 0
-	addCloseButton()
+  // if(typeof symbols !== "undefined"){
+	  var cards = shuffle(symbols);
+    $deck.empty();
+    match = 0;
+    moves = 0;
+    $moveNum.html(moves);
+    $ratingStars.removeClass('fa-star-o').addClass('fa-star');
+    for (var i = 0; i < cards.length; i++) {
+      $deck.append($('<li class="card"><i class="fa fa-' + cards[i] + '"></i></li>'))
+    }
+    localStorage['memoryGameMoves'] = 0
+    addCloseButton()
+  // } else {
+  //   setTimeout(initGame, 100)
+  // }
 };
 
 // Set Rating and final Score
