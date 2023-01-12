@@ -1,4 +1,4 @@
-const tag_for_qr = 'cafeuntitled'
+const tag_for_qr = 'modulushyd'
 const tag_required = true
 const qrcode_download = true
 
