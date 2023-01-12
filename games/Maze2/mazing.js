@@ -1,14 +1,12 @@
 // instance variables to be loaded from index.js
 loadInstanceVariables('../../' + CONTENT_PATH, '../../' + CONFIG_PATH)
 
-
 function Position(x, y) {
   this.x = x;
   this.y = y;
 }
 
 Position.prototype.toString = function() {
-  console.log(INSTANCE_JSON);
   return this.x + ":" + this.y;
 };
 
