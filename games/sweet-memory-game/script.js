@@ -4,6 +4,7 @@ const SYMBOLS_FOR_SALON = ['scissors', 'scissors', 'heart', 'heart', 'shower', '
 const SYMBOLS_FOR_HOSPITALS = ['ambulance', 'ambulance', 'heartbeat', 'heartbeat', 'stethoscope', 'stethoscope', 'wheelchair', 'wheelchair', 'user-md', 'user-md', 'hospital-o', 'hospital-o', 'life-ring', 'life-ring', 'thermometer-quarter', 'thermometer-quarter']
 const SYMBOLS_FOR_CAFE = ['cookie-bite', 'cookie-bite', 'pizza-slice', 'pizza-slice', 'burger', 'burger', 'ice-cream', 'ice-cream', 'champagne-glasses', 'champagne-glasses', 'cake-candles', 'cake-candles', 'candy-cane', 'candy-cane', 'mug-hot', 'mug-hot']
 const SYMBOLS_FOR_BIRYANI = ['pepper-hot', 'pepper-hot', 'drumstick-bite', 'drumstick-bite', 'fish-fins', 'fish-fins', 'champagne-glasses', 'champagne-glasses', 'pizza-slice', 'pizza-slice', 'ice-cream', 'ice-cream', 'burger', 'burger', 'bowl-rice', 'bowl-rice']
+const SYMBOLS_FOR_EDUCATION = ['user-graduate', 'user-graduate', 'award', 'award', 'pencil', 'pencil', 'hands-holding-child', 'hands-holding-child', 'puzzle-piece', 'puzzle-piece', 'school', 'school', 'calculator', 'calculator', 'bus', 'bus']
 const SYMBOLS_DEFAULT = ['bicycle', 'bicycle', 'leaf', 'leaf', 'cube', 'cube', 'anchor', 'anchor', 'paper-plane-o', 'paper-plane-o', 'bolt', 'bolt', 'bomb', 'bomb', 'diamond', 'diamond']
 
 var symbols = SYMBOLS_DEFAULT,
@@ -29,12 +30,29 @@ function setSymbolsOnRetailLocation() {
 		return SYMBOLS_FOR_HOSPITALS
 	} else if (retailLocation == TAG_FOR_NOSTRO_CAFE || retailLocation == TAG_FOR_COFFEECRUSH) {
 		return SYMBOLS_FOR_CAFE
+  } else if (retailLocation == TAG_FOR_MODULUS) {
+    return SYMBOLS_FOR_EDUCATION    
 	} else if (retailLocation == TAG_FOR_BLR_BIRYANI_BHAWAN) {
 		return SYMBOLS_FOR_BIRYANI
 	} else if (retailLocation == TAG_FOR_TONI_AND_GUY) {
     return SYMBOLS_FOR_SALON
   }
 	return SYMBOLS_DEFAULT
+	// if(typeof INSTANCE_JSON !== "undefined"){
+  //   console.log(INSTANCE_JSON['industry']);
+  //   if (INSTANCE_JSON['industry'] == 'Hospital') {
+  //     return SYMBOLS_FOR_HOSPITALS
+  //   } else if (INSTANCE_JSON['industry'] == 'Cafe') {
+  //     console.log(SYMBOLS_FOR_HOSPITALS)
+  //     return SYMBOLS_FOR_CAFE
+  //   } else if (INSTANCE_JSON['industry'] == 'Biryani') {
+  //     return SYMBOLS_FOR_BIRYANI
+  //   }
+  //   return SYMBOLS_DEFAULT
+  // } else {
+  //     setTimeout(setSymbolsOnRetailLocation, 100);
+  // }
+  // var retailLocation = localStorage['retailLocation']
 }
 
 // Shuffle function From http://stackoverflow.com/a/2450976
@@ -87,17 +105,21 @@ function addCloseButton() {
 
 // Initial Game
 function initGame() {
-	var cards = shuffle(symbols);
-  $deck.empty();
-  match = 0;
-  moves = 0;
-  $moveNum.html(moves);
-  $ratingStars.removeClass('fa-star-o').addClass('fa-star');
-	for (var i = 0; i < cards.length; i++) {
-		$deck.append($('<li class="card"><i class="fa fa-' + cards[i] + '"></i></li>'))
-	}
-	localStorage['memoryGameMoves'] = 0
-	addCloseButton()
+  // if(typeof symbols !== "undefined"){
+	  var cards = shuffle(symbols);
+    $deck.empty();
+    match = 0;
+    moves = 0;
+    $moveNum.html(moves);
+    $ratingStars.removeClass('fa-star-o').addClass('fa-star');
+    for (var i = 0; i < cards.length; i++) {
+      $deck.append($('<li class="card"><i class="fa fa-' + cards[i] + '"></i></li>'))
+    }
+    localStorage['memoryGameMoves'] = 0
+    addCloseButton()
+  // } else {
+  //   setTimeout(initGame, 100)
+  // }
 };
 
 // Set Rating and final Score
