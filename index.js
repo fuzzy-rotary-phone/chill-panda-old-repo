@@ -36,6 +36,7 @@ const TAG_FOR_PARTHA_DENTAL = 'parthadental'
 const TAG_FOR_NOSTRO_CAFE = 'nostrocafe'
 const TAG_FOR_COFFEECRUSH = 'coffeecrush'
 const TAG_FOR_BLR_BIRYANI_BHAWAN = 'bbb'
+const TAG_FOR_TONI_AND_GUY = 'toniguy'
 
 const CONTENT_PATH = 'resources/content.json'
 const CONFIG_PATH = 'resources/config.json'

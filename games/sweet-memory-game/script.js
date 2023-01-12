@@ -1,5 +1,6 @@
 loadInstanceVariables('../../' + CONTENT_PATH, '../../' + CONFIG_PATH)
 
+const SYMBOLS_FOR_SALON = ['scissors', 'scissors', 'heart', 'heart', 'shower', 'shower', 'mask', 'mask', 'user-check', 'user-check', 'spray-can-sparkles', 'spray-can-sparkles', 'mortar-pestle', 'mortar-pestle', 'face-grin-stars', 'face-grin-stars']
 const SYMBOLS_FOR_HOSPITALS = ['ambulance', 'ambulance', 'heartbeat', 'heartbeat', 'stethoscope', 'stethoscope', 'wheelchair', 'wheelchair', 'user-md', 'user-md', 'hospital-o', 'hospital-o', 'life-ring', 'life-ring', 'thermometer-quarter', 'thermometer-quarter']
 const SYMBOLS_FOR_CAFE = ['cookie-bite', 'cookie-bite', 'pizza-slice', 'pizza-slice', 'burger', 'burger', 'ice-cream', 'ice-cream', 'champagne-glasses', 'champagne-glasses', 'cake-candles', 'cake-candles', 'candy-cane', 'candy-cane', 'mug-hot', 'mug-hot']
 const SYMBOLS_FOR_BIRYANI = ['pepper-hot', 'pepper-hot', 'drumstick-bite', 'drumstick-bite', 'fish-fins', 'fish-fins', 'champagne-glasses', 'champagne-glasses', 'pizza-slice', 'pizza-slice', 'ice-cream', 'ice-cream', 'burger', 'burger', 'bowl-rice', 'bowl-rice']
@@ -30,7 +31,9 @@ function setSymbolsOnRetailLocation() {
 		return SYMBOLS_FOR_CAFE
 	} else if (retailLocation == TAG_FOR_BLR_BIRYANI_BHAWAN) {
 		return SYMBOLS_FOR_BIRYANI
-	}
+	} else if (retailLocation == TAG_FOR_TONI_AND_GUY) {
+    return SYMBOLS_FOR_SALON
+  }
 	return SYMBOLS_DEFAULT
 }
 
