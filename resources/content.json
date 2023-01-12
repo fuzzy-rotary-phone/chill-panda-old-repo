@@ -104,6 +104,35 @@
 		"ingamePath": "../../../assets/retailers/ingame/Cafe",
 		"adPath": "../../../assets/retailers/CafeUntitled/ads/",
 		"totalAds": 5,
-		"content": []
+		"adFormat": ".gif",
+		"content": [],
+		"games": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+	},
+	{
+    "id": "modulushyd",
+    "urlTag": "modulushyd",
+    "name": "Modulus",
+    "industry": "edu_ins",
+    "website": "https://modulushyd.com/",
+    "logo": "../../assets/retailers/Modulus/modulus_logo_no_bg.png",
+    "gif": "../../assets/retailers/gif_path/book.gif",
+    "ingamePath": "../../assets/retailers/ingame/edu_ins/",
+    "adPath": "../../assets/retailers/Modulus/ads/",
+    "totalAds": 6,
+    "adFormat": ".jpeg",
+    "content": [],
+    "games": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10
+    ],
+    "cssPath": "../../assets/retailers/Modulus/style.css"
 	}	
 ]

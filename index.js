@@ -98,6 +98,14 @@ function setRetailLocation(retailLocation) {
 	}
 }
 
+function setRetailIndustry(retailIndustry) {
+	if (retailLocation) {
+		localStorage.setItem(LOCAL_STORAGE_KEY_FOR_RETAIL_LOCATION, retailLocation)
+	} else {
+		localStorage.setItem(LOCAL_STORAGE_KEY_FOR_RETAIL_LOCATION, '')
+	}
+}
+
 function getJsonByKeyValue(data, tagName, tagValue) {
     var matches = $.map(data, function(entry) {
             var match = entry[tagName] == (tagValue ? tagValue : '')
