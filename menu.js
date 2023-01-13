@@ -44,7 +44,7 @@ $(document).ready(function(){
 
 		uniqueCategory.forEach(element => {
 			liCategory = document.createElement('li')
-			liCategory.innerHTML = '<div class="link">' + element + (isPriceRequired ? '<span>Price</span>' : '') + '<i class="fa fa-chevron-down"></i></div>'
+			liCategory.innerHTML = '<div class="link">' + element.toUpperCase() + (isPriceRequired ? '<span>Price</span>' : '') + '<i class="fa fa-chevron-down"></i></div>'
 			
 			subMenu = data.filter(function(item) {
 				return item.Category == element

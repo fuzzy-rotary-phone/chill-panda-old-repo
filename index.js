@@ -338,6 +338,10 @@ let guid = () => {
     return s4() + s4() + '-' + s4() + '-' + s4() + '-' + s4() + '-' + s4() + s4() + s4();
 }
 
+function toSentenceCase(myString) {
+	return myString.replace(/\w\S*/g, function(txt){ return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase(); });
+}
+
 function gaSetUserId() {
 	if (!localStorage['guid']) {
 		var id = guid();
