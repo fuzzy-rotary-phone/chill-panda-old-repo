@@ -46,7 +46,7 @@ $(document).ready(function(){
 
 			subMenu.forEach(element => {
 				li = document.createElement('li')
-				li.innerHTML = '<a href="#">' + subMenu.Item + '</a><span>' + subMenu.Price + '</span>'
+				li.innerHTML = '<a href="#">' + element.Item + '</a><span>' + element.Price + '</span>'
 				ulSubMenu.appendChild(li)
 			});
 
@@ -56,6 +56,7 @@ $(document).ready(function(){
 
 		button = document.getElementById('button2')
 		document.body.insertBefore(ulAccordion, button)
+		var accordion = new Accordion($('#accordion'), false);
 	}
 
 	function createButton2() {
@@ -75,32 +76,28 @@ $(document).ready(function(){
 		}
 	}
 
-	$(function() {
-		var Accordion = function(el, multiple) {
-			this.el = el || {};
-			this.multiple = multiple || false;
+	var Accordion = function(el, multiple) {
+		this.el = el || {};
+		this.multiple = multiple || false;
 
-			// Variables privadas
-			var links = this.el.find('.link');
-			// Evento
-			links.on('click', {el: this.el, multiple: this.multiple}, this.dropdown)
-		}
+		// Variables privadas
+		var links = this.el.find('.link');
+		// Evento
+		links.on('click', {el: this.el, multiple: this.multiple}, this.dropdown)
+	}
 
-		Accordion.prototype.dropdown = function(e) {
-			var $el = e.data.el;
-				$this = $(this),
-				$next = $this.next();
+	Accordion.prototype.dropdown = function(e) {
+		var $el = e.data.el;
+			$this = $(this),
+			$next = $this.next();
 
-			$next.slideToggle();
-			$this.parent().toggleClass('open');
+		$next.slideToggle();
+		$this.parent().toggleClass('open');
 
-			if (!e.data.multiple) {
-				$el.find('.submenu').not($next).slideUp().parent().removeClass('open');
-			};
-		}	
-
-		var accordion = new Accordion($('#accordion'), false);
-	});
+		if (!e.data.multiple) {
+			$el.find('.submenu').not($next).slideUp().parent().removeClass('open');
+		};
+	}
 
 	gaSetUserId();
 	gaSetUserProperties();	
