@@ -243,9 +243,31 @@ function isLocationNostroCafe() {
 	return localStorage.getItem(LOCAL_STORAGE_KEY_FOR_RETAIL_LOCATION) == TAG_FOR_NOSTRO_CAFE
 }
 
+function isLocationCafe() {
+	return JSON_VALUE_FOR_INDUSTRY_CAFE == INSTANCE_JSON[JSON_KEY_FOR_INDUSTRY]
+}
+
+function isLocationHospital() {
+	return JSON_VALUE_FOR_INDUSTRY_HOSPITAL == INSTANCE_JSON[JSON_KEY_FOR_INDUSTRY]
+}
+
+function isLocationEducationInstitution() {
+	return JSON_VALUE_FOR_INDUSTRY_EDUCATION_INSTITUTION == INSTANCE_JSON[JSON_KEY_FOR_INDUSTRY]
+}
+
+function customizeBasedOnIndustry() {
+	if(isLocationCafe()) {
+		document.getElementById('button1').innerHTML = '<span>Menu</span>'
+	}
+	if(isLocationEducationInstitution()) {
+		document.getElementById('button1').innerHTML = '<span>Programmes offered</span>'
+		document.getElementById('button1').style = 'width:300px'
+		document.getElementById('button2').style = 'width:300px'
+	}
+}
+
 function customizeBasedOnRetailLocation() {
 	if(isLocationNostroCafe()) {
-		document.getElementById('button1').innerHTML = '<span>Menu</span>'
 		document.getElementById('retailname').innerText = ''
 		document.getElementById('greeting').style.marginBottom = '3em'
 		document.getElementById('greeting').style.fontSize = '3em'
@@ -262,6 +284,7 @@ function customizeLandingPage() {
 		loadCSS()
 		loadHomePage()
 		loadEventListeners()
+		customizeBasedOnIndustry()
 		customizeBasedOnRetailLocation()
 	} else {
 		openClientPage()

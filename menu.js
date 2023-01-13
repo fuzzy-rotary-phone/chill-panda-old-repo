@@ -23,7 +23,7 @@ $(document).ready(function(){
 	}
 
 	function isPriceRequired() {
-		if (INDUSTRY == JSON_VALUE_FOR_INDUSTRY_EDUCATION_INSTITUTION || INDUSTRY == JSON_VALUE_FOR_INDUSTRY_HOSPITAL) {
+		if (isLocationEducationInstitution() || isLocationHospital()) {
 			return false
 		}
 		return true
@@ -80,8 +80,12 @@ $(document).ready(function(){
 	}
 
 	function customizeMenuBasedonLocation() {
-		if(isLocationNostroCafe()) {
+		if(isLocationCafe()) {
 			document.getElementById('menu-head').innerHTML = 'Menu'
+		}
+		if(isLocationEducationInstitution()) {
+			document.getElementById('menu-head').innerHTML = 'Programmes offered'
+			document.getElementById('menu-head').style = 'font-size:40px'
 		}
 	}
 
