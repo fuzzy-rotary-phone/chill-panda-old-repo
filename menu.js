@@ -22,6 +22,13 @@ $(document).ready(function(){
 		})
 	}
 
+	function isPriceRequired() {
+		if (INDUSTRY == JSON_VALUE_FOR_INDUSTRY_EDUCATION_INSTITUTION || INDUSTRY == JSON_VALUE_FOR_INDUSTRY_HOSPITAL) {
+			return false
+		}
+		return true
+	}
+
 	function createMenuHTML(data) {
 		ulAccordion = document.createElement('ul')
 		ulAccordion.id = 'accordion'
@@ -33,9 +40,11 @@ $(document).ready(function(){
 		setOfValue = new Set(categoryValueArray)
 		uniqueCategory = [...setOfValue]
 
+		isPriceRequired = isPriceRequired()
+
 		uniqueCategory.forEach(element => {
 			liCategory = document.createElement('li')
-			liCategory.innerHTML = '<div class="link">' + element + ' <span>Price</span><i class="fa fa-chevron-down"></i></div>'
+			liCategory.innerHTML = '<div class="link">' + element + (isPriceRequired ? '<span>Price</span>' : '') + '<i class="fa fa-chevron-down"></i></div>'
 			
 			subMenu = data.filter(function(item) {
 				return item.Category == element

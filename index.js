@@ -38,6 +38,12 @@ const TAG_FOR_NOSTRO_CAFE = 'nostrocafe'
 const TAG_FOR_COFFEECRUSH = 'coffeecrush'
 const TAG_FOR_BLR_BIRYANI_BHAWAN = 'bbb'
 
+const JSON_VALUE_FOR_INDUSTRY_CAFE = 'cafe'
+const JSON_VALUE_FOR_INDUSTRY_HOSPITAL = 'hospital'
+const JSON_VALUE_FOR_INDUSTRY_BIRYANI = 'biryani'
+const JSON_VALUE_FOR_INDUSTRY_SALON = 'salon'
+const JSON_VALUE_FOR_INDUSTRY_EDUCATION_INSTITUTION = 'education_institution'
+
 const CONTENT_PATH = 'resources/content.json'
 const CONFIG_PATH = 'resources/config.json'
 const DEFAULT_HOME_PAGE_PATH = 'assets/background-2.jpeg'
@@ -58,6 +64,7 @@ const JSON_KEY_FOR_GAMES_LIST = 'games'
 const JSON_KEY_FOR_HOME_PAGE = 'homePage'
 const JSON_KEY_FOR_CSS = 'cssPath'
 const JSON_KEY_FOR_MENU = 'menuPath'
+const JSON_KEY_FOR_INDUSTRY = 'industry'
 const MENU_URL = 'menu.html'
 const CLIENT_URL = 'client/index.html'
 const IS_INSTANCE_HANDLED_BY_TAG = true
@@ -72,6 +79,7 @@ var RETAIL_NAME
 var HOME_PAGE_PATH
 var CSS_PATH
 var MENU_PATH
+var INDUSTRY
 var ALL_CONTENT_INSTANCE_JSON
 var INSTANCE_JSON
 var CONFIG_JSON
@@ -94,15 +102,6 @@ function getRandomNumber() {
 }
 
 function setRetailLocation(retailLocation) {
-	if (retailLocation) {
-		localStorage.setItem(LOCAL_STORAGE_KEY_FOR_RETAIL_LOCATION, retailLocation)
-	} else {
-		localStorage.setItem(LOCAL_STORAGE_KEY_FOR_RETAIL_LOCATION, '')
-	}
-}
-
-// INCOMPLETE FUNCTION - to be changed
-function setRetailIndustry(retailIndustry) {
 	if (retailLocation) {
 		localStorage.setItem(LOCAL_STORAGE_KEY_FOR_RETAIL_LOCATION, retailLocation)
 	} else {
@@ -145,6 +144,7 @@ function setLocationVariables() {
 	CSS_PATH = INSTANCE_JSON[JSON_KEY_FOR_CSS]
 	MENU_PATH = INSTANCE_JSON[JSON_KEY_FOR_MENU]
 	URL_SEARCH_PARAM_FOR_RETAIL_LOCATION = (localStorage[LOCAL_STORAGE_KEY_FOR_RETAIL_LOCATION] ? ('?' + RETAIL_LOCATION_TAG_NAME + '=' + localStorage[LOCAL_STORAGE_KEY_FOR_RETAIL_LOCATION]) : '')
+	INDUSTRY = INSTANCE_JSON[JSON_KEY_FOR_INDUSTRY]
 	loadGameMap()
 }
 
