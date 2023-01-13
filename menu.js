@@ -22,6 +22,13 @@ $(document).ready(function(){
 		})
 	}
 
+	function isPriceRequired() {
+		if (isLocationEducationInstitution() || isLocationHospital()) {
+			return false
+		}
+		return true
+	}
+
 	function createMenuHTML(data) {
 		ulAccordion = document.createElement('ul')
 		ulAccordion.id = 'accordion'
@@ -33,9 +40,11 @@ $(document).ready(function(){
 		setOfValue = new Set(categoryValueArray)
 		uniqueCategory = [...setOfValue]
 
+		isPriceRequired = isPriceRequired()
+
 		uniqueCategory.forEach(element => {
 			liCategory = document.createElement('li')
-			liCategory.innerHTML = '<div class="link">' + element + ' <span>Price</span><i class="fa fa-chevron-down"></i></div>'
+			liCategory.innerHTML = '<div class="link">' + element.toUpperCase() + (isPriceRequired ? '<span>Price</span>' : '') + '<i class="fa fa-chevron-down"></i></div>'
 			
 			subMenu = data.filter(function(item) {
 				return item.Category == element
@@ -46,7 +55,7 @@ $(document).ready(function(){
 
 			subMenu.forEach(element => {
 				li = document.createElement('li')
-				li.innerHTML = '<a href="#">' + subMenu.Item + '</a><span>' + subMenu.Price + '</span>'
+				li.innerHTML = '<a href="#">' + element.Item + '</a><span>' + element.Price + '</span>'
 				ulSubMenu.appendChild(li)
 			});
 
@@ -56,6 +65,7 @@ $(document).ready(function(){
 
 		button = document.getElementById('button2')
 		document.body.insertBefore(ulAccordion, button)
+		var accordion = new Accordion($('#accordion'), false);
 	}
 
 	function createButton2() {
@@ -70,37 +80,37 @@ $(document).ready(function(){
 	}
 
 	function customizeMenuBasedonLocation() {
-		if(isLocationNostroCafe()) {
+		if(isLocationCafe()) {
 			document.getElementById('menu-head').innerHTML = 'Menu'
+		}
+		if(isLocationEducationInstitution()) {
+			document.getElementById('menu-head').innerHTML = 'Programmes offered'
+			document.getElementById('menu-head').style = 'font-size:40px'
 		}
 	}
 
-	$(function() {
-		var Accordion = function(el, multiple) {
-			this.el = el || {};
-			this.multiple = multiple || false;
+	var Accordion = function(el, multiple) {
+		this.el = el || {};
+		this.multiple = multiple || false;
 
-			// Variables privadas
-			var links = this.el.find('.link');
-			// Evento
-			links.on('click', {el: this.el, multiple: this.multiple}, this.dropdown)
-		}
+		// Variables privadas
+		var links = this.el.find('.link');
+		// Evento
+		links.on('click', {el: this.el, multiple: this.multiple}, this.dropdown)
+	}
 
-		Accordion.prototype.dropdown = function(e) {
-			var $el = e.data.el;
-				$this = $(this),
-				$next = $this.next();
+	Accordion.prototype.dropdown = function(e) {
+		var $el = e.data.el;
+			$this = $(this),
+			$next = $this.next();
 
-			$next.slideToggle();
-			$this.parent().toggleClass('open');
+		$next.slideToggle();
+		$this.parent().toggleClass('open');
 
-			if (!e.data.multiple) {
-				$el.find('.submenu').not($next).slideUp().parent().removeClass('open');
-			};
-		}	
-
-		var accordion = new Accordion($('#accordion'), false);
-	});
+		if (!e.data.multiple) {
+			$el.find('.submenu').not($next).slideUp().parent().removeClass('open');
+		};
+	}
 
 	gaSetUserId();
 	gaSetUserProperties();	

@@ -39,6 +39,12 @@ const TAG_FOR_COFFEECRUSH = 'coffeecrush'
 const TAG_FOR_BLR_BIRYANI_BHAWAN = 'bbb'
 const TAG_FOR_TONI_AND_GUY = 'toniguy'
 
+const JSON_VALUE_FOR_INDUSTRY_CAFE = 'cafe'
+const JSON_VALUE_FOR_INDUSTRY_HOSPITAL = 'hospital'
+const JSON_VALUE_FOR_INDUSTRY_BIRYANI = 'biryani'
+const JSON_VALUE_FOR_INDUSTRY_SALON = 'salon'
+const JSON_VALUE_FOR_INDUSTRY_EDUCATION_INSTITUTION = 'education_institution'
+
 const CONTENT_PATH = 'resources/content.json'
 const CONFIG_PATH = 'resources/config.json'
 const DEFAULT_HOME_PAGE_PATH = 'assets/background-2.jpeg'
@@ -59,6 +65,7 @@ const JSON_KEY_FOR_GAMES_LIST = 'games'
 const JSON_KEY_FOR_HOME_PAGE = 'homePage'
 const JSON_KEY_FOR_CSS = 'cssPath'
 const JSON_KEY_FOR_MENU = 'menuPath'
+const JSON_KEY_FOR_INDUSTRY = 'industry'
 const MENU_URL = 'menu.html'
 const CLIENT_URL = 'client/index.html'
 const IS_INSTANCE_HANDLED_BY_TAG = true
@@ -73,6 +80,7 @@ var RETAIL_NAME
 var HOME_PAGE_PATH
 var CSS_PATH
 var MENU_PATH
+var INDUSTRY
 var ALL_CONTENT_INSTANCE_JSON
 var INSTANCE_JSON
 var CONFIG_JSON
@@ -95,15 +103,6 @@ function getRandomNumber() {
 }
 
 function setRetailLocation(retailLocation) {
-	if (retailLocation) {
-		localStorage.setItem(LOCAL_STORAGE_KEY_FOR_RETAIL_LOCATION, retailLocation)
-	} else {
-		localStorage.setItem(LOCAL_STORAGE_KEY_FOR_RETAIL_LOCATION, '')
-	}
-}
-
-// INCOMPLETE FUNCTION - to be changed
-function setRetailIndustry(retailIndustry) {
 	if (retailLocation) {
 		localStorage.setItem(LOCAL_STORAGE_KEY_FOR_RETAIL_LOCATION, retailLocation)
 	} else {
@@ -146,6 +145,7 @@ function setLocationVariables() {
 	CSS_PATH = INSTANCE_JSON[JSON_KEY_FOR_CSS]
 	MENU_PATH = INSTANCE_JSON[JSON_KEY_FOR_MENU]
 	URL_SEARCH_PARAM_FOR_RETAIL_LOCATION = (localStorage[LOCAL_STORAGE_KEY_FOR_RETAIL_LOCATION] ? ('?' + RETAIL_LOCATION_TAG_NAME + '=' + localStorage[LOCAL_STORAGE_KEY_FOR_RETAIL_LOCATION]) : '')
+	INDUSTRY = INSTANCE_JSON[JSON_KEY_FOR_INDUSTRY]
 	loadGameMap()
 }
 
@@ -244,9 +244,31 @@ function isLocationNostroCafe() {
 	return localStorage.getItem(LOCAL_STORAGE_KEY_FOR_RETAIL_LOCATION) == TAG_FOR_NOSTRO_CAFE
 }
 
+function isLocationCafe() {
+	return JSON_VALUE_FOR_INDUSTRY_CAFE == INSTANCE_JSON[JSON_KEY_FOR_INDUSTRY]
+}
+
+function isLocationHospital() {
+	return JSON_VALUE_FOR_INDUSTRY_HOSPITAL == INSTANCE_JSON[JSON_KEY_FOR_INDUSTRY]
+}
+
+function isLocationEducationInstitution() {
+	return JSON_VALUE_FOR_INDUSTRY_EDUCATION_INSTITUTION == INSTANCE_JSON[JSON_KEY_FOR_INDUSTRY]
+}
+
+function customizeBasedOnIndustry() {
+	if(isLocationCafe()) {
+		document.getElementById('button1').innerHTML = '<span>Menu</span>'
+	}
+	if(isLocationEducationInstitution()) {
+		document.getElementById('button1').innerHTML = '<span>Programmes offered</span>'
+		document.getElementById('button1').style = 'width:300px'
+		document.getElementById('button2').style = 'width:300px'
+	}
+}
+
 function customizeBasedOnRetailLocation() {
 	if(isLocationNostroCafe()) {
-		document.getElementById('button1').innerHTML = '<span>Menu</span>'
 		document.getElementById('retailname').innerText = ''
 		document.getElementById('greeting').style.marginBottom = '3em'
 		document.getElementById('greeting').style.fontSize = '3em'
@@ -263,6 +285,7 @@ function customizeLandingPage() {
 		loadCSS()
 		loadHomePage()
 		loadEventListeners()
+		customizeBasedOnIndustry()
 		customizeBasedOnRetailLocation()
 	} else {
 		openClientPage()
@@ -314,6 +337,10 @@ let guid = () => {
     }
     //return id of format 'aaaaaaaa'-'aaaa'-'aaaa'-'aaaa'-'aaaaaaaaaaaa'
     return s4() + s4() + '-' + s4() + '-' + s4() + '-' + s4() + '-' + s4() + s4() + s4();
+}
+
+function toSentenceCase(myString) {
+	return myString.replace(/\w\S*/g, function(txt){ return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase(); });
 }
 
 function gaSetUserId() {
