@@ -143,5 +143,33 @@
 		],
 		"menuPath": "assets/retailers/Modulus/menu.csv",
 		"cssPath": "../../assets/retailers/Modulus/style.css"
-	}
+	},
+	{
+		"id": "blusmart",
+		"urlTag": "blusmart",
+		"name": "BluSmart",
+		"industry": "travel",
+		"website": "https://blu-smart.com",
+		"logo": "../../assets/retailers/BluSmart/logoNew.svg",
+		"gif": "../../assets/gifs/cab.gif",
+		"ingamePath": "../../assets/ingame/ecology/",
+		"adPath": "../../assets/retailers/BluSmart/ads/",
+		"totalAds": 6,
+		"adFormat": ".jpeg",
+		"content": [],
+		"games": [
+			1,
+			2,
+			3,
+			4,
+			5,
+			6,
+			7,
+			8,
+			9,
+			10
+		],
+		"menuPath": "assets/retailers/BluSmart/menu.csv",
+		"cssPath": "../../assets/retailers/BluSmart/style.css"
+	}	
 ]
