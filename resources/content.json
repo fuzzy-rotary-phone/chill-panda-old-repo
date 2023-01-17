@@ -152,7 +152,7 @@
 		"website": "https://blu-smart.com",
 		"logo": "../../assets/retailers/BluSmart/logoNew.svg",
 		"gif": "../../assets/gifs/cab.gif",
-		"ingamePath": "../../assets/ingame/ecology/",
+		"ingamePath": "../../assets/ingame/travel/",
 		"adPath": "../../assets/retailers/BluSmart/ads/",
 		"totalAds": 6,
 		"adFormat": ".jpeg",

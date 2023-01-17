@@ -38,12 +38,14 @@ const TAG_FOR_NOSTRO_CAFE = 'nostrocafe'
 const TAG_FOR_COFFEECRUSH = 'coffeecrush'
 const TAG_FOR_BLR_BIRYANI_BHAWAN = 'bbb'
 const TAG_FOR_TONI_AND_GUY = 'toniguy'
+const TAG_FOR_BLUSMART = 'blusmart'
 
 const JSON_VALUE_FOR_INDUSTRY_CAFE = 'cafe'
 const JSON_VALUE_FOR_INDUSTRY_HOSPITAL = 'hospital'
 const JSON_VALUE_FOR_INDUSTRY_BIRYANI = 'biryani'
 const JSON_VALUE_FOR_INDUSTRY_SALON = 'salon'
 const JSON_VALUE_FOR_INDUSTRY_EDUCATION_INSTITUTION = 'education_institution'
+const JSON_VALUE_FOR_INDUSTRY_TRAVEL = 'travel'
 
 const CONTENT_PATH = 'resources/content.json'
 const CONFIG_PATH = 'resources/config.json'
@@ -254,6 +256,18 @@ function isLocationHospital() {
 
 function isLocationEducationInstitution() {
 	return JSON_VALUE_FOR_INDUSTRY_EDUCATION_INSTITUTION == INSTANCE_JSON[JSON_KEY_FOR_INDUSTRY]
+}
+
+function isLocationBiryani() {
+	return JSON_VALUE_FOR_INDUSTRY_BIRYANI == INSTANCE_JSON[JSON_KEY_FOR_INDUSTRY]
+}
+
+function isLocationSalon() {
+	return JSON_VALUE_FOR_INDUSTRY_SALON == INSTANCE_JSON[JSON_KEY_FOR_INDUSTRY]
+}
+
+function isLocationTravel() {
+	return JSON_VALUE_FOR_INDUSTRY_TRAVEL == INSTANCE_JSON[JSON_KEY_FOR_INDUSTRY]
 }
 
 function customizeBasedOnIndustry() {
