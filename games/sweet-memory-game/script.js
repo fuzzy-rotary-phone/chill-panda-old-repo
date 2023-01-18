@@ -1,10 +1,11 @@
-loadInstanceVariables('../../' + CONTENT_PATH, '../../' + CONFIG_PATH)
+loadInstanceVariables('../../' + CONTENT_PATH, '../../' + CONFIG_PATH, initGame)
 
 const SYMBOLS_FOR_SALON = ['scissors', 'scissors', 'heart', 'heart', 'shower', 'shower', 'mask', 'mask', 'user-check', 'user-check', 'spray-can-sparkles', 'spray-can-sparkles', 'mortar-pestle', 'mortar-pestle', 'face-grin-stars', 'face-grin-stars']
 const SYMBOLS_FOR_HOSPITALS = ['ambulance', 'ambulance', 'heartbeat', 'heartbeat', 'stethoscope', 'stethoscope', 'wheelchair', 'wheelchair', 'user-md', 'user-md', 'hospital-o', 'hospital-o', 'life-ring', 'life-ring', 'thermometer-quarter', 'thermometer-quarter']
 const SYMBOLS_FOR_CAFE = ['cookie-bite', 'cookie-bite', 'pizza-slice', 'pizza-slice', 'burger', 'burger', 'ice-cream', 'ice-cream', 'champagne-glasses', 'champagne-glasses', 'cake-candles', 'cake-candles', 'candy-cane', 'candy-cane', 'mug-hot', 'mug-hot']
 const SYMBOLS_FOR_BIRYANI = ['pepper-hot', 'pepper-hot', 'drumstick-bite', 'drumstick-bite', 'fish-fins', 'fish-fins', 'champagne-glasses', 'champagne-glasses', 'pizza-slice', 'pizza-slice', 'ice-cream', 'ice-cream', 'burger', 'burger', 'bowl-rice', 'bowl-rice']
 const SYMBOLS_FOR_EDUCATION = ['user-graduate', 'user-graduate', 'award', 'award', 'pencil', 'pencil', 'hands-holding-child', 'hands-holding-child', 'puzzle-piece', 'puzzle-piece', 'school', 'school', 'calculator', 'calculator', 'bus', 'bus']
+const SYMBOLS_FOR_TRAVEL = ['charging-station', 'charging-station', 'car-battery', 'car-battery', 'taxi', 'taxi', 'plug-circle-bolt', 'plug-circle-bolt', 'solar-panel', 'solar-panel', 'earth-americas', 'earth-americas', 'user-shield', 'user-shield', 'face-grin-stars', 'face-grin-stars']
 const SYMBOLS_DEFAULT = ['bicycle', 'bicycle', 'leaf', 'leaf', 'cube', 'cube', 'anchor', 'anchor', 'paper-plane-o', 'paper-plane-o', 'bolt', 'bolt', 'bomb', 'bomb', 'diamond', 'diamond']
 
 var symbols = SYMBOLS_DEFAULT,
@@ -21,21 +22,24 @@ var symbols = SYMBOLS_DEFAULT,
 		rank3stars = gameCardsQTY + 2,
 		rank2stars = gameCardsQTY + 6,
 		rank1stars = gameCardsQTY + 10;
-		
-symbols = setSymbolsOnRetailLocation()
+
+function setSymbols() {
+  symbols = setSymbolsOnRetailLocation()
+}
 
 function setSymbolsOnRetailLocation() {
-	var retailLocation = localStorage['retailLocation']
-	if (retailLocation == TAG_FOR_PARTHA_DENTAL) {
+	if (isLocationHospital()) {
 		return SYMBOLS_FOR_HOSPITALS
-	} else if (retailLocation == TAG_FOR_NOSTRO_CAFE || retailLocation == TAG_FOR_COFFEECRUSH) {
+	} else if (isLocationCafe()) {
 		return SYMBOLS_FOR_CAFE
-  } else if (retailLocation == TAG_FOR_MODULUS) {
+  } else if (isLocationEducationInstitution()) {
     return SYMBOLS_FOR_EDUCATION    
-	} else if (retailLocation == TAG_FOR_BLR_BIRYANI_BHAWAN) {
+	} else if (isLocationBiryani()) {
 		return SYMBOLS_FOR_BIRYANI
-	} else if (retailLocation == TAG_FOR_TONI_AND_GUY) {
+	} else if (isLocationSalon()) {
     return SYMBOLS_FOR_SALON
+  } else if (isLocationTravel()) {
+    return SYMBOLS_FOR_TRAVEL
   }
 	return SYMBOLS_DEFAULT
 	// if(typeof INSTANCE_JSON !== "undefined"){
@@ -106,6 +110,7 @@ function addCloseButton() {
 // Initial Game
 function initGame() {
   // if(typeof symbols !== "undefined"){
+    setSymbols()
 	  var cards = shuffle(symbols);
     $deck.empty();
     match = 0;
@@ -218,7 +223,7 @@ $deck.on('click', '.card:not(".match, .open")', function() {
   }
 });
 
-initGame();
+// initGame();
 
 $(window).on('load', function() {
 	gaSetUserId();

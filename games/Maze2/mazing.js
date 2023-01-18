@@ -81,6 +81,9 @@ Mazing.prototype.customizeMaze = function() {
   if (this.retailLocation == TAG_FOR_TONI_AND_GUY) {
     $('.nubbin').not(".wall").toggleClass('salon')
   }
+  if (this.retailLocation == TAG_FOR_BLUSMART) {
+    $('.nubbin').not(".wall").toggleClass('travel')
+  }
 }
 
 Mazing.prototype.enableSpeech = function() {
