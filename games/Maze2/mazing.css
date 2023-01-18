@@ -130,6 +130,26 @@ body {
   /*content: "\1F381";*/
   content: "\01F60E";
 }
+#maze div div.nubbin.travel::after {
+  /*content: "\1F33C";*/
+  content: "\01F695";
+}
+#maze div.nubbin.travel:nth-of-type(3n)::after {
+  /*content: "\1F344";*/
+  content: "\01F50C";
+}
+#maze div.nubbin.travel:nth-of-type(5n)::after {
+  /*content: "\1F33B";*/
+  content: "\01F6A6";
+}
+#maze div.nubbin.travel:nth-of-type(7n)::after {
+  /*content: "\1F48E";*/
+  content: "\01F6A7";
+}
+#maze div.nubbin.travel:nth-of-type(13n)::after {
+  /*content: "\1F381";*/
+  content: "\01F4B0";
+}
 #maze div.hero::after {
   /*content: "\01F996";*/
   content: "\26F5" !important;
