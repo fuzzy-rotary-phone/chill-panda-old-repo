@@ -40,6 +40,7 @@ const TAG_FOR_BLR_BIRYANI_BHAWAN = 'bbb'
 const TAG_FOR_TONI_AND_GUY = 'toniguy'
 const TAG_FOR_BLUSMART = 'blusmart'
 
+const JSON_VALUE_FOR_INDUSTRY_DEFAULT = 'default'
 const JSON_VALUE_FOR_INDUSTRY_CAFE = 'cafe'
 const JSON_VALUE_FOR_INDUSTRY_HOSPITAL = 'hospital'
 const JSON_VALUE_FOR_INDUSTRY_BIRYANI = 'biryani'
@@ -51,8 +52,13 @@ const CONTENT_PATH = 'resources/content.json'
 const CONFIG_PATH = 'resources/config.json'
 const DEFAULT_HOME_PAGE_PATH = 'assets/background-2.jpeg'
 const CLOSE_BUTTON_PATH = 'assets/button.png'
+
 const LOCAL_STORAGE_KEY_FOR_RETAIL_LOCATION = 'retailLocation'
+const LOCAL_STORAGE_KEY_FOR_RETAIL_LOCATION_INDUSTRY = 'industry'
 const LOCAL_STORAGE_KEY_FOR_LAST_GAME = 'lastGame'
+const LOCAL_STORAGE_KEY_FOR_MEMORY_GAME_ASSETS = 'memory_assets'
+const LOCAL_STORAGE_KEY_FOR_MAZE_GAME_ASSETS = 'maze_assets'
+
 const RETAIL_LOCATION_TAG_NAME = 'where'
 const JSON_KEY_FOR_RETAIL_LOCATION = 'urlTag'
 const JSON_KEY_FOR_IN_GAME_ASSETS = 'ingamePath'
@@ -71,6 +77,11 @@ const JSON_KEY_FOR_INDUSTRY = 'industry'
 const MENU_URL = 'menu.html'
 const CLIENT_URL = 'client/index.html'
 const IS_INSTANCE_HANDLED_BY_TAG = true
+
+const CONFIG_JSON_KEY_FOR_INDUSTRY = 'industry'
+const GAME_KEY_FOR_MEMORY_GAME = 'memory'
+const GAME_KEY_FOR_MAZE_GAME = 'maze'
+
 var IN_GAME_ASSETS_PATH
 var AD_ASSETS_PATH
 var TOTAL_ADS
@@ -104,11 +115,28 @@ function getRandomNumber() {
 	return number;
 }
 
-function setRetailLocation(retailLocation) {
+function setRetailLocationInLocalStorage(retailLocation) {
 	if (retailLocation) {
 		localStorage.setItem(LOCAL_STORAGE_KEY_FOR_RETAIL_LOCATION, retailLocation)
 	} else {
 		localStorage.setItem(LOCAL_STORAGE_KEY_FOR_RETAIL_LOCATION, '')
+	}
+}
+
+function setRetailLocationIndustryInLocalStorage(retailLocationIndustry) {
+	if(retailLocationIndustry) {
+		localStorage.setItem(LOCAL_STORAGE_KEY_FOR_RETAIL_LOCATION_INDUSTRY, retailLocationIndustry)
+	} else {
+		localStorage.setItem(LOCAL_STORAGE_KEY_FOR_RETAIL_LOCATION_INDUSTRY, JSON_VALUE_FOR_INDUSTRY_DEFAULT)
+	}
+}
+
+function setIconsForGamesInLocalStorage() {
+	if(ICONS_FOR_MEMORY_GAME) {
+		localStorage.setItem(LOCAL_STORAGE_KEY_FOR_MEMORY_GAME_ASSETS, ICONS_FOR_MEMORY_GAME)
+	}
+	if(ICONS_FOR_MAZE_GAME) {
+		localStorage.setItem(LOCAL_STORAGE_KEY_FOR_MAZE_GAME_ASSETS, ICONS_FOR_MAZE_GAME)
 	}
 }
 
@@ -151,6 +179,45 @@ function setLocationVariables() {
 	loadGameMap()
 }
 
+function loadMemoryGameAssets(callback) {
+	if(!CONFIG_JSON) {
+		loadInstanceVariables(CONTENT_PATH, CONFIG_PATH)
+	}
+	INDUSTRY_GAME_ASSET_JSON = CONFIG_JSON[JSON_KEY_FOR_INDUSTRY][localStorage[LOCAL_STORAGE_KEY_FOR_RETAIL_LOCATION_INDUSTRY] ? localStorage[LOCAL_STORAGE_KEY_FOR_RETAIL_LOCATION_INDUSTRY] : INDUSTRY]
+	if(!INDUSTRY_GAME_ASSET_JSON) {
+		INDUSTRY_GAME_ASSET_JSON = CONFIG_JSON[JSON_KEY_FOR_INDUSTRY][JSON_VALUE_FOR_INDUSTRY_DEFAULT]
+	}
+	ICONS_FOR_MEMORY_GAME = INDUSTRY_GAME_ASSET_JSON[GAME_KEY_FOR_MEMORY_GAME]
+	if(callback) {
+		callback()
+	}
+}
+
+function loadMazeGameAssets(callback) {
+	if(!CONFIG_JSON) {
+		loadInstanceVariables(CONTENT_PATH, CONFIG_PATH)
+	}
+	INDUSTRY_GAME_ASSET_JSON = CONFIG_JSON[JSON_KEY_FOR_INDUSTRY][localStorage[LOCAL_STORAGE_KEY_FOR_RETAIL_LOCATION_INDUSTRY] ? localStorage[LOCAL_STORAGE_KEY_FOR_RETAIL_LOCATION_INDUSTRY] : INDUSTRY]
+	if(!INDUSTRY_GAME_ASSET_JSON) {
+		INDUSTRY_GAME_ASSET_JSON = CONFIG_JSON[JSON_KEY_FOR_INDUSTRY][JSON_VALUE_FOR_INDUSTRY_DEFAULT]
+	}
+	ICONS_FOR_MAZE_GAME = INDUSTRY_GAME_ASSET_JSON[GAME_KEY_FOR_MAZE_GAME]
+	if(callback) {
+		callback()
+	}
+}
+
+function loadAllGameAssets() {
+	loadMemoryGameAssets()
+	loadMazeGameAssets()
+}
+
+function setIndustryVariables() {
+	setRetailLocationIndustryInLocalStorage(INDUSTRY)
+	loadAllGameAssets()
+	setIconsForGamesInLocalStorage()
+}
+
 function setInstanceVariables() {
 	INSTANCE_JSON = getJsonByKeyValue(ALL_CONTENT_INSTANCE_JSON, JSON_KEY_FOR_RETAIL_LOCATION, localStorage[LOCAL_STORAGE_KEY_FOR_RETAIL_LOCATION])
 	if (!INSTANCE_JSON) {
@@ -158,6 +225,7 @@ function setInstanceVariables() {
 	}
 	setInGameVariables()
 	setLocationVariables()
+	setIndustryVariables()
 }
 
 function loadInstanceVariables(content_path, config_path, callback) {
@@ -176,14 +244,14 @@ function loadInstanceVariables(content_path, config_path, callback) {
 function setVariablesInLocalStorage() {
 	if (IS_INSTANCE_HANDLED_BY_TAG) {
 		var params = new URLSearchParams(location.search)
-		setRetailLocation(params.get(RETAIL_LOCATION_TAG_NAME)) // add retail location to local storage
+		setRetailLocationInLocalStorage(params.get(RETAIL_LOCATION_TAG_NAME)) // add retail location to local storage
 	} else {
 		var parts = location.hostname.split('.');
 		var subdomain = parts.shift();
 		if (subdomain == 'chillpanda') {
-			setRetailLocation('')
+			setRetailLocationInLocalStorage('')
 		} else {
-			setRetailLocation(subdomain) // add retail location to local storage
+			setRetailLocationInLocalStorage(subdomain) // add retail location to local storage
 		}
 	}
 }

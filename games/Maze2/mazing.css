@@ -57,23 +57,18 @@ body {
 }
 #maze div div.nubbin::after {
   content: "\1F33C";
-/*  content: "\01F370";*/
 }
 #maze div.nubbin:nth-of-type(3n)::after {
   content: "\1F344";
-/*  content: "\01F369";*/
 }
 #maze div.nubbin:nth-of-type(5n)::after {
   content: "\1F33B";
-/*  content: "\01F354";*/
 }
 #maze div.nubbin:nth-of-type(7n)::after {
   content: "\1F48E";
-/*  content: "\01F355";*/
 }
 #maze div.nubbin:nth-of-type(13n)::after {
   content: "\1F381";
-/*  content: "\01F357";*/
 }
 #maze div div.nubbin.hospital::after {
   content: "\01F3E5";
@@ -91,67 +86,51 @@ body {
   content: "\01F48E";
 }
 #maze div div.nubbin.cafe::after {
-  /*content: "\1F33C";*/
   content: "\01F370";
 }
 #maze div.nubbin.cafe:nth-of-type(3n)::after {
-  /*content: "\1F344";*/
   content: "\01F369";
 }
 #maze div.nubbin.cafe:nth-of-type(5n)::after {
-  /*content: "\1F33B";*/
   content: "\01F354";
 }
 #maze div.nubbin.cafe:nth-of-type(7n)::after {
-  /*content: "\1F48E";*/
   content: "\01F355";
 }
 #maze div.nubbin.cafe:nth-of-type(13n)::after {
-  /*content: "\1F381";*/
   content: "\01F357";
 }
 #maze div div.nubbin.salon::after {
-  /*content: "\1F33C";*/
   content: "\002704";
 }
 #maze div.nubbin.salon:nth-of-type(3n)::after {
-  /*content: "\1F344";*/
   content: "\01F486";
 }
 #maze div.nubbin.salon:nth-of-type(5n)::after {
-  /*content: "\1F33B";*/
   content: "\01F485";
 }
 #maze div.nubbin.salon:nth-of-type(7n)::after {
-  /*content: "\1F48E";*/
   content: "\01F64B";
 }
 #maze div.nubbin.salon:nth-of-type(13n)::after {
-  /*content: "\1F381";*/
   content: "\01F60E";
 }
 #maze div div.nubbin.travel::after {
-  /*content: "\1F33C";*/
   content: "\01F695";
 }
 #maze div.nubbin.travel:nth-of-type(3n)::after {
-  /*content: "\1F344";*/
   content: "\01F50C";
 }
 #maze div.nubbin.travel:nth-of-type(5n)::after {
-  /*content: "\1F33B";*/
   content: "\01F6A6";
 }
 #maze div.nubbin.travel:nth-of-type(7n)::after {
-  /*content: "\1F48E";*/
   content: "\01F6A7";
 }
 #maze div.nubbin.travel:nth-of-type(13n)::after {
-  /*content: "\1F381";*/
   content: "\01F4B0";
 }
 #maze div.hero::after {
-  /*content: "\01F996";*/
   content: "\26F5" !important;
 }
 #maze.face-right div.hero::after {

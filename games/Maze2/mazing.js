@@ -68,10 +68,31 @@ function Mazing(id) {
   this.winFlag = false;
 
   this.retailLocation = localStorage['retailLocation']
+  //customize Maze based on industry
   this.customizeMaze()
 };
 
 Mazing.prototype.customizeMaze = function() {
+  // icons = localStorage[LOCAL_STORAGE_KEY_FOR_MAZE_GAME_ASSETS].split(',')
+  // industry = localStorage[LOCAL_STORAGE_KEY_FOR_RETAIL_LOCATION_INDUSTRY]
+  // customStyle = document.createElement("style");
+  // customStyle.type = 'text/css'
+  // var newStyles = 
+  // "#maze div div.nubbin" + "." + industry + "::after { " +
+  //   "content: \\" + icons[0] + ";}\n" +
+  // "#maze div.nubbin:nth-of-type(3n)" + "." + industry + "::after { " +
+  //   "content: \\" + icons[1] + ";}\n" +
+  // "#maze div.nubbin:nth-of-type(5n)" + "." + industry + "::after { " +
+  //   "content: \\" + icons[2] + ";}\n" +
+  // "#maze div.nubbin:nth-of-type(7n)" + "." + industry + "::after { " +
+  //   "content: \\" + icons[3] + ";}\n" +
+  // "#maze div.nubbin:nth-of-type(13n)" + "." + industry + "::after { " +
+  //   "content: \\" + icons[4] + ";}\n"
+  // customStyle.innerHTML = newStyles
+  // document.head.appendChild(customStyle);
+  // $('.nubbin').not(".wall").toggleClass(industry)
+
+  // TODO: still using old way of editing CSS. Need to fix this by using config.json declared icons
   if (this.retailLocation == TAG_FOR_PARTHA_DENTAL) {
     $('.nubbin').not(".wall").toggleClass('hospital')
   }

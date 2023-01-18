@@ -16,5 +16,35 @@
 	"tag1": "where",
 	"where": {
 		"coffeecrush": "assets/CoffeeCrush/"
+	},
+	"industry": {
+		"default": {
+			"memory": ["bicycle", "bicycle", "leaf", "leaf", "cube", "cube", "anchor", "anchor", "paper-plane-o", "paper-plane-o", "bolt", "bolt", "bomb", "bomb", "diamond", "diamond"],
+			"maze": ["1F33C", "1F344", "1F33B", "1F48E", "1F381"]
+		},
+		"cafe": {
+			"memory": ["cookie-bite", "cookie-bite", "pizza-slice", "pizza-slice", "burger", "burger", "ice-cream", "ice-cream", "champagne-glasses", "champagne-glasses", "cake-candles", "cake-candles", "candy-cane", "candy-cane", "mug-hot", "mug-hot"],
+			"maze": ["01F370", "01F369", "01F354", "01F355", "01F357"]
+		},
+		"hospital": {
+			"memory": ["ambulance", "ambulance", "heartbeat", "heartbeat", "stethoscope", "stethoscope", "wheelchair", "wheelchair", "user-md", "user-md", "hospital-o", "hospital-o", "life-ring", "life-ring", "thermometer-quarter", "thermometer-quarter"],
+			"maze": ["01F3E5", "01F9B7", "01F489", "01F48A", "01F48E"]
+		},
+		"biryani": {
+			"memory": ["pepper-hot", "pepper-hot", "drumstick-bite", "drumstick-bite", "fish-fins", "fish-fins", "champagne-glasses", "champagne-glasses", "pizza-slice", "pizza-slice", "ice-cream", "ice-cream", "burger", "burger", "bowl-rice", "bowl-rice"],
+			"maze": ["01F370", "01F369", "01F354", "01F355", "01F357"]
+		},
+		"education_institution": {
+			"memory": ["user-graduate", "user-graduate", "award", "award", "pencil", "pencil", "hands-holding-child", "hands-holding-child", "puzzle-piece", "puzzle-piece", "school", "school", "calculator", "calculator", "bus", "bus"],
+			"maze": ["1F33C", "1F344", "1F33B", "1F48E", "1F381"]
+		},
+		"salon": {
+			"memory": ["scissors", "scissors", "heart", "heart", "shower", "shower", "mask", "mask", "user-check", "user-check", "spray-can-sparkles", "spray-can-sparkles", "mortar-pestle", "mortar-pestle", "face-grin-stars", "face-grin-stars"],
+			"maze": ["002704", "01F486", "01F485", "01F64B", "01F60E"]
+		},
+		"travel": {
+			"memory": ["charging-station", "charging-station", "car-battery", "car-battery", "taxi", "taxi", "plug-circle-bolt", "plug-circle-bolt", "solar-panel", "solar-panel", "earth-americas", "earth-americas", "user-shield", "user-shield", "face-grin-stars", "face-grin-stars"],
+			"maze": ["01F695", "01F50C", "01F6A6", "01F6A7", "01F4B0"]
+		}
 	}
 }
