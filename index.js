@@ -34,7 +34,7 @@ var GAME_MAP = {}
 
 const DOMAIN_NAME = 'chillpanda'
 
-const TAG_FOR_MODULUS = 'modulus'
+const TAG_FOR_MODULUS = 'modulushyd'
 const TAG_FOR_PARTHA_DENTAL = 'parthadental'
 const TAG_FOR_NOSTRO_CAFE = 'nostrocafe'
 const TAG_FOR_COFFEECRUSH = 'coffeecrush'
