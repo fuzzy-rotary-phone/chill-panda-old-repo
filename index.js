@@ -32,6 +32,8 @@ const ALL_GAME_MAP = {
 // };
 var GAME_MAP = {}
 
+const DOMAIN_NAME = 'chillpanda'
+
 const TAG_FOR_MODULUS = 'modulus'
 const TAG_FOR_PARTHA_DENTAL = 'parthadental'
 const TAG_FOR_NOSTRO_CAFE = 'nostrocafe'
@@ -242,13 +244,15 @@ function loadInstanceVariables(content_path, config_path, callback) {
 }
 
 function setVariablesInLocalStorage() {
-	if (IS_INSTANCE_HANDLED_BY_TAG) {
-		var params = new URLSearchParams(location.search)
-		setRetailLocationInLocalStorage(params.get(RETAIL_LOCATION_TAG_NAME)) // add retail location to local storage
+	var params = new URLSearchParams(location.search)
+	retailLocationTagValue = params.get(RETAIL_LOCATION_TAG_NAME)
+	// if (IS_INSTANCE_HANDLED_BY_TAG) {
+	if (retailLocationTagValue) {
+		setRetailLocationInLocalStorage(retailLocationTagValue)) // add retail location to local storage
 	} else {
 		var parts = location.hostname.split('.');
 		var subdomain = parts.shift();
-		if (subdomain == 'chillpanda') {
+		if (subdomain == DOMAIN_NAME) {
 			setRetailLocationInLocalStorage('')
 		} else {
 			setRetailLocationInLocalStorage(subdomain) // add retail location to local storage
