@@ -117,8 +117,8 @@
 		"menuPath": "assets/retailers/CafeUntitled/menu.csv"
 	},
 	{
-		"id": "modulushyd",
-		"urlTag": "modulushyd",
+		"id": "modulus",
+		"urlTag": "modulus",
 		"name": "Modulus",
 		"industry": "education_institution",
 		"website": "https://modulushyd.com/",
