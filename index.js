@@ -248,7 +248,7 @@ function setVariablesInLocalStorage() {
 	retailLocationTagValue = params.get(RETAIL_LOCATION_TAG_NAME)
 	// if (IS_INSTANCE_HANDLED_BY_TAG) {
 	if (retailLocationTagValue) {
-		setRetailLocationInLocalStorage(retailLocationTagValue)) // add retail location to local storage
+		setRetailLocationInLocalStorage(retailLocationTagValue) // add retail location to local storage
 	} else {
 		var parts = location.hostname.split('.');
 		var subdomain = parts.shift();
