@@ -85,6 +85,8 @@
 		"totalAds": 9,
 		"content": [],
 		"games": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16],
+		"homePage": "assets/retailers/ToniGuy/home.png",
+		"cssPath": "assets/retailers/ToniGuy/style.css",
 		"menuPath": "assets/retailers/ToniGuy/menu.csv"
 	},
 	{

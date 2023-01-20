@@ -1,19 +1,22 @@
+body {
+    background-size: auto;
+}
+
 h1 {
     font-family: 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif !important;
-    color: #3D271B;
+    color: black;
 }
 
 #button1 {
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif !important;
-    color: #3D271B;
+    color: black;
 }
 
 #button2 {
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif !important;
-    color: #3D271B;
+    color: black;
 }
 
 #greeting {
-    margin-bottom: 3em;
     font-size: 3em;
 }
